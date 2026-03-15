@@ -3,821 +3,1352 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HalpCraft — The 150-Day New Manager Programme</title>
-  <meta name="description" content="10 research-backed nudges delivered straight to your new manager's calendar over 150 days. No app. No login. No training days. Just results." />
+  <title>HalpCraft — Leadership That Lands</title>
+  <meta name="description" content="Science-backed leadership nudges delivered directly to your calendar. No app. No dashboard. Just the right prompt at the right moment." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230e0e0e'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23b8902a'>H</text></svg>" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink: #0e0e0e;
-      --paper: #f5f2ed;
-      --gold: #b8902a;
-      --gold-light: #e8c96d;
-      --muted: #6b6660;
-      --card: #faf8f4;
-      --border: #e0dbd3;
-      --white: #ffffff;
+      --ink:    #0e0e0e;
+      --paper:  #f5f2ed;
+      --gold:   #b8902a;
+      --gold-lt:#e8c96d;
+      --muted:  #6b6660;
+      --rule:   rgba(14,14,14,0.12);
+      --serif:  'Playfair Display', Georgia, serif;
+      --sans:   'DM Sans', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
+      font-family: var(--sans);
       background: var(--paper);
       color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
+      font-size: 16px;
       line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    /* ─── NAV ─────────────────────────────────────── */
     nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 22px 40px;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--paper);
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 4rem;
+      background: rgba(245,242,237,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
     }
 
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
+      font-family: var(--serif);
+      font-size: 1.35rem;
       font-weight: 700;
+      letter-spacing: -0.01em;
       color: var(--ink);
       text-decoration: none;
-      letter-spacing: -0.01em;
     }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex; gap: 2.5rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
 
     .nav-cta {
       background: var(--ink);
-      color: var(--paper);
-      padding: 10px 22px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background 0.2s;
-      letter-spacing: 0.01em;
+      color: var(--paper) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+      font-weight: 500 !important;
+      letter-spacing: 0.04em !important;
+      text-transform: uppercase !important;
+      font-size: 0.8rem !important;
+      transition: background 0.2s !important;
     }
-    .nav-cta:hover { background: #2a2520; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--ink) !important; }
 
-    /* ── HERO ── */
+    /* ─── HERO ────────────────────────────────────── */
     .hero {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 96px 40px 80px;
-      text-align: center;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 3rem 6rem 4rem;
     }
 
     .hero-eyebrow {
-      display: inline-block;
+      font-family: var(--sans);
       font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-weight: 500;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 24px;
-      border: 1px solid var(--gold-light);
-      padding: 5px 14px;
-      border-radius: 999px;
-      background: #fdf6e3;
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
     }
 
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
-      font-weight: 700;
-      line-height: 1.12;
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 5vw, 4.75rem);
+      font-weight: 900;
+      line-height: 1.05;
       letter-spacing: -0.02em;
-      margin-bottom: 28px;
       color: var(--ink);
+      margin-bottom: 2rem;
     }
-
-    .hero h1 em {
+    .hero-headline em {
       font-style: italic;
       color: var(--gold);
     }
 
-    .hero-sub {
-      font-size: 1.1rem;
+    .hero-body {
+      font-size: 1.125rem;
       color: var(--muted);
-      max-width: 560px;
-      margin: 0 auto 44px;
-      line-height: 1.7;
-      font-weight: 400;
+      line-height: 1.75;
+      max-width: 42ch;
+      margin-bottom: 3rem;
+      font-weight: 300;
     }
 
     .hero-actions {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 16px;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
 
     .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       background: var(--ink);
       color: var(--paper);
-      padding: 16px 32px;
-      border-radius: 8px;
-      font-size: 0.95rem;
+      padding: 0.9rem 2.25rem;
+      font-family: var(--sans);
+      font-size: 0.875rem;
       font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       text-decoration: none;
-      transition: background 0.2s, transform 0.1s;
-      letter-spacing: 0.01em;
+      border-radius: 2px;
+      border: 2px solid var(--ink);
+      transition: all 0.25s;
+      cursor: pointer;
     }
-    .btn-primary:hover { background: #2a2520; transform: translateY(-1px); }
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--ink);
+    }
 
-    .btn-ghost {
+    .btn-secondary {
+      font-size: 0.875rem;
+      font-weight: 500;
       color: var(--muted);
-      font-size: 0.88rem;
       text-decoration: none;
-      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid transparent;
       padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
+      transition: all 0.2s;
     }
-    .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+    .btn-secondary:hover {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
 
-    .hero-proof {
-      margin-top: 52px;
-      padding-top: 40px;
-      border-top: 1px solid var(--border);
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--rule);
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ─── HERO RIGHT — calendar visual ───────────── */
+    .hero-right {
+      background: var(--ink);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .proof-stat {
-      text-align: center;
-    }
-
-    .proof-stat strong {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--ink);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .proof-stat span {
-      font-size: 0.78rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .proof-divider {
-      width: 1px;
-      height: 40px;
-      background: var(--border);
-    }
-
-    /* ── PAIN ── */
-    .section-pain {
-      background: var(--ink);
-      color: var(--paper);
-      padding: 80px 40px;
-    }
-
-    .section-pain-inner {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .section-pain h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: 28px;
-      letter-spacing: -0.01em;
-    }
-
-    .section-pain h2 em {
-      font-style: italic;
-      color: var(--gold-light);
-    }
-
-    .pain-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 24px;
-      margin-top: 44px;
-    }
-
-    .pain-item {
-      border-top: 1px solid rgba(255,255,255,0.15);
-      padding-top: 20px;
-    }
-
-    .pain-item strong {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--gold-light);
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .pain-item p {
-      font-size: 0.88rem;
-      color: rgba(245,242,237,0.7);
-      line-height: 1.65;
-    }
-
-    /* ── HOW IT WORKS ── */
-    .section {
-      padding: 88px 40px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 0.73rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-      font-weight: 700;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-
-    .section-sub {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 520px;
-      line-height: 1.7;
-      margin-bottom: 56px;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2px;
-      background: var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    .step {
-      background: var(--card);
-      padding: 36px 32px;
-      position: relative;
-    }
-
-    .step-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--border);
-      line-height: 1;
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .step h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--ink);
-    }
-
-    .step p {
-      font-size: 0.86rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* ── ZERO FRICTION ── */
-    .section-friction {
-      background: #fdf6e3;
-      border-top: 1px solid #eddfa8;
-      border-bottom: 1px solid #eddfa8;
-      padding: 72px 40px;
-    }
-
-    .section-friction-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .friction-text .section-label { color: #8a6a1a; }
-
-    .friction-text h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.7rem, 3vw, 2.3rem);
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
-      color: var(--ink);
-    }
-
-    .friction-text p {
-      font-size: 0.92rem;
-      color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 28px;
-    }
-
-    .friction-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .friction-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.88rem;
-      color: var(--ink);
-      font-weight: 500;
-    }
-
-    .friction-list li::before {
-      content: '✓';
-      color: var(--gold);
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .friction-callout {
-      background: var(--ink);
-      color: var(--paper);
-      border-radius: 16px;
-      padding: 40px 36px;
-    }
-
-    .friction-callout h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-style: italic;
-      font-weight: 400;
-      line-height: 1.4;
-      margin-bottom: 20px;
-      color: var(--gold-light);
-    }
-
-    .friction-callout p {
-      font-size: 0.83rem;
-      color: rgba(245,242,237,0.65);
-      line-height: 1.7;
-    }
-
-    /* ── WHO IT'S FOR ── */
-    .for-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .for-card {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      padding: 28px 24px;
-    }
-
-    .for-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .for-card p {
-      font-size: 0.83rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .not-for {
-      margin-top: 40px;
-      padding: 24px 28px;
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-    }
-
-    .not-for strong {
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .not-for p {
-      font-size: 0.86rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* ── PRICING ── */
-    .section-pricing {
-      background: var(--ink);
-      padding: 88px 40px;
-    }
-
-    .section-pricing-inner {
-      max-width: 640px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .section-pricing .section-label { color: var(--gold-light); }
-
-    .section-pricing h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      font-weight: 700;
-      color: var(--paper);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-
-    .section-pricing .lead {
-      font-size: 0.95rem;
-      color: rgba(245,242,237,0.6);
-      margin-bottom: 48px;
-      line-height: 1.7;
-    }
-
-    .pricing-card {
-      background: var(--paper);
-      border-radius: 18px;
-      padding: 48px 44px;
-      text-align: left;
+      padding: 6rem 4rem;
       position: relative;
       overflow: hidden;
     }
 
-    .pricing-card::before {
+    .hero-right::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      top: -20%;
+      right: -20%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(184,144,42,0.25) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    .pricing-badge {
-      display: inline-block;
-      background: #fdf6e3;
-      border: 1px solid var(--gold-light);
-      color: var(--gold);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 999px;
-      margin-bottom: 20px;
+    .calendar-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      width: 100%;
+      max-width: 380px;
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.4);
     }
 
-    .pricing-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .pricing-desc {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 28px;
-    }
-
-    .pricing-price {
+    .cal-header {
+      background: rgba(184,144,42,0.15);
+      border-bottom: 1px solid rgba(184,144,42,0.3);
+      padding: 1rem 1.25rem;
       display: flex;
-      align-items: baseline;
-      gap: 6px;
-      margin-bottom: 8px;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .cal-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    .cal-title {
+      font-family: var(--serif);
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.7);
+      margin-left: 0.5rem;
+      letter-spacing: 0.02em;
     }
 
-    .price-amount {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.4rem;
-      font-weight: 700;
-      line-height: 1;
-      color: var(--ink);
-    }
-
-    .price-unit {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.3;
-    }
-
-    .price-anchor {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 32px;
-      font-style: italic;
-    }
-
-    .price-anchor strong { color: var(--ink); font-style: normal; }
-
-    .pricing-includes {
+    .cal-events {
+      padding: 1.25rem;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 36px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
+      gap: 0.75rem;
     }
 
-    .pricing-includes li {
+    .cal-event {
+      padding: 1rem 1.25rem;
+      border-radius: 3px;
+      border-left: 3px solid;
+      opacity: 0;
+      transform: translateX(20px);
+      animation: slideIn 0.5s ease forwards;
+    }
+    .cal-event:nth-child(1) { animation-delay: 0.3s; border-color: var(--gold); background: rgba(184,144,42,0.1); }
+    .cal-event:nth-child(2) { animation-delay: 0.6s; border-color: #7eb3d0; background: rgba(126,179,208,0.08); }
+    .cal-event:nth-child(3) { animation-delay: 0.9s; border-color: #a8c5a0; background: rgba(168,197,160,0.08); }
+    .cal-event:nth-child(4) { animation-delay: 1.2s; border-color: var(--gold); background: rgba(184,144,42,0.1); }
+
+    @keyframes slideIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .cal-event-time {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.3rem;
+    }
+    .cal-event-title {
+      font-family: var(--serif);
+      font-size: 0.925rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 0.2rem;
+    }
+    .cal-event-sub {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .cal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 1.25rem;
+      padding: 0.5rem 1rem;
+      background: rgba(184,144,42,0.15);
+      border: 1px solid rgba(184,144,42,0.3);
+      border-radius: 100px;
+      font-size: 0.72rem;
+      color: var(--gold-lt);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .cal-badge::before { content: '✓'; font-size: 0.8rem; }
+
+    /* ─── SCROLL TICKER ───────────────────────────── */
+    .ticker {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 1rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+      background: var(--paper);
+    }
+    .ticker-inner {
+      display: inline-flex;
+      animation: ticker 30s linear infinite;
+    }
+    .ticker-item {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 3rem;
+    }
+    .ticker-item span { color: var(--gold); margin-right: 0.75rem; }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION BASE ────────────────────────────── */
+    section { padding: 7rem 4rem; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-headline {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+    .section-body {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 56ch;
+      font-weight: 300;
+    }
+
+    /* ─── PROBLEM ─────────────────────────────────── */
+    .problem {
+      background: var(--ink);
+      color: var(--paper);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .problem .section-label { color: var(--gold-lt); }
+    .problem .section-headline { color: var(--paper); }
+    .problem .section-body { color: rgba(245,242,237,0.6); }
+
+    .problem-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .prob-stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 2rem;
+    }
+    .prob-stat:hover { background: rgba(184,144,42,0.08); border-color: rgba(184,144,42,0.2); }
+    .prob-num {
+      font-family: var(--serif);
+      font-size: 2.75rem;
+      font-weight: 900;
+      color: var(--gold-lt);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .prob-label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+    .prob-source {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.2);
+      margin-top: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── HOW IT WORKS ────────────────────────────── */
+    .how {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .how-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .step {
+      background: var(--paper);
+      padding: 3rem 2.5rem;
+      position: relative;
+    }
+    .step:hover { background: #f0ece5; }
+    .step-num {
+      font-family: var(--serif);
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--rule);
+      line-height: 1;
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      letter-spacing: -0.04em;
+      user-select: none;
+    }
+    .step-icon {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .step-title {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    .step-body {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── NUDGE SEQUENCE ──────────────────────────── */
+    .sequence {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .sequence-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .sequence-header .section-label { color: var(--gold-lt); }
+    .sequence-header .section-headline { color: var(--paper); }
+    .sequence-header .section-body { color: rgba(245,242,237,0.55); margin: 0 auto; }
+
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 5.5rem;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 7rem 1fr;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      align-items: start;
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-item:hover .tl-title { color: var(--gold-lt); }
+
+    .tl-day {
+      font-family: var(--serif);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gold);
+      padding-top: 0.15rem;
+      text-align: right;
+      padding-right: 2rem;
+      position: relative;
+    }
+    .tl-day::after {
+      content: '';
+      position: absolute;
+      right: -0.5rem;
+      top: 0.5rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--ink);
+    }
+
+    .tl-content {}
+    .tl-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--paper);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+    .tl-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.5;
+    }
+
+    /* ─── PRICING ─────────────────────────────────── */
+    .pricing-section {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .pricing-section .section-body { margin: 0 auto 4rem; }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 1.5rem;
+      align-items: end;
+    }
+
+    .price-card {
+      border: 1px solid var(--rule);
+      padding: 2.5rem 2rem;
+      text-align: left;
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+    .price-card:hover { border-color: var(--gold); }
+    .price-card.featured {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      padding: 3.5rem 2rem;
+    }
+
+    .price-tier {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .price-card.featured .price-tier { color: var(--gold-lt); }
+
+    .price-amount {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .price-per {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .price-card.featured .price-per { color: rgba(245,242,237,0.5); }
+
+    .price-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .price-features li {
+      font-size: 0.875rem;
+      color: var(--muted);
       display: flex;
       align-items: flex-start;
-      gap: 10px;
-      font-size: 0.86rem;
-      color: var(--ink);
-      list-style: none;
+      gap: 0.6rem;
     }
-
-    .pricing-includes li::before {
-      content: '✓';
+    .price-card.featured .price-features li { color: rgba(245,242,237,0.7); }
+    .price-features li::before {
+      content: '—';
       color: var(--gold);
-      font-weight: 700;
       flex-shrink: 0;
+      margin-top: 0.05em;
     }
 
-    .btn-pricing {
-      display: block;
-      width: 100%;
+    .price-note {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      margin-top: 0.75rem;
+    }
+    .coming-soon {
+      text-align: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--rule);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      display: inline-block;
+    }
+
+    /* ─── TESTIMONIALS ────────────────────────────── */
+    .testimonials {
+      background: #f0ece5;
+      padding: 7rem 4rem;
+    }
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .test-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 2.5rem;
+      border-radius: 2px;
+    }
+    .test-quote {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.75;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+    .test-quote::before { content: '\201C'; color: var(--gold); font-size: 1.5em; line-height: 0; vertical-align: -0.4em; margin-right: 0.2em; }
+    .test-author {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .test-role {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+    .test-placeholder {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 0.5rem;
+    }
+
+    /* ─── ABOUT / VISION ──────────────────────────── */
+    .vision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .vision-manifesto {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--ink);
+      border-left: 3px solid var(--gold);
+      padding-left: 2rem;
+      margin: 2.5rem 0;
+    }
+    .vision-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .vision-list li {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .vision-list li::before {
+      content: '→';
+      color: var(--gold);
+      flex-shrink: 0;
+      font-weight: 500;
+    }
+    .vision-right {
+      background: var(--ink);
+      padding: 4rem;
+      color: var(--paper);
+    }
+    .vision-right .section-label { color: var(--gold-lt); margin-bottom: 2rem; }
+    .product-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .product-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .product-item:last-child { border-bottom: none; }
+    .product-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--paper);
+      margin-bottom: 0.25rem;
+    }
+    .product-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .product-tag {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+    }
+    .tag-live { background: rgba(168,197,160,0.2); color: #a8c5a0; border: 1px solid rgba(168,197,160,0.3); }
+    .tag-soon { background: rgba(184,144,42,0.15); color: var(--gold-lt); border: 1px solid rgba(184,144,42,0.2); }
+    .tag-2026 { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.08); }
+
+    /* ─── CTA FOOTER BAND ─────────────────────────── */
+    .cta-band {
       background: var(--ink);
       color: var(--paper);
       text-align: center;
-      padding: 17px 24px;
-      border-radius: 10px;
-      font-size: 1rem;
+      padding: 7rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(184,144,42,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-band .section-label { color: var(--gold-lt); text-align: center; }
+    .cta-band .section-headline { color: var(--paper); max-width: 18ch; margin: 0 auto 1.25rem; }
+    .cta-band .section-body { color: rgba(245,242,237,0.5); max-width: 50ch; margin: 0 auto 3rem; }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .btn-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 0.9rem 2.25rem;
+      font-family: var(--sans);
+      font-size: 0.875rem;
       font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       text-decoration: none;
-      transition: background 0.2s, transform 0.1s;
-      letter-spacing: 0.01em;
+      border-radius: 2px;
+      border: 2px solid var(--paper);
+      transition: all 0.25s;
     }
-    .btn-pricing:hover { background: #2a2520; transform: translateY(-1px); }
-
-    .pricing-note {
-      font-size: 0.75rem;
-      color: rgba(245,242,237,0.4);
-      margin-top: 28px;
-      line-height: 1.6;
+    .btn-light:hover {
+      background: transparent;
+      color: var(--paper);
     }
 
-    /* ── FOOTER ── */
+    /* ─── FOOTER ──────────────────────────────────── */
     footer {
       background: #080808;
-      padding: 40px;
-      display: flex;
+      color: rgba(255,255,255,0.25);
+      padding: 3rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
+      gap: 2rem;
     }
-
     .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: rgba(245,242,237,0.5);
-      text-decoration: none;
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
     }
-
+    .footer-logo span { color: var(--gold); }
+    .footer-tagline {
+      font-size: 0.75rem;
+      margin-top: 0.3rem;
+      letter-spacing: 0.06em;
+    }
+    .footer-right {
+      text-align: right;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+    }
     .footer-links {
       display: flex;
-      gap: 24px;
+      gap: 2rem;
+      justify-content: flex-end;
+      margin-bottom: 0.75rem;
+      list-style: none;
     }
-
     .footer-links a {
-      font-size: 0.78rem;
-      color: rgba(245,242,237,0.35);
+      color: rgba(255,255,255,0.3);
       text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       transition: color 0.2s;
     }
-    .footer-links a:hover { color: rgba(245,242,237,0.7); }
+    .footer-links a:hover { color: var(--gold); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 680px) {
-      nav { padding: 18px 20px; }
-      .hero { padding: 64px 20px 60px; }
-      .section { padding: 64px 20px; }
-      .section-pain { padding: 60px 20px; }
-      .section-friction { padding: 56px 20px; }
-      .section-friction-inner { grid-template-columns: 1fr; gap: 40px; }
-      .section-pricing { padding: 64px 20px; }
-      .pricing-card { padding: 36px 28px; }
-      footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
-      .hero-proof { gap: 24px; }
-      .proof-divider { display: none; }
+    /* ─── MOBILE ──────────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 2rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 7rem 2rem 3rem; }
+      .hero-right { min-height: 360px; padding: 3rem 2rem; }
+      .hero-stats { gap: 2rem; }
+
+      section { padding: 5rem 2rem; }
+      .problem, .vision { grid-template-columns: 1fr; gap: 3rem; }
+      .how-steps { grid-template-columns: 1fr; }
+      .pricing-cards { grid-template-columns: 1fr; }
+      .test-grid { grid-template-columns: 1fr; }
+      .problem-stats { grid-template-columns: 1fr 1fr; }
+
+      footer { grid-template-columns: 1fr; }
+      .footer-right { text-align: left; }
+      .footer-links { justify-content: flex-start; }
+    }
+
+    /* ─── FADE IN ANIMATION ───────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="/">HalpCraft</a>
-  <a class="nav-cta" href="https://buy.stripe.com/dRm14gbUk0i8chGfO00Ba00">Start the programme →</a>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Halp<span>Craft</span></a>
+    <ul class="nav-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#sequence">The Sequence</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#vision">About</a></li>
+      <li><a href="#pricing" class="nav-cta">Get Started</a></li>
+    </ul>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-eyebrow">The 150-Day New Manager Programme</div>
-  <h1>Most new managers<br>fail <em>quietly.</em><br>HalpCraft fixes that.</h1>
-  <p class="hero-sub">10 research-backed nudges, delivered straight to your new manager's calendar over 150 days. No app. No training days. No IT approval. Just better managers.</p>
-  <div class="hero-actions">
-    <a class="btn-primary" href="https://buy.stripe.com/dRm14gbUk0i8chGfO00Ba00">Start for £79 per manager →</a>
-    <a class="btn-ghost" href="#how-it-works">See how it works</a>
-  </div>
-  <div class="hero-proof">
-    <div class="proof-stat">
-      <strong>10</strong>
-      <span>Research-backed nudges</span>
-    </div>
-    <div class="proof-divider"></div>
-    <div class="proof-stat">
-      <strong>150</strong>
-      <span>Days of support</span>
-    </div>
-    <div class="proof-divider"></div>
-    <div class="proof-stat">
-      <strong>0</strong>
-      <span>Apps or logins required</span>
-    </div>
-    <div class="proof-divider"></div>
-    <div class="proof-stat">
-      <strong>£79</strong>
-      <span>Per manager, total</span>
-    </div>
-  </div>
-</section>
-
-<!-- PAIN -->
-<section class="section-pain">
-  <div class="section-pain-inner">
-    <h2>You promoted them because they were <em>brilliant.</em><br>Now you're hoping they figure out the rest.</h2>
-    <p style="color:rgba(245,242,237,0.6);font-size:0.95rem;line-height:1.75;margin-top:16px;max-width:580px;">Most companies spend thousands on leadership courses for senior leaders — then send new managers into their first week with nothing but good intentions. The result is predictable: disengaged teams, high turnover, and managers who burn out before they've found their feet.</p>
-    <div class="pain-grid">
-      <div class="pain-item">
-        <strong>The Promotion Gap</strong>
-        <p>58% of new managers say they received no formal support when they stepped into the role. They learn by making mistakes their teams pay for.</p>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Science-Backed Leadership Coaching</p>
+      <h1 class="hero-headline">
+        Leadership that<br/>
+        <em>actually lands</em><br/>
+        in the moments<br/>
+        that matter.
+      </h1>
+      <p class="hero-body">
+        10 research-backed nudges delivered to your calendar across 150 critical days. No app to check. No dashboard to forget. Just the right prompt, right when your new hire needs you most.
+      </p>
+      <div class="hero-actions">
+        <a href="https://buy.stripe.com/dRmdR2f6wc0Q0yYbxK0Ba01" class="btn-primary">Get started — $79 / month →</a>
+        <a href="#how" class="btn-secondary">See how it works</a>
       </div>
-      <div class="pain-item">
-        <strong>The Engagement Cost</strong>
-        <p>Poor management is the #1 driver of employee disengagement. The cost of replacing one employee averages 6–9 months of their salary.</p>
-      </div>
-      <div class="pain-item">
-        <strong>The Training Trap</strong>
-        <p>A single leadership course costs £1,500–£3,000 and happens once. HalpCraft delivers 150 days of structured support for £79.</p>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">150</div>
+          <div class="stat-label">Critical days</div>
+        </div>
+        <div>
+          <div class="stat-num">10</div>
+          <div class="stat-label">Precision nudges</div>
+        </div>
+        <div>
+          <div class="stat-num">0</div>
+          <div class="stat-label">Apps to check</div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- HOW IT WORKS -->
-<section class="section" id="how-it-works">
-  <div class="section-label">How it works</div>
-  <h2 class="section-title">Three steps. Then it runs itself.</h2>
-  <p class="section-sub">You spend five minutes setting it up. HalpCraft does the rest — for 150 days.</p>
-  <div class="steps">
-    <div class="step">
-      <span class="step-num">01</span>
-      <h3>You fill in a short form</h3>
-      <p>Tell us the new manager's name, their start date, and their work pattern. That's it. No lengthy onboarding. No integration setup.</p>
+    <div class="hero-right">
+      <div>
+        <div class="calendar-card">
+          <div class="cal-header">
+            <div class="cal-dot" style="background:#e74c3c;"></div>
+            <div class="cal-dot" style="background:#f39c12; margin-left:6px;"></div>
+            <div class="cal-dot" style="background:#2ecc71; margin-left:6px;"></div>
+            <span class="cal-title">Your calendar — HalpCraft Nudges</span>
+          </div>
+          <div class="cal-events">
+            <div class="cal-event">
+              <div class="cal-event-time">Day −5 · 9:00 AM</div>
+              <div class="cal-event-title">🧭 The Readiness Protocol</div>
+              <div class="cal-event-sub">Alex starts in 5 days. Get ahead of Day 1 Drift.</div>
+            </div>
+            <div class="cal-event">
+              <div class="cal-event-time">Day 0 · 9:00 AM</div>
+              <div class="cal-event-title">🧭 The Belonging Ritual</div>
+              <div class="cal-event-sub">Alex is here. Set the Partnership tone today.</div>
+            </div>
+            <div class="cal-event">
+              <div class="cal-event-time">Day 25 · 9:00 AM</div>
+              <div class="cal-event-title">🧭 The Ethos Guard</div>
+              <div class="cal-event-sub">Is the Interview Reality holding up?</div>
+            </div>
+            <div class="cal-event">
+              <div class="cal-event-time">Day 100 · 9:00 AM</div>
+              <div class="cal-event-title">🧭 Q1 Efficiency Bridge</div>
+              <div class="cal-event-sub">Shifting from Onboarding to Optimisation.</div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top:1.25rem;">
+          <span class="cal-badge">Lands in Google, Apple, Outlook & more</span>
+        </div>
+      </div>
     </div>
-    <div class="step">
-      <span class="step-num">02</span>
-      <h3>We build a personalised programme</h3>
-      <p>HalpCraft generates a custom ICS calendar file — 10 nudges timed and spaced across 150 days, sequenced in the right order for where they are in their journey.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">03</span>
-      <h3>Nudges appear in their calendar</h3>
-      <p>Your manager opens their calendar on day 7, day 21, day 45 — and a thoughtful, research-backed prompt is already there. No chasing. No reminders. Just quiet, consistent support.</p>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item"><span>✦</span> No app required</span>
+      <span class="ticker-item"><span>✦</span> Works in every calendar</span>
+      <span class="ticker-item"><span>✦</span> Research-backed timing</span>
+      <span class="ticker-item"><span>✦</span> Shift worker support</span>
+      <span class="ticker-item"><span>✦</span> One click setup</span>
+      <span class="ticker-item"><span>✦</span> 150 days of coverage</span>
+      <span class="ticker-item"><span>✦</span> No app required</span>
+      <span class="ticker-item"><span>✦</span> Works in every calendar</span>
+      <span class="ticker-item"><span>✦</span> Research-backed timing</span>
+      <span class="ticker-item"><span>✦</span> Shift worker support</span>
+      <span class="ticker-item"><span>✦</span> One click setup</span>
+      <span class="ticker-item"><span>✦</span> 150 days of coverage</span>
     </div>
   </div>
-</section>
 
-<!-- ZERO FRICTION -->
-<section class="section-friction">
-  <div class="section-friction-inner">
-    <div class="friction-text">
-      <div class="section-label">Zero friction</div>
-      <h2>No app.<br>No login.<br>No IT request.</h2>
-      <p>The reason most manager support programmes fail isn't the content — it's the friction. Another platform to log in to. Another tool that needs IT approval. Another thing that doesn't get used.</p>
-      <p>HalpCraft works inside the calendar your manager already lives in. There's nothing to install, nothing to configure, and nothing to remember to check.</p>
-      <ul class="friction-list">
-        <li>Works with Google Calendar, Outlook, Apple Calendar — any calendar app</li>
-        <li>No IT department approval or SSO setup needed</li>
-        <li>No new app for your manager to download or forget about</li>
-        <li>No change management. No training on the tool itself.</li>
-        <li>Set up in under five minutes by HR — then it's done</li>
+  <!-- PROBLEM -->
+  <section class="problem" id="problem">
+    <div class="fade-up">
+      <p class="section-label">The problem</p>
+      <h2 class="section-headline">Most managers want to lead well.<br/>The system doesn't support them.</h2>
+      <p class="section-body">
+        New hire failure isn't a talent problem — it's a timing problem. Managers know the right things to do. They just don't know <em>when</em>, and the moment passes. HalpCraft solves the timing.
+      </p>
+    </div>
+    <div class="problem-stats fade-up">
+      <div class="prob-stat">
+        <div class="prob-num">20%</div>
+        <div class="prob-label">of new hires leave within 45 days — most due to poor onboarding</div>
+        <div class="prob-source">SHRM, 2023</div>
+      </div>
+      <div class="prob-stat">
+        <div class="prob-num">$30k</div>
+        <div class="prob-label">average cost to replace a single employee at mid-level</div>
+        <div class="prob-source">Gallup, 2024</div>
+      </div>
+      <div class="prob-stat">
+        <div class="prob-num">69%</div>
+        <div class="prob-label">of employees stay 3+ years with a great onboarding experience</div>
+        <div class="prob-source">SHRM, 2022</div>
+      </div>
+      <div class="prob-stat">
+        <div class="prob-num">88%</div>
+        <div class="prob-label">of organisations do onboarding poorly, by their own admission</div>
+        <div class="prob-source">Gallup, 2023</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" style="padding: 7rem 4rem;">
+    <div class="how">
+      <div class="how-header fade-up">
+        <p class="section-label">How it works</p>
+        <h2 class="section-headline">Three steps.<br/>One click. Zero friction.</h2>
+        <p class="section-body" style="margin: 0 auto;">You could be set up in under two minutes. Your manager gets nudged at the exact right moment — automatically.</p>
+      </div>
+      <div class="how-steps fade-up">
+        <div class="step">
+          <span class="step-num">1</span>
+          <span class="step-icon">📋</span>
+          <h3 class="step-title">Submit your new hire's details</h3>
+          <p class="step-body">Fill out a simple form with the employee's name, start date, and work pattern. Takes 60 seconds.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <span class="step-icon">📅</span>
+          <h3 class="step-title">Click once to download</h3>
+          <p class="step-body">You receive a single calendar file. One click adds all 10 nudges to your preferred calendar app — Google, Apple, Outlook, any.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <span class="step-icon">🧭</span>
+          <h3 class="step-title">Get guided at the right moment</h3>
+          <p class="step-body">Each nudge arrives with a research-backed action guide. No prep required — just read, act, and lead with confidence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUDGE SEQUENCE -->
+  <section class="sequence" id="sequence">
+    <div class="sequence-header fade-up">
+      <p class="section-label">The 150-day sequence</p>
+      <h2 class="section-headline">Every nudge. Perfectly timed.</h2>
+      <p class="section-body">Each of the 10 nudges targets a critical inflection point in the new hire journey — the moments research shows matter most for retention, engagement, and performance.</p>
+    </div>
+    <div class="timeline fade-up">
+      <div class="timeline-item">
+        <div class="tl-day">Day −5</div>
+        <div class="tl-content">
+          <div class="tl-title">The Readiness Protocol</div>
+          <div class="tl-desc">Prepare the environment before they arrive. First impressions begin before Day 1.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-day">Day −1</div>
+        <div class="tl-content">
+          <div class="tl-title">The Team Signal</div>
+          <div class="tl-desc">Warm the team. Set the tone for belonging before the first handshake.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-day">Day 0</div>
+        <div class="tl-content">
+          <div class="tl-title">The Belonging Ritual</div>
+          <div class="tl-desc">Day 1 actions that create psychological safety and signal long-term investment.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-day">Day 7</div>
+        <div class="tl-content">
+          <div class="tl-title">Clarity & Connection Check</div>
+          <div class="tl-desc">Lock in momentum. Address confusion before it calcifies into disengagement.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-day">Day 25</div>
+        <div class="tl-content">
+          <div class="tl-title">The Ethos Guard</div>
+          <div class="tl-desc">Is what you promised in the interview matching their lived reality? Check now, not at month 3.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-day">Day 40</div>
+        <div class="tl-content">
+          <div class="tl-title">Vulnerability & Mastery Check</div>
+          <div class="tl-desc">Give them permission to not know everything yet — and create space for real growth.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-day">Day 80</div>
+        <div class="tl-content">
+          <div class="tl-title">The Transparency Bridge</div>
+          <div class="tl-desc">No surprises. Align expectations before informal reviews harden into verdicts.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-day">Day 100</div>
+        <div class="tl-content">
+          <div class="tl-title">Q1 Efficiency Bridge</div>
+          <div class="tl-desc">The shift from onboarding to optimisation. Help them move from learning to leading.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-day">Day 125</div>
+        <div class="tl-content">
+          <div class="tl-title">The Values-Impact Bridge</div>
+          <div class="tl-desc">Connect their work to meaning. Show them why they matter beyond the task list.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-day">Day 150</div>
+        <div class="tl-content">
+          <div class="tl-title">Taking the Lead</div>
+          <div class="tl-desc">Hand them the wheel. The best managers make themselves unnecessary — on purpose.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <div class="testimonials">
+    <div class="testimonials-header fade-up">
+      <p class="section-label">Early adopters</p>
+      <h2 class="section-headline">What managers are saying</h2>
+    </div>
+    <div class="test-grid fade-up">
+      <div class="test-card">
+        <p class="test-quote">I've managed teams for 12 years and always meant to be more intentional at the start. HalpCraft just does it for me — the nudge shows up and I actually act on it.</p>
+        <div class="test-author">Sarah K.</div>
+        <div class="test-role">Operations Lead, 40-person team</div>
+        <div class="test-placeholder">Early Access Member</div>
+      </div>
+      <div class="test-card">
+        <p class="test-quote">We used to lose people around the 6-week mark and never really understood why. The Ethos Guard nudge at Day 25 changed that — we now catch the drift before it costs us.</p>
+        <div class="test-author">Tom R.</div>
+        <div class="test-role">Head of People, Tech Startup</div>
+        <div class="test-placeholder">Early Access Member</div>
+      </div>
+      <div class="test-card">
+        <p class="test-quote">The shift worker support was the thing that sold me. Most onboarding tools are built for desk jobs. HalpCraft actually works for my floor managers too.</p>
+        <div class="test-author">Priya M.</div>
+        <div class="test-role">Retail Operations Manager</div>
+        <div class="test-placeholder">Early Access Member</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <section id="pricing" style="padding: 7rem 4rem;">
+    <div class="pricing-section">
+      <div class="fade-up">
+        <p class="section-label">Pricing</p>
+        <h2 class="section-headline">Simple, honest pricing.<br/>Scales as you grow.</h2>
+        <p class="section-body">Start with a single manager. Build to a whole leadership team. All plans include the full 150-day nudge sequence per employee.</p>
+      </div>
+      <div class="pricing-cards fade-up" style="margin-top: 3rem;">
+        <div class="price-card">
+          <div class="price-tier">Solo Manager</div>
+          <div class="price-amount">$79</div>
+          <div class="price-per">per manager / month</div>
+          <ul class="price-features">
+            <li>Unlimited new hires</li>
+            <li>Full 10-nudge sequence per hire</li>
+            <li>Standard & shift worker modes</li>
+            <li>Works in all calendar apps</li>
+            <li>Email delivery included</li>
+          </ul>
+          <a href="https://buy.stripe.com/dRmdR2f6wc0Q0yYbxK0Ba01" class="btn-primary" style="width:100%; justify-content:center;">Subscribe &amp; set up →</a>
+          <p style="font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem;letter-spacing:0.04em;">Checkout via Stripe · Setup takes 2 minutes</p>
+        </div>
+
+        <div class="price-card featured">
+          <div class="price-tier">Team · Most Popular</div>
+          <div class="price-amount">$199</div>
+          <div class="price-per">up to 5 managers / month</div>
+          <span class="coming-soon">Coming Soon</span>
+          <ul class="price-features">
+            <li>Everything in Solo</li>
+            <li>Centralised team dashboard</li>
+            <li>Manager performance insights</li>
+            <li>Shared hire tracking</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="#" class="btn-light" style="width:100%; justify-content:center; opacity:0.5; pointer-events:none;">Notify Me</a>
+          <p class="price-note">Join waitlist below</p>
+        </div>
+
+        <div class="price-card">
+          <div class="price-tier">Enterprise</div>
+          <div class="price-amount">Custom</div>
+          <div class="price-per">for large organisations</div>
+          <span class="coming-soon">Coming Soon</span>
+          <ul class="price-features">
+            <li>Everything in Team</li>
+            <li>HRIS / ATS integrations</li>
+            <li>Custom nudge sequencing</li>
+            <li>SSO & compliance</li>
+            <li>Dedicated account manager</li>
+          </ul>
+          <a href="mailto:hello@halpcraft.com" class="btn-primary" style="width:100%; justify-content:center; background:transparent; color:var(--ink);">Contact Us →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION / ABOUT -->
+  <section class="vision" id="vision">
+    <div class="fade-up">
+      <p class="section-label">Our mission</p>
+      <h2 class="section-headline">Leadership infrastructure for the modern workplace.</h2>
+      <blockquote class="vision-manifesto">
+        "Most managers aren't bad at leading — they're unsupported at the exact moments it matters."
+      </blockquote>
+      <p class="section-body">
+        HalpCraft was built on a simple belief: the gap between a good manager and a great one isn't knowledge — it's timing. We build tools that close that gap invisibly, without adding friction to already-busy people.
+      </p>
+      <ul class="vision-list">
+        <li>Built on peer-reviewed organisational psychology research</li>
+        <li>Designed for managers who are time-poor, not talent-poor</li>
+        <li>Expanding to cover the full employee lifecycle, globally</li>
+        <li>Zero surveillance — we coach the manager, not monitor the employee</li>
       </ul>
     </div>
-    <div class="friction-callout">
-      <h3>"The best onboarding tool is the one that actually gets used."</h3>
-      <p>We deliberately chose not to build an app. Not because we couldn't — but because an ICS file that lives in your manager's existing calendar will be seen every single day. That's 150 days of consistent, low-friction support that no platform can match for adoption.</p>
-    </div>
-  </div>
-</section>
-
-<!-- WHO IT'S FOR -->
-<section class="section">
-  <div class="section-label">Who it's for</div>
-  <h2 class="section-title">Built for the 80% of companies<br>that don't have a leadership academy.</h2>
-  <p class="section-sub">HalpCraft is for People Ops and HR teams who care deeply about getting new managers right — and don't have a six-figure L&D budget to do it.</p>
-  <div class="for-grid">
-    <div class="for-card">
-      <h3>HR Directors</h3>
-      <p>Who want a structured, consistent approach to manager onboarding without building a programme from scratch every time someone gets promoted.</p>
-    </div>
-    <div class="for-card">
-      <h3>L&D Managers</h3>
-      <p>Who need scalable support tools that don't require heavy facilitation — and that prove their value in the first 90 days.</p>
-    </div>
-    <div class="for-card">
-      <h3>People Ops Teams</h3>
-      <p>At Series A–C companies (50–500 people) where every new manager matters and there's no margin for a bad promotion to go unsupported.</p>
-    </div>
-    <div class="for-card">
-      <h3>Operations Leaders</h3>
-      <p>Who are responsible for team performance and recognise that untrained managers are their highest-risk, lowest-ROI investment.</p>
-    </div>
-  </div>
-  <div class="not-for">
-    <strong>Not for everyone</strong>
-    <p>If your company already has a dedicated management training programme, a leadership academy, or a full-time executive coach for every new manager — HalpCraft isn't for you. We're for the rest.</p>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="section-pricing" id="pricing">
-  <div class="section-pricing-inner">
-    <div class="section-label">Simple pricing</div>
-    <h2>One price.<br>150 days of support.</h2>
-    <p class="lead">No subscriptions. No per-seat software fees. No annual contracts. Just a straightforward programme price per manager.</p>
-    <div class="pricing-card">
-      <div class="pricing-badge">Complete Programme</div>
-      <div class="pricing-name">The 150-Day Manager Programme</div>
-      <div class="pricing-desc">Everything a new manager needs to find their feet — delivered quietly, consistently, over their first 150 days.</div>
-      <div class="pricing-price">
-        <div class="price-amount">£79</div>
-        <div class="price-unit">per manager<br><span style="color:var(--gold);font-weight:600;">one-time programme fee</span></div>
-      </div>
-      <p class="price-anchor">A single leadership course costs <strong>£1,500–£3,000</strong> and happens once. HalpCraft runs for 150 days.</p>
-      <ul class="pricing-includes">
-        <li>10 research-backed calendar nudges, sequenced over 150 days</li>
-        <li>Personalised to the manager's name, start date and work pattern</li>
-        <li>Delivered via ICS — works with any calendar, zero setup required</li>
-        <li>Covers: first 1:1s, feedback, psychological safety, team dynamics & more</li>
-        <li>Immediate delivery — programme starts the day you choose</li>
+    <div class="vision-right fade-up">
+      <p class="section-label">The HalpCraft platform</p>
+      <ul class="product-list">
+        <li class="product-item">
+          <div class="product-name">Nudge Onboarding</div>
+          <div class="product-desc">150-day new hire onboarding sequence delivered to your calendar</div>
+          <span class="product-tag tag-live">✓ Live Now</span>
+        </li>
+        <li class="product-item">
+          <div class="product-name">Nudge Performance</div>
+          <div class="product-desc">Quarterly performance conversation guides, timed to review cycles</div>
+          <span class="product-tag tag-soon">Coming 2025</span>
+        </li>
+        <li class="product-item">
+          <div class="product-name">Nudge Retention</div>
+          <div class="product-desc">Early-warning nudges triggered by known flight-risk signals</div>
+          <span class="product-tag tag-soon">Coming 2025</span>
+        </li>
+        <li class="product-item">
+          <div class="product-name">Nudge Leadership</div>
+          <div class="product-desc">Ongoing leadership development sequences for senior managers</div>
+          <span class="product-tag tag-2026">2026 Roadmap</span>
+        </li>
+        <li class="product-item">
+          <div class="product-name">Team Intelligence</div>
+          <div class="product-desc">Cross-manager insights and team health reporting for People leaders</div>
+          <span class="product-tag tag-2026">2026 Roadmap</span>
+        </li>
       </ul>
-      <a class="btn-pricing" href="https://buy.stripe.com/dRm14gbUk0i8chGfO00Ba00">Start the programme for £79 →</a>
     </div>
-    <p class="pricing-note">Running multiple cohorts? Email us about volume pricing for 5+ managers.</p>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <a class="footer-logo" href="/">HalpCraft</a>
-  <div class="footer-links">
-    <a href="#how-it-works">How it works</a>
-    <a href="#pricing">Pricing</a>
-    <a href="/privacy.html">Privacy policy</a>
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <p class="section-label">Get started today</p>
+    <h2 class="section-headline">Your next new hire deserves a great manager.</h2>
+    <p class="section-body">Set up takes two minutes. The impact lasts 150 days — and beyond.</p>
+    <div class="cta-actions">
+      <a href="https://buy.stripe.com/dRmdR2f6wc0Q0yYbxK0Ba01" class="btn-light">Subscribe &amp; set up — $79 / month →</a>
+      <a href="mailto:hello@halpcraft.com" class="btn-secondary" style="color:rgba(245,242,237,0.5);">Talk to us first</a>
+    </div>
   </div>
-</footer>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-logo">Halp<span>Craft</span></div>
+      <div class="footer-tagline">Leadership Infrastructure · Built for Humans</div>
+    </div>
+    <div class="footer-right">
+      <ul class="footer-links">
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#vision">About</a></li>
+        <li><a href="mailto:hello@halpcraft.com">Contact</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+      </ul>
+      <div>© 2025 HalpCraft. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Fade-up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Smooth scroll nav
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>

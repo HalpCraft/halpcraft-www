@@ -7,9 +7,8 @@
   <meta name="robots" content="noindex,nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230e0e0e'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23b8902a'>H</text></svg>" />
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -21,7 +20,6 @@
     html { scroll-behavior: smooth; }
     body { font-family: var(--sans); background: var(--ink); color: var(--paper); min-height: 100vh; overflow-x: hidden; }
 
-    /* ── BACKGROUND GLOW ── */
     .bg-glow {
       position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background:
@@ -29,22 +27,24 @@
         radial-gradient(ellipse 40% 60% at 80% 90%, rgba(184,144,42,0.08) 0%, transparent 60%);
     }
 
-    /* ── NAV ── */
     nav {
       position: relative; z-index: 10;
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.5rem 4rem;
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
-    .nav-logo { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; color: var(--paper); text-decoration: none; }
-    .nav-logo span { color: var(--gold); }
+    .nav-logo {
+      font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
+      text-decoration: none; letter-spacing: 0.04em;
+    }
+    .nav-logo .halp { color: var(--paper); }
+    .nav-logo .craft { color: var(--gold); }
     .nav-tag {
       font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--gold); background: rgba(184,144,42,0.12);
       border: 1px solid rgba(184,144,42,0.25); padding: 0.35rem 0.9rem; border-radius: 100px;
     }
 
-    /* ── HERO ── */
     .hero {
       position: relative; z-index: 1;
       text-align: center;
@@ -82,7 +82,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── DIVIDER ── */
     .divider {
       position: relative; z-index: 1;
       max-width: 800px; margin: 0 auto;
@@ -98,12 +97,11 @@
       color: rgba(255,255,255,0.25); white-space: nowrap;
     }
 
-    /* ── STEPS ── */
     .steps {
       position: relative; z-index: 1;
       max-width: 800px; margin: 0 auto;
       padding: 3rem 4rem 0;
-      display: flex; flex-direction: column; gap: 0;
+      display: flex; flex-direction: column;
       opacity: 0; animation: fadeUp 0.6s ease 0.5s forwards;
     }
 
@@ -111,19 +109,16 @@
       display: grid; grid-template-columns: 4rem 1fr;
       gap: 0 2rem; padding: 2.25rem 0;
       border-bottom: 1px solid rgba(255,255,255,0.06);
-      position: relative;
-      transition: background 0.2s;
     }
     .step:last-child { border-bottom: none; }
 
-    .step-left { display: flex; flex-direction: column; align-items: center; gap: 0; }
-
+    .step-left { display: flex; flex-direction: column; align-items: center; }
     .step-num {
       width: 2.75rem; height: 2.75rem; border-radius: 50%;
       border: 1px solid rgba(184,144,42,0.4);
       background: rgba(184,144,42,0.08);
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--serif); font-size: 1rem; font-weight: 700;
+      font-family: var(--serif); font-size: 1rem; font-weight: 600;
       color: var(--gold); flex-shrink: 0;
     }
     .step-line {
@@ -133,14 +128,12 @@
     .step:last-child .step-line { display: none; }
 
     .step-right { padding-top: 0.35rem; }
-
     .step-label {
       font-size: 0.68rem; font-weight: 500; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 0.5rem;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
     }
     .step-title {
-      font-family: var(--serif); font-size: 1.2rem; font-weight: 700;
+      font-family: var(--serif); font-size: 1.3rem; font-weight: 600;
       color: var(--paper); margin-bottom: 0.6rem; line-height: 1.3;
     }
     .step-body {
@@ -149,10 +142,8 @@
     }
     .step-body strong { color: rgba(245,242,237,0.8); font-weight: 500; }
 
-    /* ── CALENDAR PREVIEW ── */
     .cal-preview {
-      display: flex; flex-direction: column; gap: 0.5rem;
-      margin-top: 1.25rem;
+      display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.25rem;
     }
     .cal-item {
       display: flex; align-items: center; gap: 0.75rem;
@@ -160,20 +151,17 @@
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.07);
       border-left: 3px solid var(--gold);
-      border-radius: 2px;
-      font-size: 0.8rem;
+      border-radius: 2px; font-size: 0.8rem;
     }
-    .cal-item-day { color: var(--gold); font-weight: 700; font-family: var(--serif); min-width: 4rem; }
+    .cal-item-day { color: var(--gold); font-weight: 600; font-family: var(--serif); min-width: 4rem; font-style: italic; }
     .cal-item-title { color: rgba(245,242,237,0.7); }
 
-    /* ── HOW TO USE ── */
     .how-section {
       position: relative; z-index: 1;
       max-width: 800px; margin: 0 auto;
       padding: 4rem 4rem 0;
       opacity: 0; animation: fadeUp 0.6s ease 0.65s forwards;
     }
-
     .how-label {
       font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
@@ -182,25 +170,20 @@
       font-family: var(--serif); font-size: 2rem; font-weight: 600;
       color: var(--paper); margin-bottom: 2rem; letter-spacing: -0.01em;
     }
-
     .how-cards {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-      background: rgba(255,255,255,0.06);
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.06);
     }
-    .how-card {
-      background: var(--ink); padding: 2rem 1.75rem;
-      transition: background 0.2s;
-    }
+    .how-card { background: var(--ink); padding: 2rem 1.75rem; transition: background 0.2s; }
     .how-card:hover { background: rgba(255,255,255,0.03); }
     .how-card-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
     .how-card-title {
-      font-family: var(--serif); font-size: 1rem; font-weight: 700;
+      font-family: var(--serif); font-size: 1rem; font-weight: 600;
       color: var(--paper); margin-bottom: 0.5rem;
     }
     .how-card-body { font-size: 0.82rem; color: rgba(245,242,237,0.4); line-height: 1.65; }
 
-    /* ── FAQ ── */
     .faq-section {
       position: relative; z-index: 1;
       max-width: 800px; margin: 0 auto;
@@ -215,24 +198,19 @@
       font-family: var(--serif); font-size: 2rem; font-weight: 600;
       color: var(--paper); margin-bottom: 2rem; letter-spacing: -0.01em;
     }
-    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-list { display: flex; flex-direction: column; }
     .faq-item {
       border-top: 1px solid rgba(255,255,255,0.07);
-      padding: 1.5rem 0;
-      cursor: pointer;
+      padding: 1.5rem 0; cursor: pointer;
     }
     .faq-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
     .faq-q {
-      font-family: var(--serif); font-size: 1rem; font-weight: 700;
+      font-family: var(--serif); font-size: 1rem; font-weight: 600;
       color: var(--paper); display: flex; justify-content: space-between;
-      align-items: center; gap: 1rem;
-      transition: color 0.2s;
+      align-items: center; gap: 1rem; transition: color 0.2s;
     }
     .faq-q:hover { color: var(--gold-lt); }
-    .faq-arrow {
-      color: var(--gold); font-size: 1.1rem; flex-shrink: 0;
-      transition: transform 0.25s;
-    }
+    .faq-arrow { color: var(--gold); font-size: 1.1rem; flex-shrink: 0; transition: transform 0.25s; }
     .faq-item.open .faq-arrow { transform: rotate(45deg); }
     .faq-a {
       font-size: 0.875rem; color: rgba(245,242,237,0.45);
@@ -242,12 +220,10 @@
     }
     .faq-item.open .faq-a { max-height: 200px; padding-top: 1rem; }
 
-    /* ── CTA FOOTER ── */
     .footer-cta {
       position: relative; z-index: 1;
       max-width: 800px; margin: 0 auto;
-      padding: 4rem 4rem 3rem;
-      text-align: center;
+      padding: 4rem 4rem 3rem; text-align: center;
       opacity: 0; animation: fadeUp 0.6s ease 0.85s forwards;
     }
     .footer-cta-inner {
@@ -256,7 +232,7 @@
       padding: 3rem;
     }
     .footer-cta-title {
-      font-family: var(--serif); font-size: 1.5rem; font-weight: 700;
+      font-family: var(--serif); font-size: 1.6rem; font-weight: 600;
       color: var(--paper); margin-bottom: 0.75rem;
     }
     .footer-cta-body {
@@ -273,26 +249,29 @@
     }
     .btn-gold:hover { background: var(--gold-lt); }
     .footer-cta-support {
-      font-size: 0.75rem; color: rgba(245,242,237,0.25);
-      margin-top: 1.25rem;
+      font-size: 0.75rem; color: rgba(245,242,237,0.25); margin-top: 1.25rem;
     }
     .footer-cta-support a { color: var(--gold); text-decoration: none; }
 
-    /* ── SITE FOOTER ── */
     footer {
       position: relative; z-index: 1;
       border-top: 1px solid rgba(255,255,255,0.06);
       padding: 2rem 4rem;
       display: flex; justify-content: space-between; align-items: center;
-      max-width: 100%;
     }
-    .footer-logo { font-family: var(--serif); font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.4); text-decoration: none; }
-    .footer-logo span { color: var(--gold); }
+    .footer-logo {
+      font-family: var(--serif); font-size: 1rem; font-weight: 400;
+      text-decoration: none; letter-spacing: 0.04em;
+    }
+    .footer-logo .halp { color: rgba(255,255,255,0.4); }
+    .footer-logo .craft { color: var(--gold); }
     .footer-links { display: flex; gap: 2rem; list-style: none; }
-    .footer-links a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.2s; }
+    .footer-links a {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.2s;
+    }
     .footer-links a:hover { color: var(--gold); }
 
-    /* ── MOBILE ── */
     @media (max-width: 700px) {
       nav { padding: 1.25rem 1.5rem; }
       .hero { padding: 4rem 1.5rem 2rem; }
@@ -309,92 +288,65 @@
 <body>
   <div class="bg-glow"></div>
 
-  <!-- NAV -->
   <nav>
-    <a href="/" class="nav-logo">Halp<span style="color:var(--gold)">Craft</span></a>
+    <a href="/" class="nav-logo"><span class="halp">Halp</span><span class="craft">Craft</span></a>
     <span class="nav-tag">Setup Complete</span>
   </nav>
 
-  <!-- HERO -->
   <div class="hero">
     <div class="confirm-badge">Setup confirmed</div>
     <h1>Your nudges are<br/><em>on their way.</em></h1>
     <p class="hero-sub">Check your inbox — your personalised calendar file will arrive within a few minutes. Here's everything you need to know to get the most out of HalpCraft.</p>
   </div>
 
-  <!-- DIVIDER -->
-  <div class="divider">
-    <span class="divider-text">What happens next</span>
-  </div>
+  <div class="divider"><span class="divider-text">What happens next</span></div>
 
-  <!-- STEPS -->
   <div class="steps">
 
     <div class="step">
-      <div class="step-left">
-        <div class="step-num">1</div>
-        <div class="step-line"></div>
-      </div>
+      <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
       <div class="step-right">
         <div class="step-label">Right now</div>
         <div class="step-title">Check your inbox</div>
-        <div class="step-body">
-          You'll receive an email from HalpCraft with a single <strong>.ics calendar file</strong> attached. This file contains all 10 nudges, timed precisely to your new hire's start date. It usually arrives within 5 minutes — check your spam folder if it doesn't show up.
-        </div>
+        <div class="step-body">You'll receive an email from HalpCraft with a single <strong>.ics calendar file</strong> attached. This file contains all 10 nudges, timed precisely to your new hire's start date. It usually arrives within 5 minutes — check your spam folder if it doesn't show up.</div>
       </div>
     </div>
 
     <div class="step">
-      <div class="step-left">
-        <div class="step-num">2</div>
-        <div class="step-line"></div>
-      </div>
+      <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
       <div class="step-right">
         <div class="step-label">One click</div>
         <div class="step-title">Open the file — that's it</div>
-        <div class="step-body">
-          Click the .ics file attachment in your email. Your calendar app — <strong>Google Calendar, Apple Calendar, Outlook</strong>, or any other — will open automatically and ask if you want to import the events. Tap yes. All 10 nudges land in your calendar instantly, no login required.
-        </div>
+        <div class="step-body">Click the .ics file attachment in your email. Your calendar app — <strong>Google Calendar, Apple Calendar, Outlook</strong>, or any other — will open automatically and ask if you want to import the events. Tap yes. All 10 nudges land in your calendar instantly.</div>
         <div class="cal-preview">
           <div class="cal-item"><span class="cal-item-day">Day −5</span><span class="cal-item-title">🧭 The Readiness Protocol</span></div>
           <div class="cal-item"><span class="cal-item-day">Day 0</span><span class="cal-item-title">🧭 The Belonging Ritual</span></div>
           <div class="cal-item"><span class="cal-item-day">Day 25</span><span class="cal-item-title">🧭 The Ethos Guard</span></div>
-          <div class="cal-item" style="border-color: rgba(255,255,255,0.15);"><span class="cal-item-day" style="color:rgba(255,255,255,0.25);">+ 7 more</span><span class="cal-item-title" style="color:rgba(255,255,255,0.25);">nudges across 150 days</span></div>
+          <div class="cal-item" style="border-color:rgba(255,255,255,0.15);"><span class="cal-item-day" style="color:rgba(255,255,255,0.25);">+ 7 more</span><span class="cal-item-title" style="color:rgba(255,255,255,0.25);">nudges across 150 days</span></div>
         </div>
       </div>
     </div>
 
     <div class="step">
-      <div class="step-left">
-        <div class="step-num">3</div>
-        <div class="step-line"></div>
-      </div>
+      <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
       <div class="step-right">
         <div class="step-label">On each nudge day</div>
         <div class="step-title">Read, act, lead</div>
-        <div class="step-body">
-          On the day of each nudge, your calendar reminds you with a 15-minute alert. Open the event, click the link inside, and you'll get a <strong>full action guide</strong> — research-backed, specific to that moment in the onboarding journey. No prep needed. Read it, do it, done.
-        </div>
+        <div class="step-body">On the day of each nudge, your calendar reminds you with a 15-minute alert. Open the event, click the link inside, and you'll get a <strong>full action guide</strong> — research-backed, specific to that moment in the onboarding journey. No prep needed. Read it, do it, done.</div>
       </div>
     </div>
 
     <div class="step">
-      <div class="step-left">
-        <div class="step-num">4</div>
-        <div class="step-line"></div>
-      </div>
+      <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
       <div class="step-right">
         <div class="step-label">Next new hire</div>
-        <div class="step-title">Repeat for every person you onboard</div>
-        <div class="step-body">
-          Your subscription covers <strong>unlimited new hires</strong>. Each time someone joins your team, email us at <a href="mailto:hello@halpcraft.com" style="color:var(--gold);">hello@halpcraft.com</a> with their name and start date and we'll send you a fresh calendar file — or use the setup link we'll email you shortly.
-        </div>
+        <div class="step-title">Each hire is a fresh programme</div>
+        <div class="step-body">Each new team member is a separate 150-day programme at <strong>$79 per employee</strong>. When you're ready to onboard your next person, visit <a href="https://www.halpcraft.com" style="color:var(--gold);">halpcraft.com</a> to get started.</div>
       </div>
     </div>
 
   </div>
 
-  <!-- HOW TO GET THE MOST OUT OF IT -->
   <div class="how-section">
     <div class="how-label">Pro tips</div>
     <div class="how-title">Getting the most out of HalpCraft</div>
@@ -417,53 +369,44 @@
     </div>
   </div>
 
-  <!-- FAQ -->
   <div class="faq-section">
     <div class="faq-label">Common questions</div>
     <div class="faq-title">Quick answers</div>
     <div class="faq-list">
-
       <div class="faq-item">
         <div class="faq-q">What if I don't receive the calendar email?<span class="faq-arrow">+</span></div>
         <div class="faq-a">Check your spam or junk folder first. If it's not there after 10 minutes, email us at hello@halpcraft.com and we'll resend it manually within the hour.</div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q">Which calendar apps does the file work with?<span class="faq-arrow">+</span></div>
-        <div class="faq-a">Any app that supports .ics files — which is essentially all of them. Google Calendar, Apple Calendar, Microsoft Outlook, Fantastical, Calendly, and more. If your app opens calendar files, it works.</div>
+        <div class="faq-a">Any app that supports .ics files — which is essentially all of them. Google Calendar, Apple Calendar, Microsoft Outlook, Fantastical, and more. If your app opens calendar files, it works.</div>
       </div>
-
       <div class="faq-item">
         <div class="faq-q">My new hire works shifts — will the dates be right?<span class="faq-arrow">+</span></div>
-        <div class="faq-a">If you selected "Shift worker" on the setup form, your nudges are not adjusted to skip weekends — they follow the offset days exactly as set. If you need to customise the dates further, contact us and we can generate a custom sequence.</div>
+        <div class="faq-a">If you selected "Shift worker" on the setup form, your nudges follow the offset days exactly rather than skipping weekends. If you need custom dates, contact us and we can generate a custom sequence.</div>
       </div>
-
       <div class="faq-item">
-        <div class="faq-q">Can I add more than one new hire?<span class="faq-arrow">+</span></div>
-        <div class="faq-a">Yes — your subscription covers unlimited new hires. Each hire gets their own calendar file. Just email hello@halpcraft.com with the new hire's name and start date, or use the setup link in your welcome email.</div>
+        <div class="faq-q">How do I onboard another team member?<span class="faq-arrow">+</span></div>
+        <div class="faq-a">Each new hire is a separate programme at $79 per employee. Visit halpcraft.com to get started with your next person whenever you're ready.</div>
       </div>
-
       <div class="faq-item">
-        <div class="faq-q">How do I cancel my subscription?<span class="faq-arrow">+</span></div>
-        <div class="faq-a">Email hello@halpcraft.com and we'll cancel it straight away — no questions, no friction. You'll keep access until the end of your current billing period.</div>
+        <div class="faq-q">Something went wrong — who do I contact?<span class="faq-arrow">+</span></div>
+        <div class="faq-a">Email hello@halpcraft.com and we'll sort it out straight away — no friction, no hold music. We respond within 2 business days.</div>
       </div>
-
     </div>
   </div>
 
-  <!-- CTA FOOTER -->
   <div class="footer-cta">
     <div class="footer-cta-inner">
-      <div class="footer-cta-title">Got a new hire starting soon?</div>
-      <div class="footer-cta-body">Set up their nudge calendar now while you're thinking about it. Takes 60 seconds.</div>
-      <a href="https://tally.so/r/xXJ975" class="btn-gold">Set up another hire →</a>
+      <div class="footer-cta-title">Onboarding another team member soon?</div>
+      <div class="footer-cta-body">Each new hire gets their own 150-day programme. $79 per employee, set up in 60 seconds.</div>
+      <a href="https://www.halpcraft.com" class="btn-gold">Get started →</a>
       <div class="footer-cta-support">Questions? <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a> · We respond within 2 business days.</div>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
-    <a href="/" class="footer-logo"><span style="color:rgba(255,255,255,0.6)">Halp</span><span style="color:var(--gold)">Craft</span></a>
+    <a href="/" class="footer-logo"><span class="halp">Halp</span><span class="craft">Craft</span></a>
     <ul class="footer-links">
       <li><a href="/">Home</a></li>
       <li><a href="/privacy">Privacy</a></li>
@@ -472,7 +415,6 @@
   </footer>
 
   <script>
-    // FAQ accordion
     document.querySelectorAll('.faq-item').forEach(item => {
       item.addEventListener('click', () => {
         const isOpen = item.classList.contains('open');

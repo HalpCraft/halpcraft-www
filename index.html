@@ -774,6 +774,77 @@
     .tag-soon { background: rgba(184,144,42,0.15); color: var(--gold-lt); border: 1px solid rgba(184,144,42,0.2); }
     .tag-2026 { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.08); }
 
+    /* ─── CONTACT FORM ───────────────────────────── */
+    .contact-form-wrap {
+      margin-top: 3rem;
+      max-width: 480px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .contact-form-label {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.4);
+      margin-bottom: 1.25rem;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .contact-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .contact-input {
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--paper);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-input::placeholder { color: rgba(245,242,237,0.3); }
+    .contact-input:focus { border-color: var(--gold); }
+    textarea.contact-input { resize: vertical; min-height: 100px; }
+    .contact-submit {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--gold);
+      border: none;
+      border-radius: 6px;
+      padding: 0.85rem 2rem;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: opacity 0.2s;
+    }
+    .contact-submit:hover { opacity: 0.85; }
+    .contact-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .contact-success {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--gold-lt);
+      margin-top: 1rem;
+    }
+    @media (max-width: 600px) {
+      .contact-form-row { grid-template-columns: 1fr; }
+    }
+
     /* ─── CTA FOOTER BAND ─────────────────────────── */
     .cta-band {
       background: var(--ink);
@@ -941,7 +1012,7 @@
         10 research-backed nudges delivered to your calendar across 150 critical days. No app to check. No dashboard to forget. Just the right prompt, right when your new hire needs you most.
       </p>
       <div class="hero-actions">
-        <a href="https://buy.stripe.com/aFadR2gaAd4UftS0T60Ba03" class="btn-primary">Get started — $79 per employee →</a>
+        <a href="https://buy.stripe.com/aFadR2gaAd4UftS0T60Ba03" class="btn-primary">Start now →</a>
         <a href="#how" class="btn-secondary">See how it works</a>
       </div>
       <div class="hero-stats">
@@ -1098,7 +1169,7 @@
     </div>
     <div class="timeline fade-up">
       <div class="timeline-item">
-        <div class="tl-day">Day of Purchase</div>
+        <div class="tl-day">Before they arrive</div>
         <div class="tl-content">
           <div class="tl-title">The Readiness Protocol</div>
           <div class="tl-desc">Set up equipment, confirm access, and assign a buddy — done the moment you commit to the onboarding.</div>
@@ -1203,55 +1274,24 @@
     <div class="pricing-section">
       <div class="fade-up">
         <p class="section-label">Pricing</p>
-        <h2 class="section-headline">Simple, honest pricing.<br/>Scales as you grow.</h2>
-        <p class="section-body">Start with a single manager. Build to a whole leadership team. All plans include the full 150-day nudge sequence per employee.</p>
+        <h2 class="section-headline">Simple, honest pricing.</h2>
+        <p class="section-body">One price. One programme. Everything your new hire needs across their first 150 days.</p>
       </div>
-      <div class="pricing-cards fade-up" style="margin-top: 3rem;">
-        <div class="price-card">
+      <div class="pricing-cards fade-up" style="margin-top: 3rem; display:flex; justify-content:center;">
+        <div class="price-card" style="max-width:400px; width:100%;">
           <div class="price-tier">Solo Manager</div>
           <div class="price-amount">$79</div>
           <div class="price-per">per employee onboarded</div>
           <p style="font-size:0.78rem;color:var(--muted);line-height:1.5;margin-bottom:1.75rem;font-style:italic;">Less than 0.3% of the cost of replacing the person they're onboarding.</p>
           <ul class="price-features">
-            <li>Unlimited new hires</li>
+            <li>One programme per employee — no subscription</li>
             <li>Full 10-nudge sequence per hire</li>
             <li>Standard & shift worker modes</li>
             <li>Works in all calendar apps</li>
             <li>Email delivery included</li>
           </ul>
-          <a href="https://buy.stripe.com/aFadR2gaAd4UftS0T60Ba03" class="btn-primary" style="width:100%; justify-content:center;">Subscribe &amp; set up →</a>
+          <a href="https://buy.stripe.com/aFadR2gaAd4UftS0T60Ba03" class="btn-primary" style="width:100%; justify-content:center;">Start now →</a>
           <p style="font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem;letter-spacing:0.04em;">Checkout via Stripe · Setup takes 2 minutes</p>
-        </div>
-
-        <div class="price-card featured">
-          <div class="price-tier">Team · Most Popular</div>
-          <div class="price-amount">$199</div>
-          <div class="price-per">up to 5 managers / month</div>
-          <span class="coming-soon">Coming Soon</span>
-          <ul class="price-features">
-            <li>Everything in Solo</li>
-            <li>Centralised team dashboard</li>
-            <li>Manager performance insights</li>
-            <li>Shared hire tracking</li>
-            <li>Priority support</li>
-          </ul>
-          <a href="#" class="btn-light" style="width:100%; justify-content:center; opacity:0.5; pointer-events:none;">Notify Me</a>
-          <p class="price-note">Join waitlist below</p>
-        </div>
-
-        <div class="price-card">
-          <div class="price-tier">Enterprise</div>
-          <div class="price-amount">Custom</div>
-          <div class="price-per">for large organisations</div>
-          <span class="coming-soon">Coming Soon</span>
-          <ul class="price-features">
-            <li>Everything in Team</li>
-            <li>HRIS / ATS integrations</li>
-            <li>Custom nudge sequencing</li>
-            <li>SSO & compliance</li>
-            <li>Dedicated account manager</li>
-          </ul>
-          <a href="mailto:hello@halpcraft.com" class="btn-primary" style="width:100%; justify-content:center; background:transparent; color:var(--ink);">Contact Us →</a>
         </div>
       </div>
     </div>
@@ -1311,8 +1351,19 @@
     <h2 class="section-headline">Your next new hire deserves a great manager.</h2>
     <p class="section-body">Set up takes two minutes. The impact lasts 150 days — and beyond.</p>
     <div class="cta-actions">
-      <a href="https://buy.stripe.com/aFadR2gaAd4UftS0T60Ba03" class="btn-light">Subscribe &amp; set up — $79 per employee →</a>
-      <a href="mailto:hello@halpcraft.com" class="btn-secondary" style="color:rgba(245,242,237,0.5);">Talk to us first</a>
+      <a href="https://buy.stripe.com/aFadR2gaAd4UftS0T60Ba03" class="btn-light">Start now →</a>
+    </div>
+    <div class="contact-form-wrap fade-up">
+      <p class="contact-form-label">Or get in touch, we reply within 24 hours.</p>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="contact-form-row">
+          <input type="text" name="name" placeholder="Name" required class="contact-input"/>
+          <input type="email" name="email" placeholder="Email" required class="contact-input"/>
+        </div>
+        <textarea name="message" placeholder="What would you like to know?" rows="4" required class="contact-input"></textarea>
+        <button type="submit" class="contact-submit" id="contactSubmit">Send message →</button>
+      </form>
+      <p class="contact-success" id="contactSuccess" style="display:none;">Thanks — we'll be in touch within 24 hours.</p>
     </div>
   </div>
 
@@ -1330,7 +1381,7 @@
         <li><a href="mailto:hello@halpcraft.com">Contact</a></li>
         <li><a href="/privacy">Privacy</a></li>
       </ul>
-      <div>© 2025 HalpCraft. All rights reserved.</div>
+      <div>© 2026 HalpCraft. All rights reserved.</div>
     </div>
   </footer>
 
@@ -1346,6 +1397,28 @@
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Contact form — constructs a mailto on submit and shows success state
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name    = contactForm.name.value.trim();
+        const email   = contactForm.email.value.trim();
+        const message = contactForm.message.value.trim();
+        if (!name || !email || !message) return;
+        const btn = document.getElementById('contactSubmit');
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        const subject = encodeURIComponent('HalpCraft enquiry from ' + name);
+        const body    = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+        window.location.href = 'mailto:hello@halpcraft.com?subject=' + subject + '&body=' + body;
+        setTimeout(function() {
+          contactForm.style.display = 'none';
+          document.getElementById('contactSuccess').style.display = 'block';
+        }, 800);
+      });
+    }
 
     // Smooth scroll nav
     document.querySelectorAll('a[href^="#"]').forEach(a => {

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — HalpCraft</title>
+  <meta name="description" content="The person behind HalpCraft — Damian Sicely, founder." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230e0e0e'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23b8902a'>H</text></svg>" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:    #0e0e0e;
+      --paper:  #f5f2ed;
+      --gold:   #b8902a;
+      --gold-lt:#e8c96d;
+      --muted:  #6b6660;
+      --rule:   rgba(14,14,14,0.12);
+      --serif:  'Cormorant Garamond', Georgia, serif;
+      --sans:   'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 4rem;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex; gap: 2.5rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--ink); border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
+    .nav-cta {
+      background: var(--ink);
+      color: var(--paper) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+      font-weight: 500 !important;
+      letter-spacing: 0.04em !important;
+      text-transform: uppercase !important;
+      font-size: 0.8rem !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--ink) !important; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s; display: block; }
+
+    /* ─── PAGE WRAPPER ────────────────────────────── */
+    .page-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 8rem 2rem 6rem;
+    }
+
+    /* ─── HERO ────────────────────────────────────── */
+    .about-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .about-heading {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 600;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 3rem;
+    }
+
+    /* ─── PORTRAIT + INTRO ────────────────────────── */
+    .about-intro {
+      display: flex;
+      gap: 3rem;
+      align-items: flex-start;
+      margin-bottom: 3rem;
+    }
+
+    .about-portrait {
+      flex-shrink: 0;
+      width: 220px;
+      height: 220px;
+      border-radius: 16px;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid var(--rule);
+      box-shadow: 0 4px 24px rgba(14,14,14,0.08);
+    }
+
+    /* ─── BODY COPY ───────────────────────────────── */
+    .about-body {
+      font-family: var(--serif);
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--ink);
+    }
+
+    .about-body p { margin-bottom: 1.5rem; }
+    .about-body p:last-child { margin-bottom: 0; }
+
+    .about-divider {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 3rem 0;
+    }
+
+    .about-section-heading {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── SIGN-OFF ────────────────────────────────── */
+    .about-signoff {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .signoff-name {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    .signoff-role {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+    }
+
+    .about-contact {
+      margin-top: 1.75rem;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .about-contact a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .about-contact a:hover { border-bottom-color: var(--gold); }
+
+    /* ─── CTA BAND ────────────────────────────────── */
+    .cta-band {
+      background: var(--ink);
+      color: var(--paper);
+      text-align: center;
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(184,144,42,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-label {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-bottom: 1rem;
+    }
+
+    .cta-heading {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--paper);
+      max-width: 18ch;
+      margin: 0 auto 1.25rem;
+    }
+
+    .cta-sub {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(245,242,237,0.5);
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 0.9rem 2.25rem;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      border: 2px solid var(--paper);
+      transition: all 0.25s;
+    }
+    .btn-light:hover { background: transparent; color: var(--paper); }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      background: #080808;
+      color: rgba(255,255,255,0.25);
+      padding: 2.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 2rem;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-tagline {
+      font-size: 0.75rem;
+      margin-top: 0.3rem;
+      letter-spacing: 0.06em;
+    }
+    .footer-right {
+      text-align: right;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin-bottom: 0.75rem;
+      justify-content: flex-end;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ─── FADE-UP ─────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── MOBILE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .page-wrap { padding: 6rem 1.5rem 4rem; }
+
+      .about-intro { flex-direction: column; align-items: center; gap: 2rem; }
+      .about-portrait { width: 180px; height: 180px; }
+
+      footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .footer-right { text-align: left; }
+      .footer-links { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">Halp<span>Craft</span></a>
+    <ul class="nav-links">
+      <li><a href="/#how">How It Works</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="/about.html" class="active">About</a></li>
+      <li><a href="mailto:hello@halpcraft.com">Contact</a></li>
+      <li><a href="https://buy.stripe.com/aFadR2gaAd4UftS0T60Ba03" class="nav-cta">Start now</a></li>
+    </ul>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <div class="page-wrap">
+
+    <!-- HERO -->
+    <div class="fade-up">
+      <p class="about-eyebrow">The person behind it</p>
+      <h1 class="about-heading">About</h1>
+    </div>
+
+    <!-- PORTRAIT + OPENING PARAGRAPHS -->
+    <div class="about-intro fade-up">
+      <img
+        src="/damian.jpg"
+        alt="Damian Sicely, Founder of HalpCraft"
+        class="about-portrait"
+      />
+      <div class="about-body">
+        <p>I've spent nearly twenty years watching the same pattern repeat itself across hundreds of businesses.</p>
+        <p>Someone gets hired into a new role. Everyone's excited. Then the business moves on — there are meetings to run, targets to hit, fires to put out. The new person, not wanting to seem difficult, stays quiet. And the manager, stretched across a dozen competing priorities, assumes everything is fine.</p>
+        <p>It usually isn't.</p>
+      </div>
+    </div>
+
+    <!-- REMAINING FIRST SECTION -->
+    <div class="about-body fade-up">
+      <p>I've seen this play out in recruitment, in event management, in leading multi-site accommodation and hospitality operations across New Zealand. Different industries, different people, different stages of growth — the same quiet failure every time. A capable person hired with genuine promise, left to find their feet alone, gradually disengaging before anyone noticed the drift had already set in.</p>
+      <p>The frustrating part is that it's entirely preventable. Not with another training day or a complex onboarding platform. Just the right prompt, from someone who has thought carefully about when those moments actually are, landing at exactly the right time.</p>
+      <p>That's what HalpCraft is.</p>
+    </div>
+
+    <hr class="about-divider fade-up" />
+
+    <!-- SECOND SECTION -->
+    <div class="about-body fade-up">
+      <p class="about-section-heading">Why I built it the way I did</p>
+      <p>I'm an executive leader, not a developer. When I decided this problem was worth solving I had a choice — wait until the conditions were perfect, or back myself and use the best tools available to build something real.</p>
+      <p>I chose the latter. I partnered with AI to design, build and refine HalpCraft from the ground up. What that process taught me is that the best solutions are almost always the simplest ones. No friction. No new platforms to learn. Just something that works quietly in the background, supporting managers at the moments that matter, without adding to the noise of an already busy working week.</p>
+      <p>I have an MBA and have spent the better part of two decades getting close to real business problems and backing people to solve them. HalpCraft is that same instinct — applied to a problem I've watched cause real damage to real people for far too long.</p>
+    </div>
+
+    <!-- SIGN-OFF -->
+    <div class="about-signoff fade-up">
+      <div class="signoff-name">Damian Sicely</div>
+      <div class="signoff-role">Founder, HalpCraft<br/>New Zealand</div>
+      <p class="about-contact">Want to know if HalpCraft is right for your team? <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a></p>
+    </div>
+
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="cta-band fade-up">
+    <p class="cta-label">Get started</p>
+    <h2 class="cta-heading">Ready to get started?</h2>
+    <p class="cta-sub">Set up takes two minutes. The impact lasts 150 days.</p>
+    <a href="https://buy.stripe.com/aFadR2gaAd4UftS0T60Ba03" class="btn-light">Start now →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-logo"><span style="color:rgba(255,255,255,0.6)">Halp</span><span>Craft</span></div>
+      <div class="footer-tagline">Leadership Infrastructure · Built for Humans</div>
+    </div>
+    <div class="footer-right">
+      <ul class="footer-links">
+        <li><a href="/#how">How It Works</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="mailto:hello@halpcraft.com">Contact</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+      </ul>
+      <div>© 2026 HalpCraft. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Fade-up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

@@ -125,9 +125,11 @@
 
     .about-portrait {
       flex-shrink: 0;
-      width: 320px;
-      height: auto;
+      width: 400px;
+      height: 533px;
       border-radius: 16px;
+      object-fit: cover;
+      object-position: center center;
       border: 1px solid var(--rule);
       box-shadow: 0 4px 24px rgba(14,14,14,0.08);
     }
@@ -327,7 +329,7 @@
       .page-wrap { padding: 6rem 1.5rem 4rem; }
 
       .about-intro { flex-direction: column; align-items: center; gap: 2rem; }
-      .about-portrait { width: 240px; height: auto; }
+      .about-portrait { width: 100%; max-width: 400px; height: auto; }
 
       footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
       .footer-right { text-align: left; }

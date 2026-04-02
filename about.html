@@ -43,16 +43,16 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.25rem 4rem;
-      background: rgba(14,14,14,0.92);
+      background: rgba(245,242,237,0.92);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid var(--rule);
     }
 
     .nav-logo {
       font-family: var(--serif);
       font-size: 1.35rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.85);
+      color: var(--ink);
       text-decoration: none;
       letter-spacing: -0.01em;
     }
@@ -66,243 +66,159 @@
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
+      color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: rgba(255,255,255,0.85); }
-    .nav-links a.active { color: rgba(255,255,255,0.85); border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--ink); border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
 
     .nav-cta {
-      background: var(--gold) !important;
-      color: var(--ink) !important;
+      background: var(--ink) !important;
+      color: var(--paper) !important;
       padding: 0.55rem 1.4rem;
       border-radius: 2px;
-      font-weight: 600 !important;
+      font-weight: 500 !important;
       letter-spacing: 0.04em !important;
       text-transform: uppercase !important;
       font-size: 0.8rem !important;
       transition: background 0.2s !important;
     }
-    .nav-cta:hover { background: var(--gold-lt) !important; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--ink) !important; }
 
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .hamburger span { width: 24px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 2px; transition: all 0.3s; display: block; }
+    .hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s; display: block; }
 
-    /* ─── HERO ────────────────────────────────────── */
-    .about-hero {
-      background: var(--ink);
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-end;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 60% at 30% 60%, rgba(184,144,42,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .about-hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      align-items: flex-end;
-      width: 100%;
-      max-width: 1200px;
+    /* ─── INTRO SECTION (two-column) ─────────────── */
+    .about-intro-section {
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 0 4rem;
-      gap: 4rem;
+      padding: 8rem 3rem 4rem;
     }
 
-    .about-hero-text {
-      padding-bottom: 5rem;
+    .about-intro-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3.5rem;
+      align-items: flex-start;
     }
+
+    .about-portrait {
+      width: 220px;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid var(--rule);
+      box-shadow: 0 4px 20px rgba(14,14,14,0.07);
+      display: block;
+    }
+
+    .about-intro-text {}
 
     .about-eyebrow {
       font-family: var(--sans);
       font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .about-eyebrow::before {
-      content: '';
-      display: block;
-      width: 2rem;
-      height: 1px;
-      background: var(--gold);
-    }
-
-    .about-name {
-      font-family: var(--serif);
-      font-size: clamp(3.5rem, 7vw, 6rem);
-      font-weight: 600;
-      line-height: 0.95;
-      color: var(--paper);
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-    }
-
-    .about-title-block {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .about-role {
-      font-family: var(--sans);
-      font-size: 0.875rem;
-      font-weight: 400;
-      color: rgba(245,242,237,0.5);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .about-hero-photo {
-      align-self: flex-end;
-    }
-
-    .about-portrait {
-      display: block;
-      width: 100%;
-      max-width: 420px;
-      height: auto;
-      border-radius: 12px 12px 0 0;
-      object-fit: cover;
-      filter: grayscale(15%);
-    }
-
-    /* ─── CONTENT AREA ───────────────────────────── */
-    .about-content {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 6rem 2rem;
-    }
-
-    .about-body {
-      font-family: var(--serif);
-      font-size: clamp(1.1rem, 2vw, 1.25rem);
-      font-weight: 300;
-      line-height: 1.9;
-      color: var(--ink);
-    }
-
-    .about-body p { margin-bottom: 1.75rem; }
-    .about-body p:last-child { margin-bottom: 0; }
-
-    /* ─── PULL QUOTE ─────────────────────────────── */
-    .about-pullquote {
-      margin: 4rem 0;
-      padding: 3rem 3rem 3rem 3.5rem;
-      border-left: 3px solid var(--gold);
-      background: rgba(184,144,42,0.05);
-      border-radius: 0 8px 8px 0;
-      font-family: var(--serif);
-      font-size: clamp(1.3rem, 2.5vw, 1.65rem);
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.6;
-      color: var(--ink);
-      letter-spacing: -0.01em;
-    }
-
-    /* ─── SECOND SECTION ─────────────────────────── */
-    .about-panel {
-      background: #edeae4;
-      border-radius: 12px;
-      padding: 3.5rem;
-      margin-top: 4rem;
-    }
-
-    .about-section-heading {
-      font-family: var(--sans);
-      font-size: 0.7rem;
-      font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .about-section-heading::before {
-      content: '';
-      display: block;
-      width: 1.5rem;
-      height: 1px;
-      background: var(--gold);
+      margin-bottom: 0.6rem;
     }
 
-    /* ─── SIGN-OFF ────────────────────────────────── */
-    .about-signoff {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 2rem 6rem;
-    }
-
-    .signoff-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      padding: 2.5rem 3rem;
-      border: 1px solid var(--rule);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.4);
-    }
-
-    .signoff-left {}
-
-    .signoff-name {
+    .about-founder-name {
       font-family: var(--serif);
-      font-size: 2rem;
+      font-size: 1.85rem;
       font-weight: 600;
       color: var(--ink);
-      line-height: 1;
-      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin-bottom: 0.3rem;
     }
 
-    .signoff-role {
+    .about-role {
       font-family: var(--sans);
       font-size: 0.78rem;
       font-weight: 400;
       color: var(--muted);
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      line-height: 1.6;
+      margin-bottom: 1.75rem;
     }
 
-    .signoff-right {}
+    /* ─── BODY COPY ───────────────────────────────── */
+    .about-body {
+      font-family: var(--serif);
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--ink);
+    }
+
+    .about-body p { margin-bottom: 1.5rem; }
+    .about-body p:last-child { margin-bottom: 0; }
+
+    /* ─── CONTENT COLUMN ──────────────────────────── */
+    .about-content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 1rem 3rem 3rem;
+    }
+
+    /* ─── PULL QUOTE ─────────────────────────────── */
+    blockquote.about-pullquote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.4rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--muted);
+      border-left: 3px solid var(--gold);
+      padding-left: 24px;
+      margin: 2.5rem 0;
+      list-style: none;
+    }
+
+    /* ─── SECTION DIVIDER ────────────────────────── */
+    .about-divider {
+      border: none;
+      border-top: 1px solid #e0dbd3;
+      margin: 40px 0;
+    }
+
+    /* ─── SECTION LABEL ──────────────────────────── */
+    .about-section-label {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ─── SIGN-OFF ────────────────────────────────── */
+    .about-signoff {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 3rem 5rem;
+    }
 
     .about-contact {
       font-family: var(--sans);
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       font-weight: 300;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     .about-contact a {
-      display: inline-block;
-      margin-top: 0.5rem;
-      color: var(--ink);
+      color: var(--gold);
       text-decoration: none;
       font-weight: 500;
-      font-size: 1rem;
-      border-bottom: 1px solid var(--gold);
-      transition: color 0.2s;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
     }
-    .about-contact a:hover { color: var(--gold); }
+    .about-contact a:hover { border-bottom-color: var(--gold); }
 
     /* ─── CTA BAND ────────────────────────────────── */
     .cta-band {
@@ -426,25 +342,19 @@
       .nav-links { display: none; }
       .hamburger { display: flex; }
 
-      .about-hero { min-height: auto; padding-top: 5rem; align-items: flex-start; }
-      .about-hero-inner {
+      .about-intro-section { padding: 6rem 1.5rem 2rem; }
+      .about-intro-grid {
         grid-template-columns: 1fr;
-        padding: 0;
-        gap: 0;
+        gap: 2rem;
       }
-      .about-hero-text { padding: 3rem 1.5rem 2.5rem; order: 1; }
-      .about-hero-photo { order: 2; }
-      .about-portrait { max-width: 100%; border-radius: 0; }
-
-      .about-content { padding: 4rem 1.5rem; }
-      .about-panel { padding: 2rem 1.5rem; }
-
-      .signoff-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 2rem 1.5rem;
+      .about-portrait {
+        width: 160px;
+        margin: 0 auto;
       }
-      .about-signoff { padding: 0 1.5rem 4rem; }
+      .about-intro-text { text-align: left; }
+
+      .about-content { padding: 1rem 1.5rem 2rem; }
+      .about-signoff { padding: 0 1.5rem 3rem; }
 
       footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
       .footer-right { text-align: left; }
@@ -467,32 +377,33 @@
     <div class="hamburger"><span></span><span></span><span></span></div>
   </nav>
 
-  <!-- HERO -->
-  <section class="about-hero">
-    <div class="about-hero-inner">
-      <div class="about-hero-text fade-up">
+  <!-- INTRO: two-column photo + text -->
+  <div class="about-intro-section fade-up">
+    <div class="about-intro-grid">
+
+      <img
+        src="/damian.jpg"
+        alt="Damian Sicely, Founder of HalpCraft"
+        class="about-portrait"
+      />
+
+      <div class="about-intro-text">
         <p class="about-eyebrow">The person behind it</p>
-        <h1 class="about-name">Damian<br/>Sicely</h1>
-        <div class="about-title-block">
-          <span class="about-role">Founder, HalpCraft &nbsp;·&nbsp; New Zealand</span>
+        <p class="about-founder-name">Damian Sicely</p>
+        <p class="about-role">Founder, HalpCraft &nbsp;·&nbsp; New Zealand</p>
+        <div class="about-body">
+          <p>I've spent nearly twenty years watching good leaders fail the people around them, not because they didn't care, but because nobody gave them the right support at the right moment.</p>
+          <p>That pattern shows up everywhere. Across industries, across countries, across organisations of every size. Leaders who are capable, committed, and completely stretched, making decisions in a vacuum because the tools available to them are either too complex, too expensive, too late, or simply not there.</p>
         </div>
       </div>
-      <div class="about-hero-photo">
-        <img
-          src="/damian.jpg.png"
-          alt="Damian Sicely, Founder of HalpCraft"
-          class="about-portrait"
-        />
-      </div>
-    </div>
-  </section>
 
-  <!-- BODY CONTENT -->
+    </div>
+  </div>
+
+  <!-- REMAINING BODY CONTENT -->
   <div class="about-content">
 
     <div class="about-body fade-up">
-      <p>I've spent nearly twenty years watching good leaders fail the people around them, not because they didn't care, but because nobody gave them the right support at the right moment.</p>
-      <p>That pattern shows up everywhere. Across industries, across countries, across organisations of every size. Leaders who are capable, committed, and completely stretched, making decisions in a vacuum because the tools available to them are either too complex, too expensive, too late, or simply not there.</p>
       <p>I built HalpCraft to change that.</p>
     </div>
 
@@ -504,8 +415,10 @@
       <p>HalpCraft is a growing suite of tools built entirely around that belief. Simple, well-timed, affordable, and designed for the leaders who give a damn.</p>
     </div>
 
-    <div class="about-panel fade-up">
-      <p class="about-section-heading">Why I built it the way I did</p>
+    <hr class="about-divider" />
+
+    <div class="fade-up">
+      <p class="about-section-label">Why I built it the way I did</p>
       <div class="about-body">
         <p>I'm an executive leader, not a developer. When I decided this problem was worth solving I had a choice — wait until the conditions were perfect, or back myself and use the best tools available to build something real.</p>
         <p>I chose the latter. I partnered with AI to design, build and refine HalpCraft from the ground up. What that process taught me is that the best solutions are almost always the simplest ones. No friction. No new platforms to learn. Just something that works quietly in the background, supporting managers at the moments that matter, without adding to the noise of an already busy working week.</p>
@@ -517,18 +430,7 @@
 
   <!-- SIGN-OFF -->
   <div class="about-signoff fade-up">
-    <div class="signoff-inner">
-      <div class="signoff-left">
-        <div class="signoff-name">Damian Sicely</div>
-        <div class="signoff-role">Founder, HalpCraft &nbsp;·&nbsp; New Zealand</div>
-      </div>
-      <div class="signoff-right">
-        <p class="about-contact">
-          Want to know if HalpCraft is right for your team?
-          <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a>
-        </p>
-      </div>
-    </div>
+    <p class="about-contact">Want to know if HalpCraft is right for your team? <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a></p>
   </div>
 
   <!-- CTA BAND -->

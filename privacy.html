@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — HalpCraft</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --ink:#0e0e0e; --paper:#f5f2ed; --gold:#b8902a; --muted:#6b6660; --rule:rgba(14,14,14,0.12); --serif:'Cormorant Garamond', Georgia, serif; --sans:'DM Sans',system-ui,sans-serif; }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.7; }
+    nav { position: fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1.25rem 4rem; background:rgba(245,242,237,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--rule); }
+    .nav-logo { font-family:var(--serif); font-size:1.5rem; font-weight:600; color:var(--ink); text-decoration:none; }
+    .nav-logo span { color:var(--gold); }
+    .nav-back { font-size:0.8rem; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+    .nav-back:hover { color:var(--ink); }
+    .container { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+    .page-label { font-size:0.72rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; }
+    h1 { font-family:var(--serif); font-size:clamp(2.4rem,4vw,3.2rem); font-weight:600; line-height:1.15; letter-spacing:-0.02em; margin-bottom:0.5rem; }
+    .last-updated { font-size:0.8rem; color:var(--muted); margin-bottom:3rem; padding-bottom:2rem; border-bottom:1px solid var(--rule); }
+    h2 { font-family:var(--serif); font-size:1.5rem; font-weight:600; margin:2.5rem 0 0.75rem; letter-spacing:-0.01em; }
+    p { color:#3a3530; margin-bottom:1rem; font-weight:300; }
+    ul { margin:0.5rem 0 1rem 0; padding-left:0; list-style:none; }
+    ul li { padding:0.3rem 0 0.3rem 1.5rem; position:relative; color:#3a3530; font-weight:300; }
+    ul li::before { content:'—'; position:absolute; left:0; color:var(--gold); }
+    a { color:var(--gold); }
+    .contact-box { margin-top:3rem; padding:2rem; background:#f0ece5; border:1px solid var(--rule); border-left:3px solid var(--gold); }
+    .contact-box p { margin:0; }
+    footer { text-align:center; padding:2rem; font-size:0.75rem; color:var(--muted); border-top:1px solid var(--rule); margin-top:4rem; }
+    @media(max-width:600px) { nav { padding:1.25rem 1.5rem; } .container { padding:8rem 1.5rem 4rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">Halp<span style="color:var(--gold)">Craft</span></a>
+    <a href="/" class="nav-back">← Back to Home</a>
+  </nav>
+
+  <div class="container">
+    <p class="page-label">Legal</p>
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated: March 2026</p>
+
+    <p>HalpCraft ("we", "us", or "our") is committed to protecting your privacy. This policy explains what personal information we collect, how we use it, and your rights in relation to it.</p>
+
+    <h2>1. Who We Are</h2>
+    <p>HalpCraft provides a leadership coaching tool that delivers calendar-based nudges to managers during employee onboarding. Our primary contact email is <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a>.</p>
+
+    <h2>2. Information We Collect</h2>
+    <p>We collect information you provide directly when using HalpCraft, including:</p>
+    <ul>
+      <li>Manager name and email address</li>
+      <li>New employee name and start date</li>
+      <li>Company name</li>
+      <li>Work pattern preferences (standard or shift)</li>
+      <li>Employee start time (if provided)</li>
+      <li>Payment information (processed securely by Stripe — we do not store card details)</li>
+    </ul>
+    <p>We may also collect basic usage data such as which nudge pages are visited, for product improvement purposes.</p>
+
+    <h2>3. How We Use Your Information</h2>
+    <p>We use your information to:</p>
+    <ul>
+      <li>Generate and deliver your personalised nudge calendar</li>
+      <li>Send you the calendar file and related communications via email</li>
+      <li>Process your subscription payment through Stripe</li>
+      <li>Improve our product and customer experience</li>
+      <li>Respond to support requests</li>
+    </ul>
+    <p>We do not sell your personal information to third parties. We do not use your data to monitor, evaluate, or report on employees.</p>
+
+    <h2>4. Employee Data</h2>
+    <p>HalpCraft is a tool for managers, not a surveillance or monitoring platform. We collect minimal employee data (name and start date) solely to personalise the timing of nudges for the manager. We do not contact employees, share employee data with third parties, or use it for any purpose beyond generating the calendar sequence.</p>
+
+    <h2>5. Third-Party Data Processors</h2>
+    <p>HalpCraft uses the following trusted third-party services to deliver our product. Each processes personal data on our behalf:</p>
+    <ul>
+      <li><strong>Stripe</strong> — Payment processing. Handles payment card data and billing information. PCI DSS compliant. <a href="https://stripe.com/privacy" target="_blank" rel="noopener">stripe.com/privacy</a></li>
+      <li><strong>Tally</strong> — Form collection. Collects employee and manager onboarding details submitted via our setup form. <a href="https://tally.so/privacy" target="_blank" rel="noopener">tally.so/privacy</a></li>
+      <li><strong>Zapier</strong> — Workflow automation. Routes onboarding data between services to deliver your calendar programme. <a href="https://zapier.com/privacy" target="_blank" rel="noopener">zapier.com/privacy</a></li>
+      <li><strong>Vercel</strong> — Website and application hosting. Hosts halpcraft.com and app.halpcraft.com. <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a></li>
+    </ul>
+    <p>We only share data with these processors to the extent necessary to deliver our service.</p>
+
+    <h2>6. How Long We Keep Your Data</h2>
+    <ul>
+      <li><strong>Payment records</strong> are retained for 7 years in accordance with financial record-keeping requirements.</li>
+      <li><strong>Onboarding data</strong> (names, start date, work pattern) is retained for the duration of your programme plus 12 months, then deleted.</li>
+      <li><strong>Calendar event data</strong> delivered via ICS file is stored in your calendar app and is under your control — you may delete it at any time.</li>
+    </ul>
+
+    <h2>7. Your Rights</h2>
+    <p>Under the New Zealand Privacy Act 2020, you have the right to access, correct, or request deletion of your personal information. To exercise these rights, contact: <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a>.</p>
+    <p>Depending on your location, you may also have the right to:</p>
+    <ul>
+      <li>Object to or restrict how we process your data</li>
+      <li>Data portability (receive your data in a machine-readable format)</li>
+    </ul>
+    <p>We will respond to all rights requests within 30 days.</p>
+
+    <h2>8. Cookies</h2>
+    <p>Our website uses minimal cookies. We may use basic analytics to understand how visitors use our site (e.g. which pages are most visited). We do not use advertising or tracking cookies.</p>
+
+    <h2>9. International Transfers</h2>
+    <p>HalpCraft is based in New Zealand and serves customers globally. Your data may be processed in countries outside your own. We take steps to ensure appropriate safeguards are in place where data crosses borders.</p>
+
+    <h2>10. Security</h2>
+    <p>We take reasonable technical and organisational measures to protect your personal information. All data is transmitted over HTTPS. Payment data is handled exclusively by Stripe and never stored on our servers.</p>
+
+    <h2>11. Changes to This Policy</h2>
+    <p>We may update this policy from time to time. We will notify active subscribers of material changes by email. The "last updated" date at the top of this page will always reflect the most recent version.</p>
+
+    <div class="contact-box">
+      <p><strong>Questions about this policy?</strong> Contact us at <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a> and we'll respond within 2 business days.</p>
+    </div>
+  </div>
+
+  <footer>© 2026 HalpCraft. All rights reserved. · <a href="/">Home</a></footer>
+</body>
+</html>

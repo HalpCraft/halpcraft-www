@@ -32,9 +32,10 @@
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ─── NAV ─────────────────────────────────────── */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -47,7 +48,6 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--rule);
     }
-
     .nav-logo {
       font-family: var(--serif);
       font-size: 1.35rem;
@@ -57,10 +57,7 @@
       letter-spacing: -0.01em;
     }
     .nav-logo span { color: var(--gold); }
-
-    .nav-links {
-      display: flex; gap: 2.5rem; list-style: none;
-    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       font-size: 0.875rem;
       font-weight: 500;
@@ -72,7 +69,6 @@
     }
     .nav-links a:hover { color: var(--ink); }
     .nav-links a.active { color: var(--ink); border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
-
     .nav-cta {
       background: var(--ink) !important;
       color: var(--paper) !important;
@@ -85,132 +81,152 @@
       transition: background 0.2s !important;
     }
     .nav-cta:hover { background: var(--gold) !important; color: var(--ink) !important; }
-
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
     .hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s; display: block; }
 
-    /* ─── INTRO SECTION (two-column) ─────────────── */
-    .about-intro-section {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 8rem 3rem 4rem;
+    /* HERO */
+    .about-hero {
+      background: var(--ink);
+      padding: 10rem 4rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-
-    .about-intro-grid {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 3.5rem;
-      align-items: flex-start;
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(184,144,42,0.12) 0%, transparent 70%);
+      pointer-events: none;
     }
-
-    .about-portrait {
-      width: 220px;
-      height: auto;
-      border-radius: 12px;
-      object-fit: cover;
-      border: 1px solid var(--rule);
-      box-shadow: 0 4px 20px rgba(14,14,14,0.07);
-      display: block;
-    }
-
-    .about-intro-text {}
-
-    .about-eyebrow {
+    .hero-eyebrow {
       font-family: var(--sans);
       font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 0.6rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
     }
-
-    .about-founder-name {
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+    .hero-name {
       font-family: var(--serif);
-      font-size: 1.85rem;
+      font-size: 2.8rem;
       font-weight: 600;
-      color: var(--ink);
-      letter-spacing: -0.01em;
-      line-height: 1.15;
-      margin-bottom: 0.3rem;
+      color: var(--paper);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
     }
-
-    .about-role {
+    .hero-subtitle {
       font-family: var(--sans);
-      font-size: 0.78rem;
-      font-weight: 400;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 1.75rem;
-    }
-
-    /* ─── BODY COPY ───────────────────────────────── */
-    .about-body {
-      font-family: var(--serif);
-      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      font-size: 1rem;
       font-weight: 300;
-      line-height: 1.9;
-      color: var(--ink);
+      color: var(--gold-lt);
+      letter-spacing: 0.04em;
+      margin-bottom: 3rem;
+    }
+    .hero-portrait {
+      display: block;
+      width: 200px;
+      height: auto;
+      border-radius: 12px;
+      border: 2px solid var(--gold);
+      margin: 0 auto;
+      object-fit: cover;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    }
+    .hero-rule {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin-top: 5rem;
+      opacity: 0.4;
     }
 
-    .about-body p { margin-bottom: 1.5rem; }
-    .about-body p:last-child { margin-bottom: 0; }
+    /* SECTION LABEL */
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
 
-    /* ─── CONTENT COLUMN ──────────────────────────── */
+    /* MAIN CONTENT */
     .about-content {
+      background: var(--paper);
+      padding: 80px 40px;
+    }
+    .about-inner {
       max-width: 680px;
       margin: 0 auto;
-      padding: 1rem 3rem 3rem;
     }
+    .about-body p {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .about-body p:last-child { margin-bottom: 0; }
 
-    /* ─── PULL QUOTE ─────────────────────────────── */
+    /* PULL QUOTE */
     blockquote.about-pullquote {
       font-family: var(--serif);
       font-style: italic;
-      font-size: 1.4rem;
       font-weight: 300;
-      line-height: 1.65;
-      color: var(--muted);
+      font-size: 1.5rem;
+      line-height: 1.4;
+      color: var(--ink);
       border-left: 3px solid var(--gold);
-      padding-left: 24px;
-      margin: 2.5rem 0;
-      list-style: none;
+      padding-left: 28px;
+      margin: 40px 0;
+      quotes: none;
     }
+    blockquote.about-pullquote::before,
+    blockquote.about-pullquote::after { content: none; }
 
-    /* ─── SECTION DIVIDER ────────────────────────── */
+    /* SECTION DIVIDER */
     .about-divider {
       border: none;
       border-top: 1px solid #e0dbd3;
-      margin: 40px 0;
+      margin: 48px 0;
     }
-
-    /* ─── SECTION LABEL ──────────────────────────── */
     .about-section-label {
       font-family: var(--sans);
       font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      font-weight: 600;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
 
-    /* ─── SIGN-OFF ────────────────────────────────── */
-    .about-signoff {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 3rem 5rem;
-    }
-
+    /* CONTACT */
     .about-contact {
+      margin-top: 48px;
+      text-align: center;
       font-family: var(--sans);
       font-size: 0.9rem;
       font-weight: 300;
       color: var(--muted);
       line-height: 1.7;
     }
-
     .about-contact a {
       color: var(--gold);
       text-decoration: none;
@@ -220,12 +236,11 @@
     }
     .about-contact a:hover { border-bottom-color: var(--gold); }
 
-    /* ─── CTA BAND ────────────────────────────────── */
+    /* CTA BAND */
     .cta-band {
       background: var(--ink);
-      color: var(--paper);
       text-align: center;
-      padding: 6rem 2rem;
+      padding: 7rem 2rem;
       position: relative;
       overflow: hidden;
     }
@@ -236,18 +251,8 @@
       background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(184,144,42,0.15) 0%, transparent 70%);
       pointer-events: none;
     }
-
-    .cta-label {
-      font-family: var(--sans);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold-lt);
-      margin-bottom: 1rem;
-    }
-
-    .cta-heading {
+    .cta-band .section-label { color: var(--gold-lt); margin-bottom: 1rem; }
+    .cta-band .section-headline {
       font-family: var(--serif);
       font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 600;
@@ -256,16 +261,14 @@
       max-width: 18ch;
       margin: 0 auto 1.25rem;
     }
-
-    .cta-sub {
-      font-family: var(--sans);
+    .cta-band .section-body {
       font-size: 1rem;
       font-weight: 300;
       color: rgba(245,242,237,0.5);
-      margin-bottom: 2.5rem;
+      max-width: 50ch;
+      margin: 0 auto 3rem;
     }
-
-    .btn-light {
+    .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -282,9 +285,9 @@
       border: 2px solid var(--paper);
       transition: all 0.25s;
     }
-    .btn-light:hover { background: transparent; color: var(--paper); }
+    .btn-primary:hover { background: transparent; color: var(--paper); }
 
-    /* ─── FOOTER ──────────────────────────────────── */
+    /* FOOTER */
     footer {
       background: #080808;
       color: rgba(255,255,255,0.25);
@@ -301,16 +304,8 @@
       color: rgba(255,255,255,0.6);
     }
     .footer-logo span { color: var(--gold); }
-    .footer-tagline {
-      font-size: 0.75rem;
-      margin-top: 0.3rem;
-      letter-spacing: 0.06em;
-    }
-    .footer-right {
-      text-align: right;
-      font-size: 0.75rem;
-      letter-spacing: 0.04em;
-    }
+    .footer-tagline { font-size: 0.75rem; margin-top: 0.3rem; letter-spacing: 0.06em; }
+    .footer-right { text-align: right; font-size: 0.75rem; letter-spacing: 0.04em; }
     .footer-links {
       display: flex;
       gap: 2rem;
@@ -328,7 +323,7 @@
     }
     .footer-links a:hover { color: var(--gold); }
 
-    /* ─── FADE-UP ─────────────────────────────────── */
+    /* FADE-UP */
     .fade-up {
       opacity: 0;
       transform: translateY(24px);
@@ -336,26 +331,15 @@
     }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* ─── MOBILE ──────────────────────────────────── */
+    /* MOBILE */
     @media (max-width: 768px) {
       nav { padding: 1.25rem 1.5rem; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-
-      .about-intro-section { padding: 6rem 1.5rem 2rem; }
-      .about-intro-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      .about-portrait {
-        width: 160px;
-        margin: 0 auto;
-      }
-      .about-intro-text { text-align: left; }
-
-      .about-content { padding: 1rem 1.5rem 2rem; }
-      .about-signoff { padding: 0 1.5rem 3rem; }
-
+      .about-hero { padding: 8rem 1.5rem 4rem; }
+      .hero-name { font-size: 2.2rem; }
+      .about-content { padding: 60px 24px; }
+      blockquote.about-pullquote { font-size: 1.25rem; }
       footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
       .footer-right { text-align: left; }
       .footer-links { justify-content: flex-start; }
@@ -364,7 +348,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="/" class="nav-logo">Halp<span>Craft</span></a>
     <ul class="nav-links">
@@ -377,71 +360,56 @@
     <div class="hamburger"><span></span><span></span><span></span></div>
   </nav>
 
-  <!-- INTRO: two-column photo + text -->
-  <div class="about-intro-section fade-up">
-    <div class="about-intro-grid">
+  <section class="about-hero">
+    <div class="fade-up">
+      <p class="hero-eyebrow">The person behind it</p>
+      <h1 class="hero-name">Damian Sicely</h1>
+      <p class="hero-subtitle">Founder, HalpCraft &nbsp;·&nbsp; New Zealand</p>
+      <img src="/damian.jpg" alt="Damian Sicely, Founder of HalpCraft" class="hero-portrait" />
+    </div>
+    <div class="hero-rule"></div>
+  </section>
 
-      <img
-        src="/damian.jpg.png"
-        alt="Damian Sicely, Founder of HalpCraft"
-        class="about-portrait"
-      />
+  <div class="about-content">
+    <div class="about-inner">
 
-      <div class="about-intro-text">
-        <p class="about-eyebrow">The person behind it</p>
-        <p class="about-founder-name">Damian Sicely</p>
-        <p class="about-role">Founder, HalpCraft &nbsp;·&nbsp; New Zealand</p>
+      <div class="about-body fade-up">
+        <p>I've spent nearly twenty years watching good leaders fail the people around them, not because they didn't care, but because nobody gave them the right support at the right moment.</p>
+        <p>That pattern shows up everywhere. Across industries, across countries, across organisations of every size. Leaders who are capable, committed, and completely stretched, making decisions in a vacuum because the tools available to them are either too complex, too expensive, too late, or simply not there.</p>
+        <p>I built HalpCraft to change that.</p>
+      </div>
+
+      <blockquote class="about-pullquote fade-up">
+        Give a leader the right insight at the right moment, without adding complexity to an already relentless working week, and they will almost always do the right thing by their people.
+      </blockquote>
+
+      <div class="about-body fade-up">
+        <p>HalpCraft is a growing suite of tools built entirely around that belief. Simple, well-timed, affordable, and designed for the leaders who give a damn.</p>
+      </div>
+
+      <hr class="about-divider" />
+
+      <div class="fade-up">
+        <p class="about-section-label">Why I built it the way I did</p>
         <div class="about-body">
-          <p>I've spent nearly twenty years watching good leaders fail the people around them, not because they didn't care, but because nobody gave them the right support at the right moment.</p>
-          <p>That pattern shows up everywhere. Across industries, across countries, across organisations of every size. Leaders who are capable, committed, and completely stretched, making decisions in a vacuum because the tools available to them are either too complex, too expensive, too late, or simply not there.</p>
+          <p>I'm an executive leader, not a developer. When I decided this problem was worth solving I had a choice — wait until the conditions were perfect, or back myself and use the best tools available to build something real.</p>
+          <p>I chose the latter. I partnered with AI to design, build and refine HalpCraft from the ground up. What that process taught me is that the best solutions are almost always the simplest ones. No friction. No new platforms to learn. Just something that works quietly in the background, supporting managers at the moments that matter, without adding to the noise of an already busy working week.</p>
+          <p>I have an MBA and have spent the better part of two decades getting close to real business problems and backing people to solve them. HalpCraft is that same instinct — applied to a problem I've watched cause real damage to real people for far too long.</p>
         </div>
       </div>
 
+      <p class="about-contact fade-up">Want to know if HalpCraft is right for your team? <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a></p>
+
     </div>
   </div>
 
-  <!-- REMAINING BODY CONTENT -->
-  <div class="about-content">
-
-    <div class="about-body fade-up">
-      <p>I built HalpCraft to change that.</p>
-    </div>
-
-    <blockquote class="about-pullquote fade-up">
-      Give a leader the right insight at the right moment, without adding complexity to an already relentless working week, and they will almost always do the right thing by their people.
-    </blockquote>
-
-    <div class="about-body fade-up">
-      <p>HalpCraft is a growing suite of tools built entirely around that belief. Simple, well-timed, affordable, and designed for the leaders who give a damn.</p>
-    </div>
-
-    <hr class="about-divider" />
-
-    <div class="fade-up">
-      <p class="about-section-label">Why I built it the way I did</p>
-      <div class="about-body">
-        <p>I'm an executive leader, not a developer. When I decided this problem was worth solving I had a choice — wait until the conditions were perfect, or back myself and use the best tools available to build something real.</p>
-        <p>I chose the latter. I partnered with AI to design, build and refine HalpCraft from the ground up. What that process taught me is that the best solutions are almost always the simplest ones. No friction. No new platforms to learn. Just something that works quietly in the background, supporting managers at the moments that matter, without adding to the noise of an already busy working week.</p>
-        <p>I have an MBA and have spent the better part of two decades getting close to real business problems and backing people to solve them. HalpCraft is that same instinct — applied to a problem I've watched cause real damage to real people for far too long.</p>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- SIGN-OFF -->
-  <div class="about-signoff fade-up">
-    <p class="about-contact">Want to know if HalpCraft is right for your team? <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a></p>
-  </div>
-
-  <!-- CTA BAND -->
   <div class="cta-band fade-up">
-    <p class="cta-label">Get started</p>
-    <h2 class="cta-heading">Ready to get started?</h2>
-    <p class="cta-sub">Set up takes two minutes. The impact lasts 150 days.</p>
-    <a href="https://buy.stripe.com/aFadR2gaAd4UftS0T60Ba03" class="btn-light">Start now</a>
+    <p class="section-label">Get started</p>
+    <h2 class="section-headline">Ready to get started?</h2>
+    <p class="section-body">Set up takes two minutes. The impact lasts 150 days.</p>
+    <a href="https://buy.stripe.com/aFadR2gaAd4UftS0T60Ba03" class="btn-primary">Start now</a>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div>
       <div class="footer-logo"><span style="color:rgba(255,255,255,0.6)">Halp</span><span>Craft</span></div>

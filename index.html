@@ -222,14 +222,7 @@
     }
 
     .hero-right::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      right: -20%;
-      width: 60%;
-      height: 60%;
-      background: radial-gradient(circle, rgba(184,144,42,0.25) 0%, transparent 70%);
-      pointer-events: none;
+      display: none;
     }
 
     .calendar-card {
@@ -944,6 +937,19 @@
       transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--gold); }
+
+    /* ─── DESKTOP CALENDAR SCALE ─────────────────── */
+    @media (min-width: 901px) {
+      .calendar-card       { max-width: 470px; }
+      .cal-header          { padding: 1.25rem 1.55rem; }
+      .cal-dot             { width: 12px; height: 12px; }
+      .cal-title           { font-size: 1.1rem; }
+      .cal-events          { padding: 1.55rem; gap: 0.95rem; }
+      .cal-event           { padding: 1.25rem 1.55rem; }
+      .cal-event-time      { font-size: 0.875rem; }
+      .cal-event-title     { font-size: 1.15rem; }
+      .cal-event-sub       { font-size: 0.925rem; }
+    }
 
     /* ─── MOBILE ──────────────────────────────────── */
     .hamburger {

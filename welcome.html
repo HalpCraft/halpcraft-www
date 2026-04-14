@@ -174,16 +174,16 @@
       display: flex; flex-direction: column;
     }
     .how-card {
-      display: flex; align-items: flex-start; gap: 1.5rem;
-      padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex; align-items: flex-start; gap: 2rem;
+      padding: 2rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .how-card:last-child { border-bottom: none; }
-    .how-card-icon { font-size: 2rem; min-width: 2.5rem; text-align: center; }
+    .how-card-icon { font-size: 2rem; min-width: 3rem; text-align: center; padding-top: 0.25rem; }
     .how-card-title {
       font-family: var(--serif); font-size: 1rem; font-weight: 600;
-      color: var(--paper); margin: 0 0 0.5rem 0;
+      color: var(--paper); margin: 0; min-width: 200px; max-width: 200px;
     }
-    .how-card-body { font-size: 0.82rem; color: rgba(245,242,237,0.4); line-height: 1.65; margin: 0; }
+    .how-card-body { font-size: 0.82rem; color: rgba(245,242,237,0.4); line-height: 1.65; margin: 0; flex: 1; }
 
     .faq-section {
       position: relative; z-index: 1;
@@ -323,7 +323,10 @@
       .steps { padding: 2rem 1.5rem 0; }
       .step { grid-template-columns: 3rem 1fr; gap: 0 1.25rem; }
       .how-section, .faq-section, .footer-cta { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .how-cards { grid-template-columns: 1fr; }
+      .how-card { flex-wrap: wrap; column-gap: 1rem; row-gap: 0; padding: 1.5rem 0; }
+      .how-card-icon { min-width: auto; padding-top: 0; }
+      .how-card-title { flex: 1; min-width: 0; max-width: none; align-self: center; margin-bottom: 0.75rem; }
+      .how-card-body { flex-basis: 100%; }
       footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; text-align: center; }
       .footer-links { justify-content: center; }
     }

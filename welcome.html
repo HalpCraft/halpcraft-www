@@ -34,11 +34,18 @@
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .nav-logo {
-      font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
-      text-decoration: none; letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
     }
-    .nav-logo .halp { color: var(--paper); }
-    .nav-logo .craft { color: var(--gold); }
+    .nav-logo img {
+      height: 67px;
+      width: auto;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .nav-logo img { height: 50px; }
+    }
     .nav-tag {
       font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--gold); background: rgba(184,144,42,0.12);
@@ -304,11 +311,11 @@
       display: flex; justify-content: space-between; align-items: center;
     }
     .footer-logo {
-      font-family: var(--serif); font-size: 1rem; font-weight: 400;
-      text-decoration: none; letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
     }
-    .footer-logo .halp { color: rgba(255,255,255,0.4); }
-    .footer-logo .craft { color: var(--gold); }
+    .footer-logo img { height: 44px; width: auto; display: block; }
     .footer-links { display: flex; gap: 2rem; list-style: none; }
     .footer-links a {
       font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
@@ -336,7 +343,7 @@
   <div class="bg-glow"></div>
 
   <nav>
-    <a href="/" class="nav-logo"><span class="halp">Halp</span><span class="craft">Craft</span></a>
+    <a href="/" class="nav-logo"><img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" /></a>
     <span class="nav-tag">Setup Complete</span>
   </nav>
 
@@ -475,7 +482,7 @@
   </div>
 
   <footer>
-    <a href="/" class="footer-logo"><span class="halp">Halp</span><span class="craft">Craft</span></a>
+    <a href="/" class="footer-logo"><img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" /></a>
     <ul class="footer-links">
       <li><a href="/">Home</a></li>
       <li><a href="/privacy">Privacy</a></li>

@@ -49,14 +49,18 @@
       border-bottom: 1px solid var(--rule);
     }
     .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
       text-decoration: none;
-      letter-spacing: -0.01em;
     }
-    .nav-logo span { color: var(--gold); }
+    .nav-logo img {
+      height: 67px;
+      width: auto;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .nav-logo img { height: 50px; }
+    }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       font-size: 0.875rem;
@@ -298,12 +302,11 @@
       gap: 2rem;
     }
     .footer-logo {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.6);
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
     }
-    .footer-logo span { color: var(--gold); }
+    .footer-logo img { height: 44px; width: auto; display: block; }
     .footer-tagline { font-size: 0.75rem; margin-top: 0.3rem; letter-spacing: 0.06em; }
     .footer-right { text-align: right; font-size: 0.75rem; letter-spacing: 0.04em; }
     .footer-links {
@@ -349,7 +352,7 @@
 <body>
 
   <nav>
-    <a href="/" class="nav-logo">Halp<span>Craft</span></a>
+    <a href="/" class="nav-logo"><img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" /></a>
     <ul class="nav-links">
       <li><a href="/#how">How It Works</a></li>
       <li><a href="/#pricing">Pricing</a></li>
@@ -412,7 +415,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><span style="color:rgba(255,255,255,0.6)">Halp</span><span>Craft</span></div>
+      <div class="footer-logo"><img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" /></div>
       <div class="footer-tagline">Better leaders, better workplaces.</div>
     </div>
     <div class="footer-right">

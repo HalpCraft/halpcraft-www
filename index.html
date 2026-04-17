@@ -46,14 +46,15 @@
     }
 
     .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
       text-decoration: none;
     }
-    .nav-logo span { color: var(--gold); }
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
 
     .nav-links {
       display: flex; gap: 2.5rem; list-style: none;
@@ -999,7 +1000,9 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">Halp<span style="color:var(--gold)">Craft</span></a>
+    <a href="#" class="nav-logo">
+  <img src="/logos/HalpCraft Logo - Dark.png" alt="HalpCraft" />
+</a>
     <ul class="nav-links">
       <li><a href="#how">How It Works</a></li>
       <li><a href="#sequence">The Sequence</a></li>

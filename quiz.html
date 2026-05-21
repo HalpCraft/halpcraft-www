@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Onboarding Score — HalpCraft</title>
+  <meta name="description" content="Most managers think they're doing fine. Answer 5 questions and find out how good your onboarding really is." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230e0e0e'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23b8902a'>H</text></svg>" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0e0e0e; --paper: #f5f2ed; --gold: #b8902a; --gold-lt: #e8c96d;
+      --muted: #6b6660;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--paper);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Ambient background ──────────────────────── */
+    .bg-glow {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% -10%, rgba(184,144,42,0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(184,144,42,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 30% 40% at 90% 70%, rgba(184,144,42,0.05) 0%, transparent 55%);
+    }
+
+    /* ── Progress bar ────────────────────────────── */
+    .progress-bar-wrap {
+      position: relative; z-index: 20;
+      height: 3px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      width: 0%;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── Nav ─────────────────────────────────────── */
+    nav {
+      position: relative; z-index: 10;
+      display: flex; align-items: center;
+      padding: 1.5rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 67px; width: auto; display: block; }
+
+    /* ── Main ────────────────────────────────────── */
+    main { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; }
+
+    /* ════════════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════════════ */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5.5rem 2rem 5rem;
+    }
+
+    .hero-ornament {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 2.25rem;
+      animation: fadeUp 0.5s ease 0.05s both;
+    }
+    .hero-ornament-line { width: 36px; height: 1px; background: rgba(184,144,42,0.4); }
+    .hero-eyebrow {
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 600; line-height: 1.06; letter-spacing: -0.025em;
+      color: var(--paper); margin-bottom: 1.75rem;
+      max-width: 14ch;
+      animation: fadeUp 0.6s ease 0.15s both;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); font-weight: 300; }
+
+    .hero-sub {
+      font-size: 1.1rem; color: rgba(245,242,237,0.45);
+      line-height: 1.8; font-weight: 300;
+      max-width: 42ch; margin: 0 auto 2.75rem;
+      animation: fadeUp 0.6s ease 0.25s both;
+    }
+
+    .hero-cta-group {
+      display: flex; flex-direction: column; align-items: center; gap: 1.1rem;
+      animation: fadeUp 0.6s ease 0.35s both;
+    }
+    .hero-start-btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: var(--gold); color: var(--ink);
+      padding: 1.1rem 2.5rem;
+      font-family: var(--sans); font-size: 0.9rem;
+      font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      border: none; border-radius: 2px;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .hero-start-btn:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .hero-start-btn:active { transform: translateY(0); }
+    .hero-start-btn .btn-arrow { font-size: 1.1rem; }
+
+    .hero-trust {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.72rem; color: rgba(255,255,255,0.2);
+      letter-spacing: 0.08em;
+    }
+    .hero-trust-dot { width: 3px; height: 3px; background: rgba(255,255,255,0.15); border-radius: 50%; }
+
+    /* Preview dots */
+    .hero-dots {
+      display: flex; gap: 0.6rem; margin-top: 3.5rem;
+      animation: fadeUp 0.6s ease 0.45s both;
+    }
+    .hero-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(184,144,42,0.25);
+      border: 1px solid rgba(184,144,42,0.3);
+    }
+
+    /* ════════════════════════════════════════════════
+       QUIZ SECTION
+    ════════════════════════════════════════════════ */
+    .quiz-shell {
+      display: none; flex: 1;
+      flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 4rem 2rem 5rem;
+      min-height: 70vh;
+    }
+    .quiz-shell.active { display: flex; }
+
+    /* Step dots */
+    .step-dots {
+      display: flex; gap: 0.7rem; margin-bottom: 3rem;
+    }
+    .step-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .step-dot.active {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+    .step-dot.done {
+      background: rgba(184,144,42,0.35);
+      border-color: rgba(184,144,42,0.5);
+    }
+
+    /* Question card */
+    .question-wrap {
+      width: 100%; max-width: 680px;
+      text-align: center;
+      animation: fadeUp 0.4s ease both;
+    }
+    .question-wrap.exiting {
+      animation: fadeOut 0.25s ease both;
+    }
+
+    .q-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(184,144,42,0.2);
+      padding: 3.5rem 3.5rem 3rem;
+      margin-bottom: 2.25rem;
+      position: relative;
+    }
+    .q-card::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .q-num {
+      font-family: var(--serif); font-size: 0.8rem; font-weight: 400;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7;
+      margin-bottom: 1.75rem;
+    }
+
+    .q-text {
+      font-family: var(--serif);
+      font-size: clamp(1.65rem, 3vw, 2.35rem);
+      font-weight: 600; line-height: 1.25; letter-spacing: -0.01em;
+      color: var(--paper);
+    }
+
+    .q-buttons {
+      display: flex; gap: 1rem;
+      justify-content: center;
+    }
+    .q-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.5rem;
+      flex: 1; max-width: 200px;
+      padding: 1.2rem 2rem;
+      font-family: var(--sans); font-size: 0.95rem;
+      font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .q-btn-yes {
+      background: var(--gold); color: var(--ink);
+      border-color: var(--gold);
+    }
+    .q-btn-yes:hover { background: var(--gold-lt); border-color: var(--gold-lt); transform: translateY(-2px); }
+    .q-btn-no {
+      background: rgba(255,255,255,0.04);
+      color: rgba(245,242,237,0.6);
+      border-color: rgba(255,255,255,0.14);
+    }
+    .q-btn-no:hover {
+      border-color: rgba(255,255,255,0.35);
+      color: var(--paper);
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-2px);
+    }
+    .q-btn:active { transform: translateY(0) scale(0.98); }
+
+    .q-hint {
+      margin-top: 1.5rem;
+      font-size: 0.72rem; color: rgba(255,255,255,0.15);
+      letter-spacing: 0.06em;
+    }
+
+    /* ════════════════════════════════════════════════
+       RESULT SECTION
+    ════════════════════════════════════════════════ */
+    .result-shell {
+      display: none; flex: 1;
+      flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 5rem 2rem 5rem;
+    }
+    .result-shell.active { display: flex; animation: fadeUp 0.55s ease both; }
+
+    .result-inner {
+      width: 100%; max-width: 620px;
+      text-align: center;
+    }
+
+    /* Score display */
+    .result-score-block {
+      margin-bottom: 2.5rem;
+    }
+    .result-score-nums {
+      font-family: var(--serif);
+      font-size: clamp(5rem, 14vw, 9rem);
+      font-weight: 300; line-height: 1;
+      color: var(--paper);
+      letter-spacing: -0.04em;
+    }
+    .result-score-nums .score-yes { color: var(--gold); }
+    .result-score-nums .score-sep { color: rgba(245,242,237,0.15); font-size: 0.6em; margin: 0 0.05em; }
+    .result-score-nums .score-total { color: rgba(245,242,237,0.2); }
+    .result-score-caption {
+      font-family: var(--serif); font-size: 1.05rem;
+      font-style: italic; font-weight: 300;
+      color: rgba(245,242,237,0.4);
+      margin-top: 0.4rem;
+    }
+
+    /* Result card */
+    .result-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 2.75rem 3rem 3rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .result-label {
+      display: inline-block;
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.1rem; border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .result-label.strong  { background: rgba(168,197,160,0.12); color: #a8c5a0; border: 1px solid rgba(168,197,160,0.3); }
+    .result-label.gaps    { background: rgba(184,144,42,0.12); color: var(--gold-lt); border: 1px solid rgba(184,144,42,0.3); }
+    .result-label.at-risk { background: rgba(220,140,60,0.12); color: #e09050; border: 1px solid rgba(220,140,60,0.3); }
+    .result-label.critical{ background: rgba(200,80,80,0.12); color: #e08080; border: 1px solid rgba(200,80,80,0.3); }
+
+    .result-headline {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      font-weight: 600; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--paper); margin-bottom: 1.25rem;
+    }
+
+    .result-rule {
+      width: 50px; height: 1px;
+      background: rgba(184,144,42,0.3);
+      margin: 0 auto 1.5rem;
+    }
+
+    .result-body {
+      font-size: 0.97rem; color: rgba(245,242,237,0.45);
+      line-height: 1.85; font-weight: 300;
+      max-width: 48ch; margin: 0 auto;
+    }
+
+    /* CTAs */
+    .result-ctas {
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .cta-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gold); color: var(--ink);
+      padding: 1.1rem 2.5rem;
+      font-family: var(--sans); font-size: 0.88rem;
+      font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      border-radius: 2px; transition: background 0.2s, transform 0.15s;
+      width: 100%; max-width: 400px;
+      justify-content: center;
+    }
+    .cta-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+    .cta-secondary {
+      font-size: 0.82rem; color: rgba(245,242,237,0.3);
+      text-decoration: none;
+    }
+    .cta-secondary a { color: rgba(184,144,42,0.7); text-decoration: none; transition: color 0.2s; }
+    .cta-secondary a:hover { color: var(--gold-lt); }
+
+    .retake-link {
+      display: inline-block; margin-top: 0.75rem;
+      font-size: 0.72rem; color: rgba(255,255,255,0.18);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; background: none; border: none;
+      font-family: var(--sans);
+      transition: color 0.2s;
+    }
+    .retake-link:hover { color: rgba(255,255,255,0.45); }
+
+    /* ── Footer ───────────────────────────────────── */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.75rem 4rem;
+      text-align: center;
+    }
+    .footer-text {
+      font-size: 0.74rem; color: rgba(255,255,255,0.17);
+      letter-spacing: 0.06em;
+    }
+    .footer-text a { color: rgba(255,255,255,0.22); text-decoration: none; transition: color 0.2s; }
+    .footer-text a:hover { color: var(--gold); }
+
+    /* ── Animations ───────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to   { opacity: 0; transform: translateY(-16px); }
+    }
+    @keyframes countUp {
+      from { opacity: 0; transform: scale(0.85); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .result-score-nums { animation: countUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both; }
+
+    /* ── Mobile ───────────────────────────────────── */
+    @media (max-width: 700px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-logo img { height: 50px; }
+      .hero { padding: 4rem 1.5rem 4rem; }
+      .quiz-shell { padding: 2.5rem 1.25rem 4rem; min-height: 60vh; }
+      .q-card { padding: 2.25rem 1.5rem 2rem; }
+      .q-buttons { flex-direction: column; align-items: stretch; }
+      .q-btn { max-width: 100%; }
+      .result-shell { padding: 3rem 1.25rem 4rem; }
+      .result-card { padding: 2rem 1.5rem 2.25rem; }
+      footer { padding: 1.75rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- Progress bar — shown during quiz -->
+  <div class="progress-bar-wrap" id="progressBarWrap" style="visibility:hidden; height:3px;">
+    <div class="progress-bar-fill" id="progressBarFill"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <a href="https://www.halpcraft.com" class="nav-logo">
+      <img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" />
+    </a>
+  </nav>
+
+  <main>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero" id="heroSection">
+
+      <div class="hero-ornament" style="animation: fadeUp 0.5s ease 0.05s both;">
+        <div class="hero-ornament-line"></div>
+        <span class="hero-eyebrow">The Onboarding Score · 60 Seconds</span>
+        <div class="hero-ornament-line"></div>
+      </div>
+
+      <h1>How good is your<br/>onboarding,<br/><em>really?</em></h1>
+
+      <p class="hero-sub">
+        Most managers think they're doing fine.<br/>
+        Answer 5 honest questions and find out where the gaps are.
+      </p>
+
+      <div class="hero-cta-group">
+        <button class="hero-start-btn" onclick="startQuiz()">
+          Take the quiz
+          <span class="btn-arrow">→</span>
+        </button>
+        <div class="hero-trust">
+          <span>No email required</span>
+          <div class="hero-trust-dot"></div>
+          <span>5 questions</span>
+          <div class="hero-trust-dot"></div>
+          <span>Under 60 seconds</span>
+        </div>
+      </div>
+
+      <div class="hero-dots">
+        <div class="hero-dot"></div>
+        <div class="hero-dot"></div>
+        <div class="hero-dot"></div>
+        <div class="hero-dot"></div>
+        <div class="hero-dot"></div>
+      </div>
+
+    </section>
+
+    <!-- ═══ QUIZ ═══ -->
+    <section class="quiz-shell" id="quizSection">
+
+      <div class="step-dots" id="stepDots">
+        <div class="step-dot" data-i="0"></div>
+        <div class="step-dot" data-i="1"></div>
+        <div class="step-dot" data-i="2"></div>
+        <div class="step-dot" data-i="3"></div>
+        <div class="step-dot" data-i="4"></div>
+      </div>
+
+      <div class="question-wrap" id="questionWrap">
+        <div class="q-card">
+          <div class="q-num" id="qCounter">Question 1 of 5</div>
+          <div class="q-text" id="qText"></div>
+        </div>
+        <div class="q-buttons">
+          <button class="q-btn q-btn-yes" onclick="answer(true)">Yes</button>
+          <button class="q-btn q-btn-no"  onclick="answer(false)">No</button>
+        </div>
+        <div class="q-hint">Answer honestly, based on your most recent new hire</div>
+      </div>
+
+    </section>
+
+    <!-- ═══ RESULT ═══ -->
+    <section class="result-shell" id="resultSection">
+      <div class="result-inner">
+
+        <div class="result-score-block">
+          <div class="result-score-nums" id="resultScoreNums">
+            <span class="score-yes" id="scoreYes">0</span><span class="score-sep">/</span><span class="score-total">5</span>
+          </div>
+          <div class="result-score-caption">questions where you showed up fully</div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-label" id="resultLabel"></div>
+          <div class="result-headline" id="resultHeadline"></div>
+          <div class="result-rule"></div>
+          <div class="result-body" id="resultBody"></div>
+        </div>
+
+        <div class="result-ctas">
+          <a href="https://buy.stripe.com/28E5kw3nOfd2dlK1Xa0Ba02" class="cta-primary">Fix it with HalpCraft, $79 per employee →</a>
+          <div class="cta-secondary"><a href="https://www.halpcraft.com">Learn more at halpcraft.com</a></div>
+          <button class="retake-link" onclick="retake()">Retake the quiz</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-text">
+      <a href="https://www.halpcraft.com">HalpCraft</a> · Better leaders, better workplaces.
+    </div>
+  </footer>
+
+  <script>
+    const questions = [
+      "Before your last new hire started, did you personally confirm their equipment and logins were ready?",
+      "Did you brief your team about the new hire at least 3 days before they arrived?",
+      "In their first week, did you have a 1:1 with no agenda, just to check how they were feeling?",
+      "At the 30-day mark, did you ask them whether the role matched what they were sold in the interview?",
+      "By day 90, had you explicitly told them what they were doing well, not just what needed improvement?"
+    ];
+
+    const results = [
+      {
+        minScore: 5,
+        labelText: "Strong",
+        labelClass: "strong",
+        headline: "Your onboarding is genuinely strong.",
+        body: "Most managers score 2 or 3. You're ahead of the curve, but even strong onboarding has moments that slip through the cracks. HalpCraft makes sure none of them do."
+      },
+      {
+        minScore: 3,
+        labelText: "Gaps",
+        labelClass: "gaps",
+        headline: "You're doing better than most, but there are gaps.",
+        body: "Those gaps cost more than you think. New hires are making stay-or-go decisions in the moments you're missing. HalpCraft puts the right action in front of you at exactly the right time."
+      },
+      {
+        minScore: 1,
+        labelText: "At Risk",
+        labelClass: "at-risk",
+        headline: "Your new hires are deciding whether to stay before you know there's a problem.",
+        body: "This isn't about effort, it's about timing. Most managers want to do the right thing. They just don't get prompted at the right moment. That's what HalpCraft fixes."
+      },
+      {
+        minScore: 0,
+        labelText: "Critical",
+        labelClass: "critical",
+        headline: "Most new team members fail quietly.",
+        body: "HalpCraft fixes that. 10 research-backed nudges delivered directly to your calendar across 150 days. No app. No login. Just the right prompt at the right moment."
+      }
+    ];
+
+    let currentQ = 0;
+    let yesCount = 0;
+    let transitioning = false;
+
+    function updateDots() {
+      document.querySelectorAll('.step-dot').forEach(dot => {
+        const i = parseInt(dot.dataset.i);
+        dot.classList.remove('active', 'done');
+        if (i < currentQ)  dot.classList.add('done');
+        if (i === currentQ) dot.classList.add('active');
+      });
+    }
+
+    function startQuiz() {
+      document.getElementById('heroSection').style.display = 'none';
+      const pw = document.getElementById('progressBarWrap');
+      pw.style.visibility = 'visible';
+      pw.style.height = '3px';
+      document.getElementById('quizSection').classList.add('active');
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const wrap = document.getElementById('questionWrap');
+      wrap.style.animation = 'none';
+      void wrap.offsetWidth;
+      wrap.style.animation = '';
+
+      document.getElementById('qCounter').textContent = `Question ${currentQ + 1} of ${questions.length}`;
+      document.getElementById('qText').textContent = questions[currentQ];
+
+      const pct = (currentQ / questions.length) * 100;
+      document.getElementById('progressBarFill').style.width = pct + '%';
+
+      updateDots();
+    }
+
+    function answer(yes) {
+      if (transitioning) return;
+      transitioning = true;
+      if (yes) yesCount++;
+
+      const wrap = document.getElementById('questionWrap');
+      wrap.classList.add('exiting');
+
+      setTimeout(() => {
+        wrap.classList.remove('exiting');
+        currentQ++;
+
+        if (currentQ < questions.length) {
+          transitioning = false;
+          showQuestion();
+        } else {
+          document.getElementById('progressBarFill').style.width = '100%';
+          // mark all dots done
+          document.querySelectorAll('.step-dot').forEach(d => { d.classList.remove('active'); d.classList.add('done'); });
+          setTimeout(showResult, 350);
+        }
+      }, 260);
+    }
+
+    function showResult() {
+      document.getElementById('quizSection').classList.remove('active');
+
+      let tier = results[results.length - 1];
+      for (const r of results) {
+        if (yesCount >= r.minScore) { tier = r; break; }
+      }
+
+      document.getElementById('scoreYes').textContent = yesCount;
+      const labelEl = document.getElementById('resultLabel');
+      labelEl.textContent = tier.labelText;
+      labelEl.className = 'result-label ' + tier.labelClass;
+      document.getElementById('resultHeadline').textContent = tier.headline;
+      document.getElementById('resultBody').textContent = tier.body;
+
+      const rs = document.getElementById('resultSection');
+      rs.style.animation = 'none';
+      void rs.offsetWidth;
+      rs.style.animation = '';
+      rs.classList.add('active');
+
+      transitioning = false;
+    }
+
+    function retake() {
+      currentQ = 0;
+      yesCount = 0;
+      transitioning = false;
+
+      document.getElementById('resultSection').classList.remove('active');
+      document.getElementById('progressBarFill').style.width = '0%';
+      updateDots();
+
+      document.getElementById('quizSection').classList.add('active');
+      showQuestion();
+    }
+  </script>
+</body>
+</html>

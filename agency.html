@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HalpCraft for Agencies — Protect Every Placement</title>
+  <meta name="description" content="Give every candidate you place a 150-day onboarding programme. Protect your placement fee. Prove you're invested in their success." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230e0e0e'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23b8902a'>H</text></svg>" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0e0e0e; --paper: #f5f2ed; --gold: #b8902a; --gold-lt: #e8c96d;
+      --muted: #6b6660;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--ink); color: var(--paper); min-height: 100vh; overflow-x: hidden; }
+
+    /* ── Background glow ─────────────────────────── */
+    .bg-glow {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 0%, rgba(184,144,42,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 80% 80%, rgba(184,144,42,0.07) 0%, transparent 55%);
+    }
+
+    /* ── Nav ─────────────────────────────────────── */
+    nav {
+      position: relative; z-index: 10;
+      display: flex; align-items: center;
+      padding: 1.5rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 67px; width: auto; display: block; }
+
+    /* ── Section base ────────────────────────────── */
+    section { position: relative; z-index: 1; padding: 6rem 4rem; }
+    .section-label {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+    }
+    .section-headline {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 600; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--paper); margin-bottom: 1.25rem;
+    }
+    .section-body {
+      font-size: 1.05rem; color: rgba(245,242,237,0.5);
+      line-height: 1.8; font-weight: 300; max-width: 58ch;
+    }
+
+    /* ── Animations ──────────────────────────────── */
+    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ══════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════ */
+    .hero {
+      min-height: 80vh; display: flex; flex-direction: column;
+      justify-content: center; padding: 8rem 4rem 6rem;
+      max-width: 860px;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      background: rgba(184,144,42,0.1); border: 1px solid rgba(184,144,42,0.25);
+      padding: 0.45rem 1rem; border-radius: 100px;
+      margin-bottom: 2.25rem; align-self: flex-start;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 5.5vw, 5rem);
+      font-weight: 600; line-height: 1.06; letter-spacing: -0.025em;
+      color: var(--paper); margin-bottom: 1.75rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); font-weight: 300; }
+    .hero-sub {
+      font-size: 1.15rem; color: rgba(245,242,237,0.5);
+      line-height: 1.8; font-weight: 300; max-width: 56ch; margin-bottom: 3rem;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gold); color: var(--ink);
+      padding: 1rem 2.25rem; font-family: var(--sans);
+      font-size: 0.875rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; text-decoration: none; border-radius: 2px;
+      border: 2px solid var(--gold); transition: background 0.2s, color 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: rgba(245,242,237,0.7);
+      padding: 1rem 2.25rem; font-family: var(--sans);
+      font-size: 0.875rem; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; text-decoration: none; border-radius: 2px;
+      border: 2px solid rgba(255,255,255,0.2); transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.5); color: var(--paper); }
+
+    /* ══════════════════════════════════════════════
+       PROBLEM — THE RISK
+    ══════════════════════════════════════════════ */
+    .risk-section { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.07); border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .risk-inner { max-width: 1100px; margin: 0 auto; }
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: rgba(255,255,255,0.07);
+      margin: 3.5rem 0 2.5rem;
+    }
+    .stat-card {
+      background: var(--ink); padding: 2.5rem 2rem;
+      transition: background 0.2s;
+    }
+    .stat-card:hover { background: rgba(184,144,42,0.07); }
+    .stat-num {
+      font-family: var(--serif); font-size: 3.5rem; font-weight: 300;
+      font-style: italic; color: var(--gold-lt); line-height: 1; margin-bottom: 0.75rem;
+    }
+    .stat-label { font-size: 0.85rem; color: rgba(245,242,237,0.45); line-height: 1.6; }
+    .stat-source { font-size: 0.65rem; color: rgba(255,255,255,0.2); margin-top: 0.5rem; letter-spacing: 0.04em; }
+    .risk-footer {
+      font-size: 1rem; color: rgba(245,242,237,0.45); line-height: 1.75;
+      font-style: italic; font-family: var(--serif);
+      border-left: 3px solid rgba(184,144,42,0.4); padding-left: 1.5rem;
+      max-width: 60ch;
+    }
+
+    /* ══════════════════════════════════════════════
+       SOLUTION
+    ══════════════════════════════════════════════ */
+    .solution-inner { max-width: 1100px; margin: 0 auto; }
+    .solution-header { margin-bottom: 4rem; }
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3.5rem;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 2px solid rgba(184,144,42,0.3);
+      padding: 2.25rem 2rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .feature-card:hover { background: rgba(184,144,42,0.05); border-top-color: var(--gold); }
+    .feature-icon { font-size: 1.75rem; display: block; margin-bottom: 1.25rem; }
+    .feature-title {
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 600;
+      color: var(--paper); margin-bottom: 0.75rem; letter-spacing: -0.01em;
+    }
+    .feature-body { font-size: 0.875rem; color: rgba(245,242,237,0.45); line-height: 1.7; }
+
+    /* ══════════════════════════════════════════════
+       AGENCY ADVANTAGE
+    ══════════════════════════════════════════════ */
+    .advantage-section { background: rgba(255,255,255,0.015); border-top: 1px solid rgba(255,255,255,0.07); border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .advantage-inner { max-width: 860px; margin: 0 auto; }
+    .advantage-header { margin-bottom: 3.5rem; }
+    .advantage-rows { display: flex; flex-direction: column; }
+    .advantage-row {
+      display: flex; align-items: flex-start; gap: 2rem;
+      padding: 2.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .advantage-row:last-child { border-bottom: none; }
+    .advantage-icon { font-size: 2rem; min-width: 3rem; padding-top: 0.2rem; }
+    .advantage-title {
+      font-family: var(--serif); font-size: 1.25rem; font-weight: 600;
+      color: var(--paper); margin-bottom: 0.6rem; letter-spacing: -0.01em;
+    }
+    .advantage-body { font-size: 0.9rem; color: rgba(245,242,237,0.45); line-height: 1.75; }
+
+    /* ══════════════════════════════════════════════
+       AGENCY PRICING
+    ══════════════════════════════════════════════ */
+    .pricing-inner { max-width: 1000px; margin: 0 auto; }
+    .pricing-header { text-align: center; margin-bottom: 3.5rem; }
+    .pricing-header .section-body { margin: 0 auto; }
+    .agency-price-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; align-items: start;
+    }
+    .a-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .a-card:hover { border-color: rgba(184,144,42,0.3); }
+    .a-card.popular {
+      border-color: var(--gold);
+    }
+    .a-pop-badge {
+      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: var(--ink);
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; padding: 0.3rem 1rem; white-space: nowrap;
+    }
+    .a-tier {
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.5rem;
+    }
+    .a-card.popular .a-tier { color: var(--gold-lt); margin-top: 1.25rem; }
+    .a-save {
+      display: inline-block; font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: rgba(184,144,42,0.15); color: var(--gold-lt);
+      border: 1px solid rgba(184,144,42,0.3);
+      padding: 0.28rem 0.7rem; border-radius: 100px; margin-bottom: 1rem;
+    }
+    .a-price {
+      font-family: var(--serif); font-size: 2.8rem; font-weight: 300;
+      font-style: italic; letter-spacing: -0.03em; color: var(--paper);
+      line-height: 1; margin-bottom: 0.25rem;
+    }
+    .a-per { font-size: 0.8rem; color: rgba(245,242,237,0.35); margin-bottom: 1.5rem; }
+    .a-desc {
+      font-size: 0.85rem; color: rgba(245,242,237,0.4); line-height: 1.65;
+      margin-bottom: 2rem; font-style: italic;
+    }
+    .a-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; padding: 0.95rem 1.5rem;
+      font-family: var(--sans); font-size: 0.82rem;
+      font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      background: rgba(184,144,42,0.15); color: var(--gold-lt);
+      border: 1px solid rgba(184,144,42,0.35);
+      transition: background 0.2s, color 0.2s;
+    }
+    .a-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+    .a-card.popular .a-btn {
+      background: var(--gold); color: var(--ink); border-color: var(--gold);
+    }
+    .a-card.popular .a-btn:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+    .pricing-disclaimer {
+      text-align: center; margin-top: 2rem;
+      font-size: 0.78rem; color: rgba(255,255,255,0.2);
+      font-family: var(--serif); font-style: italic;
+    }
+
+    /* ══════════════════════════════════════════════
+       HOW IT WORKS
+    ══════════════════════════════════════════════ */
+    .how-inner { max-width: 760px; margin: 0 auto; }
+    .how-header { margin-bottom: 3.5rem; }
+    .how-steps { display: flex; flex-direction: column; }
+    .how-step {
+      display: grid; grid-template-columns: 4rem 1fr;
+      gap: 0 2rem; padding: 2.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .how-step:last-child { border-bottom: none; }
+    .how-step-left { display: flex; flex-direction: column; align-items: center; }
+    .how-step-num {
+      width: 2.5rem; height: 2.5rem; border-radius: 50%;
+      border: 1px solid rgba(184,144,42,0.4);
+      background: rgba(184,144,42,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 1rem; font-weight: 600;
+      color: var(--gold); flex-shrink: 0;
+    }
+    .how-step-line {
+      flex: 1; width: 1px; background: rgba(255,255,255,0.06);
+      margin-top: 0.5rem; min-height: 1rem;
+    }
+    .how-step:last-child .how-step-line { display: none; }
+    .how-step-title {
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 600;
+      color: var(--paper); margin-bottom: 0.5rem; padding-top: 0.3rem;
+    }
+    .how-step-body { font-size: 0.875rem; color: rgba(245,242,237,0.45); line-height: 1.7; }
+
+    /* ══════════════════════════════════════════════
+       CTA PANEL
+    ══════════════════════════════════════════════ */
+    .cta-panel {
+      background: rgba(184,144,42,0.07);
+      border-top: 1px solid rgba(184,144,42,0.2);
+      border-bottom: 1px solid rgba(184,144,42,0.2);
+      text-align: center; padding: 7rem 4rem;
+    }
+    .cta-panel .section-headline { max-width: 22ch; margin: 0 auto 1.25rem; }
+    .cta-panel .section-body { margin: 0 auto 3rem; text-align: center; max-width: 50ch; }
+    .cta-actions { display: flex; justify-content: center; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+
+    /* ── Footer ───────────────────────────────────── */
+    footer {
+      position: relative; z-index: 1;
+      background: #080808;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 2.5rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 2rem;
+    }
+    .footer-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .footer-logo img { height: 44px; width: auto; display: block; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── Mobile ───────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-logo img { height: 50px; }
+      section { padding: 5rem 1.5rem; }
+      .hero { padding: 6rem 1.5rem 4rem; min-height: auto; }
+      .stat-grid, .feature-grid, .agency-price-grid { grid-template-columns: 1fr; }
+      .advantage-row { flex-direction: column; gap: 1rem; }
+      .cta-panel { padding: 5rem 1.5rem; }
+      footer { flex-direction: column; padding: 2rem 1.5rem; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.6rem; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .a-btn, .btn-gold, .btn-outline { width: 100%; justify-content: center; }
+      .how-step { grid-template-columns: 3rem 1fr; gap: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- Nav -->
+  <nav>
+    <a href="https://www.halpcraft.com" class="nav-logo">
+      <img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" />
+    </a>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-eyebrow">Recruitment Agency Programme</div>
+    <h1>You placed them.<br/>Now make sure<br/><em>they stick.</em></h1>
+    <p class="hero-sub">88% of failed placements happen in the first 90 days. HalpCraft gives every candidate you place a 150-day onboarding programme, protecting your placement fee and proving you're invested in their success.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-gold">Get Agency Starter, $549 →</a>
+      <a href="mailto:hello@halpcraft.com" class="btn-outline">Talk to us</a>
+    </div>
+  </section>
+
+  <!-- ═══ THE RISK ═══ -->
+  <section class="risk-section">
+    <div class="risk-inner fade-up">
+      <p class="section-label">The Risk</p>
+      <h2 class="section-headline">A failed placement costs everyone.</h2>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">88%</div>
+          <div class="stat-label">of organisations do onboarding poorly, by their own admission</div>
+          <div class="stat-source">Gallup, 2023</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">90 days</div>
+          <div class="stat-label">The window where most new hires decide whether to stay or go</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">$30k+</div>
+          <div class="stat-label">Average cost to replace a single mid-level employee</div>
+          <div class="stat-source">Gallup, 2024</div>
+        </div>
+      </div>
+      <p class="risk-footer">When a placement fails in the first 90 days, you wear the cost: in fees, reputation, and relationships.</p>
+    </div>
+  </section>
+
+  <!-- ═══ THE SOLUTION ═══ -->
+  <section>
+    <div class="solution-inner fade-up">
+      <div class="solution-header">
+        <p class="section-label">The Solution</p>
+        <h2 class="section-headline">150 days of structured support.<br/>Delivered invisibly.</h2>
+        <p class="section-body">HalpCraft delivers 10 research-backed nudges directly to the hiring manager's calendar, at the exact moments that determine whether a new hire stays or goes. No app. No login. No IT approval. Just the right action at the right time.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="feature-icon">📅</span>
+          <div class="feature-title">Lands in any calendar</div>
+          <p class="feature-body">One .ics file imports all 10 nudges into Google Calendar, Outlook, or Apple Calendar instantly.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🎯</span>
+          <div class="feature-title">Research-backed timing</div>
+          <p class="feature-body">Each nudge is placed at the moment behavioural science says matters most: Day 1, Week 1, Day 25, Day 40, through to Day 150.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🏆</span>
+          <div class="feature-title">Protects your placement</div>
+          <p class="feature-body">Managers who follow structured onboarding retain new hires at significantly higher rates. HalpCraft makes that easy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AGENCY ADVANTAGE ═══ -->
+  <section class="advantage-section">
+    <div class="advantage-inner fade-up">
+      <div class="advantage-header">
+        <p class="section-label">The Agency Advantage</p>
+        <h2 class="section-headline">Three reasons agencies choose HalpCraft.</h2>
+      </div>
+      <div class="advantage-rows">
+        <div class="advantage-row">
+          <div class="advantage-icon">💼</div>
+          <div>
+            <div class="advantage-title">Protect your placement fee</div>
+            <p class="advantage-body">A structured 150-day onboarding programme dramatically reduces the risk of early departure. Your placement sticks. Your fee holds.</p>
+          </div>
+        </div>
+        <div class="advantage-row">
+          <div class="advantage-icon">⭐</div>
+          <div>
+            <div class="advantage-title">Differentiate from every other agency</div>
+            <p class="advantage-body">No other agency in your market includes a structured onboarding programme with every placement. It's a genuine point of difference that clients notice and remember.</p>
+          </div>
+        </div>
+        <div class="advantage-row">
+          <div class="advantage-icon">🤝</div>
+          <div>
+            <div class="advantage-title">Show clients you're invested</div>
+            <p class="advantage-body">Including HalpCraft with every placement signals something money can't buy: that you genuinely care whether the person succeeds, not just whether the deal closes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AGENCY PRICING ═══ -->
+  <section id="pricing">
+    <div class="pricing-inner fade-up">
+      <div class="pricing-header">
+        <p class="section-label">Agency Pricing</p>
+        <h2 class="section-headline">Bulk programmes.<br/>Zero ongoing effort.</h2>
+        <p class="section-body">Buy once, use across placements, reorder when you run out.</p>
+      </div>
+      <div class="agency-price-grid">
+
+        <!-- Agency Starter -->
+        <div class="a-card">
+          <div class="a-tier">Agency Starter</div>
+          <div class="a-save">Save 30% vs solo pricing</div>
+          <div class="a-price">$549 <span style="font-size:0.45em;letter-spacing:0.08em;vertical-align:middle;">USD</span></div>
+          <div class="a-per">10 placements · $54.90 per employee</div>
+          <p class="a-desc">Perfect for agencies doing 10–20 placements per year. Buy once, use across placements, reorder when you run out.</p>
+          <a href="#" class="a-btn">Buy Agency Starter →</a>
+        </div>
+
+        <!-- Agency Growth — Most Popular -->
+        <div class="a-card popular">
+          <div class="a-pop-badge">Most Popular</div>
+          <div class="a-tier">Agency Growth</div>
+          <div class="a-save">Save 49% vs solo pricing</div>
+          <div class="a-price">$999 <span style="font-size:0.45em;letter-spacing:0.08em;vertical-align:middle;">USD</span></div>
+          <div class="a-per">25 placements · $39.96 per employee</div>
+          <p class="a-desc">For agencies placing 25–50 people per year. Enough to cover a full year of placements at serious discount.</p>
+          <a href="#" class="a-btn">Buy Agency Growth →</a>
+        </div>
+
+        <!-- Agency Partner -->
+        <div class="a-card">
+          <div class="a-tier">Agency Partner</div>
+          <div class="a-price" style="font-size:2rem; margin-top:0.5rem;">Let's talk.</div>
+          <div class="a-per" style="margin-bottom:1.5rem;">Custom volume · Custom pricing</div>
+          <p class="a-desc">For high-volume agencies. Tell us how many placements you make each year and we'll put together a package that works for your business.</p>
+          <a href="mailto:hello@halpcraft.com" class="a-btn">Get in touch →</a>
+        </div>
+
+      </div>
+      <p class="pricing-disclaimer">All prices in USD. Each programme covers one employee across 150 days. Programmes are used at the agency's discretion across placements.</p>
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section style="border-top: 1px solid rgba(255,255,255,0.07);">
+    <div class="how-inner fade-up">
+      <div class="how-header">
+        <p class="section-label">Simple by design</p>
+        <h2 class="section-headline">Set up in under two minutes per placement.</h2>
+      </div>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="how-step-left"><div class="how-step-num">1</div><div class="how-step-line"></div></div>
+          <div>
+            <div class="how-step-title">Buy your agency package</div>
+            <p class="how-step-body">Purchase your bulk programme pack. You'll receive instructions to set up each placement as you go.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-left"><div class="how-step-num">2</div><div class="how-step-line"></div></div>
+          <div>
+            <div class="how-step-title">Fill in the setup form</div>
+            <p class="how-step-body">When a placement is made, fill in a short form with the hiring manager's details and the employee's start date. Takes 60 seconds.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-left"><div class="how-step-num">3</div><div class="how-step-line"></div></div>
+          <div>
+            <div class="how-step-title">HalpCraft does the rest</div>
+            <p class="how-step-body">The hiring manager receives an email with a single calendar file. All 10 nudges import instantly. Nothing else required.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-left"><div class="how-step-num">4</div><div class="how-step-line"></div></div>
+          <div>
+            <div class="how-step-title">Your placement is protected</div>
+            <p class="how-step-body">150 days of structured onboarding runs automatically. You get the credit. HalpCraft does the work.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-panel fade-up">
+    <p class="section-label">Get started</p>
+    <h2 class="section-headline">Ready to protect every placement?</h2>
+    <p class="section-body">Join the agencies already using HalpCraft to differentiate their offer and reduce placement risk.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn-gold">Get Agency Starter, $549 →</a>
+      <a href="mailto:hello@halpcraft.com" class="btn-outline">Talk to us</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <a href="https://www.halpcraft.com" class="footer-logo">
+      <img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" />
+    </a>
+    <ul class="footer-links">
+      <li><a href="https://www.halpcraft.com">Home</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="mailto:hello@halpcraft.com">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

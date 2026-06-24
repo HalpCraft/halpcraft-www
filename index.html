@@ -622,7 +622,7 @@
     }
     .price-card.featured .price-features li { color: rgba(245,242,237,0.7); }
     .price-features li::before {
-      content: '—';
+      content: '→';
       color: var(--gold);
       flex-shrink: 0;
       margin-top: 0.05em;
@@ -647,6 +647,40 @@
       border-radius: 100px;
       margin-bottom: 2rem;
       display: inline-block;
+    }
+
+    /* ─── PRICING GRID ────────────────────────────── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+    @media (max-width: 1100px) {
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+    .price-save-tag {
+      display: inline-block;
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: rgba(184,144,42,0.12); color: var(--gold);
+      border: 1px solid rgba(184,144,42,0.25);
+      padding: 0.28rem 0.7rem; border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+    .price-card.featured .price-save-tag {
+      background: rgba(184,144,42,0.2); color: var(--gold-lt);
+      border-color: rgba(184,144,42,0.35);
+    }
+    .price-most-popular {
+      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: var(--ink);
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; padding: 0.3rem 1rem; white-space: nowrap;
     }
 
     /* ─── TESTIMONIALS ────────────────────────────── */
@@ -1274,28 +1308,85 @@
 
   <!-- PRICING -->
   <section id="pricing" style="padding: 7rem 4rem;">
-    <div class="pricing-section">
+    <div class="pricing-section" style="max-width:1200px;">
       <div class="fade-up">
         <p class="section-label">Pricing</p>
         <h2 class="section-headline">Simple, honest pricing.</h2>
-        <p class="section-body">One price. One programme. Everything your new hire needs across their first 150 days.</p>
+        <p class="section-body">One programme per employee. No subscription. Pick the pack that fits your hiring volume.</p>
       </div>
-      <div class="pricing-cards fade-up" style="margin-top: 3rem; display:flex; justify-content:center;">
-        <div class="price-card" style="max-width:400px; width:100%;">
-          <div class="price-tier">Onboarding Programme</div>
-          <div class="price-amount">$59 <span style="font-size:0.55em;letter-spacing:0.08em;vertical-align:middle;">USD</span></div>
-          <div class="price-per">per employee onboarded</div>
-          <p style="font-size:0.78rem;color:var(--muted);line-height:1.5;margin-bottom:1.75rem;font-style:italic;">Less than 0.3% of the cost of replacing the person they're onboarding.</p>
+
+      <div class="pricing-grid fade-up">
+
+        <!-- Solo -->
+        <div class="price-card">
+          <div class="price-tier">Solo</div>
+          <div class="price-amount">$79 <span style="font-size:0.55em;letter-spacing:0.08em;vertical-align:middle;">USD</span></div>
+          <div class="price-per">per employee · one-time</div>
+          <p style="font-size:0.78rem;color:var(--muted);line-height:1.5;margin-bottom:1.75rem;font-style:italic;">Less than 0.3% of the cost of replacing the person you're onboarding.</p>
           <ul class="price-features">
-            <li>One programme per employee — no subscription</li>
-            <li>Full 10-nudge sequence per hire</li>
-            <li>Standard & shift worker modes</li>
+            <li>One programme per employee</li>
+            <li>Full 10-nudge sequence</li>
+            <li>Standard &amp; shift worker modes</li>
             <li>Works in all calendar apps</li>
             <li>Email delivery included</li>
           </ul>
-          <a href="https://buy.stripe.com/00wbIU0bC1mc81qdFS0Ba04" class="btn-primary" style="width:100%; justify-content:center;">Start now</a>
-          <p style="font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem;letter-spacing:0.04em;">Checkout via Stripe · Setup takes 2 minutes</p>
+          <a href="https://buy.stripe.com/28E5kw3nOfd2dlK1Xa0Ba02" class="btn-primary" style="width:100%; justify-content:center;">Buy now →</a>
+          <p style="font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem;letter-spacing:0.04em;">Checkout via Stripe · 2 minutes</p>
         </div>
+
+        <!-- Team 5 -->
+        <div class="price-card">
+          <div class="price-tier">Team</div>
+          <div class="price-save-tag">Save 11%</div>
+          <div class="price-amount">$350 <span style="font-size:0.55em;letter-spacing:0.08em;vertical-align:middle;">USD</span></div>
+          <div class="price-per">5 employees · $70 per employee</div>
+          <p style="font-size:0.78rem;color:var(--muted);line-height:1.5;margin-bottom:1.75rem;font-style:italic;">Onboarding multiple people this quarter. Buy 5 programmes at once and save.</p>
+          <ul class="price-features">
+            <li>5 programmes, use as needed</li>
+            <li>Full 10-nudge sequence per hire</li>
+            <li>Standard &amp; shift worker modes</li>
+            <li>Works in all calendar apps</li>
+            <li>Email delivery included</li>
+          </ul>
+          <a href="#" class="btn-primary" style="width:100%; justify-content:center;">Get Team 5 →</a>
+        </div>
+
+        <!-- Team 10 — Most Popular -->
+        <div class="price-card" style="border-color:var(--gold); position:relative;">
+          <div class="price-most-popular">Most Popular</div>
+          <div class="price-tier" style="margin-top:1.25rem;">Team 10</div>
+          <div class="price-save-tag">Save 24%</div>
+          <div class="price-amount">$599 <span style="font-size:0.55em;letter-spacing:0.08em;vertical-align:middle;">USD</span></div>
+          <div class="price-per">10 employees · $60 per employee</div>
+          <p style="font-size:0.78rem;color:var(--muted);line-height:1.5;margin-bottom:1.75rem;font-style:italic;">For managers and HR leads running multiple hires across the year.</p>
+          <ul class="price-features">
+            <li>10 programmes, use as needed</li>
+            <li>Full 10-nudge sequence per hire</li>
+            <li>Standard &amp; shift worker modes</li>
+            <li>Works in all calendar apps</li>
+            <li>Email delivery included</li>
+          </ul>
+          <a href="#" class="btn-primary" style="width:100%; justify-content:center;">Get Team 10 →</a>
+        </div>
+
+        <!-- Agency -->
+        <div class="price-card featured">
+          <div class="price-tier">Agency</div>
+          <div class="price-save-tag">Save 30%</div>
+          <div class="price-amount">$549 <span style="font-size:0.55em;letter-spacing:0.08em;vertical-align:middle;">USD</span></div>
+          <div class="price-per">10 placements · $54.90 per employee</div>
+          <p style="font-size:0.78rem;color:rgba(245,242,237,0.45);line-height:1.5;margin-bottom:1.75rem;font-style:italic;">For recruitment agencies. Give every candidate you place a 150-day onboarding programme built in.</p>
+          <ul class="price-features">
+            <li>10 programmes for placements</li>
+            <li>Full 10-nudge sequence per placement</li>
+            <li>Delivered to the hiring manager</li>
+            <li>Works in all calendar apps</li>
+            <li>Email delivery included</li>
+          </ul>
+          <a href="/agency" class="btn-primary" style="width:100%; justify-content:center; background:var(--gold); border-color:var(--gold); color:var(--ink);">Learn more →</a>
+          <p class="price-note">For larger volumes, see agency plans</p>
+        </div>
+
       </div>
     </div>
   </section>

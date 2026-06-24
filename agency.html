@@ -133,9 +133,9 @@
     .stat-label { font-size: 0.85rem; color: rgba(245,242,237,0.45); line-height: 1.6; }
     .stat-source { font-size: 0.65rem; color: rgba(255,255,255,0.2); margin-top: 0.5rem; letter-spacing: 0.04em; }
     .risk-footer {
-      font-size: 1rem; color: rgba(245,242,237,0.45); line-height: 1.75;
-      font-style: italic; font-family: var(--serif);
-      border-left: 3px solid rgba(184,144,42,0.4); padding-left: 1.5rem;
+      font-size: 1.4rem; color: rgba(245,242,237,0.65); line-height: 1.65;
+      font-style: italic; font-family: var(--serif); font-weight: 300;
+      border-left: 3px solid rgba(184,144,42,0.5); padding-left: 1.75rem;
       max-width: 60ch;
     }
 
@@ -194,26 +194,16 @@
     }
     .a-card {
       background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(184,144,42,0.2);
       padding: 2.5rem 2rem;
       position: relative;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.2s;
     }
-    .a-card:hover { border-color: rgba(184,144,42,0.3); }
-    .a-card.popular {
-      border-color: var(--gold);
-    }
-    .a-pop-badge {
-      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
-      background: var(--gold); color: var(--ink);
-      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; padding: 0.3rem 1rem; white-space: nowrap;
-    }
+    .a-card:hover { border-color: rgba(184,144,42,0.45); background: rgba(184,144,42,0.04); }
     .a-tier {
       font-size: 0.68rem; font-weight: 500; letter-spacing: 0.16em;
-      text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.5rem;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
     }
-    .a-card.popular .a-tier { color: var(--gold-lt); margin-top: 1.25rem; }
     .a-save {
       display: inline-block; font-size: 0.62rem; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase;
@@ -242,10 +232,6 @@
       transition: background 0.2s, color 0.2s;
     }
     .a-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
-    .a-card.popular .a-btn {
-      background: var(--gold); color: var(--ink); border-color: var(--gold);
-    }
-    .a-card.popular .a-btn:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
     .pricing-disclaimer {
       text-align: center; margin-top: 2rem;
       font-size: 0.78rem; color: rgba(255,255,255,0.2);
@@ -341,7 +327,7 @@
   <!-- Nav -->
   <nav>
     <a href="https://www.halpcraft.com" class="nav-logo">
-      <img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" />
+      <img src="/logos/HalpCraft Logo - Dark.png" alt="HalpCraft" />
     </a>
   </nav>
 
@@ -462,9 +448,8 @@
           <a href="#" class="a-btn">Buy Agency Starter →</a>
         </div>
 
-        <!-- Agency Growth — Most Popular -->
-        <div class="a-card popular">
-          <div class="a-pop-badge">Most Popular</div>
+        <!-- Agency Growth -->
+        <div class="a-card">
           <div class="a-tier">Agency Growth</div>
           <div class="a-save">Save 49% vs solo pricing</div>
           <div class="a-price">$999 <span style="font-size:0.45em;letter-spacing:0.08em;vertical-align:middle;">USD</span></div>
@@ -541,7 +526,7 @@
   <!-- Footer -->
   <footer>
     <a href="https://www.halpcraft.com" class="footer-logo">
-      <img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" />
+      <img src="/logos/HalpCraft Logo - Dark.png" alt="HalpCraft" />
     </a>
     <ul class="footer-links">
       <li><a href="https://www.halpcraft.com">Home</a></li>

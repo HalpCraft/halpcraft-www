@@ -571,6 +571,9 @@
       text-align: left;
       border-radius: 2px;
       transition: border-color 0.2s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
     }
     .price-card:hover { border-color: var(--gold); }
     .price-card.featured {
@@ -661,14 +664,14 @@
       .pricing-grid { grid-template-columns: 1fr; }
     }
     .price-save-tag {
-      display: inline-block;
+      position: absolute; top: 1.5rem; right: 1.5rem;
       font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em;
       text-transform: uppercase;
       background: rgba(184,144,42,0.12); color: var(--gold);
       border: 1px solid rgba(184,144,42,0.25);
       padding: 0.28rem 0.7rem; border-radius: 100px;
-      margin-bottom: 1rem;
     }
+    .price-card .btn-primary { margin-top: auto; }
     .price-card.featured .price-save-tag {
       background: rgba(184,144,42,0.2); color: var(--gold-lt);
       border-color: rgba(184,144,42,0.35);
@@ -1333,7 +1336,7 @@
 
         <!-- Team 5 -->
         <div class="price-card">
-          <div class="price-tier">Team</div>
+          <div class="price-tier" style="padding-right:5rem;">Team</div>
           <div class="price-save-tag">Save 11%</div>
           <div class="price-amount">$350 <span style="font-size:0.55em;letter-spacing:0.08em;vertical-align:middle;">USD</span></div>
           <div class="price-per">5 employees · $70 per employee</div>
@@ -1350,7 +1353,7 @@
 
         <!-- Team 10 -->
         <div class="price-card">
-          <div class="price-tier">Team 10</div>
+          <div class="price-tier" style="padding-right:5rem;">Team 10</div>
           <div class="price-save-tag">Save 24%</div>
           <div class="price-amount">$599 <span style="font-size:0.55em;letter-spacing:0.08em;vertical-align:middle;">USD</span></div>
           <div class="price-per">10 employees · $60 per employee</div>

@@ -190,7 +190,7 @@
     .pricing-header .section-body { margin: 0 auto; }
     .agency-price-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem; align-items: start;
+      gap: 1.25rem; align-items: stretch;
     }
     .a-card {
       background: rgba(255,255,255,0.03);
@@ -198,6 +198,7 @@
       padding: 2.5rem 2rem;
       position: relative;
       transition: border-color 0.2s, background 0.2s;
+      display: flex; flex-direction: column; justify-content: space-between; height: 100%;
     }
     .a-card:hover { border-color: rgba(184,144,42,0.45); background: rgba(184,144,42,0.04); }
     .a-tier {

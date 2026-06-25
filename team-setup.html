@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Setup — HalpCraft</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230e0e0e'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23b8902a'>H</text></svg>" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0e0e0e; --paper: #f5f2ed; --gold: #b8902a; --gold-lt: #e8c96d;
+      --surface: #1a1a26; --muted: rgba(245,242,237,0.45);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--ink); color: var(--paper); min-height: 100vh; overflow-x: hidden; }
+
+    .bg-glow {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 10%, rgba(184,144,42,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 80% 90%, rgba(184,144,42,0.08) 0%, transparent 60%);
+    }
+
+    nav {
+      position: relative; z-index: 10;
+      display: flex; align-items: center;
+      padding: 1.5rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 52px; width: auto; display: block; }
+    @media (max-width: 768px) { nav { padding: 1.25rem 1.5rem; } .nav-logo img { height: 40px; } }
+
+    /* ── Layout ── */
+    .page-wrap {
+      position: relative; z-index: 1;
+      max-width: 680px; margin: 0 auto;
+      padding: 5rem 2rem 6rem;
+    }
+
+    /* ── Confirm badge ── */
+    .confirm-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: rgba(168,197,160,0.12); border: 1px solid rgba(168,197,160,0.3);
+      color: #a8c5a0; font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.5rem 1.25rem; border-radius: 100px;
+      margin-bottom: 2rem;
+    }
+    .confirm-badge::before { content: '✓'; font-size: 0.9rem; }
+
+    /* ── Typography ── */
+    .page-headline {
+      font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 600; line-height: 1.1; color: var(--paper);
+      margin-bottom: 1rem; letter-spacing: -0.02em;
+    }
+    .page-sub {
+      font-size: 1rem; color: var(--muted); line-height: 1.7;
+      font-weight: 300; margin-bottom: 2.5rem;
+    }
+
+    /* ── Form ── */
+    .form-field { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .form-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,242,237,0.5); }
+    .form-input {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+      color: var(--paper); font-family: var(--sans); font-size: 1rem;
+      padding: 0.875rem 1rem; border-radius: 2px; outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: rgba(184,144,42,0.6); }
+    .form-input::placeholder { color: rgba(245,242,237,0.2); }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gold); color: var(--ink);
+      padding: 0.9rem 2.25rem; font-family: var(--sans);
+      font-size: 0.875rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; border: none;
+      border-radius: 2px; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-lt); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .error-msg {
+      background: rgba(220,80,80,0.12); border: 1px solid rgba(220,80,80,0.3);
+      color: #e08080; font-size: 0.85rem; padding: 0.75rem 1rem;
+      border-radius: 2px; margin-top: 1rem; display: none;
+    }
+
+    /* ── Step 2: Codes ── */
+    .step-hidden { display: none; }
+
+    .codes-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+    .code-row {
+      background: var(--surface); border-left: 3px solid var(--gold);
+      padding: 1rem 1.25rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
+    }
+    .code-row-left { display: flex; flex-direction: column; gap: 0.35rem; }
+    .code-text {
+      font-family: 'Courier New', monospace; font-size: 24px;
+      font-weight: 700; color: var(--paper); letter-spacing: 0.08em;
+    }
+    .code-hint { font-size: 0.75rem; color: rgba(245,242,237,0.3); }
+    .code-row-actions { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+
+    .btn-copy {
+      background: rgba(184,144,42,0.15); border: 1px solid rgba(184,144,42,0.35);
+      color: var(--gold-lt); font-family: var(--sans);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 0.5rem 1rem;
+      border-radius: 2px; cursor: pointer; transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .btn-copy:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+    .btn-copy.copied { background: rgba(168,197,160,0.15); border-color: rgba(168,197,160,0.4); color: #a8c5a0; }
+
+    /* ── Redemption link box ── */
+    .info-box {
+      background: rgba(184,144,42,0.07); border: 1px solid rgba(184,144,42,0.2);
+      padding: 1.75rem 2rem; margin-bottom: 2rem;
+    }
+    .info-box-label {
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;
+    }
+    .info-box-url {
+      display: flex; align-items: center; gap: 0.75rem;
+      flex-wrap: wrap; margin-bottom: 0.75rem;
+    }
+    .url-text {
+      font-family: 'Courier New', monospace; font-size: 0.95rem;
+      color: var(--paper); flex: 1; min-width: 0;
+      word-break: break-all;
+    }
+    .info-box-body { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── Message template ── */
+    .msg-section { margin-top: 2.5rem; }
+    .msg-label {
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 600;
+      color: var(--paper); margin-bottom: 1rem;
+    }
+    .msg-block {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      padding: 1.5rem; font-family: 'Courier New', monospace;
+      font-size: 0.82rem; color: rgba(245,242,237,0.65); line-height: 1.8;
+      white-space: pre-wrap; word-break: break-word; margin-bottom: 0.75rem;
+    }
+
+    .divider-line {
+      height: 1px; background: rgba(255,255,255,0.07);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .footer-logo img { height: 44px; width: auto; display: block; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    @media (max-width: 700px) {
+      footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <nav>
+    <a href="https://www.halpcraft.com" class="nav-logo">
+      <img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" />
+    </a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- ── STEP 1: Details form ── -->
+    <div id="step1">
+      <div class="confirm-badge">Purchase confirmed</div>
+      <h1 class="page-headline">Your team pack is ready.</h1>
+      <p class="page-sub">Enter your details below and we'll generate your unique setup codes immediately.</p>
+
+      <form id="setupForm" novalidate>
+        <div class="form-field">
+          <label class="form-label" for="buyerName">Your name</label>
+          <input class="form-input" type="text" id="buyerName" name="buyerName" placeholder="Jane Smith" required />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="buyerEmail">Your email</label>
+          <input class="form-input" type="email" id="buyerEmail" name="buyerEmail" placeholder="jane@company.com" required />
+        </div>
+        <button type="submit" class="btn-primary" id="submitBtn">Generate My Codes →</button>
+        <div class="error-msg" id="errorMsg"></div>
+      </form>
+    </div>
+
+    <!-- ── STEP 2: Codes ready ── -->
+    <div id="step2" class="step-hidden">
+      <h1 class="page-headline">Your codes are ready.</h1>
+      <p class="page-sub">Share one code with each manager. They'll use it to set up their employee's onboarding in under 2 minutes.</p>
+
+      <div class="codes-list" id="codesList"></div>
+
+      <div class="divider-line"></div>
+
+      <div class="info-box">
+        <div class="info-box-label">Redemption Link</div>
+        <div class="info-box-url">
+          <span class="url-text">https://www.halpcraft.com/redeem</span>
+          <button class="btn-copy" id="copyLinkBtn" onclick="copyText('https://www.halpcraft.com/redeem', this)">Copy Link</button>
+        </div>
+        <div class="info-box-body">Managers visit this link, enter their code, fill in the new hire's details, and their calendar file is generated instantly.</div>
+      </div>
+
+      <div class="msg-section">
+        <div class="msg-label">What to send your managers</div>
+        <div class="msg-block" id="msgTemplate">Hi [name],
+
+I've set up a 150-day onboarding programme for your new hire. It's called HalpCraft — 10 research-backed nudges that land directly in your calendar at the moments that matter most.
+
+Here's your setup code: [CODE]
+
+To get started, go to: https://www.halpcraft.com/redeem
+
+Enter your code, fill in your new hire's details, and you'll receive a calendar file with all 10 nudges ready to import. Takes about 2 minutes.</div>
+        <button class="btn-copy" id="copyMsgBtn" onclick="copyMessage(this)">Copy Message</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <a href="/" class="footer-logo"><img src="/logos/HalpCraft Logo - Dark.png" alt="HalpCraft" /></a>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="mailto:hello@halpcraft.com">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const API_BASE = 'https://app.halpcraft.com';
+    const SECRET   = 'Dragonball';
+
+    // Read qty from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const qty = parseInt(urlParams.get('qty') || '1', 10);
+
+    // ── Form submit ──────────────────────────────────────────────────────────
+    document.getElementById('setupForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const buyerName  = document.getElementById('buyerName').value.trim();
+      const buyerEmail = document.getElementById('buyerEmail').value.trim();
+      const btn        = document.getElementById('submitBtn');
+      const errEl      = document.getElementById('errorMsg');
+
+      if (!buyerName || !buyerEmail) {
+        showError('Please fill in both fields.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Generating…';
+      errEl.style.display = 'none';
+
+      try {
+        const res = await fetch(`${API_BASE}/api/codes`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-HalpCraft-Secret': SECRET,
+          },
+          body: JSON.stringify({ buyerName, buyerEmail, qty }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || !data.codes) {
+          throw new Error(data.error || 'Something went wrong. Please try again.');
+        }
+
+        renderCodes(data.codes, buyerName);
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').classList.remove('step-hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Generate My Codes →';
+        showError(err.message);
+      }
+    });
+
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    // ── Render code rows ─────────────────────────────────────────────────────
+    function renderCodes(codes, buyerName) {
+      const list = document.getElementById('codesList');
+      list.innerHTML = '';
+
+      codes.forEach((code, i) => {
+        const row = document.createElement('div');
+        row.className = 'code-row';
+        row.innerHTML = `
+          <div class="code-row-left">
+            <span class="code-text">${code}</span>
+            <span class="code-hint">Send this to a manager along with the link below</span>
+          </div>
+          <div class="code-row-actions">
+            <button class="btn-copy" onclick="copyText('${code}', this)">Copy Code</button>
+            <button class="btn-copy" onclick="copyCodeMessage('${code}', '${escapeAttr(buyerName)}', this)">Copy Message</button>
+          </div>`;
+        list.appendChild(row);
+      });
+    }
+
+    // ── Copy helpers ─────────────────────────────────────────────────────────
+    function copyText(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+      });
+    }
+
+    function copyMessage(btn) {
+      const msg = document.getElementById('msgTemplate').textContent;
+      copyText(msg, btn);
+    }
+
+    function copyCodeMessage(code, buyerName, btn) {
+      const msg = `Hi [name],\n\nI've set up a 150-day onboarding programme for your new hire. It's called HalpCraft — 10 research-backed nudges that land directly in your calendar at the moments that matter most.\n\nHere's your setup code: ${code}\n\nTo get started, go to: https://www.halpcraft.com/redeem\n\nEnter your code, fill in your new hire's details, and you'll receive a calendar file with all 10 nudges ready to import. Takes about 2 minutes.`;
+      copyText(msg, btn);
+    }
+
+    function escapeAttr(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>

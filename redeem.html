@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redeem Your Code — HalpCraft</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230e0e0e'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23b8902a'>H</text></svg>" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0e0e0e; --paper: #f5f2ed; --gold: #b8902a; --gold-lt: #e8c96d;
+      --surface: #1a1a26; --muted: rgba(245,242,237,0.45);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--ink); color: var(--paper); min-height: 100vh; overflow-x: hidden; }
+
+    .bg-glow {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 10%, rgba(184,144,42,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 80% 90%, rgba(184,144,42,0.08) 0%, transparent 60%);
+    }
+
+    nav {
+      position: relative; z-index: 10;
+      display: flex; align-items: center;
+      padding: 1.5rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 52px; width: auto; display: block; }
+    @media (max-width: 768px) { nav { padding: 1.25rem 1.5rem; } .nav-logo img { height: 40px; } }
+
+    /* ── Layout ── */
+    .page-wrap {
+      position: relative; z-index: 1;
+      max-width: 560px; margin: 0 auto;
+      padding: 5rem 2rem 6rem;
+      text-align: center;
+    }
+
+    /* ── Typography ── */
+    .page-headline {
+      font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 600; line-height: 1.1; color: var(--paper);
+      margin-bottom: 1rem; letter-spacing: -0.02em;
+    }
+    .page-sub {
+      font-size: 1rem; color: var(--muted); line-height: 1.7;
+      font-weight: 300; margin-bottom: 2.5rem;
+    }
+
+    /* ── Confirm badge ── */
+    .confirm-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: rgba(168,197,160,0.12); border: 1px solid rgba(168,197,160,0.3);
+      color: #a8c5a0; font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.5rem 1.25rem; border-radius: 100px;
+      margin-bottom: 2rem;
+    }
+    .confirm-badge::before { content: '✓'; font-size: 0.9rem; }
+
+    /* ── Code input ── */
+    .code-input-wrap { margin-bottom: 1.5rem; }
+    .code-input {
+      width: 100%; max-width: 280px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15);
+      color: var(--paper); font-family: 'Courier New', monospace;
+      font-size: 2rem; font-weight: 700; letter-spacing: 0.12em;
+      text-align: center; text-transform: uppercase;
+      padding: 1rem 1.5rem; border-radius: 2px; outline: none;
+      transition: border-color 0.2s;
+    }
+    .code-input:focus { border-color: rgba(184,144,42,0.6); }
+    .code-input::placeholder { color: rgba(245,242,237,0.15); font-size: 1.5rem; }
+
+    /* ── Form ── */
+    .form-field { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; text-align: left; }
+    .form-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,242,237,0.45); }
+    .form-label-hint { font-size: 0.72rem; color: rgba(245,242,237,0.25); font-weight: 300; }
+    .form-input {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+      color: var(--paper); font-family: var(--sans); font-size: 1rem;
+      padding: 0.875rem 1rem; border-radius: 2px; outline: none;
+      transition: border-color 0.2s; width: 100%;
+    }
+    .form-input:focus { border-color: rgba(184,144,42,0.6); }
+    .form-input::placeholder { color: rgba(245,242,237,0.2); }
+    select.form-input { cursor: pointer; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      background: var(--gold); color: var(--ink);
+      padding: 0.9rem 2.25rem; font-family: var(--sans);
+      font-size: 0.875rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; border: none;
+      border-radius: 2px; cursor: pointer; transition: background 0.2s;
+      width: 100%;
+    }
+    .btn-primary:hover { background: var(--gold-lt); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .error-msg {
+      background: rgba(220,80,80,0.12); border: 1px solid rgba(220,80,80,0.3);
+      color: #e08080; font-size: 0.85rem; padding: 0.75rem 1rem;
+      border-radius: 2px; margin-top: 1rem; text-align: left; display: none;
+    }
+
+    .step-hidden { display: none; }
+
+    /* ── Step 3: Download ── */
+    .download-box {
+      background: rgba(184,144,42,0.08); border: 1px solid rgba(184,144,42,0.25);
+      padding: 2rem; margin: 2rem 0 1rem;
+      display: flex; flex-direction: column; align-items: center; gap: 1.25rem;
+    }
+    .download-box-title {
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 600; color: var(--paper);
+    }
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gold); color: var(--ink);
+      padding: 0.9rem 2rem; font-family: var(--sans);
+      font-size: 0.875rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      border-radius: 2px; transition: background 0.2s;
+    }
+    .btn-download:hover { background: var(--gold-lt); }
+    .small-note { font-size: 0.8rem; color: rgba(245,242,237,0.3); line-height: 1.6; }
+
+    /* ── Footer ── */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .footer-logo img { height: 44px; width: auto; display: block; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    @media (max-width: 700px) {
+      footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <nav>
+    <a href="https://www.halpcraft.com" class="nav-logo">
+      <img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" />
+    </a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- ── STEP 1: Code entry ── -->
+    <div id="step1">
+      <h1 class="page-headline">Enter your setup code.</h1>
+      <p class="page-sub">Your code was sent by the person who purchased HalpCraft for your team.</p>
+
+      <div class="code-input-wrap">
+        <input
+          class="code-input"
+          type="text"
+          id="codeInput"
+          placeholder="XXXX-XXXX"
+          maxlength="9"
+          autocomplete="off"
+          autocapitalize="characters"
+          spellcheck="false"
+        />
+      </div>
+      <button class="btn-primary" id="verifyBtn" onclick="verifyCode()">Verify Code →</button>
+      <div class="error-msg" id="step1Error"></div>
+    </div>
+
+    <!-- ── STEP 2: Setup form ── -->
+    <div id="step2" class="step-hidden" style="text-align:left;">
+      <h1 class="page-headline">Code accepted. Let's set up your new hire.</h1>
+
+      <form id="redeemForm" novalidate>
+        <div class="form-field">
+          <label class="form-label" for="managerName">Your name <span class="form-label-hint">— The manager</span></label>
+          <input class="form-input" type="text" id="managerName" name="managerName" placeholder="Jane Smith" required />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="managerEmail">Your email <span class="form-label-hint">— We'll send your calendar file here</span></label>
+          <input class="form-input" type="email" id="managerEmail" name="managerEmail" placeholder="jane@company.com" required />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="employeeName">Employee name <span class="form-label-hint">— The person you're onboarding</span></label>
+          <input class="form-input" type="text" id="employeeName" name="employeeName" placeholder="Alex Johnson" required />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="startDate">Employee start date</label>
+          <input class="form-input" type="date" id="startDate" name="startDate" required />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="workPattern">Work pattern</label>
+          <select class="form-input" id="workPattern" name="workPattern">
+            <option value="standard">Standard Mon-Fri</option>
+            <option value="shift">Shift worker</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="startTime">Preferred nudge time <span class="form-label-hint">— When should nudges appear in your calendar?</span></label>
+          <input class="form-input" type="time" id="startTime" name="startTime" value="09:00" />
+        </div>
+        <button type="submit" class="btn-primary" id="redeemBtn">Generate My Calendar →</button>
+        <div class="error-msg" id="step2Error"></div>
+      </form>
+    </div>
+
+    <!-- ── STEP 3: Confirmation ── -->
+    <div id="step3" class="step-hidden">
+      <div class="confirm-badge">You're all set</div>
+      <h1 class="page-headline">Your nudges are on their way.</h1>
+      <p class="page-sub">Check your inbox — your calendar file will arrive within a few minutes. Open the .ics file attachment and all 10 nudges will import into your calendar automatically.</p>
+
+      <div class="download-box">
+        <div class="download-box-title">Download your calendar file now</div>
+        <a class="btn-download" id="downloadBtn" href="#">Download Calendar Now</a>
+      </div>
+      <p class="small-note">The calendar file works with Google Calendar, Outlook, and Apple Calendar.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <a href="/" class="footer-logo"><img src="/logos/HalpCraft Logo - Dark.png" alt="HalpCraft" /></a>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="mailto:hello@halpcraft.com">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const API_BASE = 'https://app.halpcraft.com';
+    let verifiedCode = '';
+
+    // ── Auto-format code input: uppercase + insert hyphen after 4th char ────
+    const codeInput = document.getElementById('codeInput');
+    codeInput.addEventListener('input', function () {
+      let val = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+      if (val.length > 4) val = val.slice(0, 4) + '-' + val.slice(4, 8);
+      this.value = val;
+    });
+    codeInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); verifyCode(); }
+    });
+
+    // ── Step 1: Verify code ──────────────────────────────────────────────────
+    async function verifyCode() {
+      const code = codeInput.value.trim();
+      if (!code || code.replace('-', '').length < 8) {
+        showError('step1Error', 'Please enter your full 8-character code.');
+        return;
+      }
+
+      const btn = document.getElementById('verifyBtn');
+      btn.disabled = true;
+      btn.textContent = 'Verifying…';
+      hideError('step1Error');
+
+      try {
+        const res  = await fetch(`${API_BASE}/api/redeem?code=${encodeURIComponent(code)}`);
+        const data = await res.json();
+
+        if (data.valid === false && data.reason === 'already_used') {
+          throw new Error('This code has already been used. Contact the person who sent it to you.');
+        }
+        if (data.valid === false) {
+          throw new Error('Code not recognised. Please check and try again.');
+        }
+
+        // Valid — move to step 2
+        verifiedCode = code;
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').classList.remove('step-hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Verify Code →';
+        showError('step1Error', err.message);
+      }
+    }
+
+    // ── Step 2: Redeem code ──────────────────────────────────────────────────
+    document.getElementById('redeemForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const managerName  = document.getElementById('managerName').value.trim();
+      const managerEmail = document.getElementById('managerEmail').value.trim();
+      const employeeName = document.getElementById('employeeName').value.trim();
+      const startDate    = document.getElementById('startDate').value;
+      const workPattern  = document.getElementById('workPattern').value;
+      const startTime    = document.getElementById('startTime').value || '09:00';
+      const btn          = document.getElementById('redeemBtn');
+
+      if (!managerName || !managerEmail || !employeeName || !startDate) {
+        showError('step2Error', 'Please fill in all required fields.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Generating…';
+      hideError('step2Error');
+
+      try {
+        const res = await fetch(`${API_BASE}/api/redeem`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            code: verifiedCode,
+            managerName,
+            managerEmail,
+            employeeName,
+            startDate,
+            workPattern,
+            startTime,
+          }),
+        });
+
+        const data = await res.json();
+
+        if (!data.success) {
+          if (data.reason === 'already_used') throw new Error('This code has already been used. Please contact the person who sent it to you.');
+          if (data.reason === 'not_found')    throw new Error('Code not found. Please contact support.');
+          throw new Error('Something went wrong. Please try again.');
+        }
+
+        // Build download URL
+        const qs = new URLSearchParams({
+          employeeName: data.employeeName,
+          managerName:  data.managerName,
+          startDate:    data.startDate,
+          workPattern:  data.workPattern,
+          startTime:    data.startTime,
+          token:        data.token,
+        });
+        const downloadUrl = `${API_BASE}/api/generate?${qs.toString()}`;
+        document.getElementById('downloadBtn').href = downloadUrl;
+
+        // Move to step 3
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('step3').classList.remove('step-hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Generate My Calendar →';
+        showError('step2Error', err.message);
+      }
+    });
+
+    // ── Error helpers ────────────────────────────────────────────────────────
+    function showError(id, msg) {
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+    function hideError(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+</body>
+</html>

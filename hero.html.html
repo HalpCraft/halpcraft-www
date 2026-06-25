@@ -1,0 +1,997 @@
+<!-- HalpCraft animated product walkthrough -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#0e0e0e;
+    --paper:#f5f2ed;
+    --gold:#b8902a;
+    --gold-light:#e8c96d;
+    --muted:#6b6660;
+    --border:#e0dbd3;
+    --serif:"Cormorant Garamond", Georgia, serif;
+    --sans:"DM Sans", system-ui, -apple-system, sans-serif;
+    --stageW:1280px;
+    --stageH:720px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--sans);
+    height:100%;
+  }
+
+  /* ---------- Hero panel scaffold ---------- */
+  #hero{
+    height:100%;
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:26px 22px 22px;
+    gap:14px;
+  }
+  .hero-eyebrow{
+    font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--gold); font-weight:600; flex:none;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero-eyebrow::before,
+  .hero-eyebrow::after{content:""; width:26px; height:1px; background:rgba(184,144,42,.45);}
+
+  /* ---------- Stage scaling ---------- */
+  .stage-wrap{
+    flex:1; width:100%; min-height:0;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .stage{
+    width:var(--stageW);
+    height:var(--stageH);
+    transform-origin:center center;
+    position:relative;
+    border-radius:14px;
+    overflow:hidden;
+    background:var(--paper);
+    box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06), 0 2px 0 rgba(255,255,255,.04) inset;
+    flex:none;
+  }
+  /* replay overlay */
+  .replay{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) scale(.96);
+    z-index:80; display:flex; align-items:center; gap:10px;
+    background:rgba(14,14,14,.55); backdrop-filter:blur(2px);
+    color:var(--paper); border:1.5px solid var(--gold);
+    font-family:var(--sans); font-weight:600; font-size:15px;
+    padding:13px 24px; border-radius:40px; cursor:pointer;
+    opacity:0; visibility:hidden; transition:opacity .35s ease, transform .35s ease, background .2s;
+  }
+  .replay.show{opacity:1; visibility:visible; transform:translate(-50%,-50%) scale(1);}
+  .replay:hover{background:var(--gold); color:#15130f;}
+  .replay svg{width:16px;height:16px;}
+
+  /* ---------- Browser chrome ---------- */
+  .chrome{
+    position:absolute; inset:0 0 auto 0;
+    height:48px;
+    background:#15130f;
+    display:flex; align-items:center; gap:14px;
+    padding:0 16px;
+    z-index:40;
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .dots{display:flex; gap:7px;}
+  .dots i{width:11px;height:11px;border-radius:50%;display:block;}
+  .dots i:nth-child(1){background:#ff5f57;}
+  .dots i:nth-child(2){background:#febc2e;}
+  .dots i:nth-child(3){background:#28c840;}
+  .url{
+    flex:1; max-width:560px;
+    height:28px; border-radius:8px;
+    background:#262119; color:#cfc7b8;
+    display:flex; align-items:center; gap:8px;
+    padding:0 12px; font-size:13px; letter-spacing:.2px;
+    font-family:var(--sans);
+  }
+  .url .lock{opacity:.6;}
+  .url b{color:var(--paper); font-weight:500;}
+  .app-tag{
+    margin-left:auto; font-size:12px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--gold); font-weight:600;
+  }
+
+  /* ---------- Scene viewport ---------- */
+  .viewport{position:absolute; inset:48px 0 0 0; overflow:hidden;}
+  .scene{
+    position:absolute; inset:0;
+    opacity:0; visibility:hidden;
+    transition:opacity .5s ease, transform .5s ease;
+    transform:translateY(14px) scale(.995);
+  }
+  .scene.active{opacity:1; visibility:visible; transform:none;}
+
+  /* ---------- Cursor ---------- */
+  .cursor{
+    position:absolute; left:640px; top:360px;
+    width:26px; height:26px; z-index:60;
+    margin:-3px 0 0 -3px;
+    pointer-events:none;
+    transition:left .9s cubic-bezier(.45,.05,.2,1), top .9s cubic-bezier(.45,.05,.2,1);
+    filter:drop-shadow(0 3px 4px rgba(0,0,0,.4));
+  }
+  .cursor svg{width:100%;height:100%;display:block;}
+  .cursor.press{transform:scale(.82);}
+  .ripple{
+    position:absolute; z-index:55;
+    width:14px;height:14px;border-radius:50%;
+    border:2px solid var(--gold);
+    transform:translate(-50%,-50%) scale(.3);
+    opacity:.9; pointer-events:none;
+    animation:rip .55s ease-out forwards;
+  }
+  @keyframes rip{to{transform:translate(-50%,-50%) scale(3.4); opacity:0;}}
+
+  /* ---------- Wordmark ---------- */
+  .wordmark{font-family:var(--sans); font-weight:500; letter-spacing:-.01em; line-height:1;}
+  .wordmark .h{color:var(--ink);}
+  .wordmark .c{color:var(--gold);}
+  .on-dark .wordmark .h{color:var(--paper);}
+  .tagline{
+    font-family:var(--sans); font-weight:400; text-transform:uppercase;
+    letter-spacing:.22em; color:var(--muted); font-size:11px;
+  }
+
+  /* ============ SCENE 1: LANDING ============ */
+  .s-land{background:var(--paper); padding:0;}
+  .land-nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 60px; 
+  }
+  .land-nav .wordmark{font-size:26px;}
+  .land-nav .links{display:flex; gap:34px; font-size:14px; color:var(--muted); font-weight:500;}
+  .land-hero{padding:54px 60px 0;}
+  .eyebrow{
+    font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold); font-weight:600; margin-bottom:22px;
+  }
+  .land-hero h1{
+    font-family:var(--serif); font-weight:600; color:var(--ink);
+    font-size:78px; line-height:1.02; margin:0 0 24px; max-width:14ch;
+    letter-spacing:-.01em;
+  }
+  .land-hero p{
+    font-size:20px; color:var(--muted); max-width:46ch; line-height:1.5; margin:0 0 38px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--gold); color:#15130f; border:0;
+    font-family:var(--sans); font-weight:600; font-size:17px;
+    padding:17px 30px; border-radius:11px; cursor:pointer;
+    box-shadow:0 8px 24px rgba(184,144,42,.32);
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn.glow{background:var(--gold-light); box-shadow:0 10px 30px rgba(184,144,42,.5);}
+  .btn .arr{font-size:18px;}
+  .price-note{margin-top:16px; font-size:14px; color:var(--muted);}
+  .price-note b{color:var(--ink); font-weight:600;}
+
+  /* ============ SCENE 2: CHECKOUT ============ */
+  .s-pay{display:flex; height:100%;}
+  .pay-left{
+    width:42%; background:var(--ink); color:var(--paper);
+    padding:48px 50px; display:flex; flex-direction:column;
+  }
+  .pay-left .wordmark{font-size:22px; margin-bottom:48px;}
+  .pay-item{font-size:15px; color:#b9b2a6;}
+  .pay-amount{font-family:var(--serif); font-size:60px; font-weight:600; margin:10px 0 4px; color:var(--paper);}
+  .pay-sub{font-size:14px; color:#8c857a;}
+  .pay-line{margin-top:auto; border-top:1px solid rgba(255,255,255,.12); padding-top:20px; display:flex; justify-content:space-between; font-size:15px;}
+  .pay-line b{font-weight:600;}
+  .pay-right{
+    flex:1; background:#fbf9f5; padding:46px 56px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:13px; color:var(--muted); margin-bottom:7px; font-weight:500;}
+  .input{
+    height:48px; border:1.5px solid var(--border); border-radius:10px;
+    background:#fff; display:flex; align-items:center; padding:0 14px;
+    font-size:16px; color:var(--ink); position:relative;
+  }
+  .input.focus{border-color:var(--gold); box-shadow:0 0 0 3px rgba(184,144,42,.14);}
+  .input .ph{color:#b3ada3;}
+  .row2{display:flex; gap:14px;}
+  .row2 .field{flex:1;}
+  .caret{display:inline-block; width:1.5px; height:20px; background:var(--gold); margin-left:1px; animation:blink 1s steps(1) infinite; vertical-align:middle;}
+  @keyframes blink{50%{opacity:0;}}
+  .pay-btn{width:100%; justify-content:center; margin-top:8px;}
+  .pay-ok{
+    position:absolute; inset:0; background:#fbf9f5;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:20px; opacity:0; visibility:hidden; transition:opacity .4s ease;
+  }
+  .pay-ok.show{opacity:1; visibility:visible;}
+  .tick{
+    width:78px;height:78px;border-radius:50%;
+    background:var(--gold); display:flex; align-items:center; justify-content:center;
+  }
+  .tick svg{width:40px;height:40px;}
+  .pay-ok h3{font-family:var(--serif); font-size:34px; color:var(--ink); margin:0; font-weight:600;}
+  .pay-ok p{color:var(--muted); margin:0; font-size:15px;}
+
+  /* ============ SCENE 3: FORM ============ */
+  .s-form{background:var(--paper); display:flex; align-items:center; justify-content:center;}
+  .form-card{
+    width:620px; background:#fff; border:1px solid var(--border);
+    border-radius:18px; padding:42px 46px; box-shadow:0 20px 50px rgba(20,15,5,.07);
+  }
+  .form-card .eyebrow{margin-bottom:10px;}
+  .form-card h2{font-family:var(--serif); font-size:38px; font-weight:600; color:var(--ink); margin:0 0 28px;}
+  .form-card .field{margin-bottom:20px;}
+  .select{justify-content:space-between;}
+  .select .chev{color:var(--muted);}
+  .dropdown{
+    position:absolute; top:54px; left:0; right:0; background:#fff;
+    border:1.5px solid var(--border); border-radius:10px; padding:6px;
+    box-shadow:0 16px 36px rgba(20,15,5,.14); z-index:10;
+    opacity:0; visibility:hidden; transform:translateY(-6px); transition:.2s;
+  }
+  .dropdown.open{opacity:1; visibility:visible; transform:none;}
+  .opt{padding:11px 12px; border-radius:7px; font-size:15px; color:var(--ink);}
+  .opt.hot{background:rgba(184,144,42,.12); color:var(--gold);}
+
+  /* ============ SCENE 4 + 5: MAIL ============ */
+  .s-inbox{background:#f4f2ee; display:flex; flex-direction:column;}
+  .mail-bar{padding:20px 30px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:14px;}
+  .mail-bar h3{font-family:var(--serif); font-size:26px; margin:0; color:var(--ink); font-weight:600;}
+  .mail-bar .count{font-size:13px; color:var(--muted);}
+  .mail-list{flex:1; padding:14px 18px; display:flex; flex-direction:column; gap:10px;}
+  .mail-row{
+    background:#fff; border:1px solid var(--border); border-radius:12px;
+    padding:16px 20px; display:flex; align-items:center; gap:16px;
+    transform:translateX(40px); opacity:0; transition:transform .5s ease, opacity .5s ease;
+  }
+  .mail-row.in{transform:none; opacity:1;}
+  .mail-row.read{opacity:.55;}
+  .unread{width:9px;height:9px;border-radius:50%;background:var(--gold); flex:none;}
+  .ava{width:42px;height:42px;border-radius:10px;background:var(--ink); color:var(--gold); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; flex:none; font-family:var(--serif);}
+  .mail-meta{flex:1; min-width:0;}
+  .mail-from{font-weight:600; color:var(--ink); font-size:15px;}
+  .mail-sub{color:var(--ink); font-size:14px; margin-top:2px;}
+  .mail-prev{color:var(--muted); font-size:13px; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .mail-time{font-size:12px; color:var(--muted); flex:none;}
+  .mail-row.faint{opacity:.4;}
+
+  /* opened email */
+  .s-email{background:#fbf9f5; display:flex; align-items:center; justify-content:center;}
+  .email-card{
+    width:680px; background:#fff; border:1px solid var(--border); border-radius:16px;
+    overflow:hidden; box-shadow:0 22px 54px rgba(20,15,5,.09);
+  }
+  .email-head{padding:26px 34px 20px; border-bottom:1px solid var(--border); display:flex; gap:16px; align-items:center;}
+  .email-head .ava{width:48px;height:48px;}
+  .email-head .ttl{font-family:var(--serif); font-size:24px; color:var(--ink); font-weight:600;}
+  .email-head .addr{font-size:13px; color:var(--muted); margin-top:3px;}
+  .email-body{padding:30px 34px 34px;}
+  .email-body p{font-size:16px; line-height:1.6; color:#2a2620; margin:0 0 16px;}
+  .email-body .em-btn{margin-top:10px;}
+
+  /* invites loading overlay */
+  .s-loading{background:var(--ink); color:var(--paper); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px;}
+  .s-loading h3{font-family:var(--serif); font-size:34px; font-weight:600; margin:0;}
+  .load-list{display:flex; flex-direction:column; gap:9px; width:430px;}
+  .load-item{
+    display:flex; align-items:center; gap:12px; font-size:14px;
+    color:#cfc7b8; padding:9px 14px; border:1px solid rgba(255,255,255,.1);
+    border-radius:9px; opacity:.3; transition:.25s;
+  }
+  .load-item.done{opacity:1; border-color:rgba(184,144,42,.4); color:var(--paper);}
+  .load-item .lt{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.25); flex:none; display:flex; align-items:center; justify-content:center;}
+  .load-item.done .lt{background:var(--gold); border-color:var(--gold);}
+  .load-item.done .lt svg{width:11px;height:11px;}
+
+  /* ============ SCENE 6: CALENDAR ============ */
+  .s-cal{background:#fbf9f5; padding:30px 36px; display:flex; flex-direction:column;}
+  .cal-head{display:flex; align-items:baseline; gap:16px; margin-bottom:18px;}
+  .cal-head h2{font-family:var(--serif); font-size:34px; font-weight:600; color:var(--ink); margin:0;}
+  .cal-head .sub{font-size:14px; color:var(--muted);}
+  .cal-grid{flex:1; display:grid; grid-template-columns:repeat(7,1fr); grid-auto-rows:1fr; gap:8px;}
+  .cal-dow{font-size:12px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.08em; padding-bottom:2px;}
+  .cell{border:1px solid var(--border); border-radius:9px; background:#fff; padding:7px 8px; position:relative; overflow:hidden;}
+  .cell.dim{background:#f3f0ea; color:#bcb6ab;}
+  .cell .dn{font-size:12px; color:var(--muted); font-weight:500;}
+  .cell.today .dn{color:var(--gold); font-weight:700;}
+  .chip{
+    margin-top:5px; font-size:10.5px; line-height:1.2; font-weight:500;
+    background:rgba(184,144,42,.14); color:#8a6a18;
+    border-left:2px solid var(--gold); border-radius:4px;
+    padding:4px 5px;
+  }
+  .chip.primary{
+    background:var(--gold); color:#1a1407; border-left-color:#7a5e16;
+    box-shadow:0 4px 12px rgba(184,144,42,.4);
+  }
+  /* event popover */
+  .pop{
+    position:absolute; width:340px; background:#fff;
+    border:1px solid var(--border); border-radius:14px;
+    box-shadow:0 24px 60px rgba(20,15,5,.22); z-index:30;
+    padding:0; overflow:hidden;
+    opacity:0; visibility:hidden; transform:scale(.96) translateY(6px); transition:.22s;
+  }
+  .pop.open{opacity:1; visibility:visible; transform:none;}
+  .pop .pop-top{height:6px; background:var(--gold);}
+  .pop-body{padding:18px 20px 20px;}
+  .pop-body h4{font-family:var(--sans); font-size:16px; font-weight:600; color:var(--ink); margin:0 0 4px;}
+  .pop-when{font-size:13px; color:var(--muted); margin-bottom:14px;}
+  .pop-note{font-size:13.5px; line-height:1.5; color:#3a352d; margin-bottom:12px;}
+  .pop-link{
+    display:inline-flex; align-items:center; gap:6px;
+    color:var(--gold); font-weight:600; font-size:13.5px;
+    text-decoration:none; border-bottom:1px solid rgba(184,144,42,.4); padding-bottom:1px;
+  }
+  .pop-link.hot{background:rgba(184,144,42,.12); border-radius:4px; padding:3px 6px; border-bottom:0;}
+
+  /* ============ SCENE 7: NUDGE PAGE ============ */
+  .s-nudge{background:var(--ink); color:var(--paper); overflow-y:auto;}
+  .on-dark{}
+  .nudge-nav{display:flex; align-items:center; justify-content:space-between; padding:22px 60px; border-bottom:1px solid rgba(255,255,255,.08);}
+  .nudge-nav .wordmark{font-size:23px;}
+  .nudge-nav .prog{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:600;}
+  .nudge-body{padding:46px 60px 50px; max-width:860px;}
+  .nudge-body .eyebrow{color:var(--gold-light); margin-bottom:18px;}
+  .nudge-body h1{font-family:var(--serif); font-size:64px; font-weight:600; line-height:1.04; margin:0 0 18px; color:var(--paper);}
+  .nudge-lede{font-family:var(--serif); font-style:italic; font-weight:300; font-size:25px; line-height:1.4; color:#ddd5c7; margin:0 0 34px; max-width:30ch;}
+  .nudge-why{font-size:16px; line-height:1.6; color:#c4bcae; max-width:62ch; margin:0 0 32px;}
+  .nudge-why b{color:var(--paper); font-weight:600;}
+  .steps{display:flex; flex-direction:column; gap:14px; max-width:680px;}
+  .step{display:flex; gap:18px; align-items:flex-start; border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:18px 20px; background:rgba(255,255,255,.02);}
+  .step .num{font-family:var(--serif); font-size:30px; color:var(--gold); font-weight:600; line-height:1; flex:none; width:30px;}
+  .step .st-t{font-weight:600; color:var(--paper); font-size:15.5px; margin-bottom:4px;}
+  .step .st-d{font-size:14px; color:#b0a99c; line-height:1.5;}
+
+  /* end card */
+  .s-end{background:var(--ink); color:var(--paper); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;}
+  .s-end .wordmark{font-size:62px;}
+  .s-end .tagline{font-size:14px;}
+  .s-end .ep{font-size:15px; color:#8c857a; margin-top:10px;}
+  .s-end .ep b{color:var(--gold-light); font-weight:600;}
+
+  /* ---------- Minimal footer ---------- */
+  .hero-foot{flex:none; width:100%; max-width:560px; display:flex; align-items:center; gap:10px;}
+  .track{flex:1; height:5px; background:rgba(255,255,255,.08); border-radius:6px; display:flex; gap:4px; padding:0; overflow:hidden;}
+  .seg{flex:1; background:rgba(255,255,255,.10); border-radius:6px; cursor:pointer; position:relative; overflow:hidden; transition:.2s;}
+  .seg.done{background:var(--gold);}
+  .seg .fill{position:absolute; inset:0; background:var(--gold-light); width:0%;}
+  .seg:hover{background:rgba(255,255,255,.22);}
+
+  @media (max-width:560px){
+    #hero{padding:16px 12px 14px;}
+    .hero-eyebrow{font-size:10px; letter-spacing:.16em;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .replay{transition:none;}
+  }
+</style>
+
+<div id="hero">
+  <div class="hero-eyebrow">How HalpCraft works</div>
+  <div class="stage-wrap">
+  <div class="stage" id="stage">
+    <!-- chrome -->
+    <div class="chrome">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url"><span class="lock">🔒</span> <span id="urlText"><b>halpcraft.com</b></span></div>
+      <div class="app-tag" id="appTag">HalpCraft</div>
+    </div>
+
+    <div class="viewport">
+
+      <!-- ===== SCENE 1: LANDING ===== -->
+      <div class="scene s-land" data-scene="land">
+        <div class="land-nav">
+          <div class="wordmark"><span class="h">Halp</span><span class="c">Craft</span></div>
+          <div class="links"><span>How it works</span><span>Pricing</span><span>About</span></div>
+        </div>
+        <div class="land-hero">
+          <div class="eyebrow">150-Day Manager Programme</div>
+          <h1>Most new team members fail quietly.</h1>
+          <p>Ten research-backed nudges land in your managers' calendars over 150 days. No app. No login. No IT approval.</p>
+          <button class="btn" id="startBtn">Start now <span class="arr">→</span></button>
+          <div class="price-note"><b>$99 NZD per employee.</b> One time. Less than 0.3% of the cost of replacing them.</div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 2: CHECKOUT ===== -->
+      <div class="scene s-pay" data-scene="pay">
+        <div class="pay-left on-dark">
+          <div class="wordmark"><span class="h">Halp</span><span class="c">Craft</span></div>
+          <div class="pay-item">HalpCraft, 150-Day Manager Programme</div>
+          <div class="pay-amount">$99.00</div>
+          <div class="pay-sub">One-time payment in NZD, per employee</div>
+          <div class="pay-line"><span>Total due</span><b>$99.00 NZD</b></div>
+        </div>
+        <div class="pay-right">
+          <div class="field">
+            <label>Email</label>
+            <div class="input" id="payEmail"><span class="ph">jean@northfield.co</span></div>
+          </div>
+          <div class="field">
+            <label>Card number</label>
+            <div class="input" id="payCard"><span class="ph">1234 1234 1234 1234</span></div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label>Expiry</label>
+              <div class="input" id="payExp"><span class="ph">MM / YY</span></div>
+            </div>
+            <div class="field">
+              <label>CVC</label>
+              <div class="input" id="payCvc"><span class="ph">CVC</span></div>
+            </div>
+          </div>
+          <button class="btn pay-btn" id="payBtn">Pay $99.00</button>
+          <div class="pay-ok" id="payOk">
+            <div class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Payment received</h3>
+            <p>Taking you to setup...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 3: FORM ===== -->
+      <div class="scene s-form" data-scene="form">
+        <div class="form-card">
+          <div class="eyebrow">Step 1 of 1</div>
+          <h2>Set up your new hire</h2>
+          <div class="field">
+            <label>New hire's name</label>
+            <div class="input" id="fName"><span class="ph">First and last name</span></div>
+          </div>
+          <div class="field">
+            <label>Start date</label>
+            <div class="input" id="fDate"><span class="ph">DD Month YYYY</span></div>
+          </div>
+          <div class="field">
+            <label>Manager's name</label>
+            <div class="input" id="fMgr"><span class="ph">Who is onboarding them</span></div>
+          </div>
+          <div class="field" style="position:relative;">
+            <label>Work pattern</label>
+            <div class="input select" id="fPat"><span class="ph" id="fPatTxt">Choose one</span><span class="chev">▾</span></div>
+            <div class="dropdown" id="fDrop">
+              <div class="opt hot" id="optStd">Standard (Mon to Fri)</div>
+              <div class="opt">Shift worker</div>
+              <div class="opt">Part time</div>
+            </div>
+          </div>
+          <button class="btn pay-btn" id="formBtn" style="margin-top:14px;">Send my calendar →</button>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 4: INBOX ===== -->
+      <div class="scene s-inbox" data-scene="inbox">
+        <div class="mail-bar">
+          <h3>Inbox</h3><span class="count" id="inboxCount">3 unread</span>
+        </div>
+        <div class="mail-list">
+          <div class="mail-row in faint">
+            <span class="unread" style="background:#ccc;"></span>
+            <div class="ava" style="background:#3a3a3a;">N</div>
+            <div class="mail-meta"><div class="mail-from">Northfield Payroll</div><div class="mail-sub">Pay run confirmation</div><div class="mail-prev">Your scheduled pay run has been processed.</div></div>
+            <div class="mail-time">9:02</div>
+          </div>
+          <div class="mail-row" id="mailHC">
+            <span class="unread"></span>
+            <div class="ava">H</div>
+            <div class="mail-meta">
+              <div class="mail-from">HalpCraft</div>
+              <div class="mail-sub">Your 150-day calendar is ready</div>
+              <div class="mail-prev">Ten nudges, one for each moment that matters. Add them in one click.</div>
+            </div>
+            <div class="mail-time">now</div>
+          </div>
+          <div class="mail-row in faint">
+            <span class="unread" style="background:#ccc;"></span>
+            <div class="ava" style="background:#3a3a3a;">S</div>
+            <div class="mail-meta"><div class="mail-from">Slack</div><div class="mail-sub">3 new mentions in #people</div><div class="mail-prev">You were mentioned in a thread about onboarding.</div></div>
+            <div class="mail-time">8:47</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 5: EMAIL OPEN ===== -->
+      <div class="scene s-email" data-scene="email">
+        <div class="email-card">
+          <div class="email-head">
+            <div class="ava">H</div>
+            <div>
+              <div class="ttl">Your 150-day calendar is ready</div>
+              <div class="addr">HalpCraft &lt;hello@halpcraft.com&gt; to Jean</div>
+            </div>
+          </div>
+          <div class="email-body">
+            <p>Hi Jean,</p>
+            <p>Erik starts on 12 May. We have built your 150-day nudge calendar. One click adds all ten to your calendar.</p>
+            <p>Each nudge arrives on the day it matters, with a short action guide. Nothing to install, nothing to log in to.</p>
+            <button class="btn em-btn" id="emailBtn">Add 10 nudges to my calendar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 5b: LOADING ===== -->
+      <div class="scene s-loading on-dark" data-scene="loading">
+        <h3>Adding your nudges</h3>
+        <div class="load-list" id="loadList">
+          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 1, The Readiness Protocol</div>
+          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 2, The Team Signal</div>
+          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 3, The Belonging Ritual</div>
+          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 4, Clarity &amp; Connection Check</div>
+          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> + 6 more, through to Day 150</div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 6: CALENDAR ===== -->
+      <div class="scene s-cal" data-scene="cal">
+        <div class="cal-head">
+          <h2>May 2026</h2><span class="sub">Onboarding, Erik Lehnsherr</span>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="pop" id="pop">
+          <div class="pop-top"></div>
+          <div class="pop-body">
+            <h4>🧭 Nudge 3 of 10 — The Belonging Ritual</h4>
+            <div class="pop-when">Tuesday 12 May 2026, all day</div>
+            <div class="pop-note">Your new hire starts soon. This nudge is ready for you. Read your full action guide here:</div>
+            <a class="pop-link" id="popLink">Full nudge #3</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SCENE 7: NUDGE PAGE ===== -->
+      <div class="scene s-nudge on-dark" data-scene="nudge">
+        <div class="nudge-nav">
+          <div class="wordmark"><span class="h">Halp</span><span class="c">Craft</span></div>
+          <div class="prog">Nudge 3 of 10</div>
+        </div>
+        <div class="nudge-body">
+          <div class="eyebrow">Day 0 · Start day</div>
+          <h1>The Belonging Ritual</h1>
+          <p class="nudge-lede">The first hour decides more than the first month.</p>
+          <p class="nudge-why">A new hire spends day one deciding one thing: did I make a mistake. They are reading the room for whether they belong here. <b>Most managers fill day one with logins and paperwork.</b> That answers a question nobody is asking. Today, your job is to make belonging unmistakable before lunch.</p>
+          <div class="steps">
+            <div class="step"><div class="num">1</div><div><div class="st-t">Be at the door, not in a meeting</div><div class="st-d">Greet Erik yourself in the first five minutes. Presence on day one signals priority more than any welcome pack.</div></div></div>
+            <div class="step"><div class="num">2</div><div><div class="st-t">Name three people they will rely on</div><div class="st-d">Introduce them by what they do and why Erik will need them. A new hire who knows who to ask stops feeling like a guest.</div></div></div>
+            <div class="step"><div class="num">3</div><div><div class="st-t">Give one real task before they leave</div><div class="st-d">Something small they can finish today. Contribution, not orientation, is what makes someone feel they belong.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== END CARD ===== -->
+      <div class="scene s-end on-dark" data-scene="end">
+        <div class="wordmark"><span class="h">Halp</span><span class="c">Craft</span></div>
+        <div class="tagline">Better Leaders &nbsp;|&nbsp; Better Workplaces</div>
+        <div class="ep"><b>$99 NZD per employee.</b> One time. Live now at halpcraft.com</div>
+      </div>
+
+    </div>
+
+    <!-- cursor -->
+    <div class="cursor" id="cursor">
+      <svg viewBox="0 0 24 24"><path d="M5 3l14 7-6 1.5L9 19 5 3z" fill="#fff" stroke="#0e0e0e" stroke-width="1.2" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+    <button class="replay" id="replayBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 109-9 9 9 0 00-7 3.3M3 4v4h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Replay
+    </button>
+  </div>
+
+  <div class="hero-foot">
+    <div class="track" id="track"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const STAGE_W = 1280, STAGE_H = 720;
+  const stage = document.getElementById('stage');
+  const cursor = document.getElementById('cursor');
+  const scenes = [...stage.querySelectorAll('.scene')];
+
+  /* ---- responsive scale ---- */
+  function fit(){
+    const wrap = stage.parentElement; // .stage-wrap
+    const s = Math.min(wrap.clientWidth/STAGE_W, wrap.clientHeight/STAGE_H);
+    stage.style.transform = 'scale('+s+')';
+  }
+  window.addEventListener('resize', fit);
+
+  /* ---- timeline engine ---- */
+  let runId = 0;
+  let paused = false;
+  let speed = 1;
+  let curSegFill = null;
+
+  function cancelled(id){ return id !== runId; }
+
+  function rawSleep(ms){ return new Promise(r=>setTimeout(r, ms)); }
+
+  // wait that respects pause + cancellation + speed
+  async function wait(ms){
+    const id = runId;
+    let left = ms / speed;
+    while(left > 0){
+      if(cancelled(id)) throw 'cancel';
+      if(paused){ await rawSleep(60); continue; }
+      const tick = Math.min(40, left);
+      await rawSleep(tick);
+      left -= tick;
+    }
+  }
+
+  /* ---- cursor helpers ---- */
+  function setCursorDur(ms){
+    const d = (ms/speed);
+    cursor.style.transition = 'left '+d+'ms cubic-bezier(.45,.05,.2,1), top '+d+'ms cubic-bezier(.45,.05,.2,1)';
+  }
+  function center(el){
+    const sRect = stage.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    const sc = sRect.width / STAGE_W;
+    const x = (r.left - sRect.left)/sc + (r.width/sc)/2;
+    const y = (r.top - sRect.top)/sc + (r.height/sc)/2;
+    return {x,y};
+  }
+  async function moveTo(x,y,dur=850){
+    setCursorDur(dur);
+    cursor.style.left = x+'px';
+    cursor.style.top = y+'px';
+    await wait(dur+40);
+  }
+  async function moveToEl(sel, dur=850, dx=0, dy=0){
+    const el = typeof sel==='string'? stage.querySelector(sel): sel;
+    const c = center(el);
+    await moveTo(c.x+dx, c.y+dy, dur);
+  }
+  async function click(){
+    cursor.classList.add('press');
+    const rip = document.createElement('div');
+    rip.className='ripple';
+    rip.style.left = (parseFloat(cursor.style.left)||640)+'px';
+    rip.style.top = (parseFloat(cursor.style.top)||360)+'px';
+    stage.appendChild(rip);
+    setTimeout(()=>rip.remove(), 600);
+    await wait(150);
+    cursor.classList.remove('press');
+    await wait(120);
+  }
+
+  /* ---- typing ---- */
+  async function typeInto(el, text, cps=22){
+    el.innerHTML = '';
+    const span = document.createElement('span');
+    el.appendChild(span);
+    const caret = document.createElement('span');
+    caret.className='caret';
+    el.appendChild(caret);
+    const per = 1000/cps;
+    for(let i=0;i<text.length;i++){
+      if(cancelled(runId)) throw 'cancel';
+      span.textContent += text[i];
+      await wait(per);
+    }
+    await wait(120);
+    caret.remove();
+  }
+  function resetField(el, placeholder){
+    el.innerHTML = '<span class="ph">'+placeholder+'</span>';
+  }
+
+  /* ---- scene switching ---- */
+  let activeScene = null;
+  const sceneEl = id => stage.querySelector('.scene[data-scene="'+id+'"]');
+  async function show(id, url, tag){
+    scenes.forEach(s=>s.classList.remove('active'));
+    const el = sceneEl(id);
+    el.classList.add('active');
+    activeScene = id;
+    if(url) document.getElementById('urlText').innerHTML = url;
+    if(tag) document.getElementById('appTag').textContent = tag;
+    await wait(550);
+  }
+
+  /* ---- build calendar grid ---- */
+  function buildCalendar(){
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML='';
+    const dows=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    dows.forEach(d=>{ const c=document.createElement('div'); c.className='cal-dow'; c.textContent=d; grid.appendChild(c); });
+    // weeks Mon-Sun. lead with Apr 27-30 then May 1..31
+    const cells=[];
+    [27,28,29,30].forEach(d=>cells.push({n:d,dim:true}));
+    for(let d=1;d<=31;d++) cells.push({n:d,dim:false});
+    // pad to full weeks (5 rows*7=35 -> 35 cells; we have 4+31=35) perfect
+    const events={
+      4:{t:'Nudge 1, Readiness Protocol'},
+      6:{t:'Nudge 2, The Team Signal'},
+      12:{t:'Nudge 3, The Belonging Ritual', primary:true, id:'evt3'},
+      19:{t:'Nudge 4, Clarity & Connection'}
+    };
+    cells.forEach(c=>{
+      const cell=document.createElement('div');
+      cell.className='cell'+(c.dim?' dim':'')+(c.n===12&&!c.dim?' today':'');
+      const dn=document.createElement('div'); dn.className='dn'; dn.textContent=c.n; cell.appendChild(dn);
+      if(!c.dim && events[c.n]){
+        const ev=events[c.n];
+        const chip=document.createElement('div');
+        chip.className='chip'+(ev.primary?' primary':'');
+        chip.textContent=ev.t;
+        if(ev.id) chip.id=ev.id;
+        cell.appendChild(chip);
+      }
+      grid.appendChild(cell);
+    });
+  }
+
+  /* ---- segment progress UI ---- */
+  const SCENES = ['land','pay','form','inbox','email','loading','cal','nudge','end'];
+  function buildTrack(){
+    const track=document.getElementById('track');
+    track.innerHTML='';
+    SCENES.forEach((id,i)=>{
+      const seg=document.createElement('div');
+      seg.className='seg'; seg.dataset.i=i;
+      const fill=document.createElement('div'); fill.className='fill';
+      seg.appendChild(fill);
+      seg.addEventListener('click', ()=>jumpTo(i));
+      track.appendChild(seg);
+    });
+  }
+  function markProgress(i){
+    const si=document.getElementById('sceneIdx'); if(si) si.textContent=(i+1);
+    const segs=[...document.querySelectorAll('.seg')];
+    segs.forEach((s,j)=>{
+      s.classList.toggle('done', j<i);
+      s.querySelector('.fill').style.width = j<i? '100%' : '0%';
+    });
+    curSegFill = segs[i]?.querySelector('.fill');
+  }
+  async function fillSeg(ms){
+    // animate the active segment fill over ms (approx, non-blocking-ish)
+    if(!curSegFill) { await wait(ms); return; }
+    const id=runId; const start=performance.now(); const dur=ms/speed;
+    return new Promise(res=>{
+      function step(t){
+        if(cancelled(id)){ res(); return; }
+        if(paused){ requestAnimationFrame(step); return; }
+        const p=Math.min(1,(performance.now()-start)/dur);
+        curSegFill.style.width=(p*100)+'%';
+        if(p>=1){ res(); } else requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  /* ============ SCENE SCRIPTS ============ */
+
+  async function sLand(){
+    await show('land','<b>halpcraft.com</b>','HalpCraft');
+    cursor.style.left='1050px'; cursor.style.top='560px';
+    await wait(700);
+    await moveToEl('#startBtn', 900);
+    stage.querySelector('#startBtn').classList.add('glow');
+    await wait(300);
+    await click();
+    stage.querySelector('#startBtn').classList.remove('glow');
+    await wait(250);
+  }
+
+  async function sPay(){
+    document.getElementById('payOk').classList.remove('show');
+    resetField(document.getElementById('payEmail'),'jean@northfield.co');
+    resetField(document.getElementById('payCard'),'1234 1234 1234 1234');
+    resetField(document.getElementById('payExp'),'MM / YY');
+    resetField(document.getElementById('payCvc'),'CVC');
+    await show('pay','<b>checkout.stripe.com</b>','Secure checkout');
+    await moveToEl('#payEmail', 750);
+    document.getElementById('payEmail').classList.add('focus');
+    await typeInto(document.getElementById('payEmail'),'jean@northfield.co',30);
+    document.getElementById('payEmail').classList.remove('focus');
+
+    await moveToEl('#payCard', 650);
+    document.getElementById('payCard').classList.add('focus');
+    await typeInto(document.getElementById('payCard'),'4242 4242 4242 4242',34);
+    document.getElementById('payCard').classList.remove('focus');
+
+    await moveToEl('#payExp', 600);
+    document.getElementById('payExp').classList.add('focus');
+    await typeInto(document.getElementById('payExp'),'04 / 29',24);
+    document.getElementById('payExp').classList.remove('focus');
+
+    await moveToEl('#payCvc', 500);
+    document.getElementById('payCvc').classList.add('focus');
+    await typeInto(document.getElementById('payCvc'),'312',20);
+    document.getElementById('payCvc').classList.remove('focus');
+
+    await moveToEl('#payBtn', 650);
+    stage.querySelector('#payBtn').classList.add('glow');
+    await wait(200); await click();
+    stage.querySelector('#payBtn').classList.remove('glow');
+    await wait(500);
+    document.getElementById('payOk').classList.add('show');
+    await wait(1400);
+  }
+
+  async function sForm(){
+    resetField(document.getElementById('fName'),'First and last name');
+    resetField(document.getElementById('fDate'),'DD Month YYYY');
+    resetField(document.getElementById('fMgr'),'Who is onboarding them');
+    document.getElementById('fPatTxt').textContent='Choose one';
+    document.getElementById('fPatTxt').className='ph';
+    document.getElementById('fDrop').classList.remove('open');
+    await show('form','<b>tally.so</b>/r/halpcraft','HalpCraft setup');
+
+    await moveToEl('#fName', 750);
+    document.getElementById('fName').classList.add('focus');
+    await typeInto(document.getElementById('fName'),'Erik Lehnsherr',26);
+    document.getElementById('fName').classList.remove('focus');
+
+    await moveToEl('#fDate', 600);
+    document.getElementById('fDate').classList.add('focus');
+    await typeInto(document.getElementById('fDate'),'12 May 2026',26);
+    document.getElementById('fDate').classList.remove('focus');
+
+    await moveToEl('#fMgr', 600);
+    document.getElementById('fMgr').classList.add('focus');
+    await typeInto(document.getElementById('fMgr'),'Jean Grey',26);
+    document.getElementById('fMgr').classList.remove('focus');
+
+    await moveToEl('#fPat', 600);
+    await click();
+    document.getElementById('fDrop').classList.add('open');
+    await wait(450);
+    await moveToEl('#optStd', 500);
+    await click();
+    document.getElementById('fDrop').classList.remove('open');
+    const pt=document.getElementById('fPatTxt');
+    pt.textContent='Standard (Mon to Fri)'; pt.className='';
+    await wait(400);
+
+    await moveToEl('#formBtn', 650);
+    stage.querySelector('#formBtn').classList.add('glow');
+    await wait(200); await click();
+    stage.querySelector('#formBtn').classList.remove('glow');
+    await wait(600);
+  }
+
+  async function sInbox(){
+    const hc=document.getElementById('mailHC');
+    hc.classList.remove('in','read');
+    await show('inbox','<b>mail.northfield.co</b>','Mail');
+    cursor.style.left='1100px'; cursor.style.top='120px';
+    await wait(500);
+    hc.classList.add('in');
+    await wait(900);
+    await moveToEl('#mailHC', 800);
+    await wait(200);
+    await click();
+    hc.classList.add('read');
+    await wait(450);
+  }
+
+  async function sEmail(){
+    await show('email','<b>mail.northfield.co</b>/inbox','Mail');
+    await wait(900);
+    await moveToEl('#emailBtn', 850);
+    stage.querySelector('#emailBtn').classList.add('glow');
+    await wait(250); await click();
+    stage.querySelector('#emailBtn').classList.remove('glow');
+    await wait(500);
+  }
+
+  async function sLoading(){
+    const items=[...document.querySelectorAll('#loadList .load-item')];
+    items.forEach(it=>it.classList.remove('done'));
+    await show('loading','<b>calendar.northfield.co</b>','Adding to calendar');
+    cursor.style.left='1200px'; cursor.style.top='700px';
+    for(const it of items){
+      await wait(280);
+      it.classList.add('done');
+    }
+    await wait(900);
+  }
+
+  async function sCal(){
+    buildCalendar();
+    document.getElementById('pop').classList.remove('open');
+    await show('cal','<b>calendar.northfield.co</b>','Calendar');
+    await wait(700);
+    await moveToEl('#evt3', 850);
+    await wait(200);
+    await click();
+    // position popover near the event
+    const evt=document.getElementById('evt3');
+    const c=center(evt);
+    const pop=document.getElementById('pop');
+    let px=c.x-40, py=c.y+20;
+    if(px+340>STAGE_W-20) px=STAGE_W-360;
+    if(py+220>STAGE_H-100) py=c.y-230;
+    pop.style.left=px+'px'; pop.style.top=py+'px';
+    pop.classList.add('open');
+    await wait(900);
+    await moveToEl('#popLink', 750);
+    stage.querySelector('#popLink').classList.add('hot');
+    await wait(250); await click();
+    stage.querySelector('#popLink').classList.remove('hot');
+    await wait(500);
+  }
+
+  async function sNudge(){
+    const el=sceneEl('nudge');
+    el.scrollTop=0;
+    await show('nudge','<b>app.halpcraft.com</b>/nudge-3','HalpCraft');
+    cursor.style.left='1200px'; cursor.style.top='700px';
+    await wait(2600);
+  }
+
+  async function sEnd(){
+    await show('end','<b>halpcraft.com</b>','HalpCraft');
+    await wait(2400);
+  }
+
+  const SCRIPTS=[sLand,sPay,sForm,sInbox,sEmail,sLoading,sCal,sNudge,sEnd];
+  // approx duration weights for progress fill (ms)
+  const DUR=[5200,9000,8500,5200,4200,4500,7000,3200,2600];
+
+  /* ---- master loop (play once, then offer replay) ---- */
+  const replayBtn=document.getElementById('replayBtn');
+  async function play(from=0){
+    runId++; const id=runId;
+    paused=false;
+    replayBtn.classList.remove('show');
+    for(let i=from;i<SCRIPTS.length;i++){
+      if(cancelled(id)) return;
+      markProgress(i);
+      const fillP=fillSeg(DUR[i]);
+      try{ await SCRIPTS[i](); }catch(e){ if(e==='cancel') return; else console.error(e); }
+      await fillP.catch(()=>{});
+      if(cancelled(id)) return;
+    }
+    // mark all segments complete, hold on end card, show replay
+    document.querySelectorAll('.seg').forEach(s=>{ s.classList.add('done'); s.querySelector('.fill').style.width='100%'; });
+    if(!cancelled(id)){ await wait(700); replayBtn.classList.add('show'); }
+  }
+
+  function jumpTo(i){ play(i); }
+
+  /* ---- controls ---- */
+  replayBtn.addEventListener('click', ()=>{ play(0); });
+
+  document.addEventListener('fullscreenchange', ()=>setTimeout(fit,50));
+
+  /* ---- boot ---- */
+  buildTrack();
+  let booted=false;
+  function boot(){
+    fit();
+    if(booted) return;
+    booted=true;
+    play(0);
+  }
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(()=>setTimeout(boot,150));
+    setTimeout(boot, 1400); // fallback if fonts hang
+  } else {
+    setTimeout(boot, 100);
+  }
+})();
+</script>

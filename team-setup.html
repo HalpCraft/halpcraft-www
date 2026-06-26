@@ -300,24 +300,6 @@ Enter your code, fill in your new hire's details, and you'll receive a calendar 
         }
 
         renderCodes(data.codes, buyerName);
-
-        // Fire webhook silently for email delivery — does not block UI
-        const codesHtml = data.codes.map(code =>
-          `<table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin-bottom:8px;"><tr><td style="background-color:#0e0e0e;padding:14px 24px;text-align:center;"><span style="font-family:'Courier New',Courier,monospace;font-size:20px;font-weight:700;color:#b8902a;letter-spacing:0.15em;">${code}</span></td></tr></table>`
-        ).join('');
-        const codesList = data.codes.join(', ');
-        fetch('https://hooks.zapier.com/hooks/catch/26180187/428cc1e/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            buyerName: buyerName,
-            buyerEmail: buyerEmail,
-            codesHtml: codesHtml,
-            codesList: codesList,
-            qty: data.codes.length
-          })
-        }).catch(err => console.error('Webhook error:', err));
-
         document.getElementById('step1').style.display = 'none';
         document.getElementById('step2').classList.remove('step-hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });

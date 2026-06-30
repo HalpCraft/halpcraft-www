@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Set Up Your Onboarding — HalpCraft</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230e0e0e'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23b8902a'>H</text></svg>" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:     #0e0e0e;
+      --paper:   #f5f2ed;
+      --gold:    #b8902a;
+      --gold-lt: #e8c96d;
+      --surface: #1a1a26;
+      --muted:   rgba(245,242,237,0.45);
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--paper);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .bg-glow {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 10%, rgba(184,144,42,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 80% 90%, rgba(184,144,42,0.08) 0%, transparent 60%);
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: relative; z-index: 10;
+      display: flex; align-items: center;
+      padding: 1.5rem 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 52px; width: auto; display: block; }
+    @media (max-width: 768px) { nav { padding: 1.25rem 1.5rem; } .nav-logo img { height: 40px; } }
+
+    /* ── Layout ── */
+    .page-wrap {
+      position: relative; z-index: 1;
+      max-width: 520px; margin: 0 auto;
+      padding: 5rem 2rem 6rem;
+    }
+
+    /* ── Confirm badge ── */
+    .confirm-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: rgba(168,197,160,0.12); border: 1px solid rgba(168,197,160,0.3);
+      color: #a8c5a0; font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.5rem 1.25rem; border-radius: 100px;
+      margin-bottom: 2rem;
+    }
+    .confirm-badge::before { content: '✓'; font-size: 0.9rem; }
+
+    /* ── Typography ── */
+    .page-headline {
+      font-family: var(--serif); font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600; line-height: 1.1; color: var(--paper);
+      margin-bottom: 1rem; letter-spacing: -0.02em;
+    }
+    .page-sub {
+      font-size: 1rem; color: var(--muted); line-height: 1.7;
+      font-weight: 300; margin-bottom: 2.5rem;
+    }
+
+    /* ── Form ── */
+    .form-field { display: flex; flex-direction: column; gap: 0; margin-bottom: 1.375rem; }
+    .form-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+    }
+    .form-sublabel {
+      font-size: 12px; color: rgba(245,242,237,0.4);
+      margin-bottom: 4px; margin-top: -4px;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--paper);
+      font-family: var(--sans); font-size: 15px;
+      padding: 14px 16px; border-radius: 4px; outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-input:focus, .form-select:focus { border-color: rgba(184,144,42,0.7); }
+    .form-input::placeholder { color: rgba(245,242,237,0.2); }
+    .form-select { cursor: pointer; }
+    .form-select option { background: #1a1a1a; color: #f5f2ed; }
+
+    /* Date input fix for dark bg */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.6);
+      cursor: pointer;
+    }
+    input[type="time"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.6);
+      cursor: pointer;
+    }
+
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      width: 100%;
+      background: var(--gold); color: var(--ink);
+      padding: 1rem 2.25rem; font-family: var(--sans);
+      font-size: 0.875rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none; border: none;
+      border-radius: 3px; cursor: pointer; transition: background 0.2s;
+      margin-top: 0.75rem;
+    }
+    .btn-primary:hover:not(:disabled) { background: var(--gold-lt); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .btn-download {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; padding: 1.1rem 2rem;
+      background: var(--gold); color: var(--ink);
+      font-family: var(--sans); font-size: 0.95rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; border-radius: 3px;
+      transition: background 0.2s; margin-bottom: 1rem;
+    }
+    .btn-download:hover { background: var(--gold-lt); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center;
+      background: transparent; color: var(--gold);
+      padding: 0.75rem 1.75rem; font-family: var(--sans);
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      border: 1px solid rgba(184,144,42,0.4); border-radius: 3px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); background: rgba(184,144,42,0.08); }
+
+    /* Loading dots animation */
+    @keyframes dot-blink {
+      0%, 80%, 100% { opacity: 0; }
+      40% { opacity: 1; }
+    }
+    .loading-dots span {
+      display: inline-block; animation: dot-blink 1.4s infinite;
+    }
+    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    /* ── Error message ── */
+    .error-msg {
+      background: rgba(220,80,80,0.1); border: 1px solid rgba(220,80,80,0.3);
+      color: #e08080; font-size: 0.85rem; padding: 0.875rem 1rem;
+      border-radius: 3px; margin-top: 1rem; display: none; line-height: 1.6;
+    }
+    .error-msg a { color: #e8a0a0; }
+
+    /* ── Step 2 ── */
+    .step-hidden { display: none; }
+
+    .compat-note {
+      text-align: center; font-size: 0.8rem;
+      color: rgba(245,242,237,0.35); margin-bottom: 2.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── How it works ── */
+    .how-section { margin-top: 2.5rem; }
+    .section-label {
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem;
+    }
+    .steps-list { display: flex; flex-direction: column; gap: 1rem; }
+    .step-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .step-num {
+      flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(184,144,42,0.15); border: 1px solid rgba(184,144,42,0.35);
+      color: var(--gold); font-size: 0.75rem; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .step-text { font-size: 0.9rem; color: rgba(245,242,237,0.65); line-height: 1.65; }
+
+    .divider-line {
+      height: 1px; background: rgba(255,255,255,0.07);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Next hire CTA ── */
+    .next-hire {
+      background: rgba(184,144,42,0.06);
+      border: 1px solid rgba(184,144,42,0.18);
+      padding: 1.75rem 2rem; text-align: center;
+    }
+    .next-hire-title {
+      font-family: var(--serif); font-size: 1.3rem; font-weight: 600;
+      color: var(--paper); margin-bottom: 0.6rem;
+    }
+    .next-hire-body {
+      font-size: 0.85rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.6;
+    }
+
+    /* ── Footer ── */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .footer-logo img { height: 44px; width: auto; display: block; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    @media (max-width: 700px) {
+      footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <nav>
+    <a href="https://www.halpcraft.com" class="nav-logo">
+      <img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" />
+    </a>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- ── STEP 1: Setup form ── -->
+    <div id="step1">
+      <div class="confirm-badge">Purchase confirmed</div>
+      <h1 class="page-headline">Let's set up your new hire's onboarding.</h1>
+      <p class="page-sub">Fill in the details below and we'll send your personalised nudge calendar straight to your inbox.</p>
+
+      <form id="setupForm" novalidate>
+        <div class="form-field">
+          <label class="form-label" for="managerName">Your Name</label>
+          <input class="form-input" type="text" id="managerName" name="managerName" placeholder="Jane Smith" required />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="managerEmail">Your Email</label>
+          <p class="form-sublabel">We'll send your calendar file here</p>
+          <input class="form-input" type="email" id="managerEmail" name="managerEmail" placeholder="jane@company.com" required />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="employeeName">New Hire's Name</label>
+          <p class="form-sublabel">The person you're onboarding</p>
+          <input class="form-input" type="text" id="employeeName" name="employeeName" placeholder="Alex Johnson" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="startDate">Their Start Date</label>
+            <input class="form-input" type="date" id="startDate" name="startDate" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="startTime">Nudge Time</label>
+            <p class="form-sublabel">When nudges appear in your calendar</p>
+            <input class="form-input" type="time" id="startTime" name="startTime" value="09:00" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="workPattern">Work Pattern</label>
+          <select class="form-select" id="workPattern" name="workPattern" required>
+            <option value="">Select a work pattern</option>
+            <option value="Standard (Mon–Fri)">Standard (Mon–Fri)</option>
+            <option value="Shift worker">Shift worker</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn">Generate My Calendar →</button>
+        <div class="error-msg" id="errorMsg"></div>
+      </form>
+    </div>
+
+    <!-- ── STEP 2: Confirmation ── -->
+    <div id="step2" class="step-hidden">
+      <div class="confirm-badge">You're all set</div>
+      <h1 class="page-headline">Your nudges are on their way.</h1>
+      <p class="page-sub">Check your inbox — your personalised calendar file will arrive within a few minutes.</p>
+
+      <a href="#" class="btn-download" id="downloadBtn">Download Calendar Now →</a>
+      <p class="compat-note">The calendar file works with Google Calendar, Outlook, and Apple Calendar.</p>
+
+      <div class="divider-line"></div>
+
+      <div class="how-section">
+        <div class="section-label">How It Works</div>
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-text">Open the .ics file from your email or click the button above.</div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-text">Your calendar app asks to import — tap yes. All 10 nudges land instantly.</div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-text">On each nudge day, open the calendar event, click the link, and read your action guide.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider-line"></div>
+
+      <div class="next-hire">
+        <div class="next-hire-title">Onboarding another person?</div>
+        <p class="next-hire-body">Each new hire is a separate programme. Visit halpcraft.com to get started.</p>
+        <a href="https://www.halpcraft.com" class="btn-secondary">Visit halpcraft.com →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <a href="/" class="footer-logo"><img src="/logos/HalpCraft Logo - Dark.png" alt="HalpCraft" /></a>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="mailto:hello@halpcraft.com">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const API_BASE = 'https://app.halpcraft.com';
+
+    document.getElementById('setupForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const managerName  = document.getElementById('managerName').value.trim();
+      const managerEmail = document.getElementById('managerEmail').value.trim();
+      const employeeName = document.getElementById('employeeName').value.trim();
+      const startDate    = document.getElementById('startDate').value;
+      const startTime    = document.getElementById('startTime').value || '09:00';
+      const workPattern  = document.getElementById('workPattern').value;
+
+      const btn   = document.getElementById('submitBtn');
+      const errEl = document.getElementById('errorMsg');
+
+      if (!managerName || !managerEmail || !employeeName || !startDate || !workPattern) {
+        showError('Please fill in all required fields.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = 'Setting up<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>';
+      errEl.style.display = 'none';
+
+      try {
+        const res = await fetch(`${API_BASE}/api/setup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ managerName, managerEmail, employeeName, startDate, workPattern, startTime }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || 'Something went wrong. Please try again.');
+        }
+
+        // Wire up download button with returned URL
+        document.getElementById('downloadBtn').href = data.downloadUrl;
+
+        // Transition to step 2
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').classList.remove('step-hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Generate My Calendar →';
+        showError(err.message);
+      }
+    });
+
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      el.innerHTML = msg + ' or contact <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a>';
+      el.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

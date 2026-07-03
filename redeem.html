@@ -94,6 +94,12 @@
     .form-input:focus { border-color: rgba(184,144,42,0.6); }
     .form-input::placeholder { color: rgba(245,242,237,0.2); }
     select.form-input { cursor: pointer; }
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="time"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      opacity: 0.8;
+      cursor: pointer;
+    }
 
     .btn-primary {
       display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
@@ -161,7 +167,7 @@
 
   <nav>
     <a href="https://www.halpcraft.com" class="nav-logo">
-      <img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" />
+      <img src="/logos/HalpCraft Logo - Dark.png" alt="HalpCraft" />
     </a>
   </nav>
 

@@ -886,6 +886,28 @@
       .contact-form-row { grid-template-columns: 1fr; }
     }
 
+    /* ─── FREE NUDGE ──────────────────────────────── */
+    .free-nudge {
+      background: var(--ink);
+      color: var(--paper);
+      text-align: center;
+    }
+    .free-nudge .section-label { color: var(--gold-lt); }
+    .free-nudge .section-headline { color: var(--paper); }
+    .free-nudge .section-body { color: rgba(245,242,237,0.55); margin: 0 auto 2.5rem; }
+    .free-nudge-form {
+      display: flex; gap: 0.75rem;
+      justify-content: center;
+      max-width: 480px; margin: 0 auto;
+    }
+    .free-nudge-form .contact-input { flex: 1; }
+    .free-nudge-form .contact-submit { align-self: auto; white-space: nowrap; }
+    .free-nudge-note { font-size: 0.78rem; color: rgba(245,242,237,0.3); margin-top: 1rem; letter-spacing: 0.02em; }
+    .free-nudge-error { font-size: 0.85rem; color: #e08080; margin-top: 1rem; }
+    @media (max-width: 600px) {
+      .free-nudge-form { flex-direction: column; }
+    }
+
     /* ─── CTA FOOTER BAND ─────────────────────────── */
     .cta-band {
       background: var(--ink);
@@ -1046,6 +1068,7 @@
       <li><a href="#how">How It Works</a></li>
       <li><a href="#sequence">The Sequence</a></li>
       <li><a href="#pricing">Pricing</a></li>
+      <li><a href="/quiz">The Onboarding Score</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="#pricing" class="nav-cta">Get Started</a></li>
     </ul>
@@ -1267,6 +1290,22 @@
     </div>
   </section>
 
+  <!-- FREE NUDGE -->
+  <section class="free-nudge" id="free-nudge">
+    <div class="fade-up">
+      <p class="section-label">Try one free</p>
+      <h2 class="section-headline">See what a nudge feels like.</h2>
+      <p class="section-body">Drop your email and we'll send you one real nudge from the programme. It lands in your calendar tomorrow at 9am, exactly the way the paid version works. Ask the question it gives you. See what comes back.</p>
+      <form class="free-nudge-form" id="freeNudgeForm" novalidate>
+        <input type="email" name="email" placeholder="you@company.com" required class="contact-input" />
+        <button type="submit" class="contact-submit" id="freeNudgeBtn">Send my free nudge</button>
+      </form>
+      <p class="free-nudge-note" id="freeNudgeNote">One nudge, one email. No drip sequence, no follow-up spam.</p>
+      <p class="contact-success" id="freeNudgeSuccess" style="display:none;">Done. Check your inbox, your nudge is waiting.</p>
+      <p class="free-nudge-error" id="freeNudgeError" style="display:none;">Something broke. Email hello@halpcraft.com and we'll send it manually.</p>
+    </div>
+  </section>
+
   <!-- PRICING -->
   <section id="pricing" style="padding: 7rem 4rem;">
     <div class="pricing-section" style="max-width:1200px;">
@@ -1473,6 +1512,35 @@
       });
     }
 
+
+    // Free nudge form — posts email to the sample API
+    const freeNudgeForm = document.getElementById('freeNudgeForm');
+    if (freeNudgeForm) {
+      freeNudgeForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = freeNudgeForm.email.value.trim();
+        if (!email) return;
+        const btn = document.getElementById('freeNudgeBtn');
+        const err = document.getElementById('freeNudgeError');
+        btn.disabled = true;
+        err.style.display = 'none';
+        fetch('https://app.halpcraft.com/api/sample', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        })
+        .then(function(res) {
+          if (!res.ok) throw new Error('Request failed');
+          freeNudgeForm.style.display = 'none';
+          document.getElementById('freeNudgeNote').style.display = 'none';
+          document.getElementById('freeNudgeSuccess').style.display = 'block';
+        })
+        .catch(function() {
+          err.style.display = 'block';
+          btn.disabled = false;
+        });
+      });
+    }
 
     // Smooth scroll nav
     document.querySelectorAll('a[href^="#"]').forEach(a => {

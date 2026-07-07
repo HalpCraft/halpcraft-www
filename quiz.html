@@ -363,6 +363,39 @@
     }
     .retake-link:hover { color: rgba(255,255,255,0.45); }
 
+    /* ── Email gate ───────────────────────────────── */
+    .gate-form {
+      display: flex; gap: 0.75rem;
+      justify-content: center;
+      max-width: 440px; margin: 2rem auto 0;
+    }
+    .gate-input {
+      flex: 1;
+      font-family: var(--sans); font-size: 0.95rem; font-weight: 300;
+      color: var(--paper);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 2px;
+      padding: 1rem 1.25rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .gate-input::placeholder { color: rgba(245,242,237,0.25); }
+    .gate-input:focus { border-color: var(--gold); }
+    .gate-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--gold); color: var(--ink);
+      padding: 1rem 1.75rem;
+      font-family: var(--sans); font-size: 0.82rem;
+      font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none; border-radius: 2px;
+      cursor: pointer; transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .gate-btn:hover { background: var(--gold-lt); }
+    .gate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
     /* ── Footer ───────────────────────────────────── */
     footer {
       position: relative; z-index: 1;
@@ -403,6 +436,7 @@
       .q-btn { max-width: 100%; }
       .result-shell { padding: 3rem 1.25rem 4rem; }
       .result-card { padding: 2rem 1.5rem 2.25rem; }
+      .gate-form { flex-direction: column; }
       footer { padding: 1.75rem 1.5rem; }
     }
   </style>
@@ -446,7 +480,7 @@
           <span class="btn-arrow">→</span>
         </button>
         <div class="hero-trust">
-          <span>No email required</span>
+          <span>Free</span>
           <div class="hero-trust-dot"></div>
           <span>5 questions</span>
           <div class="hero-trust-dot"></div>
@@ -487,6 +521,21 @@
         <div class="q-hint">Answer honestly, based on your most recent new hire</div>
       </div>
 
+    </section>
+
+    <!-- ═══ EMAIL GATE ═══ -->
+    <section class="result-shell" id="gateSection">
+      <div class="result-inner">
+        <div class="result-card">
+          <div class="result-headline">Your score is ready.</div>
+          <div class="result-rule"></div>
+          <div class="result-body">Enter your email and we'll show your full breakdown, plus send you one free nudge from the programme so you can feel how it works.</div>
+          <form class="gate-form" id="gateForm" novalidate>
+            <input type="email" class="gate-input" id="gateEmail" placeholder="you@company.com" required />
+            <button type="submit" class="gate-btn" id="gateBtn">Show my score</button>
+          </form>
+        </div>
+      </div>
     </section>
 
     <!-- ═══ RESULT ═══ -->
@@ -620,13 +669,50 @@
           document.getElementById('progressBarFill').style.width = '100%';
           // mark all dots done
           document.querySelectorAll('.step-dot').forEach(d => { d.classList.remove('active'); d.classList.add('done'); });
-          setTimeout(showResult, 350);
+          setTimeout(showGate, 350);
         }
       }, 260);
     }
 
+    // Email gate — collects the lead before revealing the score.
+    // The score is NEVER blocked on an API error.
+    let gated = false;
+
+    function showGate() {
+      if (gated) { showResult(); return; }
+      document.getElementById('quizSection').classList.remove('active');
+      const gs = document.getElementById('gateSection');
+      gs.style.animation = 'none';
+      void gs.offsetWidth;
+      gs.style.animation = '';
+      gs.classList.add('active');
+      transitioning = false;
+    }
+
+    document.getElementById('gateForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('gateEmail').value.trim();
+      if (!email) return;
+      const btn = document.getElementById('gateBtn');
+      btn.disabled = true;
+      btn.textContent = 'One moment';
+      fetch('https://app.halpcraft.com/api/sample', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      })
+      .catch(function() {})
+      .finally(function() {
+        gated = true;
+        btn.disabled = false;
+        btn.textContent = 'Show my score';
+        showResult();
+      });
+    });
+
     function showResult() {
       document.getElementById('quizSection').classList.remove('active');
+      document.getElementById('gateSection').classList.remove('active');
 
       let tier = results[results.length - 1];
       for (const r of results) {
@@ -655,6 +741,7 @@
       transitioning = false;
 
       document.getElementById('resultSection').classList.remove('active');
+      document.getElementById('gateSection').classList.remove('active');
       document.getElementById('progressBarFill').style.width = '0%';
       updateDots();
 

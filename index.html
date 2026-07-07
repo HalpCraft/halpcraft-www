@@ -1030,6 +1030,8 @@
 
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-left { padding: 7rem 2rem 3rem; }
+      .hero-headline { font-size: clamp(2.5rem, 9vw, 3.2rem); }
+      .hero-headline br { display: none; }
       .hero-right { min-height: 360px; padding: 3rem 2rem; }
       .hero-stats { gap: 2rem; }
 
@@ -1082,8 +1084,8 @@
     <div class="hero-left">
       <p class="hero-eyebrow">The 150-Day Onboarding Programme</p>
       <h1 class="hero-headline">
-        Most new team members<br/>
-        fail <em>quietly.</em><br/>
+        Most new hires fail because<br/>
+        everyone assumed they were <em>fine.</em><br/>
         HalpCraft fixes that.
       </h1>
       <p class="hero-body">
@@ -1147,9 +1149,10 @@
       </p>
     </div>
     <div class="problem-stats fade-up">
+      <h3 style="grid-column:1/-1; font-family:'Cormorant Garamond',Georgia,serif; font-size:1.7rem; font-weight:600; color:var(--paper); letter-spacing:-0.01em; margin-bottom:0.75rem;">The tax, itemised.</h3>
       <div class="prob-stat">
         <div class="prob-num">20%</div>
-        <div class="prob-label">of new hires leave within 45 days — most due to poor onboarding</div>
+        <div class="prob-label">of new hires leave within 45 days</div>
         <div class="prob-source">SHRM, 2023</div>
       </div>
       <div class="prob-stat">
@@ -1164,7 +1167,7 @@
       </div>
       <div class="prob-stat">
         <div class="prob-num">88%</div>
-        <div class="prob-label">of organisations do onboarding poorly, by their own admission</div>
+        <div class="prob-label">of organisations do onboarding poorly</div>
         <div class="prob-source">Gallup, 2023</div>
       </div>
     </div>
@@ -1176,6 +1179,7 @@
     <blockquote style="font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:300; font-style:italic; color:var(--ink); max-width:680px; margin:0 auto; line-height:1.6; letter-spacing:-0.01em;">
       &ldquo;New hires aren&rsquo;t let down by bad managers, they&rsquo;re let down by the assumption that everything is fine.&rdquo;
     </blockquote>
+    <p style="font-family:'DM Sans',system-ui,sans-serif; font-size:1.05rem; font-weight:300; color:var(--muted); line-height:1.8; max-width:680px; margin:2rem auto 0; text-align:center;">There&rsquo;s a name for what this costs you: the assumption tax. Every unasked question, every silent struggle, every &lsquo;they seem fine&rsquo; compounds quietly until it arrives as a resignation letter in month four. You were always going to pay for onboarding. The only question is whether you pay $99 up front or five figures at the exit interview.</p>
   </div>
 
   <!-- HOW IT WORKS -->

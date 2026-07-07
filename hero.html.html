@@ -36,8 +36,8 @@
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    padding:64px 48px;
-    gap:32px;
+    padding:56px 40px;
+    gap:28px;
   }
   .hero-eyebrow{
     font-size:11px; letter-spacing:.22em; text-transform:uppercase;
@@ -49,13 +49,16 @@
 
   /* ---------- Stage scaling ---------- */
   .stage-wrap{
-    flex:none; width:min(90%, 640px); min-height:0;
-    aspect-ratio:16 / 9;
+    flex:none; width:min(90%, 620px); min-height:0;
+    aspect-ratio:16 / 10;
+    overflow:hidden;
+    border-radius:12px;
     display:flex; align-items:center; justify-content:center;
     position:relative;
+    box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06);
   }
   @media (max-width:768px){
-    #hero{padding:48px 20px;}
+    #hero{padding:40px 16px;}
     .stage-wrap{width:100%;}
   }
   .stage{
@@ -66,7 +69,6 @@
     border-radius:14px;
     overflow:hidden;
     background:var(--paper);
-    box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06), 0 2px 0 rgba(255,255,255,.04) inset;
     flex:none;
   }
   /* replay overlay */

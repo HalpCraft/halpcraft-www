@@ -7,27 +7,30 @@
   <meta name="robots" content="noindex,nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/logos/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --ink:#0e0e0e; --paper:#f5f2ed; --gold:#b8902a; --muted:#6b6660; --rule:rgba(14,14,14,0.12); --serif:'Cormorant Garamond', Georgia, serif; --sans:'DM Sans',system-ui,sans-serif; }
+    :root { --ink:#171714; --paper:#F3EFE7; --azure: #096977; --muted:#6b6660; --rule:rgba(23,23,20,0.12); --serif:'Fraunces', Georgia, serif; --sans:'DM Sans',system-ui,sans-serif; }
     body { font-family: var(--sans); background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.7; }
-    nav { position: fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1.25rem 4rem; background:rgba(245,242,237,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--rule); }
+    nav { position: fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1.25rem 4rem; background:rgba(243,239,231,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--rule); }
     .nav-logo { font-family:var(--serif); font-size:1.5rem; font-weight:600; color:var(--ink); text-decoration:none; }
-    .nav-logo span { color:var(--gold); }
+    .nav-logo img { height:52px; width:auto; display:block; }
     .nav-back { font-size:0.8rem; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
     .nav-back:hover { color:var(--ink); }
     .container { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 6rem; }
-    .page-label { font-size:0.72rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; }
+    .page-label { font-size:0.72rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--azure); margin-bottom:1rem; }
     h1 { font-family:var(--serif); font-size:clamp(2.4rem,4vw,3.2rem); font-weight:600; line-height:1.15; letter-spacing:-0.02em; margin-bottom:0.5rem; }
     .last-updated { font-size:0.8rem; color:var(--muted); margin-bottom:3rem; padding-bottom:2rem; border-bottom:1px solid var(--rule); }
     h2 { font-family:var(--serif); font-size:1.5rem; font-weight:600; margin:2.5rem 0 0.75rem; letter-spacing:-0.01em; }
     p { color:#3a3530; margin-bottom:1rem; font-weight:300; }
     ul { margin:0.5rem 0 1rem 0; padding-left:0; list-style:none; }
     ul li { padding:0.3rem 0 0.3rem 1.5rem; position:relative; color:#3a3530; font-weight:300; }
-    ul li::before { content:'—'; position:absolute; left:0; color:var(--gold); }
-    a { color:var(--gold); }
-    .contact-box { margin-top:3rem; padding:2rem; background:#f0ece5; border:1px solid var(--rule); border-left:3px solid var(--gold); }
+    ul li::before { content:'—'; position:absolute; left:0; color:var(--azure); }
+    a { color:var(--azure); }
+    .contact-box { margin-top:3rem; padding:2rem; background:#f0ece5; border:1px solid var(--rule); border-left:3px solid var(--azure); }
     .contact-box p { margin:0; }
     footer { text-align:center; padding:2rem; font-size:0.75rem; color:var(--muted); border-top:1px solid var(--rule); margin-top:4rem; }
     @media(max-width:600px) { nav { padding:1.25rem 1.5rem; } .container { padding:8rem 1.5rem 4rem; } }
@@ -35,7 +38,7 @@
 </head>
 <body>
   <nav>
-    <a href="/" class="nav-logo">Halp<span style="color:var(--gold)">Craft</span></a>
+    <a href="/" class="nav-logo"><img src="/logos/halpcraft-logo-on-light.png" alt="HalpCraft" /></a>
     <a href="/" class="nav-back">← Back to Home</a>
   </nav>
 

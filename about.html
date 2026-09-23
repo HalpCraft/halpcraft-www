@@ -7,20 +7,22 @@
   <meta name="description" content="The person behind HalpCraft — Damian Sicely, founder." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230e0e0e'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23b8902a'>H</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/logos/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink:    #0e0e0e;
-      --paper:  #f5f2ed;
-      --gold:   #b8902a;
-      --gold-lt:#e8c96d;
+      --ink:    #171714;
+      --paper:  #F3EFE7;
+      --azure: #096977;
+      --azure-lt: #4F9199; --azure-dk: #07535E;
       --muted:  #6b6660;
-      --rule:   rgba(14,14,14,0.12);
-      --serif:  'Cormorant Garamond', Georgia, serif;
+      --rule:   rgba(23,23,20,0.12);
+      --serif:  'Fraunces', Georgia, serif;
       --sans:   'DM Sans', system-ui, sans-serif;
     }
 
@@ -44,7 +46,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.25rem 4rem;
-      background: rgba(245,242,237,0.92);
+      background: rgba(243,239,231,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--rule);
     }
@@ -72,7 +74,7 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--ink); }
-    .nav-links a.active { color: var(--ink); border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+    .nav-links a.active { color: var(--ink); border-bottom: 1px solid var(--azure); padding-bottom: 2px; }
     .nav-cta {
       background: var(--ink) !important;
       color: var(--paper) !important;
@@ -84,7 +86,7 @@
       font-size: 0.8rem !important;
       transition: background 0.2s !important;
     }
-    .nav-cta:hover { background: var(--gold) !important; color: var(--ink) !important; }
+    .nav-cta:hover { background: var(--azure) !important; color: var(--paper) !important; }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
     .hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s; display: block; }
 
@@ -100,7 +102,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(184,144,42,0.12) 0%, transparent 70%);
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(79,145,153,0.12) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero-eyebrow {
@@ -109,7 +111,7 @@
       font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--azure-lt);
       margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
@@ -122,7 +124,7 @@
       display: block;
       width: 2rem;
       height: 1px;
-      background: var(--gold);
+      background: var(--azure);
       opacity: 0.6;
     }
     .hero-name {
@@ -138,7 +140,7 @@
       font-family: var(--sans);
       font-size: 1rem;
       font-weight: 300;
-      color: var(--gold-lt);
+      color: var(--azure-lt);
       letter-spacing: 0.04em;
       margin-bottom: 3rem;
     }
@@ -147,7 +149,7 @@
       width: 200px;
       height: auto;
       border-radius: 12px;
-      border: 2px solid var(--gold);
+      border: 2px solid var(--azure);
       margin: 0 auto;
       object-fit: cover;
       box-shadow: 0 8px 40px rgba(0,0,0,0.4);
@@ -155,7 +157,7 @@
     .hero-rule {
       width: 100%;
       height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      background: linear-gradient(to right, transparent, var(--azure), transparent);
       margin-top: 5rem;
       opacity: 0.4;
     }
@@ -166,7 +168,7 @@
       font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--azure);
       margin-bottom: 1rem;
     }
 
@@ -197,7 +199,7 @@
       font-size: 1.5rem;
       line-height: 1.4;
       color: var(--ink);
-      border-left: 3px solid var(--gold);
+      border-left: 3px solid var(--azure);
       padding-left: 28px;
       margin: 40px 0;
       quotes: none;
@@ -217,7 +219,7 @@
       font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--azure);
       margin-bottom: 1.5rem;
     }
 
@@ -232,13 +234,13 @@
       line-height: 1.7;
     }
     .about-contact a {
-      color: var(--gold);
+      color: var(--azure);
       text-decoration: none;
       font-weight: 500;
       border-bottom: 1px solid transparent;
       transition: border-color 0.2s;
     }
-    .about-contact a:hover { border-bottom-color: var(--gold); }
+    .about-contact a:hover { border-bottom-color: var(--azure); }
 
     /* CTA BAND */
     .cta-band {
@@ -252,10 +254,10 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(184,144,42,0.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(79,145,153,0.15) 0%, transparent 70%);
       pointer-events: none;
     }
-    .cta-band .section-label { color: var(--gold-lt); margin-bottom: 1rem; }
+    .cta-band .section-label { color: var(--azure-lt); margin-bottom: 1rem; }
     .cta-band .section-headline {
       font-family: var(--serif);
       font-size: clamp(2rem, 5vw, 3.5rem);
@@ -268,7 +270,7 @@
     .cta-band .section-body {
       font-size: 1rem;
       font-weight: 300;
-      color: rgba(245,242,237,0.5);
+      color: rgba(243,239,231,0.5);
       max-width: 50ch;
       margin: 0 auto 3rem;
     }
@@ -324,7 +326,7 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
-    .footer-links a:hover { color: var(--gold); }
+    .footer-links a:hover { color: var(--azure); }
 
     /* FADE-UP */
     .fade-up {
@@ -352,7 +354,7 @@
 <body>
 
   <nav>
-    <a href="/" class="nav-logo"><img src="/logos/HalpCraft Logo - Light.png" alt="HalpCraft" /></a>
+    <a href="/" class="nav-logo"><img src="/logos/halpcraft-logo-on-light.png" alt="HalpCraft" /></a>
     <ul class="nav-links">
       <li><a href="/#how">How It Works</a></li>
       <li><a href="/#pricing">Pricing</a></li>
@@ -415,7 +417,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="/logos/HalpCraft Logo - Dark.png" alt="HalpCraft" /></div>
+      <div class="footer-logo"><img src="/logos/halpcraft-logo-on-dark.png" alt="HalpCraft" /></div>
       </div>
     <div class="footer-right">
       <ul class="footer-links">

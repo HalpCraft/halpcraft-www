@@ -3,17 +3,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --ink:#0e0e0e;
-    --paper:#f5f2ed;
-    --gold:#b8902a;
-    --gold-light:#e8c96d;
+    --ink:#171714;
+    --paper:#F3EFE7;
+    --azure: #096977;
+    --azure-lt: #4F9199; --azure-dk: #07535E;
     --muted:#6b6660;
     --border:#e0dbd3;
-    --serif:"Cormorant Garamond", Georgia, serif;
+    --serif:'Fraunces', Georgia, serif;
     --sans:"DM Sans", system-ui, -apple-system, sans-serif;
     --stageW:1280px;
     --stageH:720px;
@@ -41,11 +41,11 @@
   }
   .hero-eyebrow{
     font-size:11px; letter-spacing:.22em; text-transform:uppercase;
-    color:var(--gold); font-weight:600; flex:none;
+    color:var(--azure-lt); font-weight:600; flex:none;
     display:flex; align-items:center; gap:10px;
   }
   .hero-eyebrow::before,
-  .hero-eyebrow::after{content:""; width:26px; height:1px; background:rgba(184,144,42,.45);}
+  .hero-eyebrow::after{content:""; width:26px; height:1px; background:rgba(79,145,153,.45);}
 
   /* ---------- Stage scaling ---------- */
   .stage-wrap{
@@ -75,14 +75,14 @@
   .replay{
     position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) scale(.96);
     z-index:80; display:flex; align-items:center; gap:10px;
-    background:rgba(14,14,14,.55); backdrop-filter:blur(2px);
-    color:var(--paper); border:1.5px solid var(--gold);
+    background:rgba(23,23,20,.55); backdrop-filter:blur(2px);
+    color:var(--paper); border:1.5px solid var(--azure);
     font-family:var(--sans); font-weight:600; font-size:15px;
     padding:13px 24px; border-radius:40px; cursor:pointer;
     opacity:0; visibility:hidden; transition:opacity .35s ease, transform .35s ease, background .2s;
   }
   .replay.show{opacity:1; visibility:visible; transform:translate(-50%,-50%) scale(1);}
-  .replay:hover{background:var(--gold); color:#15130f;}
+  .replay:hover{background:var(--azure); color:var(--paper);}
   .replay svg{width:16px;height:16px;}
 
   /* ---------- Browser chrome ---------- */
@@ -112,7 +112,7 @@
   .url b{color:var(--paper); font-weight:500;}
   .app-tag{
     margin-left:auto; font-size:12px; letter-spacing:.14em;
-    text-transform:uppercase; color:var(--gold); font-weight:600;
+    text-transform:uppercase; color:var(--azure-lt); font-weight:600;
   }
 
   /* ---------- Scene viewport ---------- */
@@ -139,7 +139,7 @@
   .ripple{
     position:absolute; z-index:55;
     width:14px;height:14px;border-radius:50%;
-    border:2px solid var(--gold);
+    border:2px solid var(--azure);
     transform:translate(-50%,-50%) scale(.3);
     opacity:.9; pointer-events:none;
     animation:rip .55s ease-out forwards;
@@ -149,7 +149,8 @@
   /* ---------- Wordmark ---------- */
   .wordmark{font-family:var(--sans); font-weight:500; letter-spacing:-.01em; line-height:1;}
   .wordmark .h{color:var(--ink);}
-  .wordmark .c{color:var(--gold);}
+  .wordmark .c{color:var(--azure);}
+  .wordmark img{height:1em; width:auto; display:block;}
   .on-dark .wordmark .h{color:var(--paper);}
   .tagline{
     font-family:var(--sans); font-weight:400; text-transform:uppercase;
@@ -167,7 +168,7 @@
   .land-hero{padding:54px 60px 0;}
   .eyebrow{
     font-size:12px; letter-spacing:.2em; text-transform:uppercase;
-    color:var(--gold); font-weight:600; margin-bottom:22px;
+    color:var(--azure); font-weight:600; margin-bottom:22px;
   }
   .land-hero h1{
     font-family:var(--serif); font-weight:600; color:var(--ink);
@@ -179,14 +180,14 @@
   }
   .btn{
     display:inline-flex; align-items:center; gap:10px;
-    background:var(--gold); color:#15130f; border:0;
+    background:var(--azure); color:var(--paper); border:0;
     font-family:var(--sans); font-weight:600; font-size:17px;
     padding:17px 30px; border-radius:11px; cursor:pointer;
-    box-shadow:0 8px 24px rgba(184,144,42,.32);
+    box-shadow:0 8px 24px rgba(79,145,153,.32);
     transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
   }
   .btn:hover{transform:translateY(-1px);}
-  .btn.glow{background:var(--gold-light); box-shadow:0 10px 30px rgba(184,144,42,.5);}
+  .btn.glow{background:var(--azure-dk); box-shadow:0 10px 30px rgba(79,145,153,.5);}
   .btn .arr{font-size:18px;}
   .price-note{margin-top:16px; font-size:14px; color:var(--muted);}
   .price-note b{color:var(--ink); font-weight:600;}
@@ -214,11 +215,11 @@
     background:#fff; display:flex; align-items:center; padding:0 14px;
     font-size:16px; color:var(--ink); position:relative;
   }
-  .input.focus{border-color:var(--gold); box-shadow:0 0 0 3px rgba(184,144,42,.14);}
+  .input.focus{border-color:var(--azure); box-shadow:0 0 0 3px rgba(79,145,153,.14);}
   .input .ph{color:#b3ada3;}
   .row2{display:flex; gap:14px;}
   .row2 .field{flex:1;}
-  .caret{display:inline-block; width:1.5px; height:20px; background:var(--gold); margin-left:1px; animation:blink 1s steps(1) infinite; vertical-align:middle;}
+  .caret{display:inline-block; width:1.5px; height:20px; background:var(--azure); margin-left:1px; animation:blink 1s steps(1) infinite; vertical-align:middle;}
   @keyframes blink{50%{opacity:0;}}
   .pay-btn{width:100%; justify-content:center; margin-top:8px;}
   .pay-ok{
@@ -229,7 +230,7 @@
   .pay-ok.show{opacity:1; visibility:visible;}
   .tick{
     width:78px;height:78px;border-radius:50%;
-    background:var(--gold); display:flex; align-items:center; justify-content:center;
+    background:var(--azure); display:flex; align-items:center; justify-content:center;
   }
   .tick svg{width:40px;height:40px;}
   .pay-ok h3{font-family:var(--serif); font-size:34px; color:var(--ink); margin:0; font-weight:600;}
@@ -254,7 +255,7 @@
   }
   .dropdown.open{opacity:1; visibility:visible; transform:none;}
   .opt{padding:11px 12px; border-radius:7px; font-size:15px; color:var(--ink);}
-  .opt.hot{background:rgba(184,144,42,.12); color:var(--gold);}
+  .opt.hot{background:rgba(79,145,153,.12); color:var(--azure);}
 
   /* ============ SCENE 4 + 5: MAIL ============ */
   .s-inbox{background:#f4f2ee; display:flex; flex-direction:column;}
@@ -269,8 +270,8 @@
   }
   .mail-row.in{transform:none; opacity:1;}
   .mail-row.read{opacity:.55;}
-  .unread{width:9px;height:9px;border-radius:50%;background:var(--gold); flex:none;}
-  .ava{width:42px;height:42px;border-radius:10px;background:var(--ink); color:var(--gold); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; flex:none; font-family:var(--serif);}
+  .unread{width:9px;height:9px;border-radius:50%;background:var(--azure); flex:none;}
+  .ava{width:42px;height:42px;border-radius:10px;background:var(--ink); color:var(--azure); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; flex:none; font-family:var(--serif);}
   .mail-meta{flex:1; min-width:0;}
   .mail-from{font-weight:600; color:var(--ink); font-size:15px;}
   .mail-sub{color:var(--ink); font-size:14px; margin-top:2px;}
@@ -301,9 +302,9 @@
     color:#cfc7b8; padding:9px 14px; border:1px solid rgba(255,255,255,.1);
     border-radius:9px; opacity:.3; transition:.25s;
   }
-  .load-item.done{opacity:1; border-color:rgba(184,144,42,.4); color:var(--paper);}
+  .load-item.done{opacity:1; border-color:rgba(79,145,153,.4); color:var(--paper);}
   .load-item .lt{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.25); flex:none; display:flex; align-items:center; justify-content:center;}
-  .load-item.done .lt{background:var(--gold); border-color:var(--gold);}
+  .load-item.done .lt{background:var(--azure); border-color:var(--azure);}
   .load-item.done .lt svg{width:11px;height:11px;}
 
   /* ============ SCENE 6: CALENDAR ============ */
@@ -316,16 +317,16 @@
   .cell{border:1px solid var(--border); border-radius:9px; background:#fff; padding:7px 8px; position:relative; overflow:hidden;}
   .cell.dim{background:#f3f0ea; color:#bcb6ab;}
   .cell .dn{font-size:12px; color:var(--muted); font-weight:500;}
-  .cell.today .dn{color:var(--gold); font-weight:700;}
+  .cell.today .dn{color:var(--azure); font-weight:700;}
   .chip{
     margin-top:5px; font-size:10.5px; line-height:1.2; font-weight:500;
-    background:rgba(184,144,42,.14); color:#8a6a18;
-    border-left:2px solid var(--gold); border-radius:4px;
+    background:rgba(79,145,153,.14); color:#07535E;
+    border-left:2px solid var(--azure); border-radius:4px;
     padding:4px 5px;
   }
   .chip.primary{
-    background:var(--gold); color:#1a1407; border-left-color:#7a5e16;
-    box-shadow:0 4px 12px rgba(184,144,42,.4);
+    background:var(--azure); color:var(--paper); border-left-color:#07535E;
+    box-shadow:0 4px 12px rgba(79,145,153,.4);
   }
   /* event popover */
   .pop{
@@ -336,33 +337,33 @@
     opacity:0; visibility:hidden; transform:scale(.96) translateY(6px); transition:.22s;
   }
   .pop.open{opacity:1; visibility:visible; transform:none;}
-  .pop .pop-top{height:6px; background:var(--gold);}
+  .pop .pop-top{height:6px; background:var(--azure);}
   .pop-body{padding:18px 20px 20px;}
   .pop-body h4{font-family:var(--sans); font-size:16px; font-weight:600; color:var(--ink); margin:0 0 4px;}
   .pop-when{font-size:13px; color:var(--muted); margin-bottom:14px;}
   .pop-note{font-size:13.5px; line-height:1.5; color:#3a352d; margin-bottom:12px;}
   .pop-link{
     display:inline-flex; align-items:center; gap:6px;
-    color:var(--gold); font-weight:600; font-size:13.5px;
-    text-decoration:none; border-bottom:1px solid rgba(184,144,42,.4); padding-bottom:1px;
+    color:var(--azure); font-weight:600; font-size:13.5px;
+    text-decoration:none; border-bottom:1px solid rgba(79,145,153,.4); padding-bottom:1px;
   }
-  .pop-link.hot{background:rgba(184,144,42,.12); border-radius:4px; padding:3px 6px; border-bottom:0;}
+  .pop-link.hot{background:rgba(79,145,153,.12); border-radius:4px; padding:3px 6px; border-bottom:0;}
 
   /* ============ SCENE 7: NUDGE PAGE ============ */
   .s-nudge{background:var(--ink); color:var(--paper); overflow-y:auto;}
   .on-dark{}
   .nudge-nav{display:flex; align-items:center; justify-content:space-between; padding:22px 60px; border-bottom:1px solid rgba(255,255,255,.08);}
   .nudge-nav .wordmark{font-size:23px;}
-  .nudge-nav .prog{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:600;}
+  .nudge-nav .prog{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--azure); font-weight:600;}
   .nudge-body{padding:46px 60px 50px; max-width:860px;}
-  .nudge-body .eyebrow{color:var(--gold-light); margin-bottom:18px;}
+  .nudge-body .eyebrow{color:var(--azure-lt); margin-bottom:18px;}
   .nudge-body h1{font-family:var(--serif); font-size:64px; font-weight:600; line-height:1.04; margin:0 0 18px; color:var(--paper);}
   .nudge-lede{font-family:var(--serif); font-style:italic; font-weight:300; font-size:25px; line-height:1.4; color:#ddd5c7; margin:0 0 34px; max-width:30ch;}
   .nudge-why{font-size:16px; line-height:1.6; color:#c4bcae; max-width:62ch; margin:0 0 32px;}
   .nudge-why b{color:var(--paper); font-weight:600;}
   .steps{display:flex; flex-direction:column; gap:14px; max-width:680px;}
   .step{display:flex; gap:18px; align-items:flex-start; border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:18px 20px; background:rgba(255,255,255,.02);}
-  .step .num{font-family:var(--serif); font-size:30px; color:var(--gold); font-weight:600; line-height:1; flex:none; width:30px;}
+  .step .num{font-family:var(--serif); font-size:30px; color:var(--azure); font-weight:600; line-height:1; flex:none; width:30px;}
   .step .st-t{font-weight:600; color:var(--paper); font-size:15.5px; margin-bottom:4px;}
   .step .st-d{font-size:14px; color:#b0a99c; line-height:1.5;}
 
@@ -371,14 +372,14 @@
   .s-end .wordmark{font-size:62px;}
   .s-end .tagline{font-size:14px;}
   .s-end .ep{font-size:15px; color:#8c857a; margin-top:10px;}
-  .s-end .ep b{color:var(--gold-light); font-weight:600;}
+  .s-end .ep b{color:var(--azure-lt); font-weight:600;}
 
   /* ---------- Minimal footer ---------- */
   .hero-foot{flex:none; width:100%; max-width:560px; display:flex; align-items:center; gap:10px;}
   .track{flex:1; height:5px; background:rgba(255,255,255,.08); border-radius:6px; display:flex; gap:4px; padding:0; overflow:hidden;}
   .seg{flex:1; background:rgba(255,255,255,.10); border-radius:6px; cursor:pointer; position:relative; overflow:hidden; transition:.2s;}
-  .seg.done{background:var(--gold);}
-  .seg .fill{position:absolute; inset:0; background:var(--gold-light); width:0%;}
+  .seg.done{background:var(--azure);}
+  .seg .fill{position:absolute; inset:0; background:var(--azure-dk); width:0%;}
   .seg:hover{background:rgba(255,255,255,.22);}
 
   @media (max-width:560px){
@@ -406,7 +407,7 @@
       <!-- ===== SCENE 1: LANDING ===== -->
       <div class="scene s-land" data-scene="land">
         <div class="land-nav">
-          <div class="wordmark"><span class="h">Halp</span><span class="c">Craft</span></div>
+          <div class="wordmark"><img src="/logos/halpcraft-wordmark-on-light.png" alt="HalpCraft" /></div>
           <div class="links"><span>How it works</span><span>Pricing</span><span>About</span></div>
         </div>
         <div class="land-hero">
@@ -421,7 +422,7 @@
       <!-- ===== SCENE 2: CHECKOUT ===== -->
       <div class="scene s-pay" data-scene="pay">
         <div class="pay-left on-dark">
-          <div class="wordmark"><span class="h">Halp</span><span class="c">Craft</span></div>
+          <div class="wordmark"><img src="/logos/halpcraft-wordmark-on-dark.png" alt="HalpCraft" /></div>
           <div class="pay-item">HalpCraft, 150-Day Manager Programme</div>
           <div class="pay-amount">$29.00</div>
           <div class="pay-sub">One-time payment in NZD, per employee</div>
@@ -448,7 +449,7 @@
           </div>
           <button class="btn pay-btn" id="payBtn">Pay $29.00</button>
           <div class="pay-ok" id="payOk">
-            <div class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#F3EFE7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <h3>Payment received</h3>
             <p>Taking you to setup...</p>
           </div>
@@ -539,11 +540,11 @@
       <div class="scene s-loading on-dark" data-scene="loading">
         <h3>Adding your nudges</h3>
         <div class="load-list" id="loadList">
-          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 1, The Readiness Protocol</div>
-          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 2, The Team Signal</div>
-          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 3, The Belonging Ritual</div>
-          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 4, Clarity &amp; Connection Check</div>
-          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1a1407" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> + 6 more, through to Day 150</div>
+          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#F3EFE7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 1, The Readiness Protocol</div>
+          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#F3EFE7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 2, The Team Signal</div>
+          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#F3EFE7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 3, The Belonging Ritual</div>
+          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#F3EFE7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Nudge 4, Clarity &amp; Connection Check</div>
+          <div class="load-item"><span class="lt"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#F3EFE7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span> + 6 more, through to Day 150</div>
         </div>
       </div>
 
@@ -567,7 +568,7 @@
       <!-- ===== SCENE 7: NUDGE PAGE ===== -->
       <div class="scene s-nudge on-dark" data-scene="nudge">
         <div class="nudge-nav">
-          <div class="wordmark"><span class="h">Halp</span><span class="c">Craft</span></div>
+          <div class="wordmark"><img src="/logos/halpcraft-wordmark-on-dark.png" alt="HalpCraft" /></div>
           <div class="prog">Nudge 3 of 10</div>
         </div>
         <div class="nudge-body">
@@ -585,7 +586,7 @@
 
       <!-- ===== END CARD ===== -->
       <div class="scene s-end on-dark" data-scene="end">
-        <div class="wordmark"><span class="h">Halp</span><span class="c">Craft</span></div>
+        <div class="wordmark"><img src="/logos/halpcraft-wordmark-on-dark.png" alt="HalpCraft" /></div>
         <div class="tagline">Better Leaders &nbsp;|&nbsp; Better Workplaces</div>
         <div class="ep"><b>$29 NZD per employee.</b> One time. Live now at halpcraft.com</div>
       </div>
@@ -594,7 +595,7 @@
 
     <!-- cursor -->
     <div class="cursor" id="cursor">
-      <svg viewBox="0 0 24 24"><path d="M5 3l14 7-6 1.5L9 19 5 3z" fill="#fff" stroke="#0e0e0e" stroke-width="1.2" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M5 3l14 7-6 1.5L9 19 5 3z" fill="#fff" stroke="#171714" stroke-width="1.2" stroke-linejoin="round"/></svg>
     </div>
   </div>
     <button class="replay" id="replayBtn">

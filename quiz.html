@@ -7,14 +7,16 @@
   <meta name="description" content="Most managers think they're doing fine. Answer 5 questions and find out how good your onboarding really is." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230e0e0e'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23b8902a'>H</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/logos/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --ink: #0e0e0e; --paper: #f5f2ed; --gold: #b8902a; --gold-lt: #e8c96d;
+      --ink: #171714; --paper: #F3EFE7; --azure: #096977; --azure-lt: #4F9199; --azure-dk: #07535E;
       --muted: #6b6660;
-      --serif: 'Cormorant Garamond', Georgia, serif;
+      --serif: 'Fraunces', Georgia, serif;
       --sans: 'DM Sans', system-ui, sans-serif;
     }
     html { scroll-behavior: smooth; }
@@ -32,9 +34,9 @@
     .bg-glow {
       position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background:
-        radial-gradient(ellipse 70% 50% at 50% -10%, rgba(184,144,42,0.14) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(184,144,42,0.07) 0%, transparent 55%),
-        radial-gradient(ellipse 30% 40% at 90% 70%, rgba(184,144,42,0.05) 0%, transparent 55%);
+        radial-gradient(ellipse 70% 50% at 50% -10%, rgba(79,145,153,0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(79,145,153,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 30% 40% at 90% 70%, rgba(79,145,153,0.05) 0%, transparent 55%);
     }
 
     /* ── Progress bar ────────────────────────────── */
@@ -46,7 +48,7 @@
     }
     .progress-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      background: linear-gradient(90deg, var(--azure-lt), var(--azure-lt));
       width: 0%;
       transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -82,10 +84,10 @@
       margin-bottom: 2.25rem;
       animation: fadeUp 0.5s ease 0.05s both;
     }
-    .hero-ornament-line { width: 36px; height: 1px; background: rgba(184,144,42,0.4); }
+    .hero-ornament-line { width: 36px; height: 1px; background: rgba(79,145,153,0.4); }
     .hero-eyebrow {
       font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--gold);
+      text-transform: uppercase; color: var(--azure-lt);
     }
 
     .hero h1 {
@@ -96,10 +98,10 @@
       max-width: 14ch;
       animation: fadeUp 0.6s ease 0.15s both;
     }
-    .hero h1 em { font-style: italic; color: var(--gold); font-weight: 300; }
+    .hero h1 em { font-style: italic; color: var(--azure-lt); font-weight: 300; }
 
     .hero-sub {
-      font-size: 1.1rem; color: rgba(245,242,237,0.45);
+      font-size: 1.1rem; color: rgba(243,239,231,0.45);
       line-height: 1.8; font-weight: 300;
       max-width: 42ch; margin: 0 auto 2.75rem;
       animation: fadeUp 0.6s ease 0.25s both;
@@ -111,7 +113,7 @@
     }
     .hero-start-btn {
       display: inline-flex; align-items: center; gap: 0.75rem;
-      background: var(--gold); color: var(--ink);
+      background: var(--azure); color: var(--paper);
       padding: 1.1rem 2.5rem;
       font-family: var(--sans); font-size: 0.9rem;
       font-weight: 600; letter-spacing: 0.08em;
@@ -119,7 +121,7 @@
       border: none; border-radius: 2px;
       cursor: pointer; transition: background 0.2s, transform 0.15s;
     }
-    .hero-start-btn:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .hero-start-btn:hover { background: var(--azure-dk); transform: translateY(-1px); }
     .hero-start-btn:active { transform: translateY(0); }
     .hero-start-btn .btn-arrow { font-size: 1.1rem; }
 
@@ -137,8 +139,8 @@
     }
     .hero-dot {
       width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(184,144,42,0.25);
-      border: 1px solid rgba(184,144,42,0.3);
+      background: rgba(79,145,153,0.25);
+      border: 1px solid rgba(79,145,153,0.3);
     }
 
     /* ════════════════════════════════════════════════
@@ -164,12 +166,12 @@
       transition: background 0.3s, border-color 0.3s;
     }
     .step-dot.active {
-      background: var(--gold);
-      border-color: var(--gold);
+      background: var(--azure-lt);
+      border-color: var(--azure-lt);
     }
     .step-dot.done {
-      background: rgba(184,144,42,0.35);
-      border-color: rgba(184,144,42,0.5);
+      background: rgba(79,145,153,0.35);
+      border-color: rgba(79,145,153,0.5);
     }
 
     /* Question card */
@@ -185,7 +187,7 @@
     .q-card {
       background: rgba(255,255,255,0.025);
       border: 1px solid rgba(255,255,255,0.08);
-      border-top: 1px solid rgba(184,144,42,0.2);
+      border-top: 1px solid rgba(79,145,153,0.2);
       padding: 3.5rem 3.5rem 3rem;
       margin-bottom: 2.25rem;
       position: relative;
@@ -194,13 +196,13 @@
       content: '';
       position: absolute; top: 0; left: 50%; transform: translateX(-50%);
       width: 60px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      background: linear-gradient(90deg, transparent, var(--azure-lt), transparent);
     }
 
     .q-num {
       font-family: var(--serif); font-size: 0.8rem; font-weight: 400;
       letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); opacity: 0.7;
+      color: var(--azure-lt); opacity: 0.7;
       margin-bottom: 1.75rem;
     }
 
@@ -229,13 +231,13 @@
       transition: all 0.18s ease;
     }
     .q-btn-yes {
-      background: var(--gold); color: var(--ink);
-      border-color: var(--gold);
+      background: var(--azure); color: var(--paper);
+      border-color: var(--azure);
     }
-    .q-btn-yes:hover { background: var(--gold-lt); border-color: var(--gold-lt); transform: translateY(-2px); }
+    .q-btn-yes:hover { background: var(--azure-dk); border-color: var(--azure-dk); transform: translateY(-2px); }
     .q-btn-no {
       background: rgba(255,255,255,0.04);
-      color: rgba(245,242,237,0.6);
+      color: rgba(243,239,231,0.6);
       border-color: rgba(255,255,255,0.14);
     }
     .q-btn-no:hover {
@@ -279,13 +281,13 @@
       color: var(--paper);
       letter-spacing: -0.04em;
     }
-    .result-score-nums .score-yes { color: var(--gold); }
-    .result-score-nums .score-sep { color: rgba(245,242,237,0.15); font-size: 0.6em; margin: 0 0.05em; }
-    .result-score-nums .score-total { color: rgba(245,242,237,0.2); }
+    .result-score-nums .score-yes { color: var(--azure-lt); }
+    .result-score-nums .score-sep { color: rgba(243,239,231,0.15); font-size: 0.6em; margin: 0 0.05em; }
+    .result-score-nums .score-total { color: rgba(243,239,231,0.2); }
     .result-score-caption {
       font-family: var(--serif); font-size: 1.05rem;
       font-style: italic; font-weight: 300;
-      color: rgba(245,242,237,0.4);
+      color: rgba(243,239,231,0.4);
       margin-top: 0.4rem;
     }
 
@@ -306,7 +308,7 @@
       margin-bottom: 1.5rem;
     }
     .result-label.strong  { background: rgba(168,197,160,0.12); color: #a8c5a0; border: 1px solid rgba(168,197,160,0.3); }
-    .result-label.gaps    { background: rgba(184,144,42,0.12); color: var(--gold-lt); border: 1px solid rgba(184,144,42,0.3); }
+    .result-label.gaps    { background: rgba(79,145,153,0.12); color: var(--azure-lt); border: 1px solid rgba(79,145,153,0.3); }
     .result-label.at-risk { background: rgba(220,140,60,0.12); color: #e09050; border: 1px solid rgba(220,140,60,0.3); }
     .result-label.critical{ background: rgba(200,80,80,0.12); color: #e08080; border: 1px solid rgba(200,80,80,0.3); }
 
@@ -319,12 +321,12 @@
 
     .result-rule {
       width: 50px; height: 1px;
-      background: rgba(184,144,42,0.3);
+      background: rgba(79,145,153,0.3);
       margin: 0 auto 1.5rem;
     }
 
     .result-body {
-      font-size: 0.97rem; color: rgba(245,242,237,0.45);
+      font-size: 0.97rem; color: rgba(243,239,231,0.45);
       line-height: 1.85; font-weight: 300;
       max-width: 48ch; margin: 0 auto;
     }
@@ -335,7 +337,7 @@
     }
     .cta-primary {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--gold); color: var(--ink);
+      background: var(--azure); color: var(--paper);
       padding: 1.1rem 2.5rem;
       font-family: var(--sans); font-size: 0.88rem;
       font-weight: 600; letter-spacing: 0.08em;
@@ -344,14 +346,14 @@
       width: 100%; max-width: 400px;
       justify-content: center;
     }
-    .cta-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .cta-primary:hover { background: var(--azure-dk); transform: translateY(-1px); }
 
     .cta-secondary {
-      font-size: 0.82rem; color: rgba(245,242,237,0.3);
+      font-size: 0.82rem; color: rgba(243,239,231,0.3);
       text-decoration: none;
     }
-    .cta-secondary a { color: rgba(184,144,42,0.7); text-decoration: none; transition: color 0.2s; }
-    .cta-secondary a:hover { color: var(--gold-lt); }
+    .cta-secondary a { color: rgba(79,145,153,0.7); text-decoration: none; transition: color 0.2s; }
+    .cta-secondary a:hover { color: var(--azure-lt); }
 
     .retake-link {
       display: inline-block; margin-top: 0.75rem;
@@ -380,11 +382,11 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    .gate-input::placeholder { color: rgba(245,242,237,0.25); }
-    .gate-input:focus { border-color: var(--gold); }
+    .gate-input::placeholder { color: rgba(243,239,231,0.25); }
+    .gate-input:focus { border-color: var(--azure-lt); }
     .gate-btn {
       display: inline-flex; align-items: center; justify-content: center;
-      background: var(--gold); color: var(--ink);
+      background: var(--azure); color: var(--paper);
       padding: 1rem 1.75rem;
       font-family: var(--sans); font-size: 0.82rem;
       font-weight: 600; letter-spacing: 0.08em;
@@ -393,7 +395,7 @@
       cursor: pointer; transition: background 0.2s;
       white-space: nowrap;
     }
-    .gate-btn:hover { background: var(--gold-lt); }
+    .gate-btn:hover { background: var(--azure-dk); }
     .gate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     /* ── Footer ───────────────────────────────────── */
@@ -408,7 +410,7 @@
       letter-spacing: 0.06em;
     }
     .footer-text a { color: rgba(255,255,255,0.22); text-decoration: none; transition: color 0.2s; }
-    .footer-text a:hover { color: var(--gold); }
+    .footer-text a:hover { color: var(--azure-lt); }
 
     /* ── Animations ───────────────────────────────── */
     @keyframes fadeUp {
@@ -452,7 +454,7 @@
   <!-- Nav -->
   <nav>
     <a href="https://www.halpcraft.com" class="nav-logo">
-      <img src="/logos/HalpCraft Logo - Dark.png" alt="HalpCraft" />
+      <img src="/logos/halpcraft-logo-on-dark.png" alt="HalpCraft" />
     </a>
   </nav>
 

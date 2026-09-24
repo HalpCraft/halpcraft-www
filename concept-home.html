@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HalpCraft | Better Leaders, Better Workplaces</title>
+  <meta name="description" content="HalpCraft makes practical tools that make leadership a little easier. Nudges for the first 150 days of a new hire. Between Two Minds for the argument in your own head." />
+  <!-- CONCEPT PREVIEW: not linked from the live site, not indexed. -->
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/logos/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <style>
+    :root {
+      --ink: #171714;
+      --paper: #F3EFE7;
+      --azure: #096977;
+      --moss: #66745D;
+      --clay: #B86F52;
+      --ink-soft: rgba(23,23,20,0.74);
+      --ink-mute: rgba(23,23,20,0.62);
+      --rule: rgba(23,23,20,0.16);
+      --rule-strong: rgba(23,23,20,0.85);
+      --paper-shade: rgba(23,23,20,0.035);
+      --serif: 'Fraunces', Georgia, serif;
+      --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+      --wrap: 1240px;
+      --gutter: clamp(20px, 4.5vw, 64px);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--paper); color: var(--ink);
+      font-family: var(--sans); font-size: 17px; line-height: 1.6;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* Shared type */
+    .kicker {
+      font-family: var(--sans); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute);
+    }
+    .kicker .by { color: var(--ink-mute); font-weight: 500; letter-spacing: 0.08em; text-transform: none; font-size: 13px; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.015em; }
+    h2 { font-size: clamp(2rem, 4.2vw, 3.4rem); line-height: 1.06; }
+    .lead { font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--ink-soft); max-width: 36em; }
+    .textlink {
+      color: var(--azure); font-weight: 600; text-decoration: none;
+      border-bottom: 1px solid rgba(9,105,119,0.35); padding-bottom: 1px;
+      transition: border-color .2s;
+    }
+    .textlink:hover { border-bottom-color: var(--azure); }
+    .btn {
+      display: inline-block; font-family: var(--sans); font-size: 15px; font-weight: 600;
+      text-decoration: none; padding: 15px 26px; border: 1.5px solid var(--ink);
+      background: var(--ink); color: var(--paper); transition: background .2s, color .2s;
+    }
+    .btn:hover { background: transparent; color: var(--ink); }
+    .btn--azure { background: var(--azure); border-color: var(--azure); color: var(--paper); }
+    .btn--azure:hover { background: #07535E; border-color: #07535E; color: var(--paper); }
+    .btn--ghost { background: transparent; color: var(--ink); }
+    .btn--ghost:hover { background: var(--ink); color: var(--paper); }
+    section { position: relative; }
+    .rule-top { border-top: 1px solid var(--rule); }
+
+    /* ── Nav ───────────────────────────────────────── */
+    .nav { border-bottom: 1px solid var(--rule); background: var(--paper); position: sticky; top: 0; z-index: 50; }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .nav-logo img { height: 46px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--ink-soft); }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links .btn { padding: 10px 18px; font-size: 14px; color: var(--paper); }
+    .nav-links .btn:hover { color: var(--ink); }
+    .nav-toggle { display: none; background: none; border: 1.5px solid var(--ink); font: 600 14px var(--sans); padding: 8px 14px; color: var(--ink); cursor: pointer; }
+
+    /* ── Hero ──────────────────────────────────────── */
+    .hero { padding: clamp(40px, 6vw, 88px) 0 clamp(64px, 8vw, 120px); }
+    .masthead {
+      display: flex; align-items: center; gap: 14px; margin-bottom: clamp(36px, 5vw, 64px);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute);
+    }
+    .masthead::before { content: ""; width: 40px; height: 2px; background: var(--azure); flex: none; }
+    .masthead .pipe { color: var(--azure); font-weight: 400; padding: 0 2px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
+    .hero h1 {
+      font-size: clamp(2.6rem, 5.8vw, 5.2rem); line-height: 1.02; letter-spacing: -0.018em;
+      font-weight: 400; font-variation-settings: "opsz" 72;
+    }
+    .hero h1 .second { display: block; color: var(--ink-mute); }
+    .hero .lead { margin-top: 32px; }
+    .hero-actions { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; }
+
+    /* The week */
+    .week { border-top: 2px solid var(--ink); padding-top: 14px; margin-top: 10px; }
+    .week-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .week-head h2 { font-size: 22px; letter-spacing: -0.01em; }
+    .week-head span { font-size: 13px; color: var(--ink-mute); }
+    .week ol { list-style: none; }
+    .week li {
+      display: grid; grid-template-columns: 48px 1fr; gap: 14px;
+      padding: 13px 0; border-bottom: 1px solid var(--rule); font-size: 15px; line-height: 1.45; color: var(--ink-soft);
+    }
+    .week .day { font-weight: 600; color: var(--ink); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; padding-top: 2px; }
+    .week li.nudge {
+      background: rgba(9,105,119,0.07); border-left: 3px solid var(--azure);
+      margin-left: -17px; padding-left: 14px; padding-right: 14px; color: var(--ink);
+    }
+    .week .nudge-meta { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--azure); margin-bottom: 6px; }
+    .week .nudge-q { font-family: var(--serif); font-size: 19px; line-height: 1.35; font-style: italic; }
+    .week figcaption { margin-top: 14px; font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink-mute); }
+
+    /* ── Why ───────────────────────────────────────── */
+    .why { padding: clamp(72px, 10vw, 140px) 0; background: var(--ink); color: var(--paper); }
+    .why .statement {
+      font-family: var(--serif); font-size: clamp(2.3rem, 5.4vw, 4.8rem); line-height: 1.04;
+      letter-spacing: -0.018em; font-variation-settings: "opsz" 72; max-width: 20ch;
+    }
+    .why .statement span { display: block; color: rgba(243,239,231,0.55); }
+    .why-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); margin-top: clamp(56px, 7vw, 96px); padding-top: 40px; border-top: 1px solid rgba(243,239,231,0.18); }
+    .why .kicker { color: rgba(243,239,231,0.62); }
+    .why-body p { font-size: 1.1rem; color: rgba(243,239,231,0.78); max-width: 34em; }
+    .why-body p + p { margin-top: 1.1em; }
+    .why blockquote {
+      font-family: var(--serif); font-size: clamp(1.4rem, 2.3vw, 1.9rem); line-height: 1.3; color: var(--paper);
+      margin-top: 36px; padding-left: 24px; border-left: 2px solid #4F9199; max-width: 30em;
+    }
+    .why cite { display: block; margin-top: 16px; font-family: var(--sans); font-style: normal; font-size: 14px; color: rgba(243,239,231,0.62); }
+
+    /* ── What we make ──────────────────────────────── */
+    .make { padding: clamp(72px, 10vw, 140px) 0 clamp(40px, 5vw, 64px); }
+    .make-head { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); margin-bottom: clamp(40px, 5vw, 64px); }
+    .make-head .lead { margin-top: 20px; }
+    .index { list-style: none; border-top: 2px solid var(--ink); }
+    .index li { border-bottom: 1px solid var(--rule); }
+    .index a {
+      display: grid; grid-template-columns: 80px minmax(0, 4fr) minmax(0, 6fr) 40px; gap: 24px; align-items: baseline;
+      padding: clamp(24px, 3vw, 36px) 0; text-decoration: none; color: var(--ink); transition: background .2s;
+    }
+    .index a:hover { background: var(--paper-shade); }
+    .index .num { font-family: var(--serif); font-size: 18px; color: var(--ink-mute); font-variant-numeric: oldstyle-nums; }
+    .index h3 { font-size: clamp(1.9rem, 3.4vw, 2.8rem); line-height: 1.05; }
+    .index p { color: var(--ink-soft); font-size: 1.05rem; }
+    .index p strong { color: var(--ink); font-weight: 600; }
+    .index .arrow { font-size: 24px; color: var(--azure); justify-self: end; transition: transform .2s; }
+    .index a:hover .arrow { transform: translateX(4px); }
+    .make-foot { margin-top: 22px; font-size: 15px; color: var(--ink-mute); }
+
+    /* ── Nudges ────────────────────────────────────── */
+    .nudges { padding: clamp(64px, 9vw, 128px) 0; }
+    .product-head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 6vw, 96px); align-items: end; }
+    .product-head h2 { margin-top: 18px; }
+    .product-head .lead { margin-top: 24px; }
+    .steps { list-style: none; counter-reset: s; }
+    .steps li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 10px; padding: 12px 0; border-top: 1px solid var(--rule); font-size: 15.5px; color: var(--ink-soft); }
+    .steps li:last-child { border-bottom: 1px solid var(--rule); }
+    .steps li::before { content: counter(s); font-family: var(--serif); font-size: 20px; color: var(--azure); line-height: 1.2; }
+    .steps b { color: var(--ink); font-weight: 600; }
+
+    /* Timeline */
+    .timeline { margin-top: clamp(56px, 7vw, 96px); }
+    .timeline-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
+    .timeline-head h3 { font-size: clamp(1.4rem, 2.2vw, 1.8rem); }
+    .timeline-head p { color: var(--ink-mute); font-size: 15px; max-width: 30em; }
+    .scale { position: relative; height: 64px; margin: 0 10px; }
+    .scale::before { content: ""; position: absolute; left: 0; right: 0; top: 31px; height: 2px; background: var(--ink); }
+    .scale .tick { position: absolute; top: 18px; transform: translateX(-50%); width: 28px; height: 28px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); font: 600 12px/24px var(--sans); text-align: center; color: var(--ink); }
+    .scale .tick.early { background: var(--azure); border-color: var(--azure); color: var(--paper); }
+    .scale .mark { position: absolute; top: 50px; transform: translateX(-50%); font-size: 12px; color: var(--ink-mute); white-space: nowrap; }
+    .scale .mark.start { transform: none; left: 0 !important; }
+    .scale .mark.end { transform: none; left: auto !important; right: 0; }
+    .sequence { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0 28px; margin-top: 36px; }
+    .sequence li { padding: 14px 0; border-top: 1px solid var(--rule); }
+    .sequence .when { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+    .sequence .name { font-family: var(--serif); font-size: 18px; line-height: 1.25; margin-top: 4px; display: block; }
+    .sequence .n { color: var(--azure); margin-right: 6px; font-variant-numeric: tabular-nums; }
+
+    /* Inside a nudge */
+    .inside { margin-top: clamp(64px, 8vw, 112px); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+    .inside-intro h3 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); line-height: 1.12; margin-top: 16px; }
+    .inside-intro p { margin-top: 18px; color: var(--ink-soft); }
+    .inside-intro .facts { list-style: none; margin-top: 28px; }
+    .inside-intro .facts li { padding: 10px 0; border-top: 1px solid var(--rule); font-size: 15px; color: var(--ink-soft); }
+    .inside-intro .facts li:last-child { border-bottom: 1px solid var(--rule); }
+    .inside-intro .facts b { color: var(--ink); font-weight: 600; }
+    .page {
+      background: #FBF9F4; border: 1px solid var(--rule); padding: clamp(28px, 4vw, 52px);
+      position: relative;
+    }
+    .page::after { content: ""; position: absolute; left: 10px; right: -10px; bottom: -10px; top: 10px; border: 1px solid var(--rule); z-index: -1; }
+    .page .page-meta { display: flex; justify-content: space-between; gap: 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+    .page .page-meta span:first-child { color: var(--azure); }
+    .page h4 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.05; margin-top: 22px; letter-spacing: -0.015em; }
+    .page .ask { font-family: var(--serif); font-style: italic; font-size: 1.2rem; color: var(--ink-soft); margin-top: 10px; }
+    .page .label { margin-top: 28px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); }
+    .page p.body { margin-top: 8px; color: var(--ink-soft); font-size: 16px; }
+    .page .script { margin-top: 12px; padding: 14px 18px; border-left: 3px solid var(--azure); background: rgba(9,105,119,0.06); font-size: 16px; color: var(--ink); }
+    .page .more { margin-top: 26px; padding-top: 16px; border-top: 1px dashed var(--rule); font-size: 14px; color: var(--ink-mute); }
+
+    /* Proof + price */
+    .terms { margin-top: clamp(64px, 8vw, 112px); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); }
+    .proof .figure { font-family: var(--serif); font-size: clamp(4rem, 8vw, 6.5rem); line-height: 0.9; letter-spacing: -0.03em; font-variation-settings: "opsz" 72; }
+    .proof p { margin-top: 14px; font-size: 1.1rem; color: var(--ink-soft); max-width: 22em; }
+    .proof .src { display: block; margin-top: 8px; font-size: 13px; color: var(--ink-mute); }
+    .proof .aside { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--rule); font-family: var(--serif); font-size: 1.25rem; line-height: 1.4; }
+    .prices h3 { font-size: clamp(1.4rem, 2.2vw, 1.8rem); }
+    .prices .sub { margin-top: 6px; color: var(--ink-mute); font-size: 15px; }
+    .price-list { list-style: none; margin-top: 22px; border-top: 2px solid var(--ink); }
+    .price-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 20px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+    .price-list .pack { font-weight: 600; }
+    .price-list .pack small { display: block; font-weight: 400; color: var(--ink-mute); font-size: 14px; }
+    .price-list .amt { font-family: var(--serif); font-size: 1.6rem; white-space: nowrap; }
+    .price-list .amt small { font-family: var(--sans); font-size: 12px; color: var(--ink-mute); letter-spacing: 0.08em; margin-left: 4px; }
+    .price-list a.buy { font-weight: 600; font-size: 14px; text-decoration: none; padding: 9px 16px; border: 1.5px solid var(--ink); white-space: nowrap; transition: background .2s, color .2s; }
+    .price-list a.buy:hover { background: var(--ink); color: var(--paper); }
+    .price-list li.solo a.buy { background: var(--azure); border-color: var(--azure); color: var(--paper); }
+    .price-list li.solo a.buy:hover { background: #07535E; border-color: #07535E; }
+    .prices .fine { margin-top: 16px; font-size: 14px; color: var(--ink-mute); }
+    .prices .fine a { color: var(--ink); }
+
+    /* Free nudge */
+    .free { margin-top: clamp(56px, 7vw, 96px); padding: clamp(28px, 4vw, 48px); border: 1px solid var(--rule); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+    .free h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.12; }
+    .free p { margin-top: 10px; color: var(--ink-soft); font-size: 15.5px; }
+    .free form { display: flex; gap: 0; }
+    .free input { flex: 1; min-width: 0; font: 400 16px var(--sans); padding: 15px 16px; border: 1.5px solid var(--ink); border-right: 0; background: #FBF9F4; color: var(--ink); border-radius: 0; }
+    .free input:focus { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .free button { font: 600 15px var(--sans); padding: 15px 20px; background: var(--ink); color: var(--paper); border: 1.5px solid var(--ink); cursor: pointer; white-space: nowrap; }
+    .free button:hover { background: var(--azure); border-color: var(--azure); }
+    .free button:disabled { opacity: .6; cursor: default; }
+    .free .note { margin-top: 10px; font-size: 13px; color: var(--ink-mute); }
+    .free .ok { font-family: var(--serif); font-size: 1.2rem; color: var(--azure); }
+    .free .err { margin-top: 10px; font-size: 14px; color: var(--clay); }
+    .score-link { margin-top: 22px; font-size: 15px; color: var(--ink-soft); }
+
+    /* ── Between Two Minds ─────────────────────────── */
+    .btm { background: var(--ink); color: var(--paper); padding: clamp(72px, 10vw, 140px) 0; overflow: hidden; }
+    .btm .kicker { color: rgba(243,239,231,0.62); }
+    .btm-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 96px); align-items: center; }
+    .btm h2 { margin-top: 18px; color: var(--paper); }
+    .btm .lead { color: rgba(243,239,231,0.78); margin-top: 22px; }
+    .btm .question { margin-top: 32px; padding: 20px 0; border-top: 1px solid rgba(243,239,231,0.18); border-bottom: 1px solid rgba(243,239,231,0.18); }
+    .btm .question span { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(243,239,231,0.62); }
+    .btm .question p { font-family: var(--serif); font-style: italic; font-size: 1.45rem; line-height: 1.3; margin-top: 8px; }
+    .btm .time { margin-top: 18px; font-size: 14px; color: rgba(243,239,231,0.62); }
+    .btm .btn { margin-top: 30px; background: var(--paper); color: var(--ink); border-color: var(--paper); }
+    .btm .btn:hover { background: transparent; color: var(--paper); }
+    .versus { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0; }
+    .panel { border: 5px solid var(--paper); background: var(--paper); transform: rotate(-1.5deg); }
+    .panel.villain { transform: rotate(1.5deg); }
+    .panel img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .panel figcaption { background: var(--paper); color: var(--ink); padding: 12px 12px 8px; }
+    .panel .who { font-family: var(--sans); font-weight: 700; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .panel .role { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 2px; }
+    .panel .role::before { content: ""; display: inline-block; width: 12px; height: 2px; background: var(--clay); vertical-align: middle; margin-right: 6px; }
+    .panel .desc { font-size: 13.5px; line-height: 1.4; color: var(--ink-soft); margin-top: 4px; }
+    .vs { font-family: var(--serif); font-style: italic; font-size: clamp(1.6rem, 3vw, 2.6rem); color: var(--clay); padding: 0 clamp(10px, 1.6vw, 22px); position: relative; z-index: 2; }
+
+    /* ── Founder ───────────────────────────────────── */
+    .founder { padding: clamp(72px, 10vw, 140px) 0; }
+    .founder-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
+    .portrait { max-width: 340px; }
+    .portrait img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; filter: saturate(0.92); }
+    .portrait figcaption { margin-top: 12px; font-size: 14px; color: var(--ink-mute); border-top: 1px solid var(--rule); padding-top: 10px; }
+    .portrait figcaption b { color: var(--ink); font-weight: 600; }
+    .founder h2 { margin-top: 18px; max-width: 16ch; }
+    .founder .story { margin-top: 32px; columns: 2; column-gap: 40px; }
+    .founder .story p { color: var(--ink-soft); break-inside: avoid; margin-bottom: 1em; }
+    .founder .sig { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: baseline; }
+    .founder .sig .name { font-family: var(--serif); font-style: italic; font-size: 1.35rem; }
+
+    /* ── Principles ────────────────────────────────── */
+    .principles { padding: 0 0 clamp(72px, 10vw, 140px); }
+    .principles-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); padding-top: 40px; border-top: 2px solid var(--ink); }
+    .principles h2 { font-size: clamp(1.7rem, 2.8vw, 2.4rem); line-height: 1.1; }
+    .principles ol { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+    .principles li { padding: 18px 0 20px; border-bottom: 1px solid var(--rule); }
+    .principles li b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.3rem; line-height: 1.25; }
+    .principles li span { display: block; margin-top: 6px; font-size: 15px; color: var(--ink-soft); }
+    .principles li i { font-style: normal; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: var(--ink-mute); display: block; margin-bottom: 6px; }
+    .principles li i::before { content: ""; display: inline-block; width: 14px; height: 2px; background: var(--moss); vertical-align: middle; margin-right: 8px; }
+
+    /* ── Close ─────────────────────────────────────── */
+    .close { border-top: 1px solid var(--rule); padding: clamp(80px, 11vw, 160px) 0; text-align: center; }
+    .close .signoff {
+      font-family: var(--serif); font-size: clamp(2.2rem, 4.6vw, 4.4rem); line-height: 1.04; letter-spacing: -0.018em; font-variation-settings: "opsz" 72;
+      display: flex; justify-content: center; align-items: center; gap: 0 0.4em; color: var(--ink); max-width: none; margin: 0; white-space: nowrap;
+    }
+    .close .signoff .bar { display: inline-block; width: 3px; height: 0.9em; background: var(--azure); }
+    .close p:not(.signoff) { margin: 28px auto 0; max-width: 34em; color: var(--ink-soft); font-size: 1.1rem; }
+    .close .actions { margin-top: 36px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+    .close p.contact { margin-top: 32px; font-size: 15px; color: var(--ink-mute); }
+    .close .contact a { color: var(--ink); }
+
+    /* ── Footer ────────────────────────────────────── */
+    footer { background: var(--ink); color: rgba(243,239,231,0.7); padding: 56px 0 40px; font-size: 14px; }
+    .foot-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: start; }
+    .foot-logo img { height: 48px; width: auto; }
+    .foot-tag { margin-top: 14px; letter-spacing: 0.14em; text-transform: uppercase; font-size: 11px; font-weight: 600; color: rgba(243,239,231,0.62); }
+    .foot-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .foot-cols h4 { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(243,239,231,0.5); margin-bottom: 12px; }
+    .foot-cols ul { list-style: none; }
+    .foot-cols li + li { margin-top: 8px; }
+    .foot-cols a { text-decoration: none; color: rgba(243,239,231,0.85); }
+    .foot-cols a:hover { color: var(--paper); }
+    .foot-base { margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(243,239,231,0.14); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: rgba(243,239,231,0.5); font-size: 13px; }
+
+    /* ── Responsive ────────────────────────────────── */
+    @media (max-width: 1080px) {
+      .sequence { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .founder .story { columns: 1; }
+      .scale .tick { width: 22px; height: 22px; top: 21px; font-size: 10px; line-height: 18px; }
+    }
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav.open .nav-links {
+        display: flex; flex-direction: column; align-items: flex-start; gap: 18px;
+        position: absolute; top: 76px; left: 0; right: 0; background: var(--paper);
+        padding: 24px var(--gutter) 28px; border-bottom: 1px solid var(--rule);
+      }
+      .hero-grid, .why-grid, .make-head, .product-head, .inside, .terms, .btm-grid, .founder-grid, .principles-grid, .foot-grid, .free { grid-template-columns: 1fr; }
+      .week { max-width: 560px; }
+      .index a { grid-template-columns: 56px minmax(0, 1fr) 32px; }
+      .index a p { grid-column: 2 / 3; }
+      .index a .arrow { grid-row: 1; grid-column: 3; }
+      .portrait { max-width: 260px; }
+      .btm-grid .versus { order: -1; max-width: 560px; }
+    }
+    @media (max-width: 620px) {
+      body { font-size: 16px; }
+      .nav .wrap { height: 64px; }
+      .nav-logo img { height: 38px; }
+      .nav.open .nav-links { top: 64px; }
+      .masthead { font-size: 11px; letter-spacing: 0.14em; }
+      .masthead::before { width: 24px; }
+      .hero-actions .btn { width: 100%; text-align: center; }
+      .week li.nudge { margin-left: 0; }
+      .index a { grid-template-columns: 40px minmax(0, 1fr); gap: 8px 14px; }
+      .index a .arrow { display: none; }
+      .scale { display: none; }
+      .sequence { grid-template-columns: 1fr; margin-top: 8px; }
+      .sequence li { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: baseline; }
+      .sequence .name { margin-top: 0; font-size: 17px; }
+      .price-list li { grid-template-columns: minmax(0, 1fr) auto; }
+      .price-list a.buy { grid-column: 1 / -1; text-align: center; }
+      .free form { flex-direction: column; }
+      .free input { border-right: 1.5px solid var(--ink); border-bottom: 0; }
+      .panel figcaption { padding: 8px 8px 6px; }
+      .panel .desc { display: none; }
+      .principles ol { grid-template-columns: 1fr; }
+      .foot-cols { grid-template-columns: 1fr 1fr; }
+      .close .actions .btn { width: 100%; }
+      .close .signoff { flex-direction: column; white-space: normal; }
+      .close .signoff .bar { width: 40px; height: 3px; margin: 0.25em 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav" aria-label="Main">
+    <div class="wrap">
+      <a href="/" class="nav-logo" aria-label="HalpCraft home"><img src="/logos/halpcraft-logo-on-light.png" alt="HalpCraft" /></a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#nudges">Nudges</a></li>
+        <li><a href="#between-two-minds">Between Two Minds</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/quiz">Onboarding Score</a></li>
+        <li><a href="#free-nudge" class="btn">Try a free nudge</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <!-- 1. HERO: recognition first -->
+    <header class="hero">
+      <div class="wrap">
+        <p class="masthead">Better Leaders <span class="pipe">|</span> Better Workplaces</p>
+        <div class="hero-grid">
+          <div>
+            <h1>You care about your people.<span class="second">You&rsquo;re also carrying a lot.</span></h1>
+            <p class="lead">HalpCraft makes practical tools that make leadership a little easier. They fit into the week you already have, so doing right by your people takes a little less out of you.</p>
+            <div class="hero-actions">
+              <a href="#make" class="btn">See what we make</a>
+              <a href="#free-nudge" class="textlink">Try a free nudge &rarr;</a>
+            </div>
+          </div>
+
+          <figure class="week" aria-label="An example week, with one HalpCraft nudge in it">
+            <div class="week-head"><h2>This week</h2><span>An ordinary one</span></div>
+            <ol>
+              <li><span class="day">Mon</span><span>Budget reforecast due by five.</span></li>
+              <li><span class="day">Tue</span><span>Two people off sick. Covering the floor.</span></li>
+              <li><span class="day">Wed</span><span>Final interviews, one till half four.</span></li>
+              <li class="nudge"><span class="day">Thu</span>
+                <span><span class="nudge-meta">9:00 &middot; HalpCraft nudge &middot; Day 12</span>
+                <span class="nudge-q">Ask one person: &ldquo;What&rsquo;s one thing you&rsquo;ve come across that you&rsquo;re not sure about, but haven&rsquo;t asked about yet?&rdquo;</span></span></li>
+              <li><span class="day">Fri</span><span>Board papers. Somehow.</span></li>
+            </ol>
+            <figcaption>The rest of the week stays yours.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. WHY: emotional recognition, then the belief -->
+    <section class="why" id="why">
+      <div class="wrap">
+        <p class="statement">You&rsquo;re not a bad manager. <span>You&rsquo;re a busy one.</span></p>
+        <div class="why-grid">
+          <p class="kicker">Why HalpCraft exists</p>
+          <div class="why-body">
+            <p>Most leaders who struggle with their people aren&rsquo;t careless. They&rsquo;re capable, committed and completely stretched, making calls in a vacuum because the support available is too complex, too expensive, too late, or simply not there.</p>
+            <p>HalpCraft is built around a simple belief:</p>
+            <blockquote>&ldquo;Give a leader the right insight at the right moment, without adding complexity to an already relentless working week, and they will almost always do the right thing by their people.&rdquo;
+              <cite>Damian Sicely, founder</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. WHAT WE MAKE: master brand, then products -->
+    <section class="make" id="make">
+      <div class="wrap">
+        <div class="make-head">
+          <p class="kicker">What HalpCraft makes</p>
+          <div>
+            <h2>Small tools for the moments leadership gets hard.</h2>
+            <p class="lead">Each one does one job well, fits around your working week, and asks nothing of you that it doesn&rsquo;t need to.</p>
+          </div>
+        </div>
+        <ol class="index">
+          <li>
+            <a href="#nudges">
+              <span class="num">01</span>
+              <h3>Nudges</h3>
+              <p><strong>For the first 150 days of a new hire.</strong> Ten short, well-timed prompts in your calendar, at the moments that decide whether they stay.</p>
+              <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a href="#between-two-minds">
+              <span class="num">02</span>
+              <h3>Between Two Minds</h3>
+              <p><strong>For the argument in your own head.</strong> A comic-book reflection tool. Pick your hero, name the villain, tell it straight.</p>
+              <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </li>
+        </ol>
+        <p class="make-foot">Both made by HalpCraft in New Zealand. More to come, when they&rsquo;re ready.</p>
+      </div>
+    </section>
+
+    <!-- 4. NUDGES -->
+    <section class="nudges rule-top" id="nudges">
+      <div class="wrap">
+        <div class="product-head">
+          <div>
+            <p class="kicker">Nudges <span class="by">by HalpCraft</span></p>
+            <h2>The first 150 days of a new hire, handled quietly.</h2>
+            <p class="lead">Ten research-backed nudges delivered to your calendar across 150 critical days. No app to check. No dashboard to forget. Just the right nudge, right when your new hire needs you.</p>
+          </div>
+          <ol class="steps" aria-label="How it works">
+            <li><span><b>Tell us who&rsquo;s starting.</b> Name, start date and work pattern. About 60 seconds.</span></li>
+            <li><span><b>Open one calendar file.</b> All ten nudges land in Google, Outlook or Apple Calendar.</span></li>
+            <li><span><b>Read, act, lead.</b> Each nudge arrives with its action guide. No prep required.</span></li>
+          </ol>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-head">
+            <h3>Ten moments that decide whether they stay.</h3>
+            <p>Four of the ten land before the end of week two, while first impressions are still forming.</p>
+          </div>
+          <div class="scale" aria-hidden="true" id="scale"></div>
+          <ol class="sequence">
+            <li><span class="when">Week before</span><span class="name"><span class="n">1</span>The Team Signal</span></li>
+            <li><span class="when">Day 1</span><span class="name"><span class="n">2</span>The Belonging Ritual</span></li>
+            <li><span class="when">End of week 1</span><span class="name"><span class="n">3</span>Clarity &amp; Connection Check</span></li>
+            <li><span class="when">Day 12</span><span class="name"><span class="n">4</span>The Pace Setter</span></li>
+            <li><span class="when">Day 25</span><span class="name"><span class="n">5</span>The Ethos Guard</span></li>
+            <li><span class="when">Day 40</span><span class="name"><span class="n">6</span>Vulnerability &amp; Mastery Check</span></li>
+            <li><span class="when">Day 80</span><span class="name"><span class="n">7</span>The Transparency Bridge</span></li>
+            <li><span class="when">Day 100</span><span class="name"><span class="n">8</span>Q1 Efficiency Bridge</span></li>
+            <li><span class="when">Day 125</span><span class="name"><span class="n">9</span>The Values-Impact Bridge</span></li>
+            <li><span class="when">Day 150</span><span class="name"><span class="n">10</span>Taking the Lead</span></li>
+          </ol>
+        </div>
+
+        <div class="inside">
+          <div class="inside-intro">
+            <p class="kicker">Inside a nudge</p>
+            <h3>Not a reminder. A plan you can act on today.</h3>
+            <p>Every nudge tells you why this moment matters, what to do about it, and the words to use. Here&rsquo;s the start of the first one, which lands a week before your new hire does.</p>
+            <ul class="facts">
+              <li><b>No app, no login.</b> It lives in the calendar you already use.</li>
+              <li><b>Shift workers covered.</b> Standard and shift worker schedules.</li>
+              <li><b>Nobody is being watched.</b> It supports the leader. It doesn&rsquo;t monitor the employee.</li>
+            </ul>
+          </div>
+          <article class="page" aria-label="Excerpt from Nudge 1, The Team Signal">
+            <div class="page-meta"><span>Nudge 1 of 10</span><span>One week before</span></div>
+            <h4>The Team Signal</h4>
+            <p class="ask">&ldquo;Your new hire starts next week. Is the team ready?&rdquo;</p>
+            <p class="label">Why this matters</p>
+            <p class="body">A team that wasn&rsquo;t told someone is starting next week will treat that person like an interruption. A team that was told will treat them like they were expected.</p>
+            <p class="label">The team alert</p>
+            <p class="script">&ldquo;Heads up, [name] starts next week. Please stop by on their first morning to introduce yourself. Make them feel like we were expecting them.&rdquo;</p>
+            <p class="more">Plus the buddy brief, the desk check, the first conversation and the research behind it. <a class="textlink" href="https://app.halpcraft.com/sample">Read a free sample &rarr;</a></p>
+          </article>
+        </div>
+
+        <div class="terms" id="pricing">
+          <div class="proof">
+            <p class="figure">20%</p>
+            <p>of new hires leave within 45 days.<span class="src">SHRM, 2023</span></p>
+            <p class="aside">You were always going to pay for onboarding. The only question is whether you pay $29 up front or five figures at the exit interview.</p>
+          </div>
+          <div class="prices">
+            <h3>One-time, per new hire.</h3>
+            <p class="sub">No subscription. Every pack includes the full ten-nudge sequence, standard and shift worker modes, and email delivery.</p>
+            <ul class="price-list">
+              <li class="solo">
+                <span class="pack">Solo<small>One programme</small></span>
+                <span class="amt">$29<small>NZD</small></span>
+                <a class="buy" href="https://buy.stripe.com/5kQ28kf6w4yo0yYbxK0Ba09">Buy now</a>
+              </li>
+              <li>
+                <span class="pack">Team 5<small>$25 NZD per employee. Use as needed.</small></span>
+                <span class="amt">$125<small>NZD</small></span>
+                <a class="buy" href="https://buy.stripe.com/00waEQ2jK5CsbdCatG0Ba0a">Get Team 5</a>
+              </li>
+              <li>
+                <span class="pack">Team 10<small>$22 NZD per employee. Use as needed.</small></span>
+                <span class="amt">$220<small>NZD</small></span>
+                <a class="buy" href="https://buy.stripe.com/14A6oAbUk4yobdCatG0Ba0b">Get Team 10</a>
+              </li>
+            </ul>
+            <p class="fine">Secure checkout via Stripe, about two minutes. Early adopter pricing. Placing candidates? <a href="/agency">See the agency programme</a>.</p>
+          </div>
+        </div>
+
+        <div class="free" id="free-nudge">
+          <div>
+            <h3>See what a nudge feels like before you buy.</h3>
+            <p>We&rsquo;ll send you one real nudge from the programme. It lands in your calendar tomorrow at 9am, exactly the way the paid version works.</p>
+          </div>
+          <div>
+            <form id="freeNudgeForm" novalidate>
+              <label for="freeEmail" class="kicker" style="position:absolute;left:-9999px;">Email</label>
+              <input type="email" id="freeEmail" name="email" placeholder="you@company.com" required />
+              <button type="submit" id="freeNudgeBtn">Send my free nudge</button>
+            </form>
+            <p class="note" id="freeNudgeNote">One nudge, one email. No drip sequence, no follow-up spam.</p>
+            <p class="ok" id="freeNudgeSuccess" style="display:none;">Done. Check your inbox, your nudge is waiting.</p>
+            <p class="err" id="freeNudgeError" style="display:none;">Something broke. Email hello@halpcraft.com and we&rsquo;ll send it manually.</p>
+          </div>
+        </div>
+        <p class="score-link">Not sure where your onboarding stands? <a class="textlink" href="/quiz">Take the Onboarding Score, five questions &rarr;</a></p>
+      </div>
+    </section>
+
+    <!-- 5. BETWEEN TWO MINDS: keeps its own comic voice, framed by HalpCraft -->
+    <section class="btm" id="between-two-minds">
+      <div class="wrap">
+        <div class="btm-grid">
+          <div>
+            <p class="kicker">Between Two Minds <span class="by" style="color:rgba(243,239,231,0.62)">by HalpCraft</span></p>
+            <h2>Same mind.<br />A different outcome.</h2>
+            <p class="lead">Some days the hardest conversation is the one in your own head. Between Two Minds turns it into a comic-book battle: pick the version of you in this, pick the voice pushing back, then answer a few honest questions.</p>
+            <div class="question">
+              <span>A question it might ask you</span>
+              <p>&ldquo;What are you waiting to see before you commit?&rdquo;</p>
+            </div>
+            <p class="time">About two to three minutes for one clear pass. Longer if you want to follow it further.</p>
+            <a class="btn" href="https://btm.halpcraft.com/">Open Between Two Minds &rarr;</a>
+          </div>
+          <div class="versus" aria-label="Example match-up: The Forge versus The Fog">
+            <figure class="panel hero-panel">
+              <img src="/concept/btm-forge.webp" alt="Comic illustration of The Forge, a hero" width="640" height="640" />
+              <figcaption><div class="role">Your hero</div><div class="who">The Forge</div><div class="desc">Works under pressure. Holds a standard nobody else holds.</div></figcaption>
+            </figure>
+            <span class="vs">vs</span>
+            <figure class="panel villain">
+              <img src="/concept/btm-fog.webp" alt="Comic illustration of The Fog, a villain" width="640" height="640" />
+              <figcaption><div class="role">The villain</div><div class="who">The Fog</div><div class="desc">&ldquo;You do not know enough yet.&rdquo;</div></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FOUNDER: trust, after the value is clear -->
+    <section class="founder" id="founder">
+      <div class="wrap founder-grid">
+        <figure class="portrait">
+          <img src="/damian.jpg" alt="Damian Sicely, founder of HalpCraft" width="400" height="533" />
+          <figcaption><b>Damian Sicely</b><br />Founder, HalpCraft &middot; New Zealand</figcaption>
+        </figure>
+        <div>
+          <p class="kicker">Who&rsquo;s behind it</p>
+          <h2>Built by someone who has sat in the leadership seat.</h2>
+          <div class="story">
+            <p>I&rsquo;ve spent nearly twenty years watching good leaders fail the people around them, not because they didn&rsquo;t care, but because nobody gave them the right support at the right moment.</p>
+            <p>I&rsquo;m an executive leader, not a developer. Building HalpCraft taught me that the best solutions are almost always the simplest ones. No friction. No new platforms to learn. Just something that works quietly in the background, at the moments that matter.</p>
+          </div>
+          <div class="sig">
+            <span class="name">Damian</span>
+            <a class="textlink" href="/about">Read the longer story &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. HOW WE BUILD: principles as trust -->
+    <section class="principles" id="principles">
+      <div class="wrap"><div class="principles-grid">
+        <div>
+          <p class="kicker">How we build</p>
+          <h2 style="margin-top:16px;">Four promises every HalpCraft tool keeps.</h2>
+        </div>
+        <ol>
+          <li><i>01</i><b>Time-poor, not talent-poor.</b><span>Designed for leaders who already know what good looks like and just need the moment to do it.</span></li>
+          <li><i>02</i><b>We support the leader.</b><span>Zero surveillance. Nothing we make monitors the people you lead.</span></li>
+          <li><i>03</i><b>Grounded in research.</b><span>Built on peer-reviewed organisational psychology, with sources where it matters.</span></li>
+          <li><i>04</i><b>Every workplace.</b><span>Desk, floor and field. Shift work included, not bolted on.</span></li>
+        </ol>
+      </div></div>
+    </section>
+
+    <!-- 8. CLOSE -->
+    <section class="close">
+      <div class="wrap">
+        <p class="signoff"><span>Better Leaders</span><span class="bar" aria-hidden="true"></span><span>Better Workplaces</span></p>
+        <p>Good leaders want to show up for their people. HalpCraft helps them know how, and when.</p>
+        <div class="actions">
+          <a class="btn btn--azure" href="#pricing">Start with Nudges</a>
+          <a class="btn btn--ghost" href="https://btm.halpcraft.com/">Open Between Two Minds</a>
+        </div>
+        <p class="contact">Questions? <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a>. We reply within 24 hours.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a href="/" class="foot-logo"><img src="/logos/halpcraft-logo-on-dark.png" alt="HalpCraft" /></a>
+          <p class="foot-tag">Better Leaders | Better Workplaces</p>
+        </div>
+        <div class="foot-cols">
+          <div><h4>Products</h4><ul><li><a href="#nudges">Nudges</a></li><li><a href="https://btm.halpcraft.com/">Between Two Minds</a></li><li><a href="/quiz">Onboarding Score</a></li></ul></div>
+          <div><h4>HalpCraft</h4><ul><li><a href="/about">About</a></li><li><a href="/agency">For agencies</a></li><li><a href="mailto:hello@halpcraft.com">Contact</a></li></ul></div>
+          <div><h4>Already bought?</h4><ul><li><a href="/redeem">Redeem a code</a></li><li><a href="/privacy">Privacy</a></li></ul></div>
+        </div>
+      </div>
+      <div class="foot-base"><span>&copy; 2026 HalpCraft. Made in New Zealand.</span><span>Helping good leaders do the job a little better.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav
+    (function () {
+      var nav = document.getElementById('nav'), btn = document.getElementById('navToggle');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.textContent = open ? 'Close' : 'Menu';
+      });
+      document.querySelectorAll('#navLinks a').forEach(function (a) {
+        a.addEventListener('click', function () { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.textContent = 'Menu'; });
+      });
+    })();
+
+    // Timeline scale: positions are proportional to the real schedule (day -7 to day 150)
+    (function () {
+      var el = document.getElementById('scale'); if (!el) return;
+      var days = [-7, 1, 7, 12, 25, 40, 80, 100, 125, 150], min = -7, max = 150;
+      var pct = function (d) { return ((d - min) / (max - min)) * 100; };
+      var html = '';
+      days.forEach(function (d, i) {
+        html += '<span class="tick' + (d <= 12 ? ' early' : '') + '" style="left:' + pct(d) + '%">' + (i + 1) + '</span>';
+      });
+      html += '<span class="mark start" style="left:0">Week before</span>';
+      [30, 60, 90, 120].forEach(function (d) { html += '<span class="mark" style="left:' + pct(d) + '%">Day ' + d + '</span>'; });
+      html += '<span class="mark end">Day 150</span>';
+      el.innerHTML = html;
+    })();
+
+    // Free nudge form: identical request to the live homepage (POST to the sample API)
+    (function () {
+      var form = document.getElementById('freeNudgeForm'); if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = form.email.value.trim();
+        if (!email) return;
+        var btn = document.getElementById('freeNudgeBtn');
+        var err = document.getElementById('freeNudgeError');
+        btn.disabled = true;
+        err.style.display = 'none';
+        fetch('https://app.halpcraft.com/api/sample', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed');
+          form.style.display = 'none';
+          document.getElementById('freeNudgeNote').style.display = 'none';
+          document.getElementById('freeNudgeSuccess').style.display = 'block';
+        })
+        .catch(function () {
+          err.style.display = 'block';
+          btn.disabled = false;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

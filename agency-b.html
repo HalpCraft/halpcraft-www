@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onboarding Nudges for recruitment agencies | HalpCraft</title>
+  <meta name="description" content="You placed them. Now make sure they stick. HalpCraft Onboarding Nudges gives the hiring manager of every candidate you place ten well-timed nudges across the first 150 days." />
+  <!-- PREVIEW ROUTE: remove the robots noindex line below when this file becomes agency.html. -->
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="canonical" href="https://www.halpcraft.com/agency" />
+  <meta name="theme-color" content="#F3EFE7" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="HalpCraft" />
+  <meta property="og:title" content="Onboarding Nudges for recruitment agencies | HalpCraft" />
+  <meta property="og:description" content="You placed them. Now make sure they stick." />
+  <meta property="og:url" content="https://www.halpcraft.com/agency" />
+  <meta property="og:image" content="https://www.halpcraft.com/logos/halpcraft-og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/logos/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/css/halpcraft.css" />
+  <style>
+    /* Agency: page rhythm */
+    .g-hero { padding: clamp(40px, 5vw, 72px) 0 0; }
+    .crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+    .crumb span[aria-hidden] { color: var(--azure); }
+    .g-hero h1 { font-size: clamp(2.6rem, 6.4vw, 6.4rem); margin-top: clamp(28px, 4vw, 48px); }
+    .g-hero .split { margin-top: clamp(40px, 5vw, 72px); align-items: start; }
+    .g-hero .actions { margin-top: 32px; }
+    .g-moment { position: relative; justify-self: end; width: 100%; max-width: 420px; transform: rotate(-1deg); }
+    .g-moment .note { left: -170px; top: 42%; width: 160px; text-align: right; transform: rotate(1deg); }
+    .g-moment .note span { display: block; margin-bottom: 6px; }
+    .g-hero-exit { margin-top: clamp(64px, 8vw, 112px); padding-bottom: clamp(40px, 5vw, 64px); }
+    .g-hero-exit .thread-line { --thread-h: calc(100% - 0.55em + clamp(150px, 16vw, 220px) - 46px); }
+
+    .gap { padding-top: clamp(150px, 16vw, 220px); }
+    .gap .display { margin-top: 24px; max-width: 14ch; }
+    .gap .split { margin-top: clamp(56px, 7vw, 96px); padding-top: 36px; border-top: 1px solid var(--rule-on-ink); }
+    .gap .claim { font: 400 clamp(1.6rem, 2.6vw, 2.3rem)/1.2 var(--serif); color: var(--paper); max-width: 16em; }
+    .cited { margin-top: 36px; padding-top: 18px; border-top: 1px dashed var(--rule-on-ink); }
+    .cited h3 { font: 600 11px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-ink-mute); }
+    .cited ul { list-style: none; margin-top: 10px; }
+    .cited li { font-size: 14.5px; color: var(--on-ink); padding: 4px 0; }
+    .cited cite { font-style: normal; color: var(--on-ink-mute); }
+
+    .gets { padding: var(--space) 0 clamp(64px, 8vw, 112px); }
+    .gets h2 { font-size: clamp(2.2rem, 4.8vw, 4.4rem); line-height: 1.02; margin-top: 18px; }
+    .gets .lead { margin-top: 22px; }
+    .facts { list-style: none; margin-top: 28px; }
+    .facts li { padding: 11px 0; border-top: 1px solid var(--rule); font-size: 15px; display: grid; grid-template-columns: 120px 1fr; gap: 16px; color: var(--ink-soft); }
+    .facts li:last-child { border-bottom: 1px solid var(--rule); }
+    .facts b { font-weight: 600; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); padding-top: 3px; }
+    .gets .more { margin-top: 24px; }
+    .fan { position: relative; height: 620px; }
+    .fan .slip { position: absolute; width: min(80%, 380px); }
+    .fan .slip:nth-child(1) { top: 0; left: 4%; transform: rotate(-3deg); }
+    .fan .slip:nth-child(2) { top: 205px; left: 18%; transform: rotate(1.5deg); }
+    .fan .slip:nth-child(3) { top: 410px; left: 8%; transform: rotate(-1deg); }
+
+    .how { padding: 0 0 var(--space); }
+    .how .head { padding-top: clamp(56px, 7vw, 96px); border-top: 1px solid var(--rule); }
+    .how h2 { font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.04; margin-top: 18px; max-width: 16ch; }
+    .how .rows { margin-top: clamp(36px, 5vw, 64px); }
+
+    .why h2 { font-size: clamp(2.2rem, 4.8vw, 4.4rem); line-height: 1.02; margin-top: 18px; max-width: 14ch; color: var(--paper); }
+    .why .rows { margin-top: clamp(40px, 5vw, 72px); border-top-color: var(--rule-on-ink); }
+    .why .rows h3 { color: var(--paper); }
+    .why .rows .n { color: #4F9199; }
+
+    .packs h2 { font-size: clamp(2.2rem, 4.8vw, 4.4rem); line-height: 1.02; margin-top: 18px; max-width: 16ch; }
+    .packs .rows { margin-top: clamp(40px, 5vw, 72px); }
+    .packs .rows h3 { color: var(--paper); }
+
+    .close { padding: var(--space) 0; }
+    .close h2 { font-size: clamp(2.4rem, 5.4vw, 5rem); line-height: 1; max-width: 13ch; }
+    .close .actions { margin-top: 32px; }
+    .close .fine { margin-top: 18px; font-size: 15px; color: var(--ink-mute); }
+    .family { margin-top: clamp(56px, 7vw, 88px); padding-top: 24px; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: baseline; font-size: 15px; color: var(--ink-soft); }
+    .family .label { margin-right: 4px; }
+
+    @media (max-width: 960px) {
+      .g-moment { justify-self: start; order: -1; transform: rotate(0.8deg); margin-bottom: 8px; }
+      .fan { height: auto; margin-top: 16px; padding: 0 8px 12px 0; }
+      .fan .slip { position: relative; top: auto !important; left: auto !important; width: 92%; max-width: 440px; }
+      .fan .slip + .slip { margin-top: -10px; }
+      .fan .slip:nth-child(2) { margin-left: 8%; }
+      .fan .slip:nth-child(3) { margin-left: 2%; }
+    }
+    @media (max-width: 620px) {
+      .facts li { grid-template-columns: 1fr; gap: 2px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <nav class="nav" id="nav" aria-label="Main">
+    <div class="wrap">
+      <a href="/" class="nav-logo" aria-label="HalpCraft home"><img src="/logos/halpcraft-logo-on-light.png" alt="HalpCraft" width="1935" height="480" fetchpriority="high" /></a>
+      <a class="btn nav-cta" href="mailto:hello@halpcraft.com?subject=HalpCraft Agency Enquiry">Talk to us</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <ul id="navLinks">
+        <li class="group">Products</li>
+        <li><a href="/#onboarding-nudges">Onboarding Nudges</a></li>
+        <li><a href="https://btm.halpcraft.com/">Between Two Minds</a></li>
+        <li class="sep" aria-hidden="true"></li>
+        <li class="group">Company</li>
+        <li><a href="/#believe">What we believe</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="mailto:hello@halpcraft.com?subject=HalpCraft Agency Enquiry" class="btn">Talk to us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- 1. The use case, inside the product, inside the brand -->
+    <header class="g-hero">
+      <div class="wrap">
+        <p class="label crumb"><a href="/#onboarding-nudges">Onboarding Nudges</a><span aria-hidden="true">/</span><span>For recruitment agencies</span></p>
+        <h1 class="display">You placed them.<span class="l2">Now make sure they stick.</span></h1>
+        <div class="split">
+          <div>
+            <p class="lead">The relationship doesn&rsquo;t end when your candidate starts. HalpCraft Onboarding Nudges gives their hiring manager ten well-timed nudges across the first 150 days, so the start you worked hard to arrange gets the support it needs.</p>
+            <div class="actions">
+              <a class="btn btn--azure" href="mailto:hello@halpcraft.com?subject=HalpCraft Agency Enquiry">Talk to us about your placements</a>
+              <a class="link" href="tel:+64220854626">Call Damian &rarr;</a>
+            </div>
+          </div>
+          <div class="g-moment">
+            <div class="note" aria-hidden="true">
+              <span>you sold them this role. this checks it held.</span>
+              <svg width="150" height="40" viewBox="0 0 150 40"><path d="M6 10 C 50 42, 100 38, 144 20" /><path d="M132 10 L145 20 L131 28" /></svg>
+            </div>
+            <article class="slip arrive" aria-label="An example nudge the hiring manager receives">
+              <p class="slip-when">Day 25 &middot; 9:00</p>
+              <h3>The Ethos Guard</h3>
+              <p>Is what you promised in the interview matching their lived reality? Check now, not at month three.</p>
+              <p class="slip-foot">Onboarding Nudges &middot; in the hiring manager&rsquo;s calendar</p>
+            </article>
+          </div>
+        </div>
+        <div class="thread g-hero-exit" data-motion>
+          <p class="thread-cap">You did the hard part. Then day one arrives, and it&rsquo;s out of your hands.</p>
+          <span class="thread-line" aria-hidden="true"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. The gap -->
+    <section class="band band--ink gap" aria-labelledby="gapTitle">
+      <div class="wrap">
+        <p class="label dot-label">The gap</p>
+        <h2 class="display" id="gapTitle">The relationship doesn&rsquo;t end when they start.</h2>
+        <div class="split">
+          <p class="claim">When a placement fails early, you wear the cost: in fees, reputation, and relationships.</p>
+          <div class="prose">
+            <p>You put weeks into finding the right person and convincing them the role was right. From day one, whether they stay depends on how well they&rsquo;re brought in, and that sits with someone else.</p>
+            <p>Onboarding Nudges gives that someone a little help, at the moments that matter.</p>
+            <!-- VERIFY: both figures below are on the Phase 5 claims verification list. Kept at low prominence until sources are confirmed. -->
+            <div class="cited" data-verify="agency-figures">
+              <h3>Figures we cite</h3>
+              <ul>
+                <li>88% of organisations do onboarding poorly, by their own admission. <cite>Gallup, 2023</cite></li>
+                <li>$30k+ average cost to replace a single mid-level employee. <cite>Gallup, 2024</cite></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. What the hiring manager gets -->
+    <section class="gets" aria-labelledby="getsTitle">
+      <div class="wrap split">
+        <div>
+          <p class="label">What the hiring manager gets</p>
+          <h2 id="getsTitle">150 days of structured support. Delivered invisibly.</h2>
+          <p class="lead">Ten research-backed nudges land directly in the hiring manager&rsquo;s calendar across the first 150 days. No app. No login. No IT approval. Just the right action at the right time.</p>
+          <ul class="facts">
+            <li><b>Lands in</b><span>Google Calendar, Outlook or Apple Calendar. One .ics file imports all ten nudges.</span></li>
+            <li><b>Timing</b><span>The week before, Day 1, end of week 1, Day 12, Day 25, Day 40, through to Day 150.</span></li>
+            <li><b>Shift work</b><span>Standard and shift worker schedules.</span></li>
+          </ul>
+          <p class="more"><a class="link" href="https://app.halpcraft.com/sample">Read a sample nudge &rarr;</a></p>
+        </div>
+        <div class="fan" aria-label="Three of the ten onboarding nudges">
+          <article class="slip">
+            <p class="slip-when">One week before</p>
+            <h3>The Team Signal</h3>
+            <p>&ldquo;Your new hire starts next week. Is the team ready?&rdquo;</p>
+          </article>
+          <article class="slip">
+            <p class="slip-when">Day 1</p>
+            <h3>The Belonging Ritual</h3>
+            <p>Day 1 actions that create psychological safety and signal long-term investment.</p>
+          </article>
+          <article class="slip">
+            <p class="slip-when">Day 12</p>
+            <h3>The Pace Setter</h3>
+            <p>The hand-holding has stopped but real competence hasn&rsquo;t arrived. Normalise the learning curve.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. How it works for an agency -->
+    <section class="how" aria-labelledby="howTitle">
+      <div class="wrap">
+        <div class="head">
+          <p class="label">Simple by design</p>
+          <h2 id="howTitle">Set up in under two minutes per placement.</h2>
+        </div>
+        <ol class="rows">
+          <li><span class="n">01</span><h3>Buy your agency package</h3><p>Purchase your bulk programme pack. You&rsquo;ll receive instructions to set up each placement as you go.</p></li>
+          <li><span class="n">02</span><h3>Fill in the setup form</h3><p>When a placement is made, fill in a short form with the hiring manager&rsquo;s details and the employee&rsquo;s start date. Takes 60 seconds.</p></li>
+          <li><span class="n">03</span><h3>HalpCraft does the rest</h3><p>The hiring manager receives an email with a single calendar file. All ten nudges import instantly. Nothing else required.</p></li>
+          <li><span class="n">04</span><h3>The first 150 days are covered</h3><p>150 days of structured onboarding runs automatically. You get the credit. HalpCraft does the work.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Why agencies use it -->
+    <section class="band band--ink why" aria-labelledby="whyTitle">
+      <div class="wrap">
+        <p class="label">Why agencies use it</p>
+        <h2 id="whyTitle">It keeps you in the story after the placement.</h2>
+        <ol class="rows">
+          <li><span class="n">01</span><h3>Protect your placement fee</h3><p>A structured 150-day onboarding programme is there to reduce the risk of an early departure. Your placement has a better chance of sticking.</p></li>
+          <li><span class="n">02</span><h3>Stand out from agencies that stop at the placement</h3><p>Most agencies&rsquo; involvement ends when the contract is signed. Including a structured onboarding programme with every placement gives your clients something they&rsquo;ll notice.</p></li>
+          <li><span class="n">03</span><h3>Show clients you&rsquo;re invested</h3><p>Including Onboarding Nudges with every placement signals something money can&rsquo;t buy: that you genuinely care whether the person succeeds, not just whether the deal closes.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6. Packages -->
+    <section class="band band--azure packs" aria-labelledby="packsTitle">
+      <div class="wrap">
+        <p class="label dot-label">Agency packages</p>
+        <h2 id="packsTitle">Every agency is different. Your package should be too.</h2>
+        <div class="split" style="margin-top:28px">
+          <p class="lead">Whether you place 10 people a year or 200, we&rsquo;ll put together a package that fits your volume and your budget. Bulk pricing starts well below our solo rate, and every placement gets the full 150-day programme.</p>
+        </div>
+        <ol class="rows">
+          <li><span class="n">01</span><h3>Volume-based pricing</h3><p>The more placements you cover, the lower the per-employee cost.</p></li>
+          <li><span class="n">02</span><h3>No lock-in</h3><p>Buy a pack, use it across placements, reorder when you need more.</p></li>
+          <li><span class="n">03</span><h3>White-label ready</h3><p>Want HalpCraft to feel like part of your agency&rsquo;s offer? We can discuss that too.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 7. Close -->
+    <section class="close" aria-labelledby="closeTitle">
+      <div class="wrap">
+        <h2 id="closeTitle">Ready to protect your placements?</h2>
+        <div class="actions">
+          <a class="btn btn--azure" href="mailto:hello@halpcraft.com?subject=HalpCraft Agency Enquiry">Email us &rarr;</a>
+          <a class="btn btn--line" href="tel:+64220854626">Call Damian &rarr;</a>
+        </div>
+        <p class="fine">We respond within 2 business hours.</p>
+        <p class="family"><span class="label">Part of HalpCraft</span><a class="link" href="/#onboarding-nudges">Onboarding Nudges</a><a class="link" href="https://btm.halpcraft.com/">Between Two Minds</a><a class="link" href="/about">Who&rsquo;s behind it</a></p>
+      </div>
+    </section>
+
+    <section class="signoff" aria-label="HalpCraft">
+      <div class="wrap">
+        <p>Better Leaders<span class="bar" aria-hidden="true"></span><br />Better Workplaces</p>
+        <small>Helping good leaders do the job a little better.</small>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a href="/" class="foot-logo"><img loading="lazy" src="/logos/halpcraft-logo-on-dark.png" alt="HalpCraft" width="1875" height="480" /></a>
+          <p class="foot-tag">Better Leaders | Better Workplaces</p>
+        </div>
+        <div class="foot-cols">
+          <div><h4>Products</h4><ul><li><a href="/#onboarding-nudges">Onboarding Nudges</a></li><li><a href="https://btm.halpcraft.com/">Between Two Minds</a></li><li><a href="/agency">For agencies</a></li><li><a href="/quiz">Onboarding Score</a></li></ul></div>
+          <div><h4>Company</h4><ul><li><a href="/#believe">What we believe</a></li><li><a href="/about">About</a></li><li><a href="mailto:hello@halpcraft.com">Contact</a></li></ul></div>
+          <div><h4>Already bought?</h4><ul><li><a href="/redeem">Redeem a code</a></li><li><a href="/privacy">Privacy</a></li></ul></div>
+        </div>
+      </div>
+      <div class="foot-base"><span>&copy; 2026 HalpCraft. Made in New Zealand.</span><span>Helping good leaders do the job a little better.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    document.documentElement.classList.add('js');
+    (function () {
+      var els = document.querySelectorAll('[data-motion]');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-in'); }); return; }
+      var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('is-in'); io.unobserve(x.target); } }); }, { threshold: 0.3 });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+    (function () {
+      var nav = document.getElementById('nav'), btn = document.getElementById('navToggle');
+      btn.addEventListener('click', function () { var o = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); btn.textContent = o ? 'Close' : 'Menu'; });
+    })();
+  </script>
+</body>
+</html>

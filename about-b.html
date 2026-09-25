@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | HalpCraft</title>
+  <meta name="description" content="There's a real person behind HalpCraft. Damian Sicely spent nearly twenty years watching good leaders let down by a lack of support at the right moment, and built HalpCraft to change that." />
+  <!-- PREVIEW ROUTE: remove the robots noindex line below when this file becomes about.html. -->
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="canonical" href="https://www.halpcraft.com/about" />
+  <meta name="theme-color" content="#F3EFE7" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="HalpCraft" />
+  <meta property="og:title" content="About HalpCraft" />
+  <meta property="og:description" content="There's a real person behind HalpCraft, and he's been where you are." />
+  <meta property="og:url" content="https://www.halpcraft.com/about" />
+  <meta property="og:image" content="https://www.halpcraft.com/logos/halpcraft-og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/logos/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/css/halpcraft.css" />
+  <style>
+    /* About: page rhythm */
+    .a-hero { padding: clamp(40px, 5vw, 72px) 0 0; }
+    .a-hero .grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 96px); align-items: end; margin-top: clamp(28px, 4vw, 48px); }
+    .a-hero h1 { font-size: clamp(2.6rem, 6vw, 6rem); }
+    .a-hero .lead { margin-top: 28px; }
+    .portrait { position: relative; justify-self: end; width: 100%; max-width: 400px; }
+    .portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; }
+    .portrait figcaption { margin-top: 14px; font-size: 14px; color: var(--ink-mute); }
+    .portrait figcaption b { color: var(--ink); font-weight: 600; }
+    .a-hero-exit { margin-top: clamp(64px, 8vw, 112px); padding-bottom: clamp(40px, 5vw, 64px); }
+    .a-hero-exit .thread-line { --thread-h: calc(100% - 0.55em + clamp(150px, 16vw, 220px) - 46px); }
+
+    .seen { padding-top: clamp(150px, 16vw, 220px); }
+    .seen .display { font-size: clamp(2.2rem, 5vw, 4.8rem); max-width: 20ch; margin-top: 24px; }
+    .seen .display .l2 { color: rgba(243,239,231,0.62); }
+    .seen .split { margin-top: clamp(56px, 7vw, 96px); padding-top: 36px; border-top: 1px solid var(--rule-on-ink); }
+    .seen .claim { font: 400 clamp(1.6rem, 2.6vw, 2.3rem)/1.2 var(--serif); color: var(--paper); max-width: 14em; }
+    .seen-exit { margin-top: clamp(56px, 7vw, 96px); }
+    .seen-exit p { font: 400 clamp(1.9rem, 3.8vw, 3.3rem)/1.1 var(--serif); letter-spacing: -0.02em; font-variation-settings: "opsz" 72; color: var(--paper); padding-left: 28px; }
+    .seen-exit .thread-line { top: 0.5em; --thread-h: calc(100% - 0.5em + var(--space) * 2 + 8px); }
+
+    .built { padding: calc(var(--space) + 16px) 0 var(--space); }
+    .built h2 { font-size: clamp(2.2rem, 4.6vw, 4.2rem); line-height: 1.02; margin-top: 18px; max-width: 12ch; }
+    .built .pull { margin-top: clamp(40px, 5vw, 64px); font: italic 400 clamp(1.6rem, 2.8vw, 2.4rem)/1.15 var(--serif); color: var(--azure); font-variation-settings: "opsz" 72; max-width: 16em; }
+    .built .prose { padding-top: 8px; }
+
+    .belief .display { font-size: clamp(2rem, 4.4vw, 4.2rem); line-height: 1.08; max-width: 24ch; margin-top: 28px; }
+    .belief .display::before { content: "\201C"; }
+    .belief .display::after { content: "\201D"; }
+    .belief .by { margin-top: 28px; font-size: 15px; }
+    .belief .link { color: var(--paper); border-bottom-color: rgba(243,239,231,0.6); }
+
+    .made { padding: var(--space) 0; }
+    .made h2 { font-size: clamp(2.2rem, 4.6vw, 4.2rem); line-height: 1.02; margin-top: 18px; max-width: 14ch; }
+    .made .rows { margin-top: clamp(40px, 5vw, 72px); }
+    .made .rows .sub { font: italic 400 1.15rem/1.3 var(--serif); color: var(--ink-soft); margin-top: 8px; }
+    .made .rows .link { display: inline-block; margin-top: 14px; }
+    .made .btm-name { font-style: italic; font-weight: 600; }
+
+    .invite { padding: 0 0 var(--space); }
+    .invite h2 { font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.05; max-width: 16ch; }
+    .invite .lead { margin-top: 18px; }
+    .invite .actions { margin-top: 32px; }
+
+    @media (max-width: 960px) {
+      .a-hero .grid { grid-template-columns: 1fr; align-items: start; }
+      .portrait { justify-self: start; max-width: 320px; }
+    }
+    @media (max-width: 620px) {
+      .portrait { max-width: 78%; }
+      .seen-exit p { padding-left: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <nav class="nav" id="nav" aria-label="Main">
+    <div class="wrap">
+      <a href="/" class="nav-logo" aria-label="HalpCraft home"><img src="/logos/halpcraft-logo-on-light.png" alt="HalpCraft" width="1935" height="480" fetchpriority="high" /></a>
+      <a class="btn nav-cta" href="mailto:hello@halpcraft.com">Contact</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <ul id="navLinks">
+        <li class="group">Products</li>
+        <li><a href="/#onboarding-nudges">Onboarding Nudges</a></li>
+        <li><a href="https://btm.halpcraft.com/">Between Two Minds</a></li>
+        <li class="sep" aria-hidden="true"></li>
+        <li class="group">Company</li>
+        <li><a href="/#believe">What we believe</a></li>
+        <li><a href="/about" aria-current="page">About</a></li>
+        <li><a href="mailto:hello@halpcraft.com" class="btn">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- 1. Who is behind HalpCraft -->
+    <header class="a-hero">
+      <div class="wrap">
+        <p class="label">About HalpCraft</p>
+        <div class="grid">
+          <div>
+            <h1 class="display">There&rsquo;s a real person behind HalpCraft.<span class="l2">He&rsquo;s been where you are.</span></h1>
+            <p class="lead">HalpCraft makes practical tools for the real work of leading people. This is where it came from, and who&rsquo;s behind it.</p>
+          </div>
+          <figure class="portrait reveal-photo" data-motion>
+            <img src="/damian.jpg" alt="Damian Sicely, founder of HalpCraft" width="400" height="533" />
+            <figcaption><b>Damian Sicely</b> &middot; Founder, HalpCraft &middot; New Zealand</figcaption>
+          </figure>
+        </div>
+        <div class="thread a-hero-exit" data-motion>
+          <p class="thread-cap">It started with something he kept seeing.</p>
+          <span class="thread-line" aria-hidden="true"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. What Damian has seen -->
+    <section class="band band--ink seen" aria-labelledby="seenTitle">
+      <div class="wrap">
+        <p class="label dot-label" style="--c:1">What he&rsquo;s seen</p>
+        <h2 class="display" id="seenTitle">&ldquo;I&rsquo;ve spent nearly twenty years watching good leaders fail the people around them.<span class="l2">Not because they didn&rsquo;t care, but because nobody gave them the right support at the right moment.&rdquo;</span></h2>
+        <div class="split">
+          <p class="claim">That pattern shows up everywhere.</p>
+          <div class="prose">
+            <p>Across industries, across countries, across organisations of every size. Leaders who are capable, committed, and completely stretched, making decisions in a vacuum because the tools available to them are either too complex, too expensive, too late, or simply not there.</p>
+          </div>
+        </div>
+        <div class="thread seen-exit" data-motion>
+          <p>I built HalpCraft to change that.</p>
+          <span class="thread-line" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Why that led to HalpCraft -->
+    <section class="built" aria-labelledby="builtTitle">
+      <div class="wrap split">
+        <div>
+          <p class="label dot-label">Why I built it the way I did</p>
+          <h2 id="builtTitle">I&rsquo;m an executive leader, not a developer.</h2>
+          <p class="pull">The best solutions are almost always the simplest ones.</p>
+        </div>
+        <div class="prose">
+          <p>When I decided this problem was worth solving I had a choice: wait until the conditions were perfect, or back myself and use the best tools available to build something real.</p>
+          <p>I chose the latter. I partnered with AI to design, build and refine HalpCraft from the ground up. What that process taught me is that the best solutions are almost always the simplest ones. No friction. No new platforms to learn. Just something that works quietly in the background, supporting managers at the moments that matter, without adding to the noise of an already busy working week.</p>
+          <p>I have an MBA and have spent the better part of two decades getting close to real business problems and backing people to solve them. HalpCraft is that same instinct, applied to a problem I&rsquo;ve watched cause real damage to real people for far too long.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. What HalpCraft believes -->
+    <section class="band band--azure belief" aria-labelledby="beliefTitle">
+      <div class="wrap">
+        <p class="label dot-label">What HalpCraft believes</p>
+        <h2 class="display" id="beliefTitle">Give a leader the right insight at the right moment, without adding complexity to an already relentless working week, and they will almost always do the right thing by their people.</h2>
+        <p class="by"><a class="link" href="/#believe">Read what we believe &rarr;</a></p>
+      </div>
+    </section>
+
+    <!-- 5. How that belief shapes the products -->
+    <section class="made" aria-labelledby="madeTitle">
+      <div class="wrap">
+        <div class="split">
+          <div>
+            <p class="label">What that belief has become</p>
+            <h2 id="madeTitle">A growing suite of tools, built around one belief.</h2>
+          </div>
+          <p class="lead" style="align-self:end">Simple, well-timed, affordable, and designed for the leaders who give a damn.</p>
+        </div>
+        <ol class="rows">
+          <li>
+            <span class="n">01</span>
+            <div>
+              <h3>Onboarding Nudges</h3>
+              <p class="sub">For the first 150 days of a new hire.</p>
+            </div>
+            <div>
+              <p>Ten well-timed nudges in the manager&rsquo;s calendar, each with what to do and the words to use. No app to check. No dashboard to forget.</p>
+              <a class="link" href="/#onboarding-nudges">Explore Onboarding Nudges &rarr;</a>
+            </div>
+          </li>
+          <li>
+            <span class="n">02</span>
+            <div>
+              <h3 class="btm-name">Between Two Minds</h3>
+              <p class="sub">For the argument in your own head.</p>
+            </div>
+            <div>
+              <p>A comic-book reflection tool. Pick the version of you that showed up, name the voice that pushed back, and answer a few honest questions.</p>
+              <a class="link" href="https://btm.halpcraft.com/">Open Between Two Minds &rarr;</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6. Invitation -->
+    <section class="invite" aria-labelledby="inviteTitle">
+      <div class="wrap">
+        <h2 id="inviteTitle">Want to know if HalpCraft is right for your team?</h2>
+        <p class="lead">Ask a person. Email <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a> and we&rsquo;ll reply within 24 hours.</p>
+        <div class="actions">
+          <a class="btn" href="mailto:hello@halpcraft.com">Email us</a>
+          <a class="btn btn--line" href="/">Explore HalpCraft &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="signoff" aria-label="HalpCraft">
+      <div class="wrap">
+        <p>Better Leaders<span class="bar" aria-hidden="true"></span><br />Better Workplaces</p>
+        <small>Helping good leaders do the job a little better.</small>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a href="/" class="foot-logo"><img loading="lazy" src="/logos/halpcraft-logo-on-dark.png" alt="HalpCraft" width="1875" height="480" /></a>
+          <p class="foot-tag">Better Leaders | Better Workplaces</p>
+        </div>
+        <div class="foot-cols">
+          <div><h4>Products</h4><ul><li><a href="/#onboarding-nudges">Onboarding Nudges</a></li><li><a href="https://btm.halpcraft.com/">Between Two Minds</a></li><li><a href="/agency">For agencies</a></li><li><a href="/quiz">Onboarding Score</a></li></ul></div>
+          <div><h4>Company</h4><ul><li><a href="/#believe">What we believe</a></li><li><a href="/about">About</a></li><li><a href="mailto:hello@halpcraft.com">Contact</a></li></ul></div>
+          <div><h4>Already bought?</h4><ul><li><a href="/redeem">Redeem a code</a></li><li><a href="/privacy">Privacy</a></li></ul></div>
+        </div>
+      </div>
+      <div class="foot-base"><span>&copy; 2026 HalpCraft. Made in New Zealand.</span><span>Helping good leaders do the job a little better.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    document.documentElement.classList.add('js');
+    (function () {
+      var els = document.querySelectorAll('[data-motion]');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-in'); }); return; }
+      var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('is-in'); io.unobserve(x.target); } }); }, { threshold: 0.3 });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+    (function () {
+      var nav = document.getElementById('nav'), btn = document.getElementById('navToggle');
+      btn.addEventListener('click', function () { var o = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); btn.textContent = o ? 'Close' : 'Menu'; });
+    })();
+  </script>
+</body>
+</html>

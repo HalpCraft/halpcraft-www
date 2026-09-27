@@ -36,6 +36,26 @@
       "source": "/hero.html.html",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/about-b",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/about-b.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/agency-b",
+      "destination": "/agency",
+      "permanent": true
+    },
+    {
+      "source": "/agency-b.html",
+      "destination": "/agency",
+      "permanent": true
     }
   ]
 }

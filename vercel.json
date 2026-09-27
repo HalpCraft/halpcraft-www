@@ -23,6 +23,11 @@
       "permanent": true
     },
     {
+      "source": "/hero",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/hero.html",
       "destination": "/",
       "permanent": true

@@ -263,11 +263,37 @@ Enter your code, fill in your new hire's details, and you'll receive a calendar 
 
   <script>
     const API_BASE = 'https://app.halpcraft.com';
-    const SECRET   = 'Dragonball';
 
-    // Read qty from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const qty = parseInt(urlParams.get('qty') || '1', 10);
+    // Phase 10B: Stripe sends buyers here with ?session_id={CHECKOUT_SESSION_ID}.
+    // The pack size comes from the verified purchase, never from the URL.
+    const SESSION_ID = new URLSearchParams(window.location.search).get('session_id') || '';
+    let alreadyIssued = false;
+
+    (async function loadPurchase() {
+      const btn = document.getElementById('submitBtn');
+      if (!SESSION_ID) {
+        btn.disabled = true;
+        showError('We could not find your purchase. Please use the link from your Stripe checkout, or contact hello@halpcraft.com.');
+        return;
+      }
+      try {
+        const res  = await fetch(`${API_BASE}/api/codes?session_id=${encodeURIComponent(SESSION_ID)}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'We could not confirm your purchase.');
+        const n = data.entitlements;
+        document.querySelector('#step1 .page-headline').textContent = `Your ${data.label} pack is ready.`;
+        document.querySelector('#step1 .page-sub').textContent = `Enter your details below and we'll generate your ${n} unique setup code${n === 1 ? '' : 's'} immediately.`;
+        if (data.issued) {
+          alreadyIssued = true;
+          document.querySelectorAll('#setupForm .form-field').forEach(el => { el.style.display = 'none'; });
+          document.querySelector('#step1 .page-sub').textContent = `Your ${n} code${n === 1 ? ' has' : 's have'} already been generated and emailed to ${data.sentTo || 'you'}.`;
+          btn.textContent = 'Re-send my codes →';
+        }
+      } catch (err) {
+        btn.disabled = true;
+        showError(err.message + ' If you have paid, contact hello@halpcraft.com.');
+      }
+    })();
 
     // ── Form submit ──────────────────────────────────────────────────────────
     document.getElementById('setupForm').addEventListener('submit', async function (e) {
@@ -277,7 +303,7 @@ Enter your code, fill in your new hire's details, and you'll receive a calendar 
       const btn        = document.getElementById('submitBtn');
       const errEl      = document.getElementById('errorMsg');
 
-      if (!buyerName || !buyerEmail) {
+      if (!alreadyIssued && (!buyerName || !buyerEmail)) {
         showError('Please fill in both fields.');
         return;
       }
@@ -289,14 +315,20 @@ Enter your code, fill in your new hire's details, and you'll receive a calendar 
       try {
         const res = await fetch(`${API_BASE}/api/codes`, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-HalpCraft-Secret': SECRET,
-          },
-          body: JSON.stringify({ buyerName, buyerEmail, qty }),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId: SESSION_ID, buyerName, buyerEmail }),
         });
 
         const data = await res.json();
+
+        if (res.ok && data.alreadyIssued) {
+          document.querySelectorAll('#setupForm .form-field').forEach(el => { el.style.display = 'none'; });
+          document.querySelector('#step1 .page-sub').textContent = `We've re-sent your ${data.qty} code${data.qty === 1 ? '' : 's'} to ${data.sentTo || 'the email you used'}.`;
+          btn.textContent = 'Re-send my codes →';
+          btn.disabled = false;
+          alreadyIssued = true;
+          return;
+        }
 
         if (!res.ok || !data.codes) {
           throw new Error(data.error || 'Something went wrong. Please try again.');

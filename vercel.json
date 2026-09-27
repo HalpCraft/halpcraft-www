@@ -1,4 +1,36 @@
 {
   "version": 2,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/welcome",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/welcome.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/concept-home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/concept-home.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/hero.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/hero.html.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
 }

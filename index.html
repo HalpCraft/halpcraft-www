@@ -1,1542 +1,916 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-NZ">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HalpCraft — Leadership That Lands</title>
-  <meta name="description" content="Science-backed leadership nudges delivered directly to your calendar. No app. No dashboard. Just the right nudge at the right moment." />
+  <title>HalpCraft | Better Leaders, Better Workplaces</title>
+  <meta name="description" content="HalpCraft helps good leaders do the job a little better. Practical tools for the real work of leading people: Onboarding Nudges and Between Two Minds." />
+  <link rel="canonical" href="https://www.halpcraft.com/" />
+  <meta name="theme-color" content="#F3EFE7" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="HalpCraft" />
+  <meta property="og:title" content="HalpCraft | Better Leaders, Better Workplaces" />
+  <meta property="og:description" content="You care about your people. You're also carrying a lot. HalpCraft makes practical tools that help good leaders do the job a little better." />
+  <meta property="og:url" content="https://www.halpcraft.com/" />
+  <meta property="og:image" content="https://www.halpcraft.com/logos/halpcraft-og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="HalpCraft logo with the line: You care about your people. You're also carrying a lot." />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/logos/favicon-32.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    /* =====================================================================
+       HalpCraft storytelling modules (reusable on other pages)
+       .label      small uppercase section label
+       .display    oversized statement type
+       .split      asymmetric two-column layout (wide / narrow)
+       .slip       a "real moment": one calendar item, printed-paper feel
+       .note       handwritten-style annotation (Fraunces italic + drawn stroke)
+       .band       full-bleed colour band (ink | azure)
+       .spread     a product spread in the portfolio
+       .rows       numbered editorial rows (steps, next actions)
+       ===================================================================== */
     :root {
-      --ink:    #171714;
-      --paper:  #F3EFE7;
-      --azure: #096977;
-      --azure-lt: #4F9199; --azure-dk: #07535E;
-      --muted:  #6b6660;
-      --rule:   rgba(23,23,20,0.12);
-      --serif:  'Fraunces', Georgia, serif;
-      --sans:   'DM Sans', system-ui, sans-serif;
+      --ink: #171714; --paper: #F3EFE7; --azure: #096977; --moss: #66745D; --clay: #B86F52;
+      --azure-dk: #07535E;
+      --sheet: #FBF9F4;
+      --ink-soft: rgba(23,23,20,0.76);
+      --ink-mute: rgba(23,23,20,0.62);
+      --rule: rgba(23,23,20,0.16);
+      --on-ink: rgba(243,239,231,0.8);
+      --on-ink-mute: rgba(243,239,231,0.62);
+      --rule-on-ink: rgba(243,239,231,0.18);
+      --serif: 'Fraunces', Georgia, serif;
+      --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+      --wrap: 1280px;
+      --gutter: clamp(20px, 4.5vw, 64px);
+      --space: clamp(88px, 12vw, 176px);
     }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: var(--paper); color: var(--ink); font: 400 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .skip { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--ink); color: var(--paper); padding: 10px 16px; font: 600 14px var(--sans); text-decoration: none; }
+    .skip:focus { top: 12px; }
+    :focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+    .band--ink :focus-visible, .spread--btm :focus-visible, .turn :focus-visible, footer :focus-visible, .band--azure :focus-visible { outline-color: var(--paper); }
+    [id] { scroll-margin-top: 90px; }
 
-    html { scroll-behavior: smooth; }
+    /* type */
+    h1, h2, h3, .display { font-family: var(--serif); font-weight: 400; letter-spacing: -0.018em; font-variation-settings: "opsz" 72; }
+    .label { font: 600 12px/1.4 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); }
+    .label b { color: var(--azure); font-weight: 600; }
+    .display { font-size: clamp(2.8rem, 7.4vw, 7rem); line-height: 0.98; letter-spacing: -0.025em; }
+    .lead { font-size: clamp(1.05rem, 1.35vw, 1.2rem); color: var(--ink-soft); max-width: 34em; }
+    .link { color: var(--azure); font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(9,105,119,0.35); padding-bottom: 1px; }
+    .link:hover { border-bottom-color: var(--azure); }
+    .btn { display: inline-block; font: 600 15px/1 var(--sans); text-decoration: none; padding: 17px 26px; border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+    .btn:hover { background: transparent; color: var(--ink); }
+    .btn--azure { background: var(--azure); border-color: var(--azure); }
+    .btn--azure:hover { background: var(--azure-dk); border-color: var(--azure-dk); color: var(--paper); }
+    .btn--line { background: transparent; color: var(--ink); }
+    .btn--line:hover { background: var(--ink); color: var(--paper); }
 
-    body {
-      font-family: var(--sans);
-      background: var(--paper);
-      color: var(--ink);
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    /* module: split */
+    .split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 104px); }
+    .split--rev { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 
-    /* ─── NAV ─────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.25rem 4rem;
-      background: rgba(243,239,231,0.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--rule);
-    }
+    /* module: slip */
+    .slip { position: relative; background: var(--sheet); border: 1px solid var(--ink); padding: 22px 24px 20px; max-width: 420px; }
+    .slip::after { content: ""; position: absolute; inset: 8px -8px -8px 8px; border: 1px solid var(--rule); z-index: -1; background: var(--paper); }
+    .slip-when { display: flex; align-items: center; gap: 10px; font: 600 12px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--azure); }
+    .slip-when::before { content: ""; width: 9px; height: 9px; background: var(--azure); border-radius: 50%; }
+    .slip h3 { font-size: clamp(1.6rem, 2.3vw, 2rem); line-height: 1.1; margin-top: 12px; }
+    .slip p { margin-top: 10px; font-size: 15.5px; color: var(--ink-soft); line-height: 1.5; }
+    .slip-foot { margin-top: 18px; padding-top: 12px; border-top: 1px dashed var(--rule); display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; color: var(--ink-mute); }
+    .slip-done { font: 600 13px var(--sans); color: var(--ink); background: none; border: 1.5px solid var(--ink); padding: 7px 12px; cursor: pointer; }
+    .slip-done:hover { background: var(--ink); color: var(--paper); }
+    .slip.is-done h3 { text-decoration: line-through; text-decoration-color: var(--azure); text-decoration-thickness: 2px; color: var(--ink-mute); }
+    .slip.is-done .slip-done { background: var(--azure); border-color: var(--azure); color: var(--paper); }
 
-    .nav-logo {
-      display: inline-flex;
-      align-items: center;
-      text-decoration: none;
-    }
-    .nav-logo img {
-      height: 67px;
-      width: auto;
-      display: block;
-    }
-    @media (max-width: 768px) {
-      .nav-logo img {
-        height: 50px;
-      }
-    }
+    /* module: note (handwritten-style annotation) */
+    .note { position: absolute; font: italic 400 1.15rem/1.25 var(--serif); color: var(--azure); font-variation-settings: "opsz" 24; pointer-events: none; }
+    .note svg { display: block; overflow: visible; }
+    .note path { fill: none; stroke: var(--azure); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    .nav-links {
-      display: flex; gap: 2.5rem; list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--ink); }
+    /* module: band */
+    .band { padding: var(--space) 0; }
+    .band--ink { background: var(--ink); color: var(--paper); }
+    .band--azure { background: var(--azure); color: var(--paper); }
 
-    .nav-cta {
-      background: var(--ink);
-      color: var(--paper) !important;
-      padding: 0.55rem 1.4rem;
-      border-radius: 2px;
-      font-weight: 500 !important;
-      letter-spacing: 0.04em !important;
-      text-transform: uppercase !important;
-      font-size: 0.8rem !important;
-      transition: background 0.2s !important;
-    }
-    .nav-cta:hover { background: var(--azure) !important; color: var(--paper) !important; }
+    /* module: rows */
+    .rows { list-style: none; border-top: 2px solid currentColor; }
+    .rows > li { display: grid; grid-template-columns: 72px minmax(0, 5fr) minmax(0, 6fr); gap: 24px 40px; padding: clamp(28px, 3.4vw, 44px) 0; border-bottom: 1px solid var(--rule); align-items: start; }
+    .rows .n { font: 400 clamp(1.3rem, 2vw, 1.6rem)/1 var(--serif); color: var(--azure); font-variant-numeric: oldstyle-nums; padding-top: 6px; }
+    .rows h3 { font-size: clamp(1.6rem, 2.6vw, 2.3rem); line-height: 1.08; }
+    .rows p { color: var(--ink-soft); }
 
-    /* ─── HERO ────────────────────────────────────── */
-    .hero {
-      min-height: 92vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: stretch;
-      padding-top: 5rem;
-      position: relative;
-      overflow: hidden;
-    }
+    /* ── NAV ───────────────────────────────────────── */
+    .nav { position: sticky; top: 0; z-index: 60; background: var(--paper); border-bottom: 1px solid var(--rule); }
+    .nav .wrap { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo img { height: 46px; width: auto; }
+    .nav ul { list-style: none; display: flex; align-items: center; gap: 30px; }
+    .nav ul a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--ink-soft); }
+    .nav ul a:hover { color: var(--ink); }
+    .nav ul .btn { padding: 11px 18px; font-size: 14px; color: var(--paper); }
+    .nav ul .btn:hover { color: var(--ink); }
+    .nav-cta { display: none; }
+    .nav-toggle { display: none; background: none; border: 1.5px solid var(--ink); font: 600 14px var(--sans); padding: 8px 14px; color: var(--ink); cursor: pointer; }
 
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 6rem 3rem 6rem 4rem;
-    }
+    /* ── 01 RECOGNITION ────────────────────────────── */
+    .hero { padding: clamp(40px, 5vw, 72px) 0 var(--space); position: relative; }
+    .masthead { display: flex; align-items: center; gap: 14px; font: 600 12px var(--sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); }
+    .masthead::before { content: ""; width: 40px; height: 2px; background: var(--azure); }
+    .masthead i { font-style: normal; color: var(--azure); }
+    .hero h1 { margin-top: clamp(36px, 5vw, 64px); font-size: clamp(2.6rem, 5.9vw, 6rem); }
+    .hero h1 .l2 { display: block; color: var(--ink-mute); }
+    .hero h1 .l2 em { font-style: italic; color: var(--ink); }
+    .hero-below { margin-top: clamp(48px, 6vw, 88px); align-items: start; }
+    .positioning { font: 400 clamp(1.5rem, 2.4vw, 2.1rem)/1.2 var(--serif); letter-spacing: -0.01em; max-width: 18em; }
+    .hero-below .lead { margin-top: 18px; }
+    .hero-actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
+    .hero-moment { position: relative; justify-self: end; width: 100%; max-width: 420px; transform: rotate(1.2deg); margin-top: -12px; }
+    .hero-moment .slip { max-width: none; }
+    .hero-moment .note { left: -150px; top: 58%; width: 150px; transform: rotate(-1.2deg); }
+    .hero-moment .note span { display: block; margin-bottom: 6px; }
 
-    .hero-eyebrow {
-      font-family: var(--sans);
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--azure);
-      margin-bottom: 1.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: block;
-      width: 2rem;
-      height: 1px;
-      background: var(--azure);
-    }
+    /* ── 02 BELIEF ─────────────────────────────────── */
+    .belief .label { color: var(--on-ink-mute); }
+    .belief .display { margin-top: 24px; max-width: 12ch; }
+    .pile { list-style: none; margin-top: clamp(56px, 7vw, 104px); }
+    .pile li { font: 400 clamp(1.9rem, 4.6vw, 4.2rem)/1.08 var(--serif); letter-spacing: -0.02em; font-variation-settings: "opsz" 72; color: rgba(243,239,231,0.44); padding: 0.06em 0; }
+    .pile li:nth-child(2) { padding-left: 8%; }
+    .pile li:nth-child(3) { padding-left: 16%; }
+    .pile li:nth-child(4) { padding-left: 24%; }
+    .pile li:nth-child(5) { padding-left: 28%; color: var(--paper); }
+    @media (min-width: 961px) { .pile li { white-space: nowrap; } }
+    .pile li:nth-child(5) span { background: linear-gradient(var(--azure), var(--azure)) left bottom / 100% 0.14em no-repeat; padding-bottom: 0.04em; }
+    .belief-after { margin-top: clamp(64px, 8vw, 120px); padding-top: 36px; border-top: 1px solid var(--rule-on-ink); }
+    .belief-after p { color: var(--on-ink); font-size: 1.12rem; max-width: 32em; }
+    .belief-after p + p { margin-top: 1em; }
+    .belief-after .claim { font: 400 clamp(1.6rem, 2.6vw, 2.3rem)/1.2 var(--serif); color: var(--paper); max-width: 16em; }
 
-    .hero-headline {
-      font-family: var(--serif);
-      font-size: clamp(2.5rem, 4.8vw, 4.2rem);
-      font-weight: 600;
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      margin-bottom: 2rem;
-      max-width: 17ch;
-      text-wrap: balance;
-    }
-    .hero-headline em {
-      font-style: italic;
-      color: var(--azure);
-    }
+    /* ── 03 APPROACH ───────────────────────────────── */
+    .approach { padding: var(--space) 0; }
+    .approach-head { align-items: end; }
+    .approach-head h2 { font-size: clamp(2.2rem, 4.6vw, 4rem); line-height: 1.02; margin-top: 18px; }
+    .stairs { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); margin-top: clamp(56px, 7vw, 96px); }
+    .stairs li { border-top: 2px solid var(--ink); padding-top: 20px; }
+    .stairs li:nth-child(2) { margin-top: clamp(40px, 6vw, 88px); }
+    .stairs li:nth-child(3) { margin-top: clamp(80px, 12vw, 176px); }
+    .stairs p.word { color: var(--ink); font: 400 clamp(2.6rem, 4.8vw, 4.4rem)/1 var(--serif); letter-spacing: -0.025em; font-variation-settings: "opsz" 72; }
+    .stairs .word .dot { color: var(--azure); }
+    .stairs h3 { font: 600 13px/1.3 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-top: 18px; }
+    .stairs p { margin-top: 10px; color: var(--ink-soft); max-width: 22em; }
+    .pull { margin-top: clamp(64px, 8vw, 112px); display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; }
+    .pull q { quotes: none; font: italic 400 clamp(2rem, 4.2vw, 3.6rem)/1.05 var(--serif); letter-spacing: -0.02em; color: var(--azure); font-variation-settings: "opsz" 72; }
+    .pull span { color: var(--ink-mute); font-size: 15px; max-width: 24em; }
 
-    .hero-body {
-      font-size: 1.125rem;
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 42ch;
-      margin-bottom: 3rem;
-      font-weight: 300;
-    }
+    /* ── 04 PRODUCT WORLD ──────────────────────────── */
+    .world-head { padding: 0 0 clamp(48px, 6vw, 88px); }
+    .world-head h2 { font-size: clamp(2.6rem, 6vw, 5.6rem); line-height: 0.98; letter-spacing: -0.025em; margin-top: 18px; max-width: 13ch; }
+    .world-head .lead { margin-top: 28px; }
+    .maker { display: flex; align-items: center; gap: 16px; margin-top: 36px; font-size: 14px; color: var(--ink-mute); }
+    .maker img { height: 30px; width: auto; }
 
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
+    .spread { position: relative; }
+    .spread-name { font: 400 clamp(3.4rem, 9vw, 8.4rem)/0.9 var(--serif); letter-spacing: -0.035em; font-variation-settings: "opsz" 72; }
+    .spread-by { display: block; font: 600 12px var(--sans); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; }
+    .spread-tag { font: italic 400 clamp(1.4rem, 2.2vw, 1.9rem)/1.2 var(--serif); margin-top: 18px; }
+    .spread-copy { margin-top: 22px; max-width: 30em; }
+    .facts { list-style: none; margin-top: 26px; }
+    .facts li { padding: 10px 0; border-top: 1px solid var(--rule); font-size: 15px; display: grid; grid-template-columns: 130px 1fr; gap: 16px; }
+    .facts li:last-child { border-bottom: 1px solid var(--rule); }
+    .facts b { font-weight: 600; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); padding-top: 3px; }
+    .spread-links { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; }
 
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--ink);
-      color: var(--paper);
-      padding: 0.9rem 2.25rem;
-      font-family: var(--sans);
-      font-size: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      border: 2px solid var(--ink);
-      transition: all 0.25s;
-      cursor: pointer;
-    }
-    .btn-primary:hover {
-      background: transparent;
-      color: var(--ink);
-    }
+    /* Nudges: calm, paper, practical */
+    .spread--nudges { padding: clamp(40px, 5vw, 72px) 0 clamp(80px, 10vw, 140px); }
+    .spread--nudges .spread-by { color: var(--azure); }
+    .spread--nudges .spread-name { font-size: clamp(3rem, 7.2vw, 7rem); }
+    .spread--nudges .spread-name span, .spread--btm .spread-name span { display: block; }
+    .spread--nudges .spread-tag { color: var(--ink-soft); }
+    .spread--nudges .spread-copy { color: var(--ink-soft); }
+    .fan { position: relative; height: 640px; }
+    .fan .slip { position: absolute; width: min(80%, 380px); }
+    .fan .slip:nth-child(1) { top: 0; left: 4%; transform: rotate(-3deg); }
+    .fan .slip:nth-child(2) { top: 210px; left: 18%; transform: rotate(1.5deg); }
+    .fan .slip:nth-child(3) { top: 420px; left: 8%; transform: rotate(-1deg); }
+    .fan .slip .slip-foot { display: none; }
+    .fan .note { right: -8px; top: 120px; width: 120px; text-align: right; }
 
-    .btn-primary.btn-gold {
-      background: var(--azure);
-      border-color: var(--azure);
-      color: var(--paper);
-    }
-    .btn-primary.btn-gold:hover {
-      background: transparent;
-      color: var(--ink);
-    }
+    /* Between Two Minds: louder, ink, comic */
+    .spread--btm { background: var(--ink); color: var(--paper); padding: var(--space) 0; overflow: hidden; }
+    .spread--btm .spread-by { color: var(--on-ink-mute); }
+    .spread--btm .spread-tag { color: var(--on-ink); }
+    .spread--btm .spread-copy { color: var(--on-ink); }
+    .spread--btm .facts li { border-color: var(--rule-on-ink); }
+    .spread--btm .facts b { color: var(--on-ink-mute); }
+    .spread--btm .spread-name { font-weight: 600; font-style: italic; letter-spacing: -0.03em; }
+    .spread--btm .spread-name span { display: block; }
+    .spread .split { align-items: center; }
+    .comic { align-items: start; position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; transform: rotate(-1.5deg); }
+    .comic figure { border: 6px solid var(--paper); background: var(--paper); position: relative; }
+    .comic figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+    .comic figcaption { position: absolute; left: -6px; bottom: -6px; background: var(--paper); color: var(--ink); padding: 8px 12px 6px; font: 700 13px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
+    .comic figcaption small { display: block; font-weight: 600; font-size: 10px; letter-spacing: 0.16em; color: var(--ink-mute); }
+    .comic .vs { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%) rotate(-6deg); background: var(--clay); color: var(--ink); font: italic 700 clamp(1.6rem, 2.6vw, 2.4rem)/1 var(--serif); padding: 12px 16px 14px; border: 4px solid var(--ink); z-index: 2; }
+    .bubble { position: relative; margin-top: 44px; background: var(--paper); color: var(--ink); padding: 20px 24px; max-width: 460px; border: 3px solid var(--ink); transform: rotate(1deg); font: italic 400 1.35rem/1.3 var(--serif); }
+    .bubble::after { content: ""; position: absolute; left: 44px; bottom: -22px; border-width: 22px 22px 0 0; border-style: solid; border-color: var(--paper) transparent transparent transparent; }
+    .bubble small { display: block; font: 600 11px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 6px; font-style: normal; }
+    .spread--btm .btn { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+    .spread--btm .btn:hover { background: transparent; color: var(--paper); }
 
-    .btn-secondary {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      border-bottom: 1px solid transparent;
-      padding-bottom: 2px;
-      transition: all 0.2s;
-    }
-    .btn-secondary:hover {
-      color: var(--ink);
-      border-bottom-color: var(--ink);
-    }
+    /* The empty third slot */
+    .workshop { padding: clamp(56px, 7vw, 96px) 0; }
+    .workshop .slot { border: 1.5px dashed rgba(23,23,20,0.35); padding: clamp(28px, 4vw, 48px); display: grid; grid-template-columns: 72px minmax(0, 5fr) minmax(0, 6fr); gap: 24px 40px; align-items: baseline; }
+    .workshop .n { font: 400 1.6rem/1 var(--serif); color: var(--ink-mute); }
+    .workshop h3 { font-size: clamp(1.6rem, 2.6vw, 2.3rem); color: var(--ink-mute); }
+    .workshop p { color: var(--ink-soft); }
 
-    .hero-stats {
-      display: flex;
-      gap: 3rem;
-      margin-top: 4rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid var(--rule);
-    }
-    .stat-num {
-      font-family: var(--serif);
-      font-size: 2.2rem;
-      font-weight: 300;
-      font-style: italic;
-      color: var(--ink);
-      line-height: 1;
-      margin-bottom: 0.25rem;
-    }
-    .stat-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-    }
+    /* ── 05 HUMAN PROOF ────────────────────────────── */
+    .founder { padding: var(--space) 0; border-top: 1px solid var(--rule); position: relative; }
+    .founder-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 104px); align-items: start; }
+    .founder .photo { position: relative; max-width: 400px; }
+    .founder .photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; }
+    .founder .photo figcaption { margin-top: 14px; font-size: 14px; color: var(--ink-mute); }
+    .founder .photo figcaption b { color: var(--ink); font-weight: 600; }
+    .founder .display { font-size: clamp(3.2rem, 8vw, 7.4rem); }
+    .founder .story { margin-top: clamp(32px, 4vw, 48px); max-width: 34em; }
+    .founder .story p { color: var(--ink-soft); font-size: 1.1rem; }
+    .founder .story p + p { margin-top: 1em; }
+    .founder .story .strong { color: var(--ink); font: 400 clamp(1.35rem, 2vw, 1.7rem)/1.3 var(--serif); }
+    .founder .sign { position: relative; margin-top: 36px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .founder .sign .name { font: italic 400 1.8rem/1 var(--serif); position: relative; }
+    .founder .sign .name svg { position: absolute; left: -6px; bottom: -14px; width: 130px; height: 18px; }
+    .founder .sign .name path { fill: none; stroke: var(--azure); stroke-width: 2; stroke-linecap: round; }
 
-    /* ─── HERO RIGHT — calendar visual ───────────── */
-    .hero-right {
-      background: var(--ink);
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-    }
+    /* ── 06 STATEMENT ──────────────────────────────── */
+    .statement { text-align: left; }
+    .statement .label { color: var(--paper); }
+    .statement .display { margin-top: 28px; font-size: clamp(2.6rem, 6.4vw, 6.2rem); max-width: 16ch; }
+    .statement .display .bar { display: inline-block; width: 0.07em; height: 0.82em; background: var(--paper); vertical-align: -0.05em; margin: 0 0.18em; }
+    .statement p { margin-top: 36px; color: var(--paper); font-size: 1.2rem; max-width: 30em; }
 
-    .hero-right::before {
-      display: none;
-    }
+    /* ── 07 ACTION ─────────────────────────────────── */
+    .action { padding: var(--space) 0; }
+    .action h2 { font-size: clamp(2.6rem, 6vw, 5.4rem); line-height: 0.98; letter-spacing: -0.025em; margin-top: 18px; }
+    .action .lead { margin-top: 20px; }
+    .action .rows { margin-top: clamp(40px, 5vw, 72px); }
+    .free form { display: flex; margin-top: 4px; max-width: 520px; }
+    .free input { flex: 1; min-width: 0; font: 400 16px var(--sans); padding: 15px 16px; border: 1.5px solid var(--ink); border-right: 0; background: var(--sheet); color: var(--ink); border-radius: 0; }
+    .free input:focus { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .free button { font: 600 15px var(--sans); padding: 15px 20px; background: var(--ink); color: var(--paper); border: 1.5px solid var(--ink); cursor: pointer; white-space: nowrap; }
+    .free button:hover { background: var(--azure); border-color: var(--azure); }
+    .free button:disabled { opacity: .6; cursor: default; }
+    .free .fine { margin-top: 10px; font-size: 13px; color: var(--ink-mute); }
+    .free .ok { font: 400 1.2rem var(--serif); color: var(--azure); }
+    .free .err { margin-top: 10px; font-size: 14px; color: var(--ink); }
+    .packs { margin-top: 14px; font-size: 14px; color: var(--ink-mute); }
+    .packs a { color: var(--ink); font-weight: 600; }
+    .contact { margin-top: 40px; font-size: 15px; color: var(--ink-mute); }
+    .contact a { color: var(--ink); }
 
-    .calendar-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 4px;
-      width: 100%;
-      max-width: 380px;
-      overflow: hidden;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.4);
-    }
+    .ask { margin-top: clamp(48px, 6vw, 80px); display: grid; grid-template-columns: 72px minmax(0, 5fr) minmax(0, 6fr); gap: 24px 40px; align-items: start; }
+    .ask h3 { font-size: clamp(1.6rem, 2.6vw, 2.3rem); line-height: 1.08; }
+    .ask .sub { margin-top: 10px; color: var(--ink-soft); font-size: 15px; }
+    .ask .sub a { color: var(--ink); }
+    .ask form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .ask input, .ask textarea { font: 400 16px var(--sans); padding: 13px 14px; border: 1.5px solid rgba(23,23,20,0.55); background: var(--sheet); color: var(--ink); border-radius: 0; width: 100%; }
+    .ask textarea { grid-column: 1 / -1; resize: vertical; min-height: 110px; }
+    .ask input:focus, .ask textarea:focus { border-color: var(--ink); outline: 2px solid var(--azure); outline-offset: 2px; }
+    .ask button { grid-column: 1 / -1; justify-self: start; }
+    .ask .ok { font: 400 1.2rem var(--serif); color: var(--azure); }
 
-    .cal-header {
-      background: rgba(79,145,153,0.15);
-      border-bottom: 1px solid rgba(79,145,153,0.3);
-      padding: 1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .cal-dot { width: 10px; height: 10px; border-radius: 50%; }
+    /* ── FOOTER ────────────────────────────────────── */
+    footer { background: var(--ink); color: var(--on-ink-mute); padding: 56px 0 40px; font-size: 14px; }
+    .foot-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; }
+    .foot-logo img { height: 48px; width: auto; }
+    .foot-tag { margin-top: 14px; font: 600 11px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; }
+    .foot-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .foot-cols h4 { font: 600 11px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(243,239,231,0.5); margin-bottom: 12px; }
+    .foot-cols ul { list-style: none; }
+    .foot-cols li + li { margin-top: 8px; }
+    .foot-cols a { text-decoration: none; color: rgba(243,239,231,0.85); }
+    .foot-cols a:hover { color: var(--paper); }
+    .foot-base { margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(243,239,231,0.14); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: rgba(243,239,231,0.5); font-size: 13px; }
 
-    .cal-title {
-      font-family: var(--serif);
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.7);
-      margin-left: 0.5rem;
-      letter-spacing: 0.02em;
-    }
 
-    .cal-events {
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
+    /* ── Narrative connective tissue (Phase 3C) ─────────
+       .thread   the Dark Azure line that carries the story across chapter changes
+       .bridge   a short connective line of copy between chapters
+       Motion only runs when JS has added html.js and the visitor allows motion. */
+    .thread { position: relative; z-index: 5; }
+    .thread .wrap { position: relative; }
+    .thread-line { position: absolute; left: var(--thread-x, 0); top: 0; width: 2px; height: var(--thread-h, 150px); background: var(--azure); transform-origin: top; }
+    .thread-line::after { content: ""; position: absolute; left: -4px; bottom: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--azure); }
+    .thread--light .thread-line, .thread--light .thread-line::after { background: var(--paper); }
+    .thread-cap { font: italic 400 clamp(1.25rem, 2vw, 1.7rem)/1.3 var(--serif); font-variation-settings: "opsz" 36; color: var(--azure); padding-left: 28px; max-width: 26em; }
+    .bridge { padding: clamp(72px, 10vw, 150px) 0; }
+    .bridge p { font: 400 clamp(1.9rem, 3.8vw, 3.3rem)/1.12 var(--serif); letter-spacing: -0.02em; font-variation-settings: "opsz" 72; max-width: 22ch; }
+    .bridge p .quiet { color: var(--ink-mute); }
+    .bridge--center { text-align: center; }
+    .bridge--center p { margin: 0 auto; font-size: clamp(1.5rem, 2.6vw, 2.2rem); font-style: italic; color: var(--ink-soft); max-width: 24ch; }
+    .bridge--ink { background: var(--ink); color: var(--paper); }
 
-    .cal-event {
-      padding: 1rem 1.25rem;
-      border-radius: 3px;
-      border-left: 3px solid;
-      opacity: 0;
-      transform: translateX(20px);
-      animation: slideIn 0.5s ease forwards;
-    }
-    .cal-event:nth-child(1) { animation-delay: 0.3s; border-color: var(--azure); background: rgba(79,145,153,0.1); }
-    .cal-event:nth-child(2) { animation-delay: 0.6s; border-color: #7eb3d0; background: rgba(126,179,208,0.08); }
-    .cal-event:nth-child(3) { animation-delay: 0.9s; border-color: #a8c5a0; background: rgba(168,197,160,0.08); }
-    .cal-event:nth-child(4) { animation-delay: 1.2s; border-color: var(--azure); background: rgba(79,145,153,0.1); }
+    /* hero → belief */
+    .hero { padding-bottom: 0; }
+    .hero-exit { margin-top: clamp(72px, 9vw, 128px); padding-bottom: clamp(40px, 5vw, 64px); }
+    .hero-exit .thread-cap { position: relative; }
+    .belief { padding-top: clamp(150px, 16vw, 220px); }
+    .thread--hero .thread-line { top: 0.55em; --thread-h: calc(100% - 0.55em + clamp(150px, 16vw, 220px) - 50px); }
+    .thread-line { width: 3px; }
+    .belief > .wrap > .label:first-child { padding-left: 28px; }
 
-    @keyframes slideIn {
-      to { opacity: 1; transform: translateX(0); }
-    }
+    /* belief → approach */
+    .belief-close { margin-top: clamp(56px, 7vw, 96px); }
+    .belief-close p { font: 400 clamp(1.9rem, 3.8vw, 3.3rem)/1.1 var(--serif); letter-spacing: -0.02em; font-variation-settings: "opsz" 72; color: var(--paper); max-width: 18ch; padding-left: 28px; }
+    .thread--belief .thread-line { top: 0.5em; --thread-h: calc(100% - 0.5em + var(--space) * 2 + clamp(40px, 5vw, 72px) + 4px); }
+    .approach { padding-top: calc(var(--space) + clamp(40px, 5vw, 72px)); }
+    .approach-head .label { color: var(--azure); padding-left: 28px; position: relative; }
+    .approach-head .label::before { content: ""; position: absolute; left: -4px; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--azure); transform: translateY(-50%); }
 
-    .cal-event-time {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 0.3rem;
-    }
-    .cal-event-title {
-      font-family: var(--serif);
-      font-size: 0.925rem;
-      color: rgba(255,255,255,0.9);
-      margin-bottom: 0.2rem;
-    }
-    .cal-event-sub {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.45);
-    }
+    /* nudges → btm */
+    .turn { background: var(--ink); color: var(--paper); padding: clamp(96px, 12vw, 176px) 0 0; }
+    .turn p { font: italic 400 clamp(2rem, 4.4vw, 4rem)/1.08 var(--serif); letter-spacing: -0.02em; font-variation-settings: "opsz" 72; max-width: 20ch; }
+    .turn p .from { display: block; font-style: normal; color: var(--on-ink-mute); font-size: 0.55em; margin-bottom: 0.5em; letter-spacing: -0.01em; }
+    .spread--btm { padding-top: clamp(64px, 8vw, 112px); }
+    .nudges-exit { padding-top: clamp(24px, 4vw, 56px); }
+    .nudges-exit p { font: italic 400 clamp(1.6rem, 3vw, 2.6rem)/1.15 var(--serif); letter-spacing: -0.015em; font-variation-settings: "opsz" 72; color: var(--ink-soft); }
 
-    .cal-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      margin-top: 1.25rem;
-      padding: 0.5rem 1rem;
-      background: rgba(79,145,153,0.15);
-      border: 1px solid rgba(79,145,153,0.3);
-      border-radius: 100px;
-      font-size: 0.72rem;
-      color: var(--azure-lt);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .cal-badge::before { content: '✓'; font-size: 0.8rem; }
+    /* btm → founder: a reset */
+    .workshop { padding: clamp(56px, 7vw, 96px) 0 0; }
+    .founder { border-top: 0; padding-top: 0; }
+    .founder-grid { align-items: center; }
+    .founder .photo { z-index: 1; }
+    .founder .headline { position: relative; z-index: 2; margin-left: clamp(-120px, -8vw, 0px); }
+    .founder .headline .display { background: var(--paper); display: inline; padding: 0 0.1em 0 0.12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+    .founder-exit { margin-top: clamp(72px, 9vw, 128px); }
+    .founder-exit .thread-cap { color: var(--ink-soft); }
+    .founder-exit .thread-cap b { color: var(--azure); font-weight: 400; }
+    .thread--founder .thread-line { top: 0.6em; --thread-h: calc(100% - 0.6em + var(--space)); }
+    .thread--founder .thread-line::after { display: none; }
+    .statement .label { padding-left: 28px; position: relative; }
+    .statement > .wrap { position: relative; }
+    .statement > .wrap::before { content: ""; position: absolute; left: var(--gutter); top: calc(var(--space) * -0.9); width: 3px; height: calc(var(--space) * 0.9 + 0.5em); background: var(--paper); }
+    .statement .label::before { content: ""; position: absolute; left: -4px; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--paper); transform: translateY(-50%); }
+    .action h2 { font-size: clamp(2.2rem, 4.6vw, 4.4rem); }
+    .statement { padding-top: calc(var(--space) * 0.9); }
 
-    /* ─── SCROLL TICKER ───────────────────────────── */
-    .ticker {
-      border-top: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-      padding: 1rem 0;
-      overflow: hidden;
-      white-space: nowrap;
-      background: var(--paper);
-    }
-    .ticker-inner {
-      display: inline-flex;
-      animation: ticker 30s linear infinite;
-    }
-    .ticker-item {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 0 3rem;
-    }
-    .ticker-item span { color: var(--azure); margin-right: 0.75rem; }
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
+    /* action + sign-off */
+    .action h2 .l2 { display: block; color: var(--ink-mute); }
+    .explore-link { display: inline-block; margin-bottom: clamp(28px, 4vw, 48px); font-size: 17px; }
+    .explore { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .signoff { padding: clamp(80px, 11vw, 160px) 0 clamp(64px, 8vw, 112px); border-top: 1px solid var(--rule); }
+    .signoff p { font: 400 clamp(2.6rem, 7.4vw, 7.2rem)/0.98 var(--serif); letter-spacing: -0.028em; font-variation-settings: "opsz" 72; }
+    .signoff p .bar { display: inline-block; width: 0.06em; height: 0.8em; background: var(--azure); vertical-align: -0.04em; margin: 0 0.2em; }
+    .signoff small { display: block; margin-top: 28px; font: 400 clamp(1.1rem, 1.6vw, 1.35rem)/1.4 var(--serif); font-style: italic; color: var(--ink-mute); }
 
-    /* ─── SECTION BASE ────────────────────────────── */
-    section { padding: 7rem 4rem; }
-    .section-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--azure);
-      margin-bottom: 1rem;
+    /* ── Motion (only with JS, only if the visitor allows it) ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .js .hero-moment .slip { animation: slipIn .8s cubic-bezier(.2,.7,.2,1) .35s both; }
+      .js .hero-moment .note { opacity: 0; animation: fadeNote .5s ease 1.2s forwards; }
+      .js .hero-moment .note path { stroke-dasharray: 220; stroke-dashoffset: 220; animation: draw .7s ease 1.3s forwards; }
+      .js [data-motion] .thread-line { transform: scaleY(0); transition: transform .9s cubic-bezier(.3,.6,.2,1); }
+      .js [data-motion].is-in .thread-line { transform: scaleY(1); }
+      .js .pile li { opacity: 0; transform: translateX(-18px); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+      .js .pile.is-in li { opacity: 1; transform: none; }
+      .js .pile.is-in li:nth-child(2) { transition-delay: .18s; } .js .pile.is-in li:nth-child(3) { transition-delay: .36s; }
+      .js .pile.is-in li:nth-child(4) { transition-delay: .54s; } .js .pile.is-in li:nth-child(5) { transition-delay: .9s; }
+      .js .pile li:nth-child(5) span { background-size: 0% 0.14em; transition: background-size .8s ease 1.6s; }
+      .js .pile.is-in li:nth-child(5) span { background-size: 100% 0.14em; }
+      .js .stairs li { border-top-color: transparent; position: relative; }
+      .js .stairs li::before { content: ""; position: absolute; left: 0; right: 0; top: -2px; height: 2px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .6s ease; }
+      .js .stairs li > * { opacity: 0; transition: opacity .5s ease; }
+      .js .stairs.is-in li::before { transform: scaleX(1); }
+      .js .stairs.is-in li > * { opacity: 1; }
+      .js .stairs.is-in li:nth-child(1)::before { transition-delay: 0s; }   .js .stairs.is-in li:nth-child(1) > * { transition-delay: .35s; }
+      .js .stairs.is-in li:nth-child(2)::before { transition-delay: .5s; }  .js .stairs.is-in li:nth-child(2) > * { transition-delay: .85s; }
+      .js .stairs.is-in li:nth-child(3)::before { transition-delay: 1s; }   .js .stairs.is-in li:nth-child(3) > * { transition-delay: 1.35s; }
+      .js .comic figure { transition: transform .7s cubic-bezier(.2,.7,.2,1), opacity .5s ease; opacity: 0; }
+      .js .comic figure:first-child { transform: translateX(-40px) rotate(-4deg); }
+      .js .comic figure:nth-child(2) { transform: translateX(40px) rotate(4deg); }
+      .js .comic.is-in figure { opacity: 1; transform: none; }
+      .js .comic .vs { opacity: 0; transform: translate(-50%, -50%) rotate(-6deg) scale(1.8); transition: transform .35s cubic-bezier(.3,1.6,.5,1) .6s, opacity .2s ease .6s; }
+      .js .comic.is-in .vs { opacity: 1; transform: translate(-50%, -50%) rotate(-6deg) scale(1); }
+      .js .founder-grid .photo img { clip-path: inset(100% 0 0 0); transition: clip-path 1s cubic-bezier(.3,.6,.2,1); }
+      .js .founder-grid .headline { opacity: 0; transform: translateX(24px); transition: opacity .7s ease .45s, transform .9s cubic-bezier(.2,.7,.2,1) .45s; }
+      .js .founder-grid.is-in .photo img { clip-path: inset(0 0 0 0); }
+      .js .founder-grid.is-in .headline { opacity: 1; transform: none; }
     }
-    .section-headline {
-      font-family: var(--serif);
-      font-size: clamp(2.4rem, 3.5vw, 3.2rem);
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      margin-bottom: 1.25rem;
-    }
-    .section-body {
-      font-size: 1.05rem;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 56ch;
-      font-weight: 300;
-    }
+    @keyframes slipIn { from { opacity: 0; transform: translateY(-28px) rotate(5deg); } to { opacity: 1; transform: rotate(0); } }
+    @keyframes fadeNote { to { opacity: 1; } }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
 
-    /* ─── PROBLEM ─────────────────────────────────── */
-    .problem {
-      background: var(--ink);
-      color: var(--paper);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-    }
-    .problem .section-label { color: var(--azure-lt); }
-    .problem .section-headline { color: var(--paper); }
-    .problem .section-body { color: rgba(243,239,231,0.6); }
-
-    .problem-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-    }
-    .prob-stat {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 2rem;
-    }
-    .prob-stat:hover { background: rgba(79,145,153,0.08); border-color: rgba(79,145,153,0.2); }
-    .prob-num {
-      font-family: var(--serif);
-      font-size: 3rem;
-      font-weight: 300;
-      font-style: italic;
-      color: var(--azure-lt);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .prob-label {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.5;
-    }
-    .prob-source {
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.2);
-      margin-top: 0.5rem;
-      letter-spacing: 0.04em;
-    }
-
-    /* ─── HOW IT WORKS ────────────────────────────── */
-    .how {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .how-header {
-      text-align: center;
-      margin-bottom: 5rem;
-    }
-    .how-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--rule);
-      border: 1px solid var(--rule);
-    }
-    .step {
-      background: var(--paper);
-      padding: 3rem 2.5rem;
-      position: relative;
-    }
-    .step:hover { background: #f0ece5; }
-    .step-num {
-      font-family: var(--serif);
-      font-size: 5rem;
-      font-weight: 900;
-      color: var(--rule);
-      line-height: 1;
-      position: absolute;
-      top: 1.5rem;
-      right: 2rem;
-      letter-spacing: -0.04em;
-      user-select: none;
-    }
-    .step-icon {
-      font-size: 1.75rem;
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-    .step-title {
-      font-family: var(--serif);
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.01em;
-    }
-    .step-body {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* ─── NUDGE SEQUENCE ──────────────────────────── */
-    .sequence {
-      background: var(--ink);
-      color: var(--paper);
-    }
-    .sequence-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-    .sequence-header .section-label { color: var(--azure-lt); }
-    .sequence-header .section-headline { color: var(--paper); }
-    .sequence-header .section-body { color: rgba(243,239,231,0.55); margin: 0 auto; }
-
-    .timeline {
-      position: relative;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 5.5rem;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: rgba(255,255,255,0.08);
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 7rem 1fr;
-      gap: 2rem;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      align-items: start;
-    }
-    .timeline-item:last-child { border-bottom: none; }
-    .timeline-item:hover .tl-title { color: var(--azure-lt); }
-
-    .tl-day {
-      font-family: var(--serif);
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--azure-lt);
-      padding-top: 0.15rem;
-      text-align: right;
-      padding-right: 2rem;
-      position: relative;
-    }
-    .tl-day::after {
-      content: '';
-      position: absolute;
-      right: -0.5rem;
-      top: 0.5rem;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--azure);
-      border: 2px solid var(--ink);
-    }
-
-    .tl-content {}
-    .tl-title {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--paper);
-      margin-bottom: 0.25rem;
-      transition: color 0.2s;
-    }
-    .tl-desc {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.4);
-      line-height: 1.5;
-    }
-    .tl-desc-locked {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.22);
-      line-height: 1.5;
-      font-style: italic;
-    }
-
-    /* ─── PRICING ─────────────────────────────────── */
-    .pricing-section {
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .pricing-section .section-body { margin: 0 auto 4rem; }
-
-    .pricing-cards {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr 1fr;
-      gap: 1.5rem;
-      align-items: end;
-    }
-
-    .price-card {
-      border: 1px solid var(--rule);
-      padding: 2.5rem 2rem;
-      text-align: left;
-      border-radius: 2px;
-      transition: border-color 0.2s;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-    .price-card:hover { border-color: var(--azure); }
-    .price-card.featured {
-      border-color: var(--ink);
-      background: var(--ink);
-      color: var(--paper);
-      padding: 3.5rem 2rem;
-    }
-
-    .price-tier {
-      font-size: 0.7rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-    .price-card.featured .price-tier { color: var(--azure-lt); }
-
-    .price-amount {
-      font-family: var(--serif);
-      font-size: 3.2rem;
-      font-weight: 300;
-      font-style: italic;
-      letter-spacing: -0.03em;
-      line-height: 1;
-      margin-bottom: 0.25rem;
-    }
-    .price-per {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-    .price-card.featured .price-per { color: rgba(243,239,231,0.5); }
-
-    .price-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 2.5rem;
-    }
-    .price-features li {
-      font-size: 0.875rem;
-      color: var(--muted);
-      display: flex;
-      align-items: flex-start;
-      gap: 0.6rem;
-    }
-    .price-card.featured .price-features li { color: rgba(243,239,231,0.7); }
-    .price-features li::before {
-      content: '→';
-      color: var(--azure);
-      flex-shrink: 0;
-      margin-top: 0.05em;
-    }
-
-    .price-note {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.3);
-      text-align: center;
-      margin-top: 0.75rem;
-    }
-    .coming-soon {
-      text-align: center;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      border: 1px solid var(--rule);
-      padding: 0.5rem 1rem;
-      border-radius: 100px;
-      margin-bottom: 2rem;
-      display: inline-block;
-    }
-
-    /* ─── PRICING GRID ────────────────────────────── */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-      align-items: stretch;
-      margin-top: 3rem;
-    }
-    @media (max-width: 900px) {
-      .pricing-grid { grid-template-columns: 1fr; }
-    }
-    .price-save-tag {
-      position: absolute; top: 1.5rem; right: 1.5rem;
-      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase;
-      background: rgba(79,145,153,0.12); color: var(--azure);
-      border: 1px solid rgba(79,145,153,0.25);
-      padding: 0.28rem 0.7rem; border-radius: 100px;
-    }
-    .price-card .btn-primary { margin-top: auto; }
-    .price-card.featured .price-save-tag {
-      background: rgba(79,145,153,0.2); color: var(--azure-lt);
-      border-color: rgba(79,145,153,0.35);
-    }
-    .price-most-popular {
-      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
-      background: var(--azure); color: var(--paper);
-      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; padding: 0.3rem 1rem; white-space: nowrap;
-    }
-
-    /* ─── TESTIMONIALS ────────────────────────────── */
-    .testimonials {
-      background: #f0ece5;
-      padding: 7rem 4rem;
-    }
-    .testimonials-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-    .test-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .test-card {
-      background: var(--paper);
-      border: 1px solid var(--rule);
-      padding: 2.5rem;
-      border-radius: 2px;
-    }
-    .test-quote {
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      font-style: italic;
-      line-height: 1.75;
-      color: var(--ink);
-      margin-bottom: 2rem;
-    }
-    .test-quote::before { content: '\201C'; color: var(--azure); font-size: 1.5em; line-height: 0; vertical-align: -0.4em; margin-right: 0.2em; }
-    .test-author {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--ink);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .test-role {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 0.2rem;
-    }
-    .test-placeholder {
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--azure);
-      margin-top: 0.5rem;
-    }
-
-    /* ─── ABOUT / VISION ──────────────────────────── */
-    .vision {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-    }
-    .vision-manifesto {
-      font-family: var(--serif);
-      font-size: 1.6rem;
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.65;
-      color: var(--ink);
-      border-left: 3px solid var(--azure);
-      padding-left: 2rem;
-      margin: 2.5rem 0;
-    }
-
-    .vision-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    .vision-list li {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-    .vision-list li::before {
-      content: '→';
-      color: var(--azure);
-      flex-shrink: 0;
-      font-weight: 500;
-    }
-    .vision-right {
-      background: var(--ink);
-      padding: 4rem;
-      color: var(--paper);
-    }
-    .vision-right .section-label { color: var(--azure-lt); margin-bottom: 2rem; }
-    .product-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .product-item {
-      padding: 1.5rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .product-item:last-child { border-bottom: none; }
-    .product-name {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--paper);
-      margin-bottom: 0.25rem;
-    }
-    .product-desc {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.4);
-    }
-    .product-tag {
-      display: inline-block;
-      margin-top: 0.5rem;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 0.2rem 0.6rem;
-      border-radius: 100px;
-    }
-    .tag-live { background: rgba(168,197,160,0.2); color: #a8c5a0; border: 1px solid rgba(168,197,160,0.3); }
-    .tag-soon { background: rgba(79,145,153,0.15); color: var(--azure-lt); border: 1px solid rgba(79,145,153,0.2); }
-    .tag-2026 { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.08); }
-
-    /* ─── CONTACT FORM ───────────────────────────── */
-    .contact-form-wrap {
-      margin-top: 3rem;
-      max-width: 480px;
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .contact-form-label {
-      font-family: var(--sans);
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(243,239,231,0.4);
-      margin-bottom: 1.25rem;
-    }
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .contact-form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-    }
-    .contact-input {
-      font-family: var(--sans);
-      font-size: 0.875rem;
-      font-weight: 300;
-      color: var(--paper);
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 6px;
-      padding: 0.75rem 1rem;
-      width: 100%;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .contact-input::placeholder { color: rgba(243,239,231,0.3); }
-    .contact-input:focus { border-color: var(--azure); }
-    textarea.contact-input { resize: vertical; min-height: 100px; }
-    .contact-submit {
-      font-family: var(--sans);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--paper);
-      background: var(--azure);
-      border: none;
-      border-radius: 6px;
-      padding: 0.85rem 2rem;
-      cursor: pointer;
-      align-self: flex-start;
-      transition: opacity 0.2s;
-    }
-    .contact-submit:hover { opacity: 0.85; }
-    .contact-submit:disabled { opacity: 0.5; cursor: not-allowed; }
-    .contact-success {
-      font-family: var(--serif);
-      font-size: 1rem;
-      font-style: italic;
-      color: var(--azure-lt);
-      margin-top: 1rem;
-    }
-    @media (max-width: 600px) {
-      .contact-form-row { grid-template-columns: 1fr; }
-    }
-
-    /* ─── FREE NUDGE ──────────────────────────────── */
-    .free-nudge {
-      background: var(--ink);
-      color: var(--paper);
-      text-align: center;
-    }
-    .free-nudge .section-label { color: var(--azure-lt); }
-    .free-nudge .section-headline { color: var(--paper); }
-    .free-nudge .section-body { color: rgba(243,239,231,0.55); margin: 0 auto 2.5rem; }
-    .free-nudge-form {
-      display: flex; gap: 0.75rem;
-      justify-content: center;
-      max-width: 480px; margin: 0 auto;
-    }
-    .free-nudge-form .contact-input { flex: 1; }
-    .free-nudge-form .contact-submit { align-self: auto; white-space: nowrap; }
-    .free-nudge-note { font-size: 0.78rem; color: rgba(243,239,231,0.3); margin-top: 1rem; letter-spacing: 0.02em; }
-    .free-nudge-error { font-size: 0.85rem; color: #e08080; margin-top: 1rem; }
-    @media (max-width: 600px) {
-      .free-nudge-form { flex-direction: column; }
-    }
-
-    /* ─── CTA FOOTER BAND ─────────────────────────── */
-    .cta-band {
-      background: var(--ink);
-      color: var(--paper);
-      text-align: center;
-      padding: 7rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-band::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(79,145,153,0.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cta-band .section-label { color: var(--azure-lt); text-align: center; }
-    .cta-band .section-headline { color: var(--paper); max-width: 18ch; margin: 0 auto 1.25rem; font-weight: 600; }
-    .cta-band .section-body { color: rgba(243,239,231,0.5); max-width: 50ch; margin: 0 auto 3rem; }
-
-    .cta-actions {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .btn-light {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--paper);
-      color: var(--ink);
-      padding: 0.9rem 2.25rem;
-      font-family: var(--sans);
-      font-size: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      border: 2px solid var(--paper);
-      transition: all 0.25s;
-    }
-    .btn-light:hover {
-      background: transparent;
-      color: var(--paper);
-    }
-
-    /* ─── FOOTER ──────────────────────────────────── */
-    footer {
-      background: #080808;
-      color: rgba(255,255,255,0.25);
-      padding: 3rem 4rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 2rem;
-    }
-    .footer-logo {
-      display: inline-flex;
-      align-items: center;
-      text-decoration: none;
-    }
-    .footer-logo img { height: 44px; width: auto; display: block; }
-    .footer-tagline {
-      font-size: 0.75rem;
-      margin-top: 0.3rem;
-      letter-spacing: 0.06em;
-    }
-    .footer-right {
-      text-align: right;
-      font-size: 0.75rem;
-      letter-spacing: 0.04em;
-    }
-    .footer-links {
-      display: flex;
-      gap: 2rem;
-      justify-content: flex-end;
-      margin-bottom: 0.75rem;
-      list-style: none;
-    }
-    .footer-links a {
-      color: rgba(255,255,255,0.3);
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--azure); }
-
-    /* ─── DESKTOP CALENDAR SCALE ─────────────────── */
-    @media (min-width: 901px) {
-      .calendar-card       { max-width: 470px; }
-      .cal-header          { padding: 1.25rem 1.55rem; }
-      .cal-dot             { width: 12px; height: 12px; }
-      .cal-title           { font-size: 1.1rem; }
-      .cal-events          { padding: 1.55rem; gap: 0.95rem; }
-      .cal-event           { padding: 1.25rem 1.55rem; }
-      .cal-event-time      { font-size: 0.875rem; }
-      .cal-event-title     { font-size: 1.15rem; }
-      .cal-event-sub       { font-size: 0.925rem; }
-    }
-
-    /* ─── MOBILE ──────────────────────────────────── */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); }
-
-    @media (max-width: 900px) {
-      nav { padding: 1.25rem 2rem; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { padding: 7rem 2rem 3rem; }
-      .hero-right { min-height: 0; padding: 0; }
-      .hero-right iframe { height: auto; aspect-ratio: 4 / 3; }
-      .hero-actions { flex-direction: column; align-items: stretch; gap: 12px; }
-      .hero-actions .btn-primary { width: 100%; justify-content: center; }
-      .hero-actions .btn-secondary { align-self: center; }
-      .hero-stats { gap: 2rem; }
-
-      section { padding: 5rem 2rem; }
-      .problem, .vision { grid-template-columns: 1fr; gap: 3rem; }
-      .how-steps { grid-template-columns: 1fr; }
-      .pricing-cards { grid-template-columns: 1fr; }
-      .test-grid { grid-template-columns: 1fr; }
-      .problem-stats { grid-template-columns: 1fr 1fr; }
-
-      footer { grid-template-columns: 1fr; }
-      .footer-right { text-align: left; }
-      .footer-links { justify-content: flex-start; }
-    }
-
-    /* ─── FADE IN ANIMATION ───────────────────────── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* ── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .hero-moment .note { display: none; }
+      .fan .note { display: none; }
+    }
+    @media (max-width: 960px) {
+      .nav ul { display: none; }
+      .nav-toggle { display: block; }
+      .nav .wrap { gap: 12px; }
+      .nav-logo { margin-right: auto; }
+      .nav-cta { display: inline-block; padding: 10px 14px; font-size: 14px; }
+      .nav.open ul { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; position: absolute; top: 76px; left: 0; right: 0; background: var(--paper); padding: 24px var(--gutter) 28px; border-bottom: 1px solid var(--rule); }
+      .split, .split--rev, .founder-grid, .foot-grid { grid-template-columns: 1fr; }
+      .hero-below { margin-top: clamp(28px, 6vw, 48px); }
+      .hero-moment { justify-self: start; margin-top: 0; order: -1; max-width: 460px; }
+      .ask { grid-template-columns: 48px minmax(0, 1fr); }
+      .ask > form, .ask > .ok { grid-column: 2; }
+      .fan { height: auto; display: block; margin-top: 16px; padding: 0 8px 12px 0; }
+      .fan .slip { position: relative; top: auto !important; left: auto !important; width: 92%; max-width: 440px; }
+      .fan .slip + .slip { margin-top: -10px; }
+      .fan .slip:nth-child(1) { transform: rotate(-2deg); }
+      .fan .slip:nth-child(2) { margin-left: 8%; transform: rotate(1.4deg); }
+      .fan .slip:nth-child(3) { margin-left: 2%; transform: rotate(-0.8deg); }
+      .stairs { grid-template-columns: 1fr; gap: 36px; }
+      .stairs li:nth-child(n) { margin-top: 0; }
+      .rows > li, .workshop .slot { grid-template-columns: 48px minmax(0, 1fr); }
+      .rows > li > :last-child, .workshop .slot p { grid-column: 2; }
+      .comic { max-width: 560px; margin-top: 8px; }
+      .founder .photo { max-width: 320px; }
+      .founder .headline { margin-left: 0; margin-top: -48px; }
+    }
+    @media (max-width: 620px) {
+      body { font-size: 16px; }
+      .nav .wrap { height: 64px; }
+      .nav-logo img { height: 38px; }
+      .nav.open ul { top: 64px; }
+      .nav-cta { padding: 9px 12px; font-size: 13px; }
+      .nav-toggle { padding: 7px 11px; font-size: 13px; }
+      .masthead { font-size: 11px; letter-spacing: 0.12em; }
+      .masthead::before { width: 22px; }
+      .hero-actions .btn { width: 100%; text-align: center; }
+      .hero-moment { transform: rotate(0.8deg); margin: 4px 6px 8px 0; }
+      .positioning { font-size: 1.5rem; }
+      .pile li:nth-child(n) { padding-left: 0; }
+      .pile li:nth-child(2) { padding-left: 6%; }
+      .pile li:nth-child(3) { padding-left: 12%; }
+      .pile li:nth-child(4) { padding-left: 18%; }
+      .pile li:nth-child(5) { padding-left: 0; }
+      .facts li { grid-template-columns: 1fr; gap: 2px; }
+      .comic { gap: 8px; }
+      .comic figure { border-width: 4px; }
+      .comic figcaption { font-size: 11px; padding: 6px 8px 4px; }
+      .rows > li, .workshop .slot { grid-template-columns: 1fr; gap: 10px; }
+      .rows > li > :last-child, .workshop .slot p { grid-column: auto; }
+      .spread-links .btn, .explore .btn { width: 100%; text-align: center; }
+      .ask { grid-template-columns: 1fr; gap: 14px; }
+      .ask > form, .ask > .ok { grid-column: auto; }
+      .ask form { grid-template-columns: 1fr; }
+      .ask button { justify-self: stretch; }
+      .founder .photo { max-width: 74%; }
+      .founder .headline { margin-top: 20px; padding-left: 0; }
+      .spread--nudges .spread-name { font-size: clamp(2.8rem, 13vw, 3.6rem); }
+      .free form { flex-direction: column; }
+      .free input { border-right: 1.5px solid var(--ink); border-bottom: 0; }
+      .foot-cols { grid-template-columns: 1fr 1fr; }
+      .statement .display .bar { display: block; width: 44px; height: 4px; margin: 0.2em 0 0.24em; }
+      .statement .display br { display: none; }
+      .thread-cap, .belief-close p, .approach-head .label { padding-left: 22px; }
+      .signoff p .bar { display: block; width: 44px; height: 4px; margin: 0.18em 0 0.22em; }
+      .signoff p br { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
   </style>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-logo">
-  <img src="/logos/halpcraft-logo-on-light.png" alt="HalpCraft" />
-</a>
-    <ul class="nav-links">
-      <li><a href="#how">How It Works</a></li>
-      <li><a href="#sequence">The Sequence</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="/quiz">The Onboarding Score</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="#pricing" class="nav-cta">Get Started</a></li>
-    </ul>
-    <div class="hamburger">
-      <span></span><span></span><span></span>
+  <nav class="nav" id="nav" aria-label="Main">
+    <div class="wrap">
+      <a href="/" class="nav-logo" aria-label="HalpCraft home"><img src="/logos/halpcraft-logo-on-light.png" alt="HalpCraft" width="1935" height="480" fetchpriority="high" /></a>
+      <a class="btn nav-cta" href="#start">Start small</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <ul id="navLinks">
+        <li><a href="#believe">What we believe</a></li>
+        <li><a href="#tools">Our tools</a></li>
+        <li><a href="#founder">Who&rsquo;s behind it</a></li>
+        <li><a href="/quiz">Onboarding Score</a></li>
+        <li><a href="#start" class="btn">Start small</a></li>
+      </ul>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <p class="hero-eyebrow">The 150-Day Onboarding Programme</p>
-      <h1 class="hero-headline">
-        New hires fail when everyone <em>assumes</em> they're fine.
-      </h1>
-      <p class="hero-body">
-        10 research-backed nudges delivered to your calendar across 150 critical days. No app to check. No dashboard to forget. Just the right nudge, right when your new hire needs you.
-      </p>
-      <div class="hero-actions">
-        <a href="#pricing" class="btn-primary btn-gold">Start the programme →</a>
-        <a href="#free-nudge" class="btn-secondary">Try one nudge free →</a>
+  <main id="main">
+
+    <!-- 01 RECOGNITION -->
+    <header class="hero">
+      <div class="wrap">
+        <p class="masthead">Better Leaders <i>|</i> Better Workplaces</p>
+        <h1 class="display">You care about your people.<span class="l2">You&rsquo;re also <em>carrying a lot.</em></span></h1>
+
+        <div class="split hero-below">
+          <div>
+            <p class="positioning">Helping good leaders do the job a little better.</p>
+            <p class="lead">HalpCraft makes practical tools for the real work of leading people. Small, well-timed, and built by someone who has done the job.</p>
+            <div class="hero-actions">
+              <a class="btn" href="#believe">What we believe</a>
+              <a class="link" href="#tools">See the tools &rarr;</a>
+            </div>
+          </div>
+
+          <div class="hero-moment">
+            <div class="note" aria-hidden="true">
+              <span>this is the whole idea, really</span>
+              <svg width="140" height="44" viewBox="0 0 140 44"><path d="M4 8 C 40 40, 90 40, 132 22" /><path d="M120 12 L133 22 L119 30" /></svg>
+            </div>
+            <article class="slip" id="heroSlip" aria-label="An example HalpCraft moment">
+              <p class="slip-when">Tomorrow &middot; 9:00</p>
+              <h3>Ask, then stop talking.</h3>
+              <p>Ask one person: &ldquo;What&rsquo;s one thing you&rsquo;ve come across that you&rsquo;re not sure about, but haven&rsquo;t asked about yet?&rdquo; The first answer is usually safe. The real one comes after the pause.</p>
+              <div class="slip-foot">
+                <span id="slipStatus">Onboarding Nudges &middot; Day 12</span>
+                <button class="slip-done" id="slipDone" type="button" aria-pressed="false">Mark done</button>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="thread thread--hero hero-exit" data-motion>
+          <p class="thread-cap">Simple enough. So why doesn&rsquo;t it happen more often?</p>
+          <span class="thread-line" aria-hidden="true"></span>
+        </div>
       </div>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-num">150</div>
-          <div class="stat-label">Critical days</div>
+    </header>
+
+    <!-- 02 BELIEF -->
+    <section class="band band--ink belief" id="believe">
+      <div class="wrap">
+        <p class="label">What we believe</p>
+        <h2 class="display">It&rsquo;s rarely a care problem.</h2>
+        <ul class="pile" aria-label="What actually gets in the way">
+          <li>It&rsquo;s the pressure.</li>
+          <li>The inbox.</li>
+          <li>The three things due by Friday.</li>
+          <li>The person off sick.</li>
+          <li><span>The moment that slipped past.</span></li>
+        </ul>
+        <div class="split belief-after">
+          <p class="claim">Good leaders don&rsquo;t stop caring. They get stretched.</p>
+          <div>
+            <p>The check-in that should have happened on Tuesday slides to Friday, then to never. Nobody means for it to. It just gets buried under everything else that&rsquo;s urgent.</p>
+            <p>Not because anyone stopped caring. Because everything else was louder.</p>
+          </div>
         </div>
-        <div>
-          <div class="stat-num">10</div>
-          <div class="stat-label">Action nudges</div>
+        <div class="thread thread--belief belief-close" data-motion>
+          <p>HalpCraft exists for those moments.</p>
+          <span class="thread-line" aria-hidden="true"></span>
         </div>
-        <div>
-          <div class="stat-num">0</div>
-          <div class="stat-label">Apps to check</div>
+      </div>
+    </section>
+
+    <!-- 03 APPROACH -->
+    <section class="approach" id="approach">
+      <div class="wrap">
+        <div class="split approach-head">
+          <div>
+            <p class="label">So here&rsquo;s what we do about it</p>
+            <h2>Three small things, done at the right time.</h2>
+          </div>
+          <p class="lead">Every HalpCraft tool is built the same way. Nothing to install, no dashboard to feed. Just help, arriving when it&rsquo;s useful.</p>
         </div>
+        <ol class="stairs">
+          <li>
+            <p class="word">Notice<span class="dot">.</span></p>
+            <h3>The right moment</h3>
+            <p>We bring the moment that matters to you, instead of hoping you&rsquo;ll remember it in the middle of a busy week.</p>
+          </li>
+          <li>
+            <p class="word">Think<span class="dot">.</span></p>
+            <h3>A better question</h3>
+            <p>Good leadership is mostly good questions. Our tools hand you the one worth asking, of your team or of yourself.</p>
+          </li>
+          <li>
+            <p class="word">Act<span class="dot">.</span></p>
+            <h3>One small step</h3>
+            <p>Something you can actually do today, in the time you actually have. Then get back to your week.</p>
+          </li>
+        </ol>
+        <div class="pull">
+          <q>Ask before you advise.</q>
+          <span>If HalpCraft had a house rule, it would be this one.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- bridge: philosophy -> tools -->
+    <div class="bridge" aria-hidden="false">
+      <div class="wrap">
+        <p>Principles are easy to agree with on a Monday. <span class="quiet">They&rsquo;re harder to remember by Thursday afternoon.</span> So we built them into tools.</p>
       </div>
     </div>
 
-    <div class="hero-right">
-      <iframe
-        src="/hero.html"
-        title="See how HalpCraft works"
-        loading="lazy"
-        scrolling="no"
-        style="width:100%; height:100%; border:0; display:block; background:#171714; border-radius:14px;"
-      ></iframe>
+    <!-- 04 THE PRODUCT WORLD -->
+    <section id="tools" aria-labelledby="toolsTitle">
+      <div class="wrap"><div class="world-head">
+        <div class="split">
+          <div>
+            <p class="label">What HalpCraft makes</p>
+            <h2 id="toolsTitle">Tools for the real work of leading people.</h2>
+          </div>
+          <div>
+            <p class="lead">Each one comes from the same idea, and each one does a different job. Use one. Use both. Start wherever your week needs it most.</p>
+            <p class="maker"><img loading="lazy" src="/logos/halpcraft-mark-on-light.png" alt="" width="469" height="512" /> Made by HalpCraft in New Zealand.</p>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- Nudges -->
+      <article class="spread spread--nudges" id="onboarding-nudges">
+        <span id="how"></span><span id="nudges"></span><span id="sequence"></span>
+        <div class="wrap split">
+          <div>
+            <span class="spread-by">01 &middot; HalpCraft Onboarding Nudges</span>
+            <h3 class="spread-name"><span>Onboarding</span><span>Nudges</span></h3>
+            <p class="spread-tag">A little help, right when you need it.</p>
+            <p class="spread-copy">Ten research-backed onboarding nudges delivered to your calendar across a new hire&rsquo;s first 150 days. Each one arrives at the moment it matters, with what to do and the words to use. No app to check. No dashboard to forget.</p>
+            <ul class="facts">
+              <li><b>For</b><span>Anyone bringing a new person into their team</span></li>
+              <li><b>Lives in</b><span>Google, Outlook or Apple Calendar</span></li>
+              <li><b>Covers</b><span>The week before, through to Day 150. Shift workers included.</span></li>
+              <li><b>Costs</b><span>$49 NZD per new hire, one-time</span></li>
+            </ul>
+            <div class="spread-links">
+              <a class="btn btn--azure" href="#free-nudge">Try a nudge free</a>
+              <a class="link" href="https://app.halpcraft.com/sample">Read a sample &rarr;</a>
+            </div>
+          </div>
+          <div class="fan" aria-label="Three of the ten onboarding nudges">
+            <article class="slip">
+              <p class="slip-when">One week before</p>
+              <h3>The Team Signal</h3>
+              <p>&ldquo;Your new hire starts next week. Is the team ready?&rdquo;</p>
+            </article>
+            <article class="slip">
+              <p class="slip-when">Day 12</p>
+              <h3>The Pace Setter</h3>
+              <p>The hand-holding has stopped but real competence hasn&rsquo;t arrived. Normalise the learning curve.</p>
+            </article>
+            <article class="slip">
+              <p class="slip-when">Day 25</p>
+              <h3>The Ethos Guard</h3>
+              <p>Is what you promised in the interview matching their lived reality? Check now, not at month three.</p>
+            </article>
+          </div>
+        </div>
+      </article>
+
+      <!-- Between Two Minds -->
+      <div class="turn">
+        <div class="wrap"><p><span class="from">Sometimes the right help isn&rsquo;t a nudge.</span>Sometimes you need to stop and look at what happened.</p></div>
+      </div>
+      <article class="spread spread--btm" id="between-two-minds">
+        <div class="wrap split split--rev">
+          <div class="comic" aria-label="Example match-up: The Forge versus The Fog">
+            <figure>
+              <img loading="lazy" decoding="async" src="/concept/btm-forge.webp" alt="Comic illustration of The Forge, one of the heroes" width="640" height="640" />
+              <figcaption><small>Hero</small>The Forge</figcaption>
+            </figure>
+            <figure>
+              <img loading="lazy" decoding="async" src="/concept/btm-fog.webp" alt="Comic illustration of The Fog, one of the villains" width="640" height="640" />
+              <figcaption><small>Villain</small>The Fog</figcaption>
+            </figure>
+            <span class="vs" aria-hidden="true">vs</span>
+          </div>
+          <div>
+            <span class="spread-by">02 &middot; Between Two Minds &middot; by HalpCraft</span>
+            <h3 class="spread-name"><span>Between</span><span>Two Minds</span></h3>
+            <p class="spread-tag">A different way to think about how you showed up.</p>
+            <p class="spread-copy">Some days the hardest conversation is the one in your own head. Pick the version of you that showed up, name the voice that pushed back, and answer a few honest questions. Same mind. A different outcome.</p>
+            <p class="bubble"><small>The Fog says</small>&ldquo;You do not know enough yet.&rdquo;</p>
+            <ul class="facts" style="margin-top:48px">
+              <li><b>For</b><span>The argument you&rsquo;re having with yourself</span></li>
+              <li><b>Takes</b><span>About two to three minutes for one clear pass</span></li>
+            </ul>
+            <div class="spread-links">
+              <a class="btn" href="https://btm.halpcraft.com/">Pick your hero &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Future slot -->
+      <div class="workshop">
+        <div class="wrap">
+          <div class="slot">
+            <span class="n">03</span>
+            <h3>In the workshop.</h3>
+            <p>We build one tool at a time, and only when it earns its place in a leader&rsquo;s week. The next one will show up here when it&rsquo;s ready.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- bridge: a quiet reset -->
+    <div class="bridge bridge--center">
+      <div class="wrap"><p>There is a person behind all of this.</p></div>
     </div>
-  </section>
 
-  <!-- TICKER -->
-  <div class="ticker">
-    <div class="ticker-inner">
-      <span class="ticker-item"><span>✦</span> No app required</span>
-      <span class="ticker-item"><span>✦</span> Works in every calendar</span>
-      <span class="ticker-item"><span>✦</span> Research-backed timing</span>
-      <span class="ticker-item"><span>✦</span> Shift worker support</span>
-      <span class="ticker-item"><span>✦</span> One click setup</span>
-      <span class="ticker-item"><span>✦</span> 150 days of coverage</span>
-      <span class="ticker-item"><span>✦</span> No app required</span>
-      <span class="ticker-item"><span>✦</span> Works in every calendar</span>
-      <span class="ticker-item"><span>✦</span> Research-backed timing</span>
-      <span class="ticker-item"><span>✦</span> Shift worker support</span>
-      <span class="ticker-item"><span>✦</span> One click setup</span>
-      <span class="ticker-item"><span>✦</span> 150 days of coverage</span>
-    </div>
-  </div>
-
-  <!-- PROBLEM -->
-  <section class="problem" id="problem">
-    <div class="fade-up">
-      <p class="section-label">The problem</p>
-      <h2 class="section-headline">You're not a bad manager.<br/>You're a busy one.</h2>    </div>
-    <div class="problem-stats fade-up">
-      <h3 style="grid-column:1/-1; font-family:'Fraunces',Georgia,serif; font-size:1.7rem; font-weight:600; color:var(--paper); letter-spacing:-0.01em; margin-bottom:0.75rem;">The tax, itemised.</h3>
-      <div class="prob-stat">
-        <div class="prob-num">20%</div>
-        <div class="prob-label">of new hires leave within 45 days</div>
-        <div class="prob-source">SHRM, 2023</div>
-      </div>
-      <div class="prob-stat">
-        <div class="prob-num">$30k</div>
-        <div class="prob-label">average cost to replace a single employee at mid-level</div>
-        <div class="prob-source">Gallup, 2024</div>
-      </div>
-      <div class="prob-stat">
-        <div class="prob-num">69%</div>
-        <div class="prob-label">of employees stay 3+ years with a great onboarding experience</div>
-        <div class="prob-source">SHRM, 2022</div>
-      </div>
-      <div class="prob-stat">
-        <div class="prob-num">88%</div>
-        <div class="prob-label">of organisations do onboarding poorly</div>
-        <div class="prob-source">Gallup, 2023</div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- Pull quote -->
-  <div style="background:#f0ece5; padding:4rem; text-align:center; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);">
-    <blockquote style="font-family:'Fraunces',Georgia,serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:300; font-style:italic; color:var(--ink); max-width:680px; margin:0 auto; line-height:1.6; letter-spacing:-0.01em;">
-      &ldquo;New hires aren&rsquo;t let down by bad managers, they&rsquo;re let down by the assumption that everything is fine.&rdquo;
-    </blockquote>
-    <p style="font-family:'DM Sans',system-ui,sans-serif; font-size:1.05rem; font-weight:300; color:var(--muted); line-height:1.8; max-width:680px; margin:2rem auto 0; text-align:center;">There&rsquo;s a name for what this costs you: the assumption tax. Every unasked question, every silent struggle, every &lsquo;they seem fine&rsquo; compounds quietly until it arrives as a resignation letter in month four. You were always going to pay for onboarding. The only question is whether you pay $29 up front or five figures at the exit interview.</p>
-  </div>
-
-  <!-- HOW IT WORKS -->
-  <section id="how" style="padding: 7rem 4rem;">
-    <div class="how">
-      <div class="how-header fade-up">
-        <p class="section-label">How it works</p>
-        <h2 class="section-headline">Three steps.<br/>One click. Zero friction.</h2>
-        <p class="section-body" style="margin: 0 auto;">Set up in under two minutes. Nudged at the right moment, automatically.</p>
-      </div>
-      <div class="how-steps fade-up">
-        <div class="step">
-          <span class="step-num">1</span>
-          <span class="step-icon">📋</span>
-          <h3 class="step-title">Submit your new hire's details</h3>
-          <p class="step-body">Fill out a simple form with the employee's name, start date, and work pattern. Takes 60 seconds.</p>
-        </div>
-        <div class="step">
-          <span class="step-num">2</span>
-          <span class="step-icon">📅</span>
-          <h3 class="step-title">Click once to download</h3>
-          <p class="step-body">You receive a single .ics file. Open it and every nudge lands instantly in Google, Apple, Outlook, whichever calendar you use.</p>
-        </div>
-        <div class="step">
-          <span class="step-num">3</span>
-          <span class="step-icon">🧭</span>
-          <h3 class="step-title">Get the right nudge at the right moment</h3>
-          <p class="step-body">Each nudge arrives with a research-backed action guide. No prep required. Read, act, lead.</p>
+    <!-- 05 HUMAN PROOF -->
+    <section class="founder" id="founder">
+      <div class="wrap founder-grid" data-motion>
+        <figure class="photo">
+          <img loading="lazy" decoding="async" src="/damian.jpg" alt="Damian Sicely, founder of HalpCraft" width="400" height="533" />
+          <figcaption><b>Damian Sicely</b> &middot; Founder, HalpCraft &middot; New Zealand</figcaption>
+        </figure>
+        <div class="headline">
+          <h2 class="display">I&rsquo;ve been there.</h2>
+          <div class="story">
+            <p class="strong">I&rsquo;ve spent nearly twenty years watching good leaders fail the people around them. Not because they didn&rsquo;t care, but because nobody gave them the right support at the right moment.</p>
+            <p>Capable, committed, completely stretched. Making calls in a vacuum because the tools available are too complex, too expensive, too late, or simply not there. I&rsquo;m an executive leader, not a developer, and I built HalpCraft to change that.</p>
+            <p>The best solutions are almost always the simplest ones. No friction. No new platforms to learn. Just something that works quietly in the background, at the moments that matter.</p>
+          </div>
+          <div class="sign">
+            <span class="name">Damian<svg viewBox="0 0 130 18" aria-hidden="true"><path d="M3 12 C 30 4, 60 16, 90 8 S 122 6, 127 10" /></svg></span>
+            <a class="link" href="/about">The longer story &rarr;</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- NUDGE SEQUENCE -->
-  <section class="sequence" id="sequence">
-    <div class="sequence-header fade-up">
-      <p class="section-label">The 150-day sequence</p>
-      <h2 class="section-headline">Every nudge. Perfectly timed.</h2>
-      <p class="section-body">Ten nudges. Ten moments research says decide whether your new hire stays.</p>
-    </div>
-    <div class="timeline fade-up">
-      <div class="timeline-item">
-        <div class="tl-day">Week Before</div>
-        <div class="tl-content">
-          <div class="tl-title">The Team Signal</div>
-          <div class="tl-desc">Brief your team a week out. Make sure no one is surprised when your new hire walks in.</div>
+      <div class="wrap">
+        <div class="thread thread--founder founder-exit" data-motion>
+          <p class="thread-cap">That&rsquo;s where HalpCraft started. <b>It&rsquo;s not where it ends.</b> It exists for every leader still in the seat, still trying.</p>
+          <span class="thread-line" aria-hidden="true"></span>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="tl-day">Day 1</div>
-        <div class="tl-content">
-          <div class="tl-title">The Belonging Ritual</div>
-          <div class="tl-desc">Day 1 actions that create psychological safety and signal long-term investment.</div>
+    </section>
+
+    <!-- 06 BRAND STATEMENT -->
+    <section class="band band--azure statement" aria-label="What HalpCraft stands for">
+      <div class="wrap">
+        <p class="label">What HalpCraft stands for</p>
+        <h2 class="display">Good leaders want to show up for their people.</h2>
+        <p>HalpCraft helps them know how, and when. That&rsquo;s the job, and we think it&rsquo;s worth doing well.</p>
+      </div>
+    </section>
+
+    <!-- 07 ACTION -->
+    <section class="action" id="start">
+      <div class="wrap">
+        <div class="split">
+          <div>
+            <p class="label">Where to start</p>
+            <h2>You don&rsquo;t have to lead perfectly.<span class="l2">You just have to keep trying to lead well.</span></h2>
+          </div>
+          <p class="lead">Start small. You don&rsquo;t need a rollout plan or a budget meeting. Pick whichever of these fits your week.</p>
+        </div>
+        <ol class="rows">
+          <li>
+            <span class="n">01</span>
+            <h3>Try one nudge, free.</h3>
+            <div class="free" id="free-nudge">
+              <form id="freeNudgeForm" novalidate>
+                <label for="freeEmail" class="sr">Email address</label>
+                <input type="email" id="freeEmail" name="email" placeholder="you@company.com" required />
+                <button type="submit" id="freeNudgeBtn">Send my free nudge</button>
+              </form>
+              <p class="fine" id="freeNudgeNote">One real nudge in your calendar tomorrow at 9am. One email. No follow-up spam.</p>
+              <p class="ok" id="freeNudgeSuccess" style="display:none;">Done. Check your inbox, your nudge is waiting.</p>
+              <p class="err" id="freeNudgeError" style="display:none;">Something broke. Email hello@halpcraft.com and we&rsquo;ll send it manually.</p>
+            </div>
+          </li>
+          <li id="pricing">
+            <span class="n">02</span>
+            <h3>Set up Onboarding Nudges for your next new hire.</h3>
+            <div>
+              <p>All ten onboarding nudges, in your calendar in about two minutes. $49 NZD per new hire, one-time. No subscription.</p>
+              <div class="spread-links" style="margin-top:18px">
+                <a class="btn btn--azure" href="https://buy.stripe.com/cNi9AM9Mcgh60yYcBO0Ba0c">Buy for one new hire</a>
+              </div>
+              <p class="packs">Hiring a few? <a href="https://buy.stripe.com/8x2fZa2jK1mcgxWatG0Ba0d">Team 5, $220 NZD</a> or <a href="https://buy.stripe.com/aFacMYgaA7KA3La45i0Ba0e">Team 10, $390 NZD</a>. Placing candidates? <a href="/agency">Agency programme</a>.</p>
+            </div>
+          </li>
+          <li>
+            <span class="n">03</span>
+            <h3>Have a think with Between Two Minds.</h3>
+            <div>
+              <p>Two to three minutes with the argument in your own head. Pick your hero, name the villain, tell it straight.</p>
+              <div class="spread-links" style="margin-top:18px">
+                <a class="btn btn--line" href="https://btm.halpcraft.com/">Open Between Two Minds</a>
+              </div>
+            </div>
+          </li>
+        </ol>
+
+        <div class="ask" id="contact">
+          <span aria-hidden="true"></span>
+          <div>
+            <h3>Not sure which? Ask a person.</h3>
+            <p class="sub">We reply within 24 hours. Or email <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a> directly.</p>
+          </div>
+          <form id="contactForm" novalidate>
+            <label class="sr" for="cName">Name</label>
+            <input type="text" id="cName" name="name" placeholder="Name" autocomplete="name" required />
+            <label class="sr" for="cEmail">Email</label>
+            <input type="email" id="cEmail" name="email" placeholder="Email" autocomplete="email" required />
+            <label class="sr" for="cMsg">Message</label>
+            <textarea id="cMsg" name="message" rows="4" placeholder="What would you like to know?" required></textarea>
+            <button type="submit" class="btn" id="contactSubmit">Send message</button>
+          </form>
+          <p class="ok" id="contactSuccess" style="display:none;">Thanks. We&rsquo;ll be in touch within 24 hours.</p>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="tl-day">End of Week 1</div>
-        <div class="tl-content">
-          <div class="tl-title">Clarity &amp; Connection Check</div>
-          <div class="tl-desc">Lock in momentum. Address confusion before it calcifies into disengagement.</div>
-        </div>
+    </section>
+
+    <!-- sign-off -->
+    <section class="signoff" aria-label="HalpCraft">
+      <div class="wrap">
+        <a class="link explore-link" href="/about">Explore HalpCraft &rarr;</a>
+        <p>Better Leaders<span class="bar" aria-hidden="true"></span><br />Better Workplaces</p>
+        <small>Helping good leaders do the job a little better.</small>
       </div>
-      <div class="timeline-item">
-        <div class="tl-day">Day 12</div>
-        <div class="tl-content">
-          <div class="tl-title">The Pace Setter</div>
-          <div class="tl-desc">Two weeks in. The initial hand-holding has stopped but real competence has not arrived. This is where you normalise the learning curve.</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-day">Day 25</div>
-        <div class="tl-content">
-          <div class="tl-title">The Ethos Guard</div>
-          <div class="tl-desc">Is what you promised in the interview matching their lived reality? Check now, not at month 3.</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-day">Day 40</div>
-        <div class="tl-content">
-          <div class="tl-title">Vulnerability & Mastery Check</div>
-          <div class="tl-desc-locked">🔒 Unlocked when you start the programme.</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-day">Day 80</div>
-        <div class="tl-content">
-          <div class="tl-title">The Transparency Bridge</div>
-          <div class="tl-desc-locked">🔒 Unlocked when you start the programme.</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-day">Day 100</div>
-        <div class="tl-content">
-          <div class="tl-title">Q1 Efficiency Bridge</div>
-          <div class="tl-desc-locked">🔒 Unlocked when you start the programme.</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-day">Day 125</div>
-        <div class="tl-content">
-          <div class="tl-title">The Values-Impact Bridge</div>
-          <div class="tl-desc-locked">🔒 Unlocked when you start the programme.</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-day">Day 150</div>
-        <div class="tl-content">
-          <div class="tl-title">Taking the Lead</div>
-          <div class="tl-desc-locked">🔒 Unlocked when you start the programme.</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- FREE NUDGE -->
-  <section class="free-nudge" id="free-nudge">
-    <div class="fade-up">
-      <p class="section-label">Try one free</p>
-      <h2 class="section-headline">See what a nudge feels like.</h2>
-      <p class="section-body">Drop your email and we'll send you one real nudge from the programme. It lands in your calendar tomorrow at 9am, exactly the way the paid version works. Ask the question it gives you. See what comes back.</p>
-      <form class="free-nudge-form" id="freeNudgeForm" novalidate>
-        <input type="email" name="email" placeholder="you@company.com" required class="contact-input" />
-        <button type="submit" class="contact-submit" id="freeNudgeBtn">Send my free nudge</button>
-      </form>
-      <p class="free-nudge-note" id="freeNudgeNote">One nudge, one email. No drip sequence, no follow-up spam.</p>
-      <p class="contact-success" id="freeNudgeSuccess" style="display:none;">Done. Check your inbox, your nudge is waiting.</p>
-      <p class="free-nudge-error" id="freeNudgeError" style="display:none;">Something broke. Email hello@halpcraft.com and we'll send it manually.</p>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" style="padding: 7rem 4rem;">
-    <div class="pricing-section" style="max-width:1200px;">
-      <div class="fade-up">
-        <p class="section-label">Pricing</p>
-        <h2 class="section-headline">Simple, honest pricing.</h2>
-        <p class="section-body">One programme per employee. No subscription. Pick the pack that fits your hiring volume.</p>
-      </div>
-
-      <!-- Early Adopter Banner -->
-      <div class="fade-up" style="margin-bottom:2rem; background:#171714; border-left:4px solid #4F9199; padding:32px 40px;">
-        <div style="font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:#4F9199; margin-bottom:12px;">Early Adopter Pricing</div>
-        <div style="font-family:'Fraunces',serif; font-size:28px; font-weight:600; color:#F3EFE7; margin-bottom:8px;">These rates won’t be available forever.</div>
-        <div style="font-family:'DM Sans',sans-serif; font-size:14px; font-weight:300; color:rgba(243,239,231,0.6); line-height:1.6;">HalpCraft is in its early days. The prices you see now reflect that. Lock them in while they last.</div>
-      </div>
-
-      <div class="pricing-grid fade-up">
-
-        <!-- Solo -->
-        <div class="price-card">
-          <div class="price-tier">Solo</div>
-          <div class="price-amount">$29 <span style="font-size:0.55em;letter-spacing:0.08em;vertical-align:middle;">NZD</span></div>
-          <div class="price-per">per employee · one-time</div>
-          <p style="font-size:0.78rem;color:var(--muted);line-height:1.5;margin-bottom:1.75rem;font-style:italic;">Less than 0.3% of the cost of replacing the person you’re onboarding.</p>
-          <ul class="price-features">
-            <li>One programme per employee</li>
-            <li>Full 10-nudge sequence</li>
-            <li>Standard &amp; shift worker modes</li>
-            <li>Works in all calendar apps</li>
-            <li>Email delivery included</li>
-          </ul>
-          <a href="https://buy.stripe.com/5kQ28kf6w4yo0yYbxK0Ba09" class="btn-primary" style="width:100%; justify-content:center;">Buy now →</a>
-          <p style="font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem;letter-spacing:0.04em;">Checkout via Stripe · 2 minutes</p>
-        </div>
-
-        <!-- Team 5 -->
-        <div class="price-card">
-          <div class="price-tier" style="padding-right:5rem;">Team 5</div>
-          <div class="price-save-tag">Save 14%</div>
-          <div class="price-amount">$125 <span style="font-size:0.55em;letter-spacing:0.08em;vertical-align:middle;">NZD</span></div>
-          <div class="price-per">5 employees · $25 NZD per employee</div>
-          <p style="font-size:0.78rem;color:var(--muted);line-height:1.5;margin-bottom:1.75rem;font-style:italic;">Onboarding multiple people this quarter. Buy 5 programmes at once and save.</p>
-          <ul class="price-features">
-            <li>5 programmes, use as needed</li>
-            <li>Full 10-nudge sequence per hire</li>
-            <li>Standard &amp; shift worker modes</li>
-            <li>Works in all calendar apps</li>
-            <li>Email delivery included</li>
-          </ul>
-          <a href="https://buy.stripe.com/00waEQ2jK5CsbdCatG0Ba0a" class="btn-primary" style="width:100%; justify-content:center;">Get Team 5 →</a>
-          <p style="font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem;letter-spacing:0.04em;">Checkout via Stripe · 2 minutes</p>
-        </div>
-
-        <!-- Team 10 -->
-        <div class="price-card">
-          <div class="price-tier" style="padding-right:5rem;">Team 10</div>
-          <div class="price-save-tag">Save 24%</div>
-          <div class="price-amount">$220 <span style="font-size:0.55em;letter-spacing:0.08em;vertical-align:middle;">NZD</span></div>
-          <div class="price-per">10 employees · $22 NZD per employee</div>
-          <p style="font-size:0.78rem;color:var(--muted);line-height:1.5;margin-bottom:1.75rem;font-style:italic;">For managers and HR leads running multiple hires across the year.</p>
-          <ul class="price-features">
-            <li>10 programmes, use as needed</li>
-            <li>Full 10-nudge sequence per hire</li>
-            <li>Standard &amp; shift worker modes</li>
-            <li>Works in all calendar apps</li>
-            <li>Email delivery included</li>
-          </ul>
-          <a href="https://buy.stripe.com/14A6oAbUk4yobdCatG0Ba0b" class="btn-primary" style="width:100%; justify-content:center;">Get Team 10 →</a>
-          <p style="font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem;letter-spacing:0.04em;">Checkout via Stripe · 2 minutes</p>
-        </div>
-
-      </div>
-
-      <!-- Agency banner -->
-      <div style="margin-top:1.25rem; background:#171714; padding:80px 48px; text-align:center;">
-        <div style="font-family:'DM Sans',sans-serif; font-size:11px; font-weight:400; letter-spacing:0.25em; text-transform:uppercase; color:#4F9199; margin-bottom:20px;">Recruitment Agencies</div>
-        <div style="font-family:'Fraunces',serif; font-size:clamp(24px,3vw,36px); font-weight:600; color:#F3EFE7; line-height:1.2; max-width:600px; margin:0 auto 16px auto;">Placing candidates? Let's talk.</div>
-        <div style="font-family:'DM Sans',sans-serif; font-size:14px; font-weight:300; color:rgba(243,239,231,0.5); max-width:500px; margin:0 auto 36px auto; line-height:1.7;">HalpCraft helps recruitment agencies protect every placement with a structured 150-day onboarding programme. We'll build a package around your volume.</div>
-        <a href="mailto:hello@halpcraft.com?subject=HalpCraft Agency Enquiry" style="display:inline-block; background:#096977; color:#F3EFE7; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; padding:16px 40px; border-radius:2px; border:none; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#07535E'" onmouseout="this.style.background='#096977'">Talk to Us →</a>
-        <div style="margin-top:16px;"><a href="/agency" style="font-family:'DM Sans',sans-serif; font-size:13px; color:#4F9199; text-decoration:none; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Or visit the agency page →</a></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VISION / ABOUT -->
-  <section class="vision" id="vision">
-    <div class="fade-up">
-      <p class="section-label">Our mission</p>
-      <h2 class="section-headline">HalpCraft exists to give leaders the right tool, at the right moment, without getting in the way.</h2>
-
-      <p class="section-body">
-        Good leaders want to show up for their people. HalpCraft makes sure they know how, and when.
-      </p>
-      <ul class="vision-list">
-        <li>Designed for leaders who are time-poor, not talent-poor</li>
-        <li>Zero surveillance, we support the leader, not monitor the employee</li>
-        <li>Built on peer-reviewed organisational psychology research</li>
-        <li>Built for every workplace, desk, floor, and field</li>
-      </ul>
-    </div>
-    <div class="vision-right fade-up">
-      <p class="section-label">The HalpCraft platform</p>
-      <ul class="product-list">
-        <li class="product-item">
-          <div class="product-name">Onboarding Nudges</div>
-          <div class="product-desc">150-day new hire onboarding sequence delivered to your calendar</div>
-          <span class="product-tag tag-live">✓ Live Now</span>
-        </li>
-        <li class="product-item">
-          <div class="product-name">Nudge Performance</div>
-          <div class="product-desc">Quarterly performance conversation guides, timed to review cycles</div>
-          <span class="product-tag tag-soon">Coming Soon</span>
-        </li>
-        <li class="product-item">
-          <div class="product-name">Nudge Retention</div>
-          <div class="product-desc">Early-warning nudges triggered by known flight-risk signals</div>
-          <span class="product-tag tag-soon">Coming Soon</span>
-        </li>
-        <li class="product-item">
-          <div class="product-name">Nudge Leadership</div>
-          <div class="product-desc">Ongoing leadership development sequences for senior managers</div>
-          <span class="product-tag tag-2026">2026 Roadmap</span>
-        </li>
-        <li class="product-item">
-          <div class="product-name">Team Intelligence</div>
-          <div class="product-desc">Cross-manager insights and team health reporting for People leaders</div>
-          <span class="product-tag tag-2026">2026 Roadmap</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- CTA BAND -->
-  <div class="cta-band">
-    <p class="section-label">Get started today</p>
-    <h2 class="section-headline">Your next new hire deserves a great manager.</h2>
-    <p class="section-body">Set up takes two minutes. The impact lasts 150 days.</p>
-    <div class="cta-actions">
-      <a href="https://buy.stripe.com/5kQ28kf6w4yo0yYbxK0Ba09" class="btn-light">Start now</a>
-    </div>
-    <div class="contact-form-wrap fade-up">
-      <p class="contact-form-label">Or get in touch, we reply within 24 hours.</p>
-      <form class="contact-form" id="contactForm" novalidate>
-        <div class="contact-form-row">
-          <input type="text" name="name" placeholder="Name" required class="contact-input"/>
-          <input type="email" name="email" placeholder="Email" required class="contact-input"/>
-        </div>
-        <textarea name="message" placeholder="What would you like to know?" rows="4" required class="contact-input"></textarea>
-        <button type="submit" class="contact-submit" id="contactSubmit">Send message →</button>
-      </form>
-      <p class="contact-success" id="contactSuccess" style="display:none;">Thanks — we'll be in touch within 24 hours.</p>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
   <footer>
-    <div>
-      <div class="footer-logo"><img src="/logos/halpcraft-logo-on-dark.png" alt="HalpCraft" /></div>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a href="/" class="foot-logo"><img loading="lazy" src="/logos/halpcraft-logo-on-dark.png" alt="HalpCraft" width="1875" height="480" /></a>
+          <p class="foot-tag">Better Leaders | Better Workplaces</p>
+        </div>
+        <div class="foot-cols">
+          <div><h4>Tools</h4><ul><li><a href="#onboarding-nudges">Onboarding Nudges</a></li><li><a href="https://btm.halpcraft.com/">Between Two Minds</a></li><li><a href="/quiz">Onboarding Score</a></li></ul></div>
+          <div><h4>HalpCraft</h4><ul><li><a href="#believe">What we believe</a></li><li><a href="/about">About</a></li><li><a href="/agency">For agencies</a></li><li><a href="mailto:hello@halpcraft.com">Contact</a></li></ul></div>
+          <div><h4>Already bought?</h4><ul><li><a href="/redeem">Redeem a code</a></li><li><a href="/privacy">Privacy</a></li></ul></div>
+        </div>
       </div>
-    <div class="footer-right">
-      <ul class="footer-links">
-        <li><a href="#how">How It Works</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="mailto:hello@halpcraft.com">Contact</a></li>
-        <li><a href="/privacy">Privacy</a></li>
-      </ul>
-      <div>© 2026 HalpCraft. All rights reserved.</div>
+      <div class="foot-base"><span>&copy; 2026 HalpCraft. Made in New Zealand.</span><span>Helping good leaders do the job a little better.</span></div>
     </div>
   </footer>
 
   <script>
-    // Fade-up on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
+    // Motion is opt-in: without JS (or with reduced motion) everything is simply visible.
+    document.documentElement.classList.add('js');
+    (function () {
+      var els = document.querySelectorAll('[data-motion], .pile, .stairs, .comic');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-in'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+      }, { threshold: 0.3, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+
+    // Mobile nav
+    (function () {
+      var nav = document.getElementById('nav'), btn = document.getElementById('navToggle');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.textContent = open ? 'Close' : 'Menu';
       });
-    }, { threshold: 0.12 });
+      document.querySelectorAll('#navLinks a').forEach(function (a) {
+        a.addEventListener('click', function () { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.textContent = 'Menu'; });
+      });
+    })();
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    // The hero moment: mark it done, like you would in a real week
+    (function () {
+      var slip = document.getElementById('heroSlip'), b = document.getElementById('slipDone'), st = document.getElementById('slipStatus');
+      if (!slip) return;
+      b.addEventListener('click', function () {
+        var done = slip.classList.toggle('is-done');
+        b.setAttribute('aria-pressed', done ? 'true' : 'false');
+        b.textContent = done ? 'Done' : 'Mark done';
+        st.textContent = done ? 'That’s it. Next one lands on Day 25.' : 'Onboarding Nudges · Day 12';
+      });
+    })();
 
-    // Contact form — constructs a mailto on submit and shows success state
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-      contactForm.addEventListener('submit', function(e) {
+    // Contact form: identical behaviour to the live homepage (opens a pre-filled email to hello@halpcraft.com)
+    (function () {
+      var contactForm = document.getElementById('contactForm'); if (!contactForm) return;
+      contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        const name    = contactForm.name.value.trim();
-        const email   = contactForm.email.value.trim();
-        const message = contactForm.message.value.trim();
+        var name = contactForm.name.value.trim(), email = contactForm.email.value.trim(), message = contactForm.message.value.trim();
         if (!name || !email || !message) return;
-        const btn = document.getElementById('contactSubmit');
-        btn.disabled = true;
-        btn.textContent = 'Sending…';
-        const subject = encodeURIComponent('HalpCraft enquiry from ' + name);
-        const body    = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+        var btn = document.getElementById('contactSubmit');
+        btn.disabled = true; btn.textContent = 'Sending\u2026';
+        var subject = encodeURIComponent('HalpCraft enquiry from ' + name);
+        var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
         window.location.href = 'mailto:hello@halpcraft.com?subject=' + subject + '&body=' + body;
-        setTimeout(function() {
-          contactForm.style.display = 'none';
-          document.getElementById('contactSuccess').style.display = 'block';
-        }, 800);
+        setTimeout(function () { contactForm.style.display = 'none'; document.getElementById('contactSuccess').style.display = 'block'; }, 800);
       });
-    }
+    })();
 
-
-    // Free nudge form — posts email to the sample API
-    const freeNudgeForm = document.getElementById('freeNudgeForm');
-    if (freeNudgeForm) {
-      freeNudgeForm.addEventListener('submit', function(e) {
+    // Free nudge form: identical request to the live homepage (POST to the sample API)
+    (function () {
+      var form = document.getElementById('freeNudgeForm'); if (!form) return;
+      form.addEventListener('submit', function (e) {
         e.preventDefault();
-        const email = freeNudgeForm.email.value.trim();
+        var email = form.email.value.trim();
         if (!email) return;
-        const btn = document.getElementById('freeNudgeBtn');
-        const err = document.getElementById('freeNudgeError');
+        var btn = document.getElementById('freeNudgeBtn');
+        var err = document.getElementById('freeNudgeError');
         btn.disabled = true;
         err.style.display = 'none';
         fetch('https://app.halpcraft.com/api/sample', {
@@ -1544,30 +918,18 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: email })
         })
-        .then(function(res) {
+        .then(function (res) {
           if (!res.ok) throw new Error('Request failed');
-          freeNudgeForm.style.display = 'none';
+          form.style.display = 'none';
           document.getElementById('freeNudgeNote').style.display = 'none';
           document.getElementById('freeNudgeSuccess').style.display = 'block';
         })
-        .catch(function() {
+        .catch(function () {
           err.style.display = 'block';
           btn.disabled = false;
         });
       });
-    }
-
-    // Smooth scroll nav
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
+    })();
   </script>
-
 </body>
 </html>

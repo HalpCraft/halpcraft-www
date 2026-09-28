@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HalpCraft | Better Leaders, Better Workplaces</title>
+  <title>Preview: HalpCraft homepage mock-up</title>
+  <!-- PREVIEW: homepage mock-up for review. Not linked, not indexed. -->
+  <meta name="robots" content="noindex,nofollow" />
   <meta name="description" content="HalpCraft helps good leaders do the job a little better. Practical tools for the real work of leading people: Onboarding Nudges and Between Two Minds." />
   <link rel="canonical" href="https://www.halpcraft.com/" />
   <meta name="theme-color" content="#F3EFE7" />
@@ -502,8 +504,10 @@
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 
     /* =====================================================================
-       Homepage (Phase 16): one clear section system, less copy, product in motion
+       Phase 15 preview: one clear section system, less copy, product in motion
        ===================================================================== */
+    .preview-note { background: var(--ink); color: var(--paper); font: 600 12px/1.4 var(--sans); letter-spacing: .08em; text-align: center; padding: 8px 16px; }
+    .preview-note b { color: #6FB1B9; }
 
     .hero { padding: clamp(40px, 5vw, 72px) 0 clamp(88px, 11vw, 150px); }
 
@@ -520,34 +524,11 @@
     .band--ink .mark .name { color: var(--paper); }
     .band--ink .mark .no { color: #6FB1B9; }
 
-    /* photography */
-    /* Photography: offset ink frame, warm grade, editorial caption, scroll reveal */
-    .shot { margin: 0; position: relative; }
-    .shot .frame { position: relative; z-index: 1; overflow: hidden; border-radius: 4px; background: var(--ink); }
-    .shot .frame img { display: block; width: 100%; height: auto; filter: saturate(.86) contrast(1.02) sepia(.06); }
-    .shot::before { content: ""; position: absolute; z-index: 0; top: 18px; left: 18px; right: -18px; bottom: 42px; border: 1px solid var(--ink); border-radius: 4px; pointer-events: none; }
-    .shot--left::before { left: -18px; right: 18px; }
-    .shot figcaption { display: flex; align-items: center; gap: 12px; margin-top: 32px; min-height: 28px; font: 600 11px/1.3 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); }
-    .shot figcaption::before { content: ""; width: 28px; height: 2px; background: var(--azure); flex: none; }
-    .shot--tall { max-width: 420px; justify-self: end; }
-    .coast { margin: 0; position: relative; overflow: hidden; height: clamp(320px, 50vw, 680px); background: var(--azure); }
-    .coast img { position: absolute; left: 0; top: -9%; width: 100%; height: 118%; object-fit: cover; object-position: 50% 42%; filter: saturate(.92); will-change: transform; }
-    .coast::after { content: ""; position: absolute; inset: auto 0 0; height: 38%; z-index: 1; background: linear-gradient(rgba(9,105,119,0), var(--azure)); pointer-events: none; }
-    .coast figcaption { position: absolute; z-index: 2; left: var(--gutter); bottom: 26px; display: flex; align-items: center; gap: 12px; color: var(--paper); font: 600 12px/1.3 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
-    .coast figcaption::before { content: ""; width: 28px; height: 2px; background: var(--paper); }
-    @media (prefers-reduced-motion: no-preference) {
-      .js .shot .frame { clip-path: inset(100% 0 0 0); transition: clip-path 1.1s cubic-bezier(.7,0,.2,1); }
-      .js .shot .frame img { transform: scale(1.12); transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
-      .js .shot::before { opacity: 0; transform: translate(-18px, -18px); transition: opacity .6s ease .7s, transform .9s cubic-bezier(.2,.7,.2,1) .7s; }
-      .js .shot--left::before { transform: translate(18px, -18px); }
-      .js .shot figcaption { opacity: 0; transition: opacity .6s ease 1.1s; }
-      .js .shot.is-in .frame { clip-path: inset(0 0 0 0); }
-      .js .shot.is-in .frame img { transform: none; }
-      .js .shot.is-in::before { opacity: 1; transform: none; }
-      .js .shot.is-in figcaption { opacity: 1; }
-      .js .coast figcaption { opacity: 0; transform: translateY(8px); transition: opacity .7s ease .3s, transform .7s ease .3s; }
-      .js .coast.is-in figcaption { opacity: 1; transform: none; }
-    }
+    /* photo slots (Damian supplies the photos) */
+    .photo-slot { position: relative; background: #E6E0D4; border: 1px solid var(--rule); border-radius: 12px; aspect-ratio: 4 / 5; display: flex; align-items: flex-end; overflow: hidden; }
+    .photo-slot--wide { aspect-ratio: 3 / 2; }
+    .photo-slot p { margin: 16px; background: var(--paper); border-radius: 8px; padding: 10px 12px; font-size: 13px; line-height: 1.45; color: var(--ink-soft); }
+    .photo-slot p b { display: block; color: var(--ink); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3px; }
 
     /* 01 why */
     .why-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
@@ -604,9 +585,7 @@
     @media (max-width: 960px) {
       .why-grid, .tool, .how-grid { grid-template-columns: 1fr; }
       .tool .wt { order: 2; }
-      .shot--tall { justify-self: start; }
-      .shot::before { right: -10px; left: 10px; top: 10px; bottom: 50px; }
-      .shot--left::before { left: -10px; right: 10px; }
+      .photo-slot { aspect-ratio: 3 / 2; }
       .mark .aside { margin-left: 0; flex-basis: 100%; }
       .stairs li:nth-child(n) { margin-top: 0; }
     }
@@ -615,6 +594,7 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+  <div class="preview-note"><b>Preview</b> &middot; homepage mock-up for review, not the live site</div>
 
   <nav class="nav" id="nav" aria-label="Main">
     <div class="wrap">
@@ -627,7 +607,7 @@
         <li><a href="/between-two-minds">Between Two Minds</a></li>
         <li class="sep" aria-hidden="true"></li>
         <li class="group">Company</li>
-        <li><a href="#believe">What we believe</a></li>
+        <li><a href="#why">What we believe</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="#start" class="btn">Start small</a></li>
       </ul>
@@ -670,7 +650,7 @@
     </header>
 
     <!-- 01 WHY -->
-    <section class="sec sec--sheet why" id="believe" aria-labelledby="whyTitle">
+    <section class="sec sec--sheet why" id="why" aria-labelledby="whyTitle">
       <div class="wrap">
         <p class="mark"><span class="no">01</span><span class="name">Why HalpCraft</span></p>
         <div class="why-grid">
@@ -684,10 +664,9 @@
             </ul>
             <p class="claim"><strong>Good leaders don&rsquo;t stop caring. They get stretched.</strong> HalpCraft exists for the moments that get buried under everything else.</p>
           </div>
-          <figure class="shot">
-            <div class="frame"><img src="/images/home/mid-week-1200.jpg" srcset="/images/home/mid-week-800.jpg 800w, /images/home/mid-week-1200.jpg 1200w" sizes="(max-width: 960px) 100vw, 40vw" width="1200" height="1500" loading="lazy" decoding="async" alt="A laptop open on a wooden café table beside a small blue coffee, with a large mural of Albert Einstein on the wall behind." /></div>
-            <figcaption>Mid-week, inbox open</figcaption>
-          </figure>
+          <div class="photo-slot" role="img" aria-label="Photo placeholder">
+            <p><b>Your photo</b>A leader mid-week: a busy desk, a quick one-to-one, a real workplace. Candid, natural light.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -698,7 +677,6 @@
         <p class="mark"><span class="no">02</span><span class="name">The tools</span><span class="aside">Two HalpCraft tools are live today. More are on the way.</span></p>
         <h2 class="sec-title" id="toolsTitle">Practical tools for the real work of leading people.</h2>
 
-        <span id="how"></span><span id="nudges"></span><span id="sequence"></span>
         <article class="tool" id="onboarding-nudges" aria-label="Onboarding Nudges">
           <div>
             <p class="label"><b>Available now</b> &middot; HalpCraft Onboarding Nudges</p>
@@ -753,10 +731,9 @@
             <h2 class="sec-title" id="howTitle">Three small things, done at the right time.</h2>
             <p class="sec-lead">Every HalpCraft tool works the same way. Nothing to install, no dashboard to feed.</p>
           </div>
-          <figure class="shot shot--tall shot--left">
-            <div class="frame"><img src="/images/home/quiet-desk-1000.jpg" srcset="/images/home/quiet-desk-600.jpg 600w, /images/home/quiet-desk-1000.jpg 1000w" sizes="(max-width: 960px) 100vw, 420px" width="1000" height="1250" loading="lazy" decoding="async" alt="A takeaway coffee in the morning sun on a desk, with a laptop and green hills blurred behind." /></div>
-            <figcaption>Before the day gets loud</figcaption>
-          </figure>
+          <div class="photo-slot photo-slot--wide" role="img" aria-label="Photo placeholder">
+            <p><b>Your photo</b>A first day: a desk set up and waiting, or a manager welcoming someone new.</p>
+          </div>
         </div>
         <ol class="stairs">
           <li><p class="word">Notice<span class="dot">.</span></p><h3>The right moment</h3><p>We bring it to you, instead of hoping you&rsquo;ll remember it mid-week.</p></li>
@@ -833,12 +810,6 @@
       </div>
     </section>
 
-    <!-- NEW ZEALAND -->
-    <figure class="coast">
-      <img src="/images/home/nz-coast-2000.jpg" srcset="/images/home/nz-coast-1000.jpg 1000w, /images/home/nz-coast-2000.jpg 2000w" sizes="100vw" width="2000" height="1000" loading="lazy" decoding="async" alt="Sunset behind an island off the New Zealand coast, framed by a tree and flax in silhouette." />
-      <figcaption>Made in New Zealand</figcaption>
-    </figure>
-
     <!-- CLOSE -->
     <section class="band band--azure statement close-band" aria-label="What HalpCraft stands for">
       <div class="wrap">
@@ -858,7 +829,7 @@
         </div>
         <div class="foot-cols">
           <div><h4>Products</h4><ul><li><a href="/onboarding-nudges">Onboarding Nudges</a></li><li><a href="/between-two-minds">Between Two Minds</a></li><li><a href="/agency">For agencies</a></li><li><a href="/quiz">Onboarding Score</a></li></ul></div>
-          <div><h4>Company</h4><ul><li><a href="#believe">What we believe</a></li><li><a href="/about">About</a></li><li><a href="mailto:hello@halpcraft.com">Contact</a></li></ul></div>
+          <div><h4>Company</h4><ul><li><a href="#why">What we believe</a></li><li><a href="/about">About</a></li><li><a href="mailto:hello@halpcraft.com">Contact</a></li></ul></div>
           <div><h4>Already bought?</h4><ul><li><a href="/redeem">Redeem a code</a></li><li><a href="/privacy">Privacy</a></li></ul></div>
         </div>
       </div>
@@ -870,26 +841,12 @@
   <script>
     document.documentElement.classList.add('js');
     (function () {
-      var els = document.querySelectorAll('[data-motion], .stairs, .comic, .shot, .coast');
+      var els = document.querySelectorAll('[data-motion], .stairs, .comic');
       if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-in'); }); return; }
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
       }, { threshold: 0.3, rootMargin: '0px 0px -8% 0px' });
       els.forEach(function (e) { io.observe(e); });
-    })();
-    (function () {
-      var c = document.querySelector('.coast img');
-      if (!c || !window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var box = c.parentNode, ticking = false;
-      function move() {
-        ticking = false;
-        var r = box.getBoundingClientRect(), vh = window.innerHeight;
-        if (r.bottom < 0 || r.top > vh) return;
-        var p = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2);
-        c.style.transform = 'translate3d(0,' + (p * 7).toFixed(2) + '%,0)';
-      }
-      window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(move); } }, { passive: true });
-      move();
     })();
     (function () {
       var nav = document.getElementById('nav'), btn = document.getElementById('navToggle');

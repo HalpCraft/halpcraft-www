@@ -1,0 +1,130 @@
+/* =====================================================================
+   HalpCraft Onboarding Nudges walkthrough (animated mock-up)
+   A 960 x 600 stage, scaled to its container. Six scenes, about 36s.
+   Ink, Paper, Dark Azure only. No gold, no gradients, no device chrome.
+   ===================================================================== */
+.wt { --ink:#171714; --paper:#F3EFE7; --sheet:#FBF9F4; --azure:#096977; --azure-dk:#07535E;
+  --soft:rgba(23,23,20,.72); --mute:rgba(23,23,20,.64); --rule:rgba(23,23,20,.14);
+  --serif:'Fraunces', Georgia, serif; --sans:'DM Sans', system-ui, sans-serif;
+  position: relative; width: 100%; }
+.wt-frame { position: relative; width: 100%; overflow: hidden; border: 1px solid var(--ink); border-radius: 12px; background: var(--sheet); }
+.wt-stage { position: absolute; left: 0; top: 0; width: 960px; height: 600px; transform-origin: 0 0; font-family: var(--sans); color: var(--ink); }
+
+/* scenes */
+.wt-scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s linear .45s; }
+.wt-scene.on { opacity: 1; visibility: visible; transition: opacity .45s ease; }
+.wt-bar { position: absolute; left: 0; right: 0; top: 0; height: 56px; border-bottom: 1px solid var(--rule); display: flex; align-items: center; padding: 0 28px; gap: 16px; background: var(--paper); }
+.wt-bar img { height: 26px; width: auto; }
+.wt-bar .where { margin-left: auto; font-size: 13px; color: var(--mute); }
+.wt-body { position: absolute; left: 0; right: 0; top: 56px; bottom: 0; display: flex; align-items: center; justify-content: center; }
+
+.wt-label { font: 700 13px/1.4 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--azure); }
+.wt-h { font: 400 46px/1.06 var(--serif); letter-spacing: -.02em; margin-top: 10px; }
+.wt-p { font-size: 20px; line-height: 1.55; color: var(--soft); margin-top: 12px; }
+.wt-btn { display: inline-block; margin-top: 22px; background: var(--azure); color: var(--paper); font: 700 18px/1 var(--sans); padding: 18px 28px; border-radius: 10px; transition: transform .15s ease, background .15s ease; }
+.wt-btn.press { transform: scale(.96); background: var(--azure-dk); }
+.wt-btn--ink { background: var(--ink); }
+.wt-btn--ink.press { background: #000; }
+
+/* scene 1: product */
+.s1 .card { width: 720px; }
+.s1 .price { display: flex; align-items: baseline; gap: 12px; margin-top: 18px; }
+.s1 .price b { font: 400 56px/1 var(--serif); }
+.s1 .price span { font-size: 17px; color: var(--mute); }
+
+/* scene 2: paid */
+.s2 .card { width: 500px; background: #fff; border: 1px solid var(--rule); border-radius: 12px; padding: 34px 36px; text-align: center; }
+.s2 .tick { width: 56px; height: 56px; border-radius: 50%; background: var(--azure); margin: 0 auto; display: grid; place-items: center; transform: scale(.4); opacity: 0; transition: transform .45s cubic-bezier(.3,1.5,.5,1), opacity .2s ease; }
+.s2 .tick svg { width: 26px; height: 26px; }
+.s2.go .tick { transform: scale(1); opacity: 1; }
+.s2 .amt { font: 400 36px/1 var(--serif); margin-top: 18px; }
+.s2 .row { display: flex; justify-content: space-between; font-size: 16px; color: var(--soft); padding: 10px 0; border-top: 1px solid var(--rule); margin-top: 14px; }
+.s2 .fine { font-size: 14px; color: var(--mute); margin-top: 14px; }
+.s2 .next { font-size: 16px; color: var(--azure); font-weight: 700; margin-top: 18px; opacity: 0; transition: opacity .3s ease; }
+.s2.go2 .next { opacity: 1; }
+
+/* scene 3: setup form */
+.s3 .card { width: 720px; }
+.s3 .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; margin-top: 20px; }
+.s3 .f { display: block; }
+.s3 .f.full { grid-column: 1 / -1; }
+.s3 .f small { display: block; font: 700 12px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); margin-bottom: 7px; }
+.s3 .f .in { height: 50px; border: 1.5px solid rgba(23,23,20,.35); border-radius: 10px; background: #fff; padding: 0 14px; display: flex; align-items: center; font-size: 18px; }
+.s3 .f.active .in { border-color: var(--azure); box-shadow: 0 0 0 3px rgba(9,105,119,.14); }
+.s3 .f .in i { display: inline-block; width: 1.5px; height: 20px; background: var(--ink); margin-left: 1px; animation: wtBlink 1s steps(1) infinite; visibility: hidden; }
+.s3 .f.active .in i { visibility: visible; }
+@keyframes wtBlink { 50% { opacity: 0; } }
+
+/* scene 4: inbox + email */
+.s4 .inbox { position: absolute; left: 0; top: 0; bottom: 0; width: 340px; border-right: 1px solid var(--rule); background: var(--paper); }
+.s4 .inbox h4 { font: 700 12px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); padding: 20px 22px 12px; }
+.s4 .msg { padding: 16px 22px; border-top: 1px solid var(--rule); font-size: 15px; line-height: 1.4; color: var(--soft); }
+.s4 .msg b { display: block; color: var(--ink); font-size: 16px; }
+.s4 .msg.new { background: #fff; border-left: 3px solid var(--azure); transform: translateY(-14px); opacity: 0; transition: transform .45s ease, opacity .35s ease; }
+.s4.go .msg.new { transform: none; opacity: 1; }
+.s4 .msg.new b { font-weight: 700; }
+.s4 .mail { position: absolute; left: 340px; right: 0; top: 0; bottom: 0; padding: 30px 44px; background: var(--paper); opacity: 0; transition: opacity .4s ease; }
+.s4.open .mail { opacity: 1; }
+.s4 .mail img { height: 28px; width: auto; }
+.s4 .mail .rule { height: 2px; background: var(--ink); margin: 14px 0 20px; }
+.s4 .mail .wt-h { font-size: 38px; }
+
+/* scene 5: timeline */
+.s5 .card { width: 860px; }
+.s5 .count { font: 400 40px/1.1 var(--serif); margin-top: 8px; }
+.s5 .count em { font-style: normal; color: var(--azure); }
+.s5 .line { position: relative; height: 2px; background: var(--ink); margin: 96px 30px 0; }
+.s5 .pt { position: absolute; top: -8px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: var(--azure); border: 3px solid var(--sheet); transform: translateY(-26px); opacity: 0; transition: transform .45s cubic-bezier(.3,1.5,.5,1), opacity .25s ease; }
+.s5 .pt.in { transform: none; opacity: 1; }
+.s5 .pt span { position: absolute; left: 50%; transform: translateX(-50%); top: 30px; white-space: nowrap; font: 700 13px/1 var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--soft); }
+.s5 .pt:nth-child(even) span { top: auto; bottom: 30px; }
+.s5 .ends { display: flex; justify-content: space-between; margin: 76px 30px 0; font-size: 15px; color: var(--mute); }
+
+/* scene 6: the day it lands */
+.s6 .day { position: absolute; left: 0; top: 0; bottom: 0; width: 390px; border-right: 1px solid var(--rule); background: var(--paper); padding: 22px 26px; }
+.s6 .day h4 { font: 400 30px/1.1 var(--serif); }
+.s6 .day .slot { display: flex; gap: 14px; border-top: 1px solid var(--rule); padding: 12px 0; font-size: 15px; color: var(--mute); margin-top: 12px; }
+.s6 .day .slot b { width: 44px; font-weight: 700; color: var(--soft); }
+.s6 .ev { background: var(--azure); color: var(--paper); border-radius: 8px; padding: 10px 12px; font-size: 16px; line-height: 1.3; flex: 1; }
+.s6 .ev small { display: block; opacity: .85; font-size: 13px; margin-top: 2px; }
+.s6 .toast { position: absolute; right: 24px; top: 20px; width: 340px; background: #fff; border: 1px solid var(--rule); border-radius: 12px; padding: 14px 16px; font-size: 15px; line-height: 1.4; transform: translateY(-16px); opacity: 0; transition: transform .45s ease, opacity .3s ease; }
+.s6 .toast b { display: block; font-size: 16px; }
+.s6.go .toast { transform: none; opacity: 1; }
+.s6 .guide { position: absolute; left: 420px; right: 30px; top: 110px; bottom: 26px; background: #fff; border: 1px solid var(--ink); border-radius: 12px; padding: 26px 28px; transform: translateY(24px); opacity: 0; transition: transform .5s ease, opacity .4s ease; }
+.s6.open .guide { transform: none; opacity: 1; }
+.s6 .guide .wt-h { font-size: 36px; }
+.s6 .say { margin-top: 18px; padding-left: 16px; border-left: 3px solid var(--azure); font: 400 23px/1.4 var(--serif); }
+
+/* cursor */
+.wt-cursor { position: absolute; left: 480px; top: 520px; width: 22px; height: 22px; z-index: 20; transition: left .9s cubic-bezier(.45,.05,.3,1), top .9s cubic-bezier(.45,.05,.3,1), opacity .3s; pointer-events: none; }
+.wt-cursor svg { width: 22px; height: 22px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); }
+
+/* caption + controls (outside the stage, real HTML text) */
+.wt-under { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+.wt-play { flex: none; width: 38px; height: 38px; border-radius: 10px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); display: grid; place-items: center; cursor: pointer; }
+.wt-play:hover { background: var(--ink); color: var(--paper); }
+.wt-play svg { width: 14px; height: 14px; }
+.wt-cap { flex: 1; min-width: 0; font-size: 15px; line-height: 1.4; color: var(--ink); }
+.wt-cap b { color: var(--azure); font-weight: 700; margin-right: 6px; font-variant-numeric: tabular-nums; }
+.wt-steps { display: flex; gap: 4px; flex: none; }
+.wt-steps button { width: 22px; height: 4px; border: 0; padding: 0; background: rgba(23,23,20,.18); cursor: pointer; border-radius: 2px; }
+.wt-steps button[aria-current="true"] { background: var(--azure); }
+.wt-steps button:focus-visible, .wt-play:focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+/* narrow containers (phones): a taller stage and single-panel scenes */
+.wt.narrow .wt-stage { width: 540px; height: 640px; }
+.wt.narrow .wt-bar .where { display: none; }
+.wt.narrow .s1 .card, .wt.narrow .s3 .card { width: 470px; }
+.wt.narrow .s2 .card { width: 440px; }
+.wt.narrow .s5 .card { width: 500px; }
+.wt.narrow .wt-h { font-size: 40px; }
+.wt.narrow .s3 .wt-h { font-size: 34px; }
+.wt.narrow .s4 .inbox { display: none; }
+.wt.narrow .s4 .mail { left: 0; opacity: 1; }
+.wt.narrow .s6 .day { display: none; }
+.wt.narrow .s6 .guide { left: 24px; right: 24px; top: 120px; }
+.wt.narrow .s6 .toast { left: 24px; right: 24px; width: auto; }
+.wt.narrow .s5 .line { margin: 110px 34px 0; }
+.wt.narrow .s5 .pt span { font-size: 11px; }
+.wt.narrow .s5 .count { font-size: 34px; }
+@media (max-width: 520px) { .wt-steps { display: none; } .wt-cap { font-size: 14px; } }
+@media (prefers-reduced-motion: reduce) { .wt * { transition: none !important; animation: none !important; } }

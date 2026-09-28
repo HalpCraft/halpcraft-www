@@ -33,7 +33,8 @@
     .g-moment .note { left: -170px; top: 42%; width: 160px; text-align: right; transform: rotate(1deg); }
     .g-moment .note span { display: block; margin-bottom: 6px; }
     .g-hero-exit { margin-top: clamp(64px, 8vw, 112px); padding-bottom: clamp(40px, 5vw, 64px); }
-    .g-hero-exit .thread-line { --thread-h: calc(100% - 0.55em + clamp(150px, 16vw, 220px) - 46px); }
+    .g-hero-exit .thread-line { --thread-h: calc(100% - 0.55em + clamp(150px, 16vw, 220px) + 3px); }
+    .g-hero-exit .thread-line::after { display: none; }
 
     .gap { padding-top: clamp(150px, 16vw, 220px); }
     .gap .display { margin-top: 24px; max-width: 14ch; }

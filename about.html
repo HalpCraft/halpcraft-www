@@ -32,7 +32,8 @@
     .portrait figcaption { margin-top: 14px; font-size: 14px; color: var(--ink-mute); }
     .portrait figcaption b { color: var(--ink); font-weight: 600; }
     .a-hero-exit { margin-top: clamp(64px, 8vw, 112px); padding-bottom: clamp(40px, 5vw, 64px); }
-    .a-hero-exit .thread-line { --thread-h: calc(100% - 0.55em + clamp(150px, 16vw, 220px) - 46px); }
+    .a-hero-exit .thread-line { --thread-h: calc(100% - 0.55em + clamp(150px, 16vw, 220px) + 3px); }
+    .a-hero-exit .thread-line::after { display: none; }
 
     .seen { padding-top: clamp(150px, 16vw, 220px); }
     .seen .display { font-size: clamp(2.2rem, 5vw, 4.8rem); max-width: 20ch; margin-top: 24px; }
@@ -41,7 +42,8 @@
     .seen .claim { font: 400 clamp(1.6rem, 2.6vw, 2.3rem)/1.2 var(--serif); color: var(--paper); max-width: 14em; }
     .seen-exit { margin-top: clamp(56px, 7vw, 96px); }
     .seen-exit p { font: 400 clamp(1.9rem, 3.8vw, 3.3rem)/1.1 var(--serif); letter-spacing: -0.02em; font-variation-settings: "opsz" 72; color: var(--paper); padding-left: 28px; }
-    .seen-exit .thread-line { top: 0.5em; --thread-h: calc(100% - 0.5em + var(--space) * 2 + 8px); }
+    .seen-exit .thread-line { top: 0.5em; --thread-h: calc(100% - 0.5em + var(--space) * 2 + 19px); }
+    .seen-exit .thread-line::after { display: none; }
 
     .built { padding: calc(var(--space) + 16px) 0 var(--space); }
     .built h2 { font-size: clamp(2.2rem, 4.6vw, 4.2rem); line-height: 1.02; margin-top: 18px; max-width: 12ch; }

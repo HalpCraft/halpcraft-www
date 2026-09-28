@@ -349,6 +349,7 @@
     .belief-close { margin-top: clamp(56px, 7vw, 96px); }
     .belief-close p { font: 400 clamp(1.9rem, 3.8vw, 3.3rem)/1.1 var(--serif); letter-spacing: -0.02em; font-variation-settings: "opsz" 72; color: var(--paper); max-width: 18ch; padding-left: 28px; }
     .thread--belief .thread-line { top: 0.5em; --thread-h: calc(100% - 0.5em + var(--space) * 2 + clamp(40px, 5vw, 72px) + 4px); }
+    .thread--belief .thread-line::after { display: none; } /* the line runs into the label dot below */
     .approach { padding-top: calc(var(--space) + clamp(40px, 5vw, 72px)); }
     .approach-head .label { color: var(--azure); padding-left: 28px; position: relative; }
     .approach-head .label::before { content: ""; position: absolute; left: -4px; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--azure); transform: translateY(-50%); }

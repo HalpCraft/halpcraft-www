@@ -44,7 +44,8 @@
     .p-moment .note { position: static; margin-top: 22px; text-align: right; transform: rotate(-1deg); }
     .p-moment .note svg { display: none; }
     .p-hero-exit { margin-top: clamp(64px, 8vw, 112px); padding-bottom: 8px; }
-    .p-hero-exit .thread-line { --thread-h: calc(100% - 0.55em + var(--space) - 46px); }
+    .p-hero-exit .thread-line { --thread-h: calc(100% - 0.55em + var(--space) + 3px); }
+    .p-hero-exit .thread-line::after { display: none; }
 
     /* pricing */
     #pricing { border-top: 0; }

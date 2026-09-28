@@ -20,152 +20,402 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/logos/favicon-32.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/css/halpcraft.css" />
   <style>
-    /* Onboarding Nudges product page */
-    .crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
-    .crumb span[aria-hidden] { color: var(--azure); }
-    .sec { padding: var(--space) 0; }
-    .sec + .sec { border-top: 1px solid var(--rule); }
-    .sec-head h2 { font-size: clamp(2.2rem, 4.8vw, 4.4rem); line-height: 1.02; margin-top: 18px; max-width: 15ch; }
-    .sec-head .lead { margin-top: 22px; }
-    .sec-head.split { align-items: end; }
+    :root {
+      --ink: #171714; --paper: #F3EFE7; --azure: #096977; --moss: #66745D; --clay: #B86F52;
+      --azure-dk: #07535E;
+      --sheet: #FBF9F4;
+      --ink-soft: rgba(23,23,20,0.76);
+      --ink-mute: rgba(23,23,20,0.62);
+      --rule: rgba(23,23,20,0.16);
+      --on-ink: rgba(243,239,231,0.8);
+      --on-ink-mute: rgba(243,239,231,0.62);
+      --rule-on-ink: rgba(243,239,231,0.18);
+      --serif: 'Fraunces', Georgia, serif;
+      --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+      --wrap: 1280px;
+      --gutter: clamp(20px, 4.5vw, 64px);
+      --space: clamp(88px, 12vw, 176px);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { background: var(--paper); color: var(--ink); font: 400 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .skip { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--ink); color: var(--paper); padding: 10px 16px; font: 600 14px var(--sans); text-decoration: none; }
+    .skip:focus { top: 12px; }
+    :focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+    .band--ink :focus-visible, .spread--btm :focus-visible, .turn :focus-visible, footer :focus-visible, .band--azure :focus-visible { outline-color: var(--paper); }
+    [id] { scroll-margin-top: 90px; }
 
-    /* hero */
-    .p-hero { padding: clamp(40px, 5vw, 72px) 0 0; }
-    .p-hero h1 { font-size: clamp(2.6rem, 6.4vw, 6.4rem); margin-top: clamp(28px, 4vw, 48px); }
-    .p-hero .split { margin-top: clamp(40px, 5vw, 72px); align-items: start; }
-    .price { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
-    .price strong { font: 400 clamp(2.4rem, 4vw, 3.2rem)/1 var(--serif); letter-spacing: -0.02em; font-variation-settings: "opsz" 72; }
-    .price span { font-size: 15px; color: var(--ink-mute); }
-    .p-hero .actions { margin-top: 26px; }
-    .p-moment { position: relative; justify-self: end; width: 100%; max-width: 420px; transform: rotate(1deg); }
-    .p-moment .slip { max-width: none; }
-    .p-moment .note { position: static; margin-top: 22px; text-align: right; transform: rotate(-1deg); }
-    .p-moment .note svg { display: none; }
-    .p-hero-exit { margin-top: clamp(64px, 8vw, 112px); padding-bottom: 8px; }
-    .p-hero-exit .thread-line { --thread-h: calc(100% - 0.55em + var(--space) + 3px); }
-    .p-hero-exit .thread-line::after { display: none; }
+    /* type */
+    h1, h2, h3, .display { font-family: var(--serif); font-weight: 400; letter-spacing: -0.018em; font-variation-settings: "opsz" 72; }
+    .label { font: 600 12px/1.4 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); }
+    .label b { color: var(--azure); font-weight: 600; }
+    .display { font-size: clamp(2.8rem, 7.4vw, 7rem); line-height: 0.98; letter-spacing: -0.025em; }
+    .lead { font-size: clamp(1.05rem, 1.35vw, 1.2rem); color: var(--ink-soft); max-width: 34em; }
+    .link { color: var(--azure); font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(9,105,119,0.35); padding-bottom: 1px; }
+    .link:hover { border-bottom-color: var(--azure); }
+    .btn { display: inline-block; font: 600 15px/1 var(--sans); text-decoration: none; padding: 17px 26px; border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+    .btn:hover { background: transparent; color: var(--ink); }
+    .btn--azure { background: var(--azure); border-color: var(--azure); }
+    .btn--azure:hover { background: var(--azure-dk); border-color: var(--azure-dk); color: var(--paper); }
+    .btn--line { background: transparent; color: var(--ink); }
+    .btn--line:hover { background: var(--ink); color: var(--paper); }
+    .btn, .btn--buy { border-radius: 10px; }
 
-    /* pricing */
-    #pricing { border-top: 0; }
-    #pricing .sec-head .label, #sample .label { padding-left: 28px; }
-    .tiers { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: clamp(40px, 5vw, 72px); border-top: 2px solid var(--ink); }
-    .tiers > li { padding: 28px clamp(20px, 2.6vw, 36px) 32px; border-left: 1px solid var(--rule); display: flex; flex-direction: column; }
-    .tiers > li:first-child { border-left: 0; padding-left: 0; }
-    .tiers .tier { font: 600 12px var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--azure); }
-    .tiers .amt { font: 400 clamp(2.8rem, 5vw, 4.4rem)/1 var(--serif); letter-spacing: -0.03em; font-variation-settings: "opsz" 72; margin-top: 18px; }
-    .tiers .amt small { font: 500 15px var(--sans); letter-spacing: 0; color: var(--ink-mute); margin-left: 6px; }
-    .tiers .per { margin-top: 10px; font-size: 15px; color: var(--ink); font-weight: 600; }
-    .tiers .desc { margin-top: 12px; color: var(--ink-soft); font-size: 15.5px; flex: 1; }
-    .tiers .btn { margin-top: 24px; align-self: flex-start; }
-    .tier-foot { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; font-size: 15px; color: var(--ink-mute); }
-    .tier-foot a { color: var(--ink); font-weight: 600; }
+    /* module: split */
+    .split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 104px); }
+    .split--rev { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 
-    /* sample */
-    #sample { background: var(--sheet); }
-    #sample h2 { font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.04; margin-top: 18px; max-width: 14ch; }
-    #sample .split { align-items: start; }
-    .free form { display: flex; margin-top: 8px; max-width: 520px; }
-    .free input { flex: 1; min-width: 0; font: 400 16px var(--sans); padding: 15px 16px; border: 1.5px solid var(--ink); border-right: 0; background: var(--paper); color: var(--ink); border-radius: 10px 0 0 10px; }
+    /* module: slip */
+    .slip { position: relative; background: var(--sheet); border: 1px solid var(--ink); padding: 22px 24px 20px; max-width: 420px; }
+    .slip::after { content: ""; position: absolute; inset: 8px -8px -8px 8px; border: 1px solid var(--rule); z-index: -1; background: var(--paper); }
+    .slip-when { display: flex; align-items: center; gap: 10px; font: 600 12px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--azure); }
+    .slip-when::before { content: ""; width: 9px; height: 9px; background: var(--azure); border-radius: 50%; }
+    .slip h3 { font-size: clamp(1.6rem, 2.3vw, 2rem); line-height: 1.1; margin-top: 12px; }
+    .slip p { margin-top: 10px; font-size: 15.5px; color: var(--ink-soft); line-height: 1.5; }
+    .slip-foot { margin-top: 18px; padding-top: 12px; border-top: 1px dashed var(--rule); display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; color: var(--ink-mute); }
+    .slip-done { font: 600 13px var(--sans); color: var(--ink); background: none; border: 1.5px solid var(--ink); border-radius: 8px; padding: 7px 12px; cursor: pointer; }
+    .slip-done:hover { background: var(--ink); color: var(--paper); }
+    .slip.is-done h3 { text-decoration: line-through; text-decoration-color: var(--azure); text-decoration-thickness: 2px; color: var(--ink-mute); }
+    .slip.is-done .slip-done { background: var(--azure); border-color: var(--azure); color: var(--paper); }
+
+    /* ── NAV ───────────────────────────────────────── */
+    .nav { position: sticky; top: 0; z-index: 60; background: var(--paper); border-bottom: 1px solid var(--rule); }
+    .nav .wrap { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo img { height: 46px; width: auto; }
+    .nav ul { list-style: none; display: flex; align-items: center; gap: 30px; }
+    .nav ul a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--ink-soft); }
+    .nav ul a:hover { color: var(--ink); }
+    .nav ul .btn { padding: 11px 18px; font-size: 14px; color: var(--paper); }
+    .nav ul .btn:hover { color: var(--ink); }
+    .nav-cta { display: none; }
+    .nav-toggle { display: none; background: none; border: 1.5px solid var(--ink); border-radius: 8px; font: 600 14px var(--sans); padding: 8px 14px; color: var(--ink); cursor: pointer; }
+    .nav ul .group { font: 600 11px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); display: none; }
+    .nav .sep { width: 1px; height: 18px; background: var(--rule); }
+
+    /* ── FOOTER ────────────────────────────────────── */
+    footer { background: var(--ink); color: var(--on-ink-mute); padding: 56px 0 40px; font-size: 14px; }
+    .foot-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; }
+    .foot-logo img { height: 48px; width: auto; }
+    .foot-tag { margin-top: 14px; font: 600 11px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; }
+    .foot-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .foot-cols h4 { font: 600 11px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(243,239,231,0.5); margin-bottom: 12px; }
+    .foot-cols ul { list-style: none; }
+    .foot-cols li + li { margin-top: 8px; }
+    .foot-cols a { text-decoration: none; color: rgba(243,239,231,0.85); }
+    .foot-cols a:hover { color: var(--paper); }
+    .foot-base { margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(243,239,231,0.14); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: rgba(243,239,231,0.5); font-size: 13px; }
+
+
+    /* section marker: rule + number + name (+ optional aside) */
+    .sec { padding: clamp(88px, 11vw, 150px) 0; position: relative; }
+    .sec--sheet { background: var(--sheet); }
+    .mark { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 18px; border-top: 2px solid var(--ink); padding-top: 16px; }
+    .mark .no { font: 400 1.4rem/1 var(--serif); color: var(--azure); font-variant-numeric: lining-nums; }
+    .mark .name { font: 700 14px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+    .mark .aside { margin-left: auto; font: italic 400 clamp(1.05rem, 1.5vw, 1.25rem)/1.35 var(--serif); color: var(--ink-soft); }
+    .sec-title { font: 400 clamp(2.5rem, 5.2vw, 4.4rem)/1.02 var(--serif); letter-spacing: -.025em; font-variation-settings: "opsz" 72; margin-top: clamp(26px, 3.6vw, 44px); max-width: 16ch; }
+    .sec-lead { margin-top: 22px; font-size: clamp(1.05rem, 1.35vw, 1.2rem); color: var(--ink-soft); max-width: 34em; }
+    .band--ink .mark, .spread--btm .mark { border-top-color: var(--paper); }
+    .band--ink .mark .name { color: var(--paper); }
+    .band--ink .mark .no { color: #6FB1B9; }
+
+    /* Photography: offset ink frame, warm grade, editorial caption, scroll reveal */
+    .shot { margin: 0; position: relative; }
+    .shot .frame { position: relative; z-index: 1; overflow: hidden; border-radius: 4px; background: var(--ink); }
+    .shot .frame img { display: block; width: 100%; height: auto; filter: saturate(.86) contrast(1.02) sepia(.06); }
+    .shot::before { content: ""; position: absolute; z-index: 0; top: 18px; left: 18px; right: -18px; bottom: 42px; border: 1px solid var(--ink); border-radius: 4px; pointer-events: none; }
+    .shot--left::before { left: -18px; right: 18px; }
+    .shot figcaption { display: flex; align-items: center; gap: 12px; margin-top: 32px; min-height: 28px; font: 600 11px/1.3 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); }
+    .shot figcaption::before { content: ""; width: 28px; height: 2px; background: var(--azure); flex: none; }
+    .shot--tall { max-width: 420px; justify-self: end; }
+    @media (prefers-reduced-motion: no-preference) {
+      .js .shot .frame { clip-path: inset(100% 0 0 0); transition: clip-path 1.1s cubic-bezier(.7,0,.2,1); }
+      .js .shot .frame img { transform: scale(1.12); transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
+      .js .shot::before { opacity: 0; transform: translate(-18px, -18px); transition: opacity .6s ease .7s, transform .9s cubic-bezier(.2,.7,.2,1) .7s; }
+      .js .shot--left::before { transform: translate(18px, -18px); }
+      .js .shot figcaption { opacity: 0; transition: opacity .6s ease 1.1s; }
+      .js .shot.is-in .frame { clip-path: inset(0 0 0 0); }
+      .js .shot.is-in .frame img { transform: none; }
+      .js .shot.is-in::before { opacity: 1; transform: none; }
+      .js .shot.is-in figcaption { opacity: 1; }
+    }
+
+
+    .band { padding: var(--space) 0; }
+    .band--ink { background: var(--ink); color: var(--paper); }
+    .nav ul a[aria-current="page"] { color: var(--ink); }
+
+    /* =====================================================================
+       Onboarding Nudges (Phase 17): the homepage section system, applied to one product
+       ===================================================================== */
+    .sec { padding: clamp(88px, 11vw, 150px) 0; }
+
+    /* ── HERO: the walkthrough does the explaining ── */
+    .p-hero { padding: clamp(36px, 4.5vw, 64px) 0 clamp(80px, 10vw, 136px); }
+    .crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font: 600 12px var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-mute); }
+    .crumb::before { content: ""; width: 40px; height: 2px; background: var(--azure); }
+    .crumb a { color: var(--ink-mute); text-decoration: none; }
+    .crumb a:hover { color: var(--ink); }
+    .crumb i { font-style: normal; color: var(--azure); }
+    .crumb b { color: var(--ink); font-weight: 600; }
+    .p-hero h1 { margin-top: clamp(24px, 3vw, 40px); font-size: clamp(2.4rem, 4.3vw, 4.4rem); line-height: 1.02; letter-spacing: -.028em; max-width: 30ch; }
+    .p-hero h1 .l2 { display: block; color: var(--ink-mute); }
+    .p-hero h1 em { font-style: italic; color: var(--ink); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(36px, 5vw, 80px); align-items: start; margin-top: clamp(28px, 3.4vw, 48px); }
+    .hero-grid .lead { font-size: clamp(1.08rem, 1.35vw, 1.22rem); }
+    .p-hero .price { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--rule); }
+    .p-hero .price strong { display: inline; margin-right: 12px; font: 400 clamp(2.6rem, 4.2vw, 3.4rem)/1 var(--serif); letter-spacing: -.02em; font-variation-settings: "opsz" 72; }
+    .p-hero .price span { font-size: 15px; color: var(--ink-mute); }
+    .p-hero .price em { font: italic 400 1.12rem/1.3 var(--serif); color: var(--ink); display: block; margin-top: 4px; }
+    .hero-actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
+    .hero-more { margin-top: 18px; font-size: 14px; color: var(--ink-mute); }
+    .hero-more a { color: var(--ink); font-weight: 600; }
+    .demo-cap { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font: 600 11px/1.3 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); }
+    .demo-cap::before { content: ""; width: 28px; height: 2px; background: var(--azure); flex: none; }
+
+    /* ── 01 THE PROBLEM ── */
+    .problem-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
+    .week { list-style: none; margin-top: clamp(32px, 4vw, 52px); border-top: 1px solid var(--rule); }
+    .week li { display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 13px 0; border-bottom: 1px solid var(--rule); }
+    .week b { font: 600 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); }
+    .week span { font: 400 clamp(1.25rem, 1.9vw, 1.6rem)/1.25 var(--serif); letter-spacing: -.01em; color: var(--ink-soft); }
+    .week li.gone span { color: var(--ink); }
+    .week li.gone span s { text-decoration-color: var(--azure); text-decoration-thickness: 2px; }
+    .problem .claim { margin-top: 28px; font-size: 1.12rem; color: var(--ink-soft); max-width: 32em; }
+    .problem .claim strong { color: var(--ink); font-weight: 600; }
+
+    /* ── 02 HOW IT WORKS ── */
+    .how-head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 80px); align-items: end; }
+    .how-head .sec-lead { margin-top: 0; }
+    .steps { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 3vw, 44px); margin-top: clamp(48px, 6vw, 80px); counter-reset: s; }
+    .steps li { position: relative; padding-top: 22px; border-top: 2px solid var(--ink); }
+    .steps li:last-child { border-top-color: var(--azure); }
+    .steps .n { font: 400 clamp(2.6rem, 4vw, 3.6rem)/1 var(--serif); color: var(--azure); font-variant-numeric: lining-nums; letter-spacing: -.02em; }
+    .steps h3 { font-size: clamp(1.35rem, 2vw, 1.7rem); line-height: 1.12; margin-top: 16px; }
+    .steps p { margin-top: 10px; color: var(--ink-soft); font-size: 15.5px; }
+    .steps .t { display: block; margin-top: 14px; font: 600 12px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+    .how-note { margin-top: clamp(40px, 5vw, 64px); padding-top: 18px; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 10px 40px; font-size: 15px; color: var(--ink-mute); }
+    .how-note a { color: var(--ink); font-weight: 600; }
+
+    /* ── 03 THE SEQUENCE: time you can see ── */
+    .sequence .sec-title { color: var(--paper); }
+    .sequence .sec-lead { color: var(--on-ink); }
+    .ruler { position: relative; margin: clamp(56px, 7vw, 96px) 14px 0; height: 96px; }
+    .ruler .axis { position: absolute; left: 0; right: 0; top: 40px; height: 2px; background: rgba(243,239,231,.35); }
+    .ruler .fill { position: absolute; left: 0; right: 0; top: 40px; height: 2px; background: #6FB1B9; transform-origin: left; }
+    .ruler .dot { position: absolute; top: 41px; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: #6FB1B9; color: var(--ink); display: grid; place-items: center; font: 700 11px/1 var(--sans); box-shadow: 0 0 0 4px var(--ink); }
+    .ruler .dot.mail { width: 14px; height: 14px; margin: -7px 0 0 -7px; background: var(--ink); border: 2px solid rgba(243,239,231,.7); box-shadow: none; }
+    .ruler .tick { position: absolute; top: 58px; transform: translateX(-50%); font: 600 11px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--on-ink-mute); white-space: nowrap; padding-top: 14px; }
+    .ruler .tick::before { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 8px; background: rgba(243,239,231,.35); }
+    .ruler .tick.first { transform: none; }
+    .ruler .tick.first::before { left: 0; }
+    .ruler .tick.last { transform: translateX(-100%); }
+    .ruler .tick.last::before { left: auto; right: 0; }
+    .ruler .quiet { position: absolute; top: 0; transform: translateX(-50%); font: italic 400 15px/1.2 var(--serif); color: var(--on-ink-mute); white-space: nowrap; }
+    .ruler-key { margin: 22px 14px 0; display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 13px; color: var(--on-ink-mute); }
+    .ruler-key span { display: inline-flex; align-items: center; gap: 8px; }
+    .ruler-key i { width: 12px; height: 12px; border-radius: 50%; background: #6FB1B9; display: inline-block; }
+    .ruler-key i.m { background: var(--ink); border: 2px solid rgba(243,239,231,.7); width: 11px; height: 11px; }
+
+    .phases { list-style: none; margin-top: clamp(56px, 7vw, 96px); border-top: 2px solid var(--paper); }
+    .phase { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 12px clamp(24px, 4vw, 64px); padding: clamp(22px, 2.6vw, 32px) 0; border-bottom: 1px solid var(--rule-on-ink); }
+    .phase-name { font: italic 400 clamp(1.3rem, 2vw, 1.7rem)/1.15 var(--serif); color: var(--paper); font-variation-settings: "opsz" 36; }
+    .phase-name small { display: block; margin-top: 6px; font: 600 11px var(--sans); letter-spacing: .14em; text-transform: uppercase; font-style: normal; color: var(--on-ink-mute); }
+    .nudge { display: grid; grid-template-columns: 150px minmax(0, 4fr) minmax(0, 6fr) 64px; gap: 4px 28px; align-items: baseline; }
+    .nudge + .nudge { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--rule-on-ink); }
+    .nudge .when { font: 600 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: #6FB1B9; }
+    .nudge h3 { font-size: clamp(1.2rem, 1.7vw, 1.45rem); line-height: 1.15; color: var(--paper); }
+    .nudge h3 .no { font: 400 .8em var(--serif); color: var(--on-ink-mute); margin-right: .45em; }
+    .nudge p { color: var(--on-ink); font-size: 15.5px; }
+    .nudge .mins { font-size: 13px; color: var(--on-ink-mute); text-align: right; white-space: nowrap; }
+    .seq-foot { margin-top: 32px; color: var(--on-ink); max-width: 42em; font-size: 15.5px; }
+
+    /* ── 04 WHAT ARRIVES ── */
+    .receive-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 104px); align-items: start; margin-top: clamp(48px, 6vw, 80px); }
+    .cal { position: sticky; top: 110px; }
+    .cal .slip { max-width: 440px; transform: rotate(-1deg); }
+    .cal .slip h3 { font-size: clamp(1.5rem, 2.1vw, 1.85rem); }
+    .cal .alert { margin: 26px 0 0 clamp(16px, 4vw, 48px); max-width: 320px; background: var(--sheet); border: 1px solid var(--rule); border-left: 3px solid var(--azure); padding: 12px 16px; font-size: 14.5px; color: var(--ink-soft); transform: rotate(.8deg); }
+    .cal .alert b { display: block; color: var(--ink); font-size: 15px; }
+    .cal .cap { margin-top: 26px; font-size: 14px; color: var(--ink-mute); max-width: 26em; }
+    .guide-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; padding-bottom: 14px; border-bottom: 2px solid var(--ink); }
+    .guide-head p { font: 600 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); }
+    .guide-head h3 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); line-height: 1.05; }
+    .part { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 4px 20px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
+    .part .n { font: 400 1.3rem/1.2 var(--serif); color: var(--azure); }
+    .part h4 { font: 600 12px/1.5 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+    .part p { margin-top: 6px; color: var(--ink-soft); font-size: 15.5px; max-width: 36em; }
+    .part .acts { list-style: none; margin-top: 10px; }
+    .part .acts li { padding: 8px 0 8px 18px; position: relative; color: var(--ink-soft); font-size: 15.5px; }
+    .part .acts li::before { content: ""; position: absolute; left: 0; top: 17px; width: 8px; height: 2px; background: var(--azure); }
+    .part .acts b { color: var(--ink); font-weight: 600; }
+    .part .say { margin-top: 12px; padding-left: 16px; border-left: 3px solid var(--azure); font: 400 clamp(1.15rem, 1.6vw, 1.35rem)/1.4 var(--serif); color: var(--ink); max-width: 30em; }
+    .around { list-style: none; margin-top: clamp(56px, 7vw, 88px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 44px); }
+    .around li { border-top: 1px solid var(--ink); padding-top: 14px; }
+    .around b { display: block; font: 600 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--azure); }
+    .around span { display: block; margin-top: 8px; color: var(--ink-soft); font-size: 15.5px; }
+    .words { list-style: none; margin-top: clamp(64px, 8vw, 112px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--ink); }
+    .words li { padding: 24px clamp(18px, 2.4vw, 32px) 8px; border-left: 1px solid var(--rule); }
+    .words li:first-child { padding-left: 0; border-left: 0; }
+    .words .w { font: 600 11px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); }
+    .words q { display: block; quotes: none; margin-top: 12px; font: 400 clamp(1.2rem, 1.7vw, 1.45rem)/1.35 var(--serif); letter-spacing: -.005em; color: var(--ink); }
+    .words-cap { margin-top: 12px; font-size: 14px; color: var(--ink-mute); }
+
+    /* ── 05 WHY THESE MOMENTS ── */
+    .moments { background: var(--sheet); }
+    .moments-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(40px, 6vw, 104px); align-items: start; }
+    .moments .display { font-size: clamp(2.6rem, 5.6vw, 5rem); line-height: 1; margin-top: clamp(26px, 3.6vw, 44px); max-width: 13ch; }
+    .moments .display .l2 { display: block; color: var(--ink-mute); }
+    .principles { list-style: none; border-top: 2px solid var(--ink); margin-top: clamp(8px, 2vw, 24px); }
+    .principles li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 14px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+    .principles .n { font: 400 1.15rem/1.3 var(--serif); color: var(--azure); }
+    .principles h3 { font-size: clamp(1.25rem, 1.8vw, 1.5rem); line-height: 1.15; }
+    .principles p { grid-column: 2; color: var(--ink-soft); font-size: 15.5px; }
+    .figs { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; margin-top: 12px; }
+    .figs p, .principles .stat { margin-top: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.45; }
+    .figs b, .principles .stat b { display: block; font: 400 clamp(2rem, 3vw, 2.6rem)/1 var(--serif); letter-spacing: -.02em; color: var(--azure); margin-bottom: 8px; font-variation-settings: "opsz" 72; }
+    .principles .stat b { font-size: clamp(1.7rem, 2.4vw, 2.1rem); margin: 8px 0 6px; }
+    .cite { margin-top: 10px !important; font-size: 13px !important; color: var(--ink-mute) !important; font-style: italic; }
+    .principles .cite { grid-column: 2; margin-top: 4px !important; }
+    .src { margin-top: 22px; font-size: 14px; color: var(--ink-mute); max-width: 40em; }
+    .moments .signline { margin-top: clamp(40px, 5vw, 64px); font: italic 400 clamp(1.3rem, 2vw, 1.7rem)/1.3 var(--serif); color: var(--azure); }
+
+    /* ── 06 START SMALL ── */
+    .start-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 104px); align-items: end; margin-top: clamp(40px, 5vw, 64px); }
+    .one .big { font: 400 clamp(4.4rem, 11vw, 9.6rem)/.9 var(--serif); letter-spacing: -.04em; font-variation-settings: "opsz" 144; }
+    .one .big small { font: 500 clamp(1rem, 1.4vw, 1.2rem) var(--sans); letter-spacing: 0; color: var(--ink-mute); margin-left: .4em; }
+    .one .per { margin-top: 18px; font: italic 400 clamp(1.2rem, 1.8vw, 1.5rem)/1.3 var(--serif); color: var(--ink-soft); }
+    .one .hero-actions { margin-top: 28px; }
+    .packs-list { list-style: none; border-top: 2px solid var(--ink); }
+    .packs-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 20px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+    .packs-list h3 { font-size: clamp(1.35rem, 2vw, 1.7rem); line-height: 1.1; }
+    .packs-list h3 span { font: 400 .8em var(--serif); color: var(--ink-mute); margin-left: .3em; }
+    .packs-list p { grid-column: 1; font-size: 14.5px; color: var(--ink-soft); }
+    .packs-list .btn { grid-row: 1 / span 2; grid-column: 2; padding: 13px 18px; font-size: 14px; }
+    .packs-foot { margin-top: 16px; font-size: 14px; color: var(--ink-mute); }
+    .packs-foot a { color: var(--ink); font-weight: 600; }
+
+    .sample { margin-top: clamp(72px, 9vw, 120px); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 104px); padding-top: clamp(32px, 4vw, 48px); border-top: 1px solid var(--rule); }
+    .sample h3 { font-size: clamp(1.7rem, 2.8vw, 2.4rem); line-height: 1.06; }
+    .sample .sub { margin-top: 10px; color: var(--ink-soft); max-width: 30em; }
+    .free form { display: flex; margin-top: 22px; max-width: 520px; }
+    .free input { flex: 1; min-width: 0; font: 400 16px var(--sans); padding: 15px 16px; border: 1.5px solid var(--ink); border-right: 0; background: var(--sheet); color: var(--ink); border-radius: 10px 0 0 10px; }
     .free input:focus { outline: 2px solid var(--azure); outline-offset: 2px; }
     .free button { border-radius: 0 10px 10px 0; font: 600 15px var(--sans); padding: 15px 20px; background: var(--ink); color: var(--paper); border: 1.5px solid var(--ink); cursor: pointer; white-space: nowrap; }
     .free button:hover { background: var(--azure); border-color: var(--azure); }
     .free button:disabled { opacity: .6; cursor: default; }
     .free .fine { margin-top: 10px; font-size: 13px; color: var(--ink-mute); }
-    .free .ok { font: 400 1.3rem var(--serif); color: var(--azure); }
+    .free .ok { margin-top: 16px; font: 400 1.3rem var(--serif); color: var(--azure); }
     .free .err { margin-top: 10px; font-size: 14px; color: var(--ink); }
-    .free-lead { color: var(--ink-soft); max-width: 30em; margin-bottom: 18px; }
-    .or-read { border-left: 3px solid var(--azure); padding: 4px 0 4px 22px; }
-    .or-read p { color: var(--ink-soft); }
-    .or-read p + p { margin-top: 12px; }
+    .or-read { border-left: 3px solid var(--azure); padding: 4px 0 4px 22px; align-self: end; }
+    .or-read .w { font: 600 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); }
+    .or-read p { margin-top: 10px; color: var(--ink-soft); }
 
-    /* timeline */
-    .timeline { list-style: none; margin-top: clamp(48px, 6vw, 88px); position: relative; }
-    .timeline::before { content: ""; position: absolute; left: 5px; top: 10px; bottom: 10px; width: 2px; background: rgba(79,145,153,0.55); }
-    .timeline li { position: relative; display: grid; grid-template-columns: 170px minmax(0, 5fr) minmax(0, 6fr) 90px; gap: 6px 32px; padding: 20px 0 20px 40px; border-bottom: 1px solid var(--rule-on-ink); align-items: baseline; }
-    .timeline li::before { content: ""; position: absolute; left: 0; top: 27px; width: 12px; height: 12px; border-radius: 50%; background: #4F9199; box-shadow: 0 0 0 4px var(--ink); }
-    .timeline .when { font: 600 12px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: #6FB1B9; }
-    .timeline h3 { font-size: clamp(1.3rem, 2vw, 1.7rem); line-height: 1.1; color: var(--paper); }
-    .timeline p { color: var(--on-ink); font-size: 15.5px; }
-    .timeline .mins { font-size: 13px; color: var(--on-ink-mute); text-align: right; }
-    .how-foot { margin-top: 36px; color: var(--on-ink); max-width: 40em; }
-
-    /* what you receive */
-    .receive .split { align-items: start; margin-top: clamp(40px, 5vw, 72px); }
-    .gets { list-style: none; border-top: 2px solid var(--ink); }
-    .gets li { padding: 18px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 6px 24px; }
-    .gets b { font: 600 12px/1.5 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); padding-top: 3px; }
-    .gets span { color: var(--ink-soft); }
-    .gets span strong { color: var(--ink); font-weight: 600; }
-    .event { position: relative; justify-self: end; width: 100%; max-width: 440px; }
-    .event .slip { max-width: none; }
-    .event .slip .guide { display: inline-block; margin-top: 14px; font: 600 14px var(--sans); color: var(--azure); text-decoration: none; border-bottom: 1px solid rgba(9,105,119,0.35); }
-    .event .cap { margin-top: 26px; font-size: 14px; color: var(--ink-mute); max-width: 30em; }
-    .guide-parts { list-style: none; margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--rule); display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; font-size: 13.5px; color: var(--ink-soft); }
-    .guide-parts li::before { content: "\2192\00a0"; color: var(--azure); }
-
-    /* examples */
-    .examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(28px, 4vw, 56px) clamp(28px, 4vw, 64px); margin-top: clamp(48px, 6vw, 88px); }
-    .examples .slip { max-width: none; }
-    .examples .slip .act { margin-top: 18px; font: 600 12px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
-    .examples .slip .say { margin-top: 8px; font: 400 1.15rem/1.4 var(--serif); color: var(--ink); font-variation-settings: "opsz" 24; }
-    .examples .slip:nth-child(1) { transform: rotate(-0.8deg); }
-    .examples .slip:nth-child(2) { transform: rotate(0.6deg); margin-top: 32px; }
-    .examples .slip:nth-child(3) { transform: rotate(0.4deg); }
-    .examples .slip:nth-child(4) { transform: rotate(-0.6deg); margin-top: 32px; }
-
-    /* setup */
-    .setup .rows { margin-top: clamp(40px, 5vw, 72px); }
-    .setup .rows a { color: var(--ink); font-weight: 600; }
-
-    /* why it works */
-    .why h2 { font-size: clamp(2.2rem, 4.8vw, 4.4rem); line-height: 1.02; margin-top: 18px; max-width: 15ch; color: var(--paper); }
-    .why .lead { margin-top: 22px; }
-    .why .rows { margin-top: clamp(40px, 5vw, 72px); }
-    .why .src { margin-top: 36px; font-size: 15px; color: var(--paper); max-width: 44em; opacity: 0.9; }
-
-    /* faq */
-    .faq { margin-top: clamp(40px, 5vw, 72px); border-top: 2px solid var(--ink); }
-    .faq details { border-bottom: 1px solid var(--rule); }
-    .faq summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) 28px; gap: 20px; align-items: baseline; padding: 22px 0; font: 400 clamp(1.25rem, 2vw, 1.6rem)/1.2 var(--serif); letter-spacing: -0.01em; }
+    /* questions */
+    .faq-sec { padding: 0 0 clamp(88px, 11vw, 150px); }
+    .faq-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 32px; border-top: 2px solid var(--ink); padding-top: 16px; }
+    .faq-head h2 { font: 700 14px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+    .faq-head p { font-size: 15px; color: var(--ink-mute); }
+    .faq-head a { color: var(--ink); font-weight: 600; }
+    .faq { margin-top: 8px; columns: 2; column-gap: clamp(32px, 5vw, 80px); }
+    .faq details { break-inside: avoid; border-bottom: 1px solid var(--rule); }
+    .faq summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) 24px; gap: 16px; align-items: baseline; padding: 18px 0; font: 400 clamp(1.1rem, 1.5vw, 1.3rem)/1.25 var(--serif); letter-spacing: -.01em; }
     .faq summary::-webkit-details-marker { display: none; }
-    .faq summary::after { content: "+"; font: 400 1.6rem/1 var(--sans); color: var(--azure); text-align: right; }
+    .faq summary::after { content: "+"; font: 400 1.4rem/1 var(--sans); color: var(--azure); text-align: right; }
     .faq details[open] summary::after { content: "\2212"; }
     .faq summary:hover { color: var(--azure); }
-    .faq .a { padding: 0 48px 24px 0; color: var(--ink-soft); max-width: 44em; }
-    .faq .a p + p { margin-top: 0.8em; }
+    .faq .a { padding: 0 32px 20px 0; color: var(--ink-soft); font-size: 15.5px; }
     .faq .a a { color: var(--ink); font-weight: 600; }
 
-    /* close */
-    .close h2 { font-size: clamp(2.4rem, 5.4vw, 5rem); line-height: 1; max-width: 14ch; }
-    .close .actions { margin-top: 32px; }
-    .close .fine { margin-top: 18px; font-size: 15px; color: var(--ink-mute); }
-    .close .fine a { color: var(--ink); font-weight: 600; }
-    .family { margin-top: clamp(56px, 7vw, 88px); padding-top: 24px; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: baseline; font-size: 15px; color: var(--ink-soft); }
+    .signoff { padding: clamp(72px, 10vw, 140px) 0 clamp(56px, 7vw, 96px); border-top: 1px solid var(--rule); }
+    .signoff p { font: 400 clamp(2.4rem, 6.6vw, 6.4rem)/0.98 var(--serif); letter-spacing: -0.028em; font-variation-settings: "opsz" 72; }
+    .signoff p .bar { display: inline-block; width: 0.06em; height: 0.8em; background: var(--azure); vertical-align: -0.04em; margin: 0 0.2em; }
+    .signoff small { display: block; margin-top: 24px; font: italic 400 clamp(1.1rem, 1.6vw, 1.35rem)/1.4 var(--serif); color: var(--ink-mute); }
 
-    @media (max-width: 1100px) { .p-moment .note { display: none; } }
+    /* ── Motion (JS + visitor allows it) ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .js .ruler .fill { transform: scaleX(0); transition: transform 1.8s cubic-bezier(.4,.1,.2,1); }
+      .js .ruler .dot { opacity: 0; transform: scale(.4); transition: opacity .3s ease, transform .45s cubic-bezier(.3,1.5,.5,1); }
+      .js .ruler.is-in .fill { transform: scaleX(1); }
+      .js .ruler.is-in .dot { opacity: 1; transform: none; transition-delay: calc(var(--d) * 1.8s); }
+      .js .steps li { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+      .js .steps.is-in li { opacity: 1; transform: none; }
+      .js .steps.is-in li:nth-child(2) { transition-delay: .15s; } .js .steps.is-in li:nth-child(3) { transition-delay: .3s; } .js .steps.is-in li:nth-child(4) { transition-delay: .45s; }
+      .js .week li.gone s { text-decoration-color: transparent; transition: text-decoration-color .5s ease .6s; }
+      .js .week.is-in li.gone s { text-decoration-color: var(--azure); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .nudge { grid-template-columns: 130px minmax(0, 1fr) 56px; }
+      .nudge p { grid-column: 2 / 4; }
+      .ruler .quiet { display: none; }
+    }
     @media (max-width: 960px) {
-      .p-moment { justify-self: start; order: -1; transform: rotate(0.8deg); margin-bottom: 8px; }
-      .tiers { grid-template-columns: 1fr; }
-      .tiers > li { border-left: 0; padding-left: 0; padding-right: 0; border-bottom: 1px solid var(--rule); }
-      .timeline li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-      .timeline .mins { text-align: left; }
-      .event { justify-self: start; }
-      .examples { grid-template-columns: 1fr; }
-      .examples .slip:nth-child(n) { margin-top: 0; }
+      .nav ul { display: none; }
+      .nav-toggle { display: block; }
+      .nav .wrap { gap: 12px; }
+      .nav-logo { margin-right: auto; }
+      .nav-cta { display: inline-block; padding: 10px 14px; font-size: 14px; }
+      .nav.open ul { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; position: absolute; top: 76px; left: 0; right: 0; background: var(--paper); padding: 24px var(--gutter) 28px; border-bottom: 1px solid var(--rule); }
+      .nav.open ul .group { display: block; margin-top: 8px; }
+      .nav .sep { display: none; }
+      .foot-grid, .hero-grid, .problem-grid, .how-head, .receive-grid, .moments-grid, .start-grid, .sample { grid-template-columns: 1fr; }
+      .shot::before { right: -10px; left: 10px; top: 10px; bottom: 50px; }
+      .problem .shot { max-width: 460px; }
+      .steps { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+      .phase { grid-template-columns: 1fr; }
+      .cal { position: static; }
+      .around { grid-template-columns: 1fr; gap: 18px; }
+      .figs { grid-template-columns: 1fr; }
+      .words { grid-template-columns: 1fr; }
+      .words li { padding: 22px 0 18px; border-left: 0; border-bottom: 1px solid var(--rule); }
+      .faq { columns: 1; }
+      .mark .aside { margin-left: 0; flex-basis: 100%; }
+    }
+    @media (max-width: 700px) {
+      .ruler { height: 74px; margin-left: 8px; margin-right: 8px; }
+      .ruler .dot { width: 12px; height: 12px; margin: -6px 0 0 -6px; font-size: 0; box-shadow: 0 0 0 2px var(--ink); }
+      .ruler .dot.mail { width: 10px; height: 10px; margin: -5px 0 0 -5px; }
+      .ruler .tick { top: 50px; font-size: 10px; letter-spacing: .06em; }
+      .ruler .tick.mid { display: none; }
+      .ruler .axis, .ruler .fill { top: 40px; }
+      .nudge { grid-template-columns: minmax(0, 1fr) auto; }
+      .nudge .when { grid-column: 1 / -1; }
+      .nudge h3 { grid-column: 1; }
+      .nudge .mins { grid-column: 2; grid-row: 2; }
+      .nudge p { grid-column: 1 / -1; }
     }
     @media (max-width: 620px) {
+      body { font-size: 16px; }
+      .nav .wrap { height: 64px; }
+      .nav-logo img { height: 38px; }
+      .nav.open ul { top: 64px; }
+      .nav-cta { padding: 9px 12px; font-size: 13px; white-space: nowrap; }
+      .nav-toggle { padding: 7px 11px; font-size: 13px; }
+      .crumb { font-size: 11px; letter-spacing: .12em; }
+      .crumb::before { width: 22px; }
+      .hero-actions .btn { width: 100%; text-align: center; }
+      .steps { grid-template-columns: 1fr; }
+      .week li { grid-template-columns: 1fr; gap: 2px; }
+      .foot-cols { grid-template-columns: 1fr 1fr; }
       .free form { flex-direction: column; }
       .free input { border-right: 1.5px solid var(--ink); border-bottom: 0; border-radius: 10px 10px 0 0; }
       .free button { border-radius: 0 0 10px 10px; }
-      .gets li { grid-template-columns: 1fr; gap: 4px; }
-      .guide-parts { grid-template-columns: 1fr; }
-      .tiers .btn, .close .actions .btn { width: 100%; text-align: center; }
+      .packs-list li { grid-template-columns: 1fr; }
+      .packs-list .btn { grid-row: auto; grid-column: 1; justify-self: start; margin-top: 8px; }
       .faq .a { padding-right: 0; }
-      #pricing .sec-head .label, #sample .label { padding-left: 22px; }
+      .signoff p .bar { display: block; width: 44px; height: 4px; margin: 0.18em 0 0.22em; }
+      .signoff p br { display: none; }
     }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
   </style>
+  <link rel="stylesheet" href="/concept/walkthrough.css" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -190,87 +440,192 @@
 
   <main id="main">
 
-    <!-- 1. What it is -->
+    <!-- HERO: what it is, what it looks like, what it costs -->
     <header class="p-hero">
       <div class="wrap">
-        <p class="label crumb"><a href="/">HalpCraft</a><span aria-hidden="true">/</span><span>Onboarding Nudges</span></p>
-        <h1 class="display">A little help, right when you need it.<span class="l2">For your new hire&rsquo;s first 150 days.</span></h1>
-        <div class="split">
+        <p class="crumb"><a href="/">HalpCraft</a><i>/</i><b>Onboarding Nudges</b></p>
+        <h1 class="display">Managers don&rsquo;t need more theory.<span class="l2">They need the right prompt at the <em>right moment.</em></span></h1>
+        <div class="hero-grid">
           <div>
-            <p class="lead">HalpCraft Onboarding Nudges puts ten short, research-backed nudges in your calendar, from the week before your new hire starts through to Day 150. Each one lands on the day it matters, with what to do and the words to use. No app. No login. Nothing to remember.</p>
-            <p class="price"><strong>$49 NZD</strong><span>per new hire, one-time. No subscription.</span></p>
-            <div class="actions">
+            <p class="lead">HalpCraft Onboarding Nudges puts ten research-backed prompts in your calendar across a new hire&rsquo;s first 150 days. Each one arrives on the day it matters, with what to do and the words to use.</p>
+            <p class="price"><strong>$49 NZD</strong><span>per new hire, one-time.</span><em>Less than the cost of their first day.</em></p>
+            <div class="hero-actions">
               <a class="btn btn--azure btn--buy" href="https://buy.stripe.com/cNi9AM9Mcgh60yYcBO0Ba0c">Buy now</a>
-              <a class="link" href="#pricing">Team packs and pricing &rarr;</a>
+              <a class="link" href="#how">See how it works &darr;</a>
             </div>
+            <p class="hero-more">Hiring a few? <a href="#pricing">Team packs from $39 per hire</a>.</p>
           </div>
-          <div class="p-moment">
-            <article class="slip arrive" aria-label="An example nudge">
-              <p class="slip-when">Day 12 &middot; 9:00</p>
-              <h3>The Pace Setter</h3>
-              <p>Two weeks in. The firehose is over but the doubt is just starting. Ask the question they haven&rsquo;t asked yet.</p>
-              <p class="slip-foot">Nudge 4 of 10 &middot; about 10 minutes</p>
-            </article>
-            <div class="note" aria-hidden="true">
-              lands in your calendar. that&rsquo;s the whole job.
-            </div>
+          <div>
+            <p class="demo-cap">From checkout to the day it lands</p>
+            <div class="wt" data-walkthrough aria-label="Animated walkthrough: buying, setting up and receiving Onboarding Nudges"></div>
           </div>
-        </div>
-        <div class="thread p-hero-exit" data-motion>
-          <p class="thread-cap">One price per new hire. Paid once. Here&rsquo;s how it works out.</p>
-          <span class="thread-line" aria-hidden="true"></span>
         </div>
       </div>
     </header>
 
-    <!-- 2. Pricing (before the sample) -->
-    <section class="sec" id="pricing" aria-labelledby="pricingTitle">
+    <!-- 01 THE PROBLEM -->
+    <section class="sec sec--sheet problem" id="problem" aria-labelledby="problemTitle">
       <div class="wrap">
-        <div class="split sec-head">
+        <p class="mark"><span class="no">01</span><span class="name">The problem</span></p>
+        <div class="problem-grid">
           <div>
-            <p class="label dot-label">Pricing</p>
-            <h2 id="pricingTitle">Pay once for each new hire.</h2>
+            <h2 class="sec-title" id="problemTitle">Most managers know what a good start looks like.</h2>
+            <ul class="week" data-motion aria-label="A manager's week">
+              <li><b>Monday</b><span>Rosters, and a supplier who won&rsquo;t call back.</span></li>
+              <li><b>Tuesday</b><span>The inbox.</span></li>
+              <li><b>Wednesday</b><span>Three things due by Friday.</span></li>
+              <li class="gone"><b>Thursday</b><span><s>Check in with the new starter.</s></span></li>
+            </ul>
+            <p class="claim"><strong>The problem is remembering it on the right Tuesday.</strong> The conversations that make a new start work are small, and they&rsquo;re the easiest thing in the week to let slip.</p>
           </div>
-          <p class="lead">No subscription, no seats, nothing that renews. Buy for the person starting next, or buy a pack and share setup codes with other managers.</p>
-        </div>
-        <ol class="tiers">
-          <li>
-            <p class="tier">Single</p>
-            <p class="amt">$49<small>NZD</small></p>
-            <p class="per">One new hire</p>
-            <p class="desc">Set up straight after checkout. All ten nudges in your calendar in about two minutes.</p>
-            <a class="btn btn--azure btn--buy" href="https://buy.stripe.com/cNi9AM9Mcgh60yYcBO0Ba0c">Buy now</a>
-          </li>
-          <li>
-            <p class="tier">Team 5</p>
-            <p class="amt">$220<small>NZD</small></p>
-            <p class="per">Five new hires, $44 each</p>
-            <p class="desc">Five setup codes by email. Give one to each manager with someone starting.</p>
-            <a class="btn btn--line btn--buy" href="https://buy.stripe.com/8x2fZa2jK1mcgxWatG0Ba0d">Buy Team 5</a>
-          </li>
-          <li>
-            <p class="tier">Team 10</p>
-            <p class="amt">$390<small>NZD</small></p>
-            <p class="per">Ten new hires, $39 each</p>
-            <p class="desc">Ten setup codes by email, for a busy hiring season or a whole team of managers.</p>
-            <a class="btn btn--line btn--buy" href="https://buy.stripe.com/aFacMYgaA7KA3La45i0Ba0e">Buy Team 10</a>
-          </li>
-        </ol>
-        <div class="tier-foot">
-          <span>Prices in New Zealand dollars. Secure payment by Stripe.</span>
-          <span>Placing candidates for clients? <a href="/agency">Agency programme</a></span>
+          <figure class="shot">
+            <div class="frame"><img src="/images/home/mid-week-1200.jpg" srcset="/images/home/mid-week-800.jpg 800w, /images/home/mid-week-1200.jpg 1200w" sizes="(max-width: 960px) 100vw, 40vw" width="1200" height="1500" loading="lazy" decoding="async" alt="A laptop open on a wooden café table beside a small blue coffee, with a large mural of Albert Einstein on the wall behind." /></div>
+            <figcaption>Mid-week, inbox open</figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- 3. Try a sample -->
-    <section class="sec" id="sample" aria-labelledby="sampleTitle">
-      <div class="wrap split">
-        <div>
-          <p class="label dot-label">Try a sample</p>
-          <h2 id="sampleTitle">Not sure yet? Try one nudge, free.</h2>
-          <div class="free" style="margin-top:28px">
-            <p class="free-lead">One real nudge in your calendar tomorrow at 9am, so you can feel how it lands.</p>
+    <!-- 02 HOW IT WORKS -->
+    <section class="sec how" id="how" aria-labelledby="howTitle">
+      <div class="wrap">
+        <p class="mark"><span class="no">02</span><span class="name">How the nudges work</span></p>
+        <div class="how-head">
+          <h2 class="sec-title" id="howTitle">Set up once. Then it turns up on its own.</h2>
+          <p class="sec-lead">About two minutes of setup. After that there&rsquo;s nothing to log in to, and nothing to remember.</p>
+        </div>
+        <ol class="steps" data-motion>
+          <li><p class="n">1</p><h3>Buy</h3><p>$49 NZD for one new hire, or a Team pack for several.</p><span class="t">Checkout by Stripe</span></li>
+          <li><p class="n">2</p><h3>Tell us who and when</h3><p>Your new hire&rsquo;s name, their start date, standard or shift pattern, and the time you&rsquo;d like nudges to land.</p><span class="t">About two minutes</span></li>
+          <li><p class="n">3</p><h3>Import one file</h3><p>The calendar file arrives by email. Open it once and all ten nudges are in place, each on its day.</p><span class="t">Google, Outlook or Apple</span></li>
+          <li><p class="n">4</p><h3>Get on with your week</h3><p>Each nudge turns up when it&rsquo;s due, with a reminder 15 minutes before.</p><span class="t">Across 150 days</span></li>
+        </ol>
+        <p class="how-note"><span>Bought a Team pack? Each manager enters their code at <a href="/redeem">halpcraft.com/redeem</a>. Codes are valid for 12 months.</span><span>Shift workers can adjust any date before importing. Standard schedules skip weekends.</span></p>
+      </div>
+    </section>
+
+    <!-- 03 THE SEQUENCE -->
+    <section class="band band--ink sequence" id="sequence" aria-labelledby="seqTitle">
+      <div class="wrap">
+        <p class="mark"><span class="no">03</span><span class="name">The 150-day sequence</span></p>
+        <h2 class="sec-title" id="seqTitle">Ten moments, where they fall.</h2>
+        <p class="sec-lead">Most of the weight sits early, when a new start is decided. Then the nudges spread out, the way the relationship does.</p>
+        <div class="ruler" data-motion aria-hidden="true"><span class="axis"></span><span class="fill"></span><span class="quiet" style="left:13.38%">six in the first 40 days</span><span class="quiet" style="left:74.52%">then one every few weeks</span><span class="dot" style="left:0.0%;--d:0.00">1</span><span class="dot" style="left:4.46%;--d:0.04">2</span><span class="dot" style="left:7.64%;--d:0.08">3</span><span class="dot" style="left:12.1%;--d:0.12">4</span><span class="dot" style="left:20.38%;--d:0.20">5</span><span class="dot" style="left:29.94%;--d:0.30">6</span><span class="dot" style="left:55.41%;--d:0.55">7</span><span class="dot" style="left:68.15%;--d:0.68">8</span><span class="dot" style="left:84.08%;--d:0.84">9</span><span class="dot" style="left:100.0%;--d:1.00">10</span><span class="dot mail" style="left:42.68%;--d:0.43"></span><span class="tick first" style="left:0">Week before</span><span class="tick mid" style="left:23.57%">Month 1</span><span class="tick mid" style="left:42.68%">Month 2</span><span class="tick mid" style="left:61.78%">Month 3</span><span class="tick mid" style="left:80.89%">Month 4</span><span class="tick last" style="left:100%">Day 150</span></div>
+        <p class="ruler-key" aria-hidden="true"><span><i></i>A nudge in your calendar</span><span><i class="m"></i>Day 60 check-in email</span></p>
+        <ol class="phases" aria-label="The ten nudges, by stage">
+          <li class="phase"><p class="phase-name">Before they start<small>Week before</small></p><div><div class="nudge"><span class="when">One week before</span><h3><span class="no">01</span>The Team Signal</h3><p>Is the team ready? Brief them, brief the buddy, decide your first words.</p><span class="mins">15 min</span></div></div></li>
+          <li class="phase"><p class="phase-name">The first week<small>Days 1 to 5</small></p><div><div class="nudge"><span class="when">Day 1</span><h3><span class="no">02</span>The Belonging Ritual</h3><p>Set the tone: a human tour and a coffee without the laptop.</p><span class="mins">60 min</span></div><div class="nudge"><span class="when">End of week 1</span><h3><span class="no">03</span>Clarity &amp; Connection Check</h3><p>The high point, the roadblock, and the one priority for week two.</p><span class="mins">20 min</span></div></div></li>
+          <li class="phase"><p class="phase-name">An early relationship<small>Days 12 to 25</small></p><div><div class="nudge"><span class="when">Day 12</span><h3><span class="no">04</span>The Pace Setter</h3><p>Normalise the learning curve before the doubt sets in.</p><span class="mins">10 min</span></div><div class="nudge"><span class="when">Day 25</span><h3><span class="no">05</span>The Ethos Guard</h3><p>Is the interview promise holding up? Ask before they wonder.</p><span class="mins">20 min</span></div></div></li>
+          <li class="phase"><p class="phase-name">Settling in<small>Day 40</small></p><div><div class="nudge"><span class="when">Day 40</span><h3><span class="no">06</span>Vulnerability &amp; Mastery Check</h3><p>Permission to be unfinished. Clear the silent gaps early.</p><span class="mins">15 min</span></div></div></li>
+          <li class="phase"><p class="phase-name">Feedback, both ways<small>Days 80 to 100</small></p><div><div class="nudge"><span class="when">Day 80</span><h3><span class="no">07</span>The Transparency Bridge</h3><p>No surprises. Clear the air before the 90-day mark.</p><span class="mins">20 min</span></div><div class="nudge"><span class="when">Day 100</span><h3><span class="no">08</span>Q1 Efficiency Bridge</h3><p>Invite critique. Fresh eyes see the friction you&rsquo;ve stopped noticing.</p><span class="mins">20 min</span></div></div></li>
+          <li class="phase"><p class="phase-name">Growth<small>Day 125</small></p><div><div class="nudge"><span class="when">Day 125</span><h3><span class="no">09</span>The Values-Impact Bridge</h3><p>Show them why their work matters, and where it could lead.</p><span class="mins">15 min</span></div></div></li>
+          <li class="phase"><p class="phase-name">Looking further ahead<small>Day 150</small></p><div><div class="nudge"><span class="when">Day 150</span><h3><span class="no">10</span>Taking the Lead</h3><p>From new hire to trusted partner. Hand over ownership, and say thank you.</p><span class="mins">15 min</span></div></div></li>
+        </ol>
+        <p class="seq-foot">Most take 10 to 20 minutes. Day 1 is the longest, and most of that is time with your new hire you&rsquo;d be spending anyway.</p>
+      </div>
+    </section>
+
+    <!-- 04 WHAT ARRIVES -->
+    <section class="sec receive" id="receive" aria-labelledby="receiveTitle">
+      <div class="wrap">
+        <p class="mark"><span class="no">04</span><span class="name">What a manager actually receives</span></p>
+        <h2 class="sec-title" id="receiveTitle">One calendar block. One short guide. Ten minutes.</h2>
+        <div class="receive-grid">
+          <div class="cal">
+            <article class="slip" aria-label="Nudge 4 as it appears in your calendar">
+              <p class="slip-when">Day 12 &middot; 9:00 to 9:30</p>
+              <h3>Nudge 4 of 10: The Pace Setter</h3>
+              <p>&ldquo;Two weeks in. The firehose is over but the doubt is just starting.&rdquo;</p>
+              <div class="slip-foot"><span>Read your full action guide &rarr;</span><span>10 min</span></div>
+            </article>
+            <p class="alert"><b>In 15 minutes</b>Nudge 4 of 10: The Pace Setter</p>
+            <p class="cap">This is Day 12, exactly as it lands. One tap opens the guide.</p>
+          </div>
+          <div class="gbook">
+            <div class="guide-head"><h3>Inside the guide</h3><p>Day 12 &middot; The Pace Setter</p></div>
+            <div class="part"><span class="n">01</span><div><h4>Why this moment matters</h4><p>By Day 12 the hand-holding has stopped but real competence hasn&rsquo;t arrived. Most new hires won&rsquo;t say anything, because they&rsquo;re still proving they were the right hire.</p></div></div>
+            <div class="part"><span class="n">02</span><div><h4>What to do &middot; 3 actions, 10 minutes</h4>
+              <ul class="acts">
+                <li><b>The Timeline Talk.</b> Tell them it&rsquo;s normal to feel behind at this point.</li>
+                <li><b>The Hidden Question.</b> Ask, then just listen:</li>
+              </ul>
+              <p class="say">&ldquo;What is one thing you have come across in the last two weeks that you are not 100% sure about but have not asked yet?&rdquo;</p>
+              <ul class="acts"><li><b>The Progress Anchor.</b> Name one thing they can do now that they couldn&rsquo;t on Day 1.</li></ul>
+            </div></div>
+            <div class="part"><span class="n">03</span><div><h4>What the research says</h4>
+              <div class="figs">
+                <p><b>40%</b>of new hires report feeling &ldquo;not competent enough&rdquo; within the first two weeks, peaking between days 10 and 14.</p>
+                <p><b>3&times;</b>more likely to stay past 12 months when a manager explicitly normalises the learning timeline in the first two weeks.</p>
+              </div>
+              <p class="cite">Source as cited: LinkedIn Workforce Learning Report &amp; Journal of Organisational Behaviour.</p>
+            </div></div>
+            <div class="part"><span class="n">04</span><div><h4>Why you&rsquo;re doing this</h4><p>&ldquo;Imposter syndrome does not announce itself. It shows up as silence, as &lsquo;I am fine.&rsquo;&rdquo; You&rsquo;re giving them permission to still be learning.</p></div></div>
+          </div>
+        </div>
+        <ul class="around" aria-label="Around the nudges">
+          <li><b>Straight away</b><span>One email with one calendar file. Nothing else to set up.</span></li>
+          <li><b>Around Day 60</b><span>A short check-in email with one thing to tell your new hire.</span></li>
+          <li><b>Never</b><span>An app, a login, a dashboard, or anything sent to your new hire.</span></li>
+        </ul>
+        <ul class="words" aria-label="Real words from the nudges">
+          <li><p class="w">One week before &middot; to your team</p><q>&ldquo;Heads up, [Name] starts next week. Please stop by on their first morning to introduce yourself.&rdquo;</q></li>
+          <li><p class="w">Day 25 &middot; ask, then listen</p><q>&ldquo;What is one thing about our daily culture that has surprised you, for better or worse?&rdquo;</q></li>
+          <li><p class="w">Day 150 &middot; say it</p><q>&ldquo;The way you&rsquo;ve approached these first 150 days has made a real difference to this team.&rdquo;</q></li>
+        </ul>
+        <p class="words-cap">Real words, taken straight from the nudges.</p>
+      </div>
+    </section>
+
+    <!-- 05 WHY THESE MOMENTS -->
+    <section class="sec moments" id="why" aria-labelledby="whyTitle">
+      <div class="wrap">
+        <p class="mark"><span class="no">05</span><span class="name">Why these moments matter</span></p>
+        <div class="moments-grid">
+          <div>
+            <h2 class="display" id="whyTitle">Good onboarding isn&rsquo;t one big event.<span class="l2">It&rsquo;s a handful of small moments.</span></h2>
+            <p class="signline">Helping good leaders do the job a little better.</p>
+          </div>
+          <div>
+            <ol class="principles">
+              <li><span class="n">01</span><h3>Belonging comes first</h3><p class="stat"><b>91%</b>of new hires who received an effective introduction to company culture on Day 1 feel connected to their workplace. For those who didn&rsquo;t, it drops to 29%.</p><p class="cite">Glassdoor, Journal of Applied Psychology</p></li>
+              <li><span class="n">02</span><h3>Clarity beats volume</h3><p class="stat"><b>#1</b>Role clarity is the single highest driver of employee productivity.</p><p class="cite">Gallup 2025 Workforce Report</p></li>
+              <li><span class="n">03</span><h3>Doubt is normal, silence is costly</h3><p class="stat"><b>31%</b>of employees fail to complete important projects because they fear their work will expose a gap in their competence.</p><p class="cite">Training Industry, Combatting Imposter Syndrome in the Workplace</p></li>
+              <li><span class="n">04</span><h3>Promises get checked</h3><p class="stat"><b>43%</b>of new hires say their day-to-day role wasn&rsquo;t what they were led to believe during hiring. Most make that call by Day 33.</p><p class="cite">Glassdoor &amp; Journal of Vocational Behavior</p></li>
+              <li><span class="n">05</span><h3>A visible future keeps people</h3><p class="stat"><b>33%</b>of employees who leave within their first year do so between months 4 and 6.</p><p class="cite">LinkedIn Workplace Learning Report &amp; Attrition Risk Research</p></li>
+            </ol>
+            <p class="src">Figures as cited in the nudges&rsquo; action guides. Every guide includes its own research anchor, with its sources named.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 START SMALL -->
+    <section class="sec start" id="pricing" aria-labelledby="startTitle">
+      <div class="wrap">
+        <p class="mark"><span class="no">06</span><span class="name">Start small</span><span class="aside">One price per new hire. Paid once.</span></p>
+        <h2 class="sec-title" id="startTitle">Start with one new hire.</h2>
+        <div class="start-grid">
+          <div class="one">
+            <p class="big">$49<small>NZD</small></p>
+            <p class="per">One new hire, one-time. Less than the cost of their first day.</p>
+            <div class="hero-actions">
+              <a class="btn btn--azure btn--buy" href="https://buy.stripe.com/cNi9AM9Mcgh60yYcBO0Ba0c">Buy now</a>
+              <a class="link" href="#sample">See a sample &darr;</a>
+            </div>
+          </div>
+          <div>
+            <ul class="packs-list" aria-label="Team packs">
+              <li><h3>Team 5 <span>$220 NZD</span></h3><p>Five new hires, $44 each. Five setup codes by email.</p><a class="btn btn--line btn--buy" href="https://buy.stripe.com/8x2fZa2jK1mcgxWatG0Ba0d">Buy Team 5</a></li>
+              <li><h3>Team 10 <span>$390 NZD</span></h3><p>Ten new hires, $39 each. Ten setup codes by email.</p><a class="btn btn--line btn--buy" href="https://buy.stripe.com/aFacMYgaA7KA3La45i0Ba0e">Buy Team 10</a></li>
+            </ul>
+            <p class="packs-foot">Prices in New Zealand dollars. Secure payment by Stripe. Nothing renews. Placing candidates? <a href="/agency">Agency programme</a>.</p>
+          </div>
+        </div>
+
+        <div class="sample" id="sample">
+          <div class="free">
+            <h3>Not sure yet? Try one nudge, free.</h3>
+            <p class="sub">One real nudge in your calendar tomorrow at 9am, so you can feel how it lands.</p>
             <form id="freeNudgeForm" novalidate>
               <label for="freeEmail" class="sr">Email address</label>
               <input type="email" id="freeEmail" name="email" placeholder="you@company.com" required />
@@ -280,166 +635,21 @@
             <p class="ok" id="freeNudgeSuccess" style="display:none;">Done. Check your inbox, your nudge is waiting.</p>
             <p class="err" id="freeNudgeError" style="display:none;">Something broke. Email hello@halpcraft.com and we&rsquo;ll send it manually.</p>
           </div>
-        </div>
-        <div class="or-read">
-          <p class="label">Or read one now</p>
-          <p>The Hidden Question: one action from The Pace Setter, the Day 12 nudge. What to ask, why it works, and what to do with the answer.</p>
-          <p><a class="link" href="https://app.halpcraft.com/sample">Read the sample &rarr;</a></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. How the 10 nudges / 150 days work -->
-    <section class="band band--ink" id="how" aria-labelledby="howTitle">
-      <div class="wrap">
-        <div class="split sec-head">
-          <div>
-            <p class="label">How it works</p>
-            <h2 id="howTitle" style="color:var(--paper)">Ten moments. 150 days.</h2>
-          </div>
-          <p class="lead">The nudges follow the moments that shape whether a new start goes well: getting the team ready, the first morning, the doubt that creeps in around week two, the gap between what was promised and what&rsquo;s real, and the handover to ownership.</p>
-        </div>
-        <ol class="timeline">
-          <li><span class="when">One week before</span><h3>The Team Signal</h3><p>Is the team ready? Brief them, brief the buddy, decide your first words.</p><span class="mins">15 min</span></li>
-          <li><span class="when">Day 1</span><h3>The Belonging Ritual</h3><p>Set the tone: a human tour and a coffee without the laptop.</p><span class="mins">60 min</span></li>
-          <li><span class="when">End of week 1</span><h3>Clarity &amp; Connection Check</h3><p>The high point, the roadblock, and the one priority for week two.</p><span class="mins">20 min</span></li>
-          <li><span class="when">Day 12</span><h3>The Pace Setter</h3><p>Normalise the learning curve before the doubt sets in.</p><span class="mins">10 min</span></li>
-          <li><span class="when">Day 25</span><h3>The Ethos Guard</h3><p>Is the interview promise holding up? Ask before they wonder.</p><span class="mins">20 min</span></li>
-          <li><span class="when">Day 40</span><h3>Vulnerability &amp; Mastery Check</h3><p>Permission to be unfinished. Clear the silent gaps early.</p><span class="mins">15 min</span></li>
-          <li><span class="when">Day 80</span><h3>The Transparency Bridge</h3><p>No surprises. Clear the air before the 90-day mark.</p><span class="mins">20 min</span></li>
-          <li><span class="when">Day 100</span><h3>Q1 Efficiency Bridge</h3><p>Invite critique. Fresh eyes see the friction you&rsquo;ve stopped noticing.</p><span class="mins">20 min</span></li>
-          <li><span class="when">Day 125</span><h3>The Values-Impact Bridge</h3><p>Show them why their work matters, and where it could lead.</p><span class="mins">15 min</span></li>
-          <li><span class="when">Day 150</span><h3>Taking the Lead</h3><p>From new hire to trusted partner. Hand over ownership, and say thank you.</p><span class="mins">15 min</span></li>
-        </ol>
-        <p class="how-foot">Standard schedules skip weekends automatically. Shift workers can adjust any nudge date to fit the roster before importing.</p>
-      </div>
-    </section>
-
-    <!-- 5. What the manager actually receives -->
-    <section class="sec receive" id="receive" aria-labelledby="receiveTitle">
-      <div class="wrap">
-        <div class="split sec-head">
-          <div>
-            <p class="label">What you actually receive</p>
-            <h2 id="receiveTitle">One email. One file. Ten well-timed nudges.</h2>
-          </div>
-          <p class="lead">Everything arrives in the calendar you already live in. There&rsquo;s nothing new to log in to, and nothing your new hire ever sees.</p>
-        </div>
-        <div class="split">
-          <ul class="gets">
-            <li><b>Straight away</b><span>An email with <strong>one calendar file</strong>. Open it and all ten nudges import into Google Calendar, Outlook or Apple Calendar.</span></li>
-            <li><b>On the day</b><span>Each nudge is a <strong>30-minute calendar block</strong> at the start time you chose, with a reminder 15 minutes before.</span></li>
-            <li><b>Inside each one</b><span>A link to the <strong>full action guide</strong>: why this moment matters, three or four things to do with the words to use, the research behind it, and why it&rsquo;s worth your time.</span></li>
-            <li><b>Around Day 60</b><span>A short <strong>check-in email</strong> with one thing to tell your new hire.</span></li>
-            <li><b>Never</b><span>An app, a login, a dashboard, or anything sent to your new hire.</span></li>
-          </ul>
-          <div class="event">
-            <article class="slip" aria-label="What a nudge looks like in your calendar">
-              <p class="slip-when">Day 25 &middot; 9:00 to 9:30</p>
-              <h3>Nudge 5 of 10: The Ethos Guard</h3>
-              <p>&ldquo;Your new hire&rsquo;s first month: is the interview reality holding up?&rdquo;</p>
-              <span class="guide" aria-hidden="true">Read your full action guide &rarr;</span>
-              <ul class="guide-parts" aria-label="What the action guide covers">
-                <li>The strategy</li>
-                <li>The actions</li>
-                <li>The research anchor</li>
-                <li>The executive why</li>
-              </ul>
-            </article>
-            <p class="cap">What a nudge looks like when it lands. The full guide opens in your browser in one tap.</p>
+          <div class="or-read">
+            <p class="w">Or read one now</p>
+            <p>The Hidden Question: one action from The Pace Setter, the Day 12 nudge. What to ask, why it works, and what to do with the answer.</p>
+            <p><a class="link" href="https://app.halpcraft.com/sample">Read the sample &rarr;</a></p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 6. Examples of real nudges -->
-    <section class="sec" id="examples" aria-labelledby="examplesTitle">
+    <!-- QUESTIONS -->
+    <section class="faq-sec" id="faq" aria-labelledby="faqTitle">
       <div class="wrap">
-        <div class="split sec-head">
-          <div>
-            <p class="label">From the nudges</p>
-            <h2 id="examplesTitle">Real actions, real words.</h2>
-          </div>
-          <p class="lead">Every nudge gives you something specific to do or say. Here are four, taken straight from the programme.</p>
-        </div>
-        <div class="examples">
-          <article class="slip">
-            <p class="slip-when">One week before &middot; The Team Signal</p>
-            <h3>The Team Alert</h3>
-            <p class="act">Send to your team</p>
-            <p class="say">&ldquo;Heads up, [Name] starts next week. Please stop by on their first morning to introduce yourself. Make them feel like we were expecting them.&rdquo;</p>
-          </article>
-          <article class="slip">
-            <p class="slip-when">Day 12 &middot; The Pace Setter</p>
-            <h3>The Timeline Talk</h3>
-            <p class="act">Say</p>
-            <p class="say">&ldquo;At this point most people feel like they should know more than they do. That is completely normal. You are exactly where you should be.&rdquo;</p>
-          </article>
-          <article class="slip">
-            <p class="slip-when">Day 25 &middot; The Ethos Guard</p>
-            <h3>The Surprise Factor</h3>
-            <p class="act">Ask, then listen without defending</p>
-            <p class="say">&ldquo;What is one thing about our daily culture that has surprised you, for better or worse, compared to what you expected?&rdquo;</p>
-          </article>
-          <article class="slip">
-            <p class="slip-when">Day 150 &middot; Taking the Lead</p>
-            <h3>The Acknowledgement</h3>
-            <p class="act">Say this, or a version of it</p>
-            <p class="say">&ldquo;The way you&rsquo;ve approached these first 150 days has made a real difference to this team. I don&rsquo;t take that for granted.&rdquo;</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. How setup works -->
-    <section class="sec setup" id="setup" aria-labelledby="setupTitle">
-      <div class="wrap">
-        <div class="split sec-head">
-          <div>
-            <p class="label">Setting it up</p>
-            <h2 id="setupTitle">About two minutes, once.</h2>
-          </div>
-          <p class="lead">You&rsquo;ll need your new hire&rsquo;s name, their start date, and whether they work a standard week or shifts.</p>
-        </div>
-        <ol class="rows">
-          <li><span class="n">01</span><h3>Buy</h3><p>Checkout is handled by Stripe. $49 NZD for one new hire, or a Team pack.</p></li>
-          <li><span class="n">02</span><h3>Fill in one short form</h3><p>Your name and email, your new hire&rsquo;s name, their start date, standard or shift pattern, and the time you&rsquo;d like nudges to land.</p></li>
-          <li><span class="n">03</span><h3>Import one file</h3><p>The calendar file arrives by email. Open it once and all ten nudges are in place, each on its day.</p></li>
-          <li><span class="n">04</span><h3>Bought a Team pack?</h3><p>Your setup codes arrive by email. Each manager enters theirs at <a href="/redeem">halpcraft.com/redeem</a> and does step two for their own new hire. Codes are valid for 12 months.</p></li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- 8. Research / behavioural rationale -->
-    <section class="band band--azure why" id="why" aria-labelledby="whyTitle">
-      <div class="wrap">
-        <div class="split sec-head">
-          <div>
-            <p class="label dot-label">Why it works</p>
-            <h2 id="whyTitle">Good intentions need good timing.</h2>
-          </div>
-          <p class="lead">Most managers know what a good onboarding looks like. The problem is remembering it on the right Tuesday. Onboarding Nudges takes the timing off your plate, and each nudge is built on what the research says matters most in a new start.</p>
-        </div>
-        <ol class="rows">
-          <li><span class="n">01</span><h3>Belonging comes first</h3><p>Feeling expected and connected early is one of the strongest signals of whether someone settles in. So the programme starts before Day 1, with the team.</p></li>
-          <li><span class="n">02</span><h3>Clarity beats volume</h3><p>New hires don&rsquo;t need more information. They need to know what matters and what good looks like. The early nudges keep priorities clear.</p></li>
-          <li><span class="n">03</span><h3>Doubt is normal, silence is costly</h3><p>Around week two, people become aware of everything they don&rsquo;t know yet, and many stop asking. The nudges name it early and make it safe to ask.</p></li>
-          <li><span class="n">04</span><h3>Promises get checked</h3><p>If the job doesn&rsquo;t match what was described in the interview, it shows up in the first month or two. The nudges help you ask about it before it becomes a reason to leave.</p></li>
-          <li><span class="n">05</span><h3>Ownership keeps people</h3><p>Autonomy and a visible future matter more over time than another checklist. The final nudges hand over ownership and talk about what&rsquo;s next.</p></li>
-        </ol>
-        <p class="src">Each nudge&rsquo;s action guide includes a research anchor naming its sources, including Gallup, Harvard Business Review, the Journal of Applied Psychology, LinkedIn&rsquo;s Workplace Learning Report and Self-Determination Theory (Deci &amp; Ryan).</p>
-      </div>
-    </section>
-
-    <!-- 9. FAQ -->
-    <section class="sec" id="faq" aria-labelledby="faqTitle">
-      <div class="wrap">
-        <div class="split sec-head">
-          <div>
-            <p class="label">Questions</p>
-            <h2 id="faqTitle">The things people ask.</h2>
-          </div>
-          <p class="lead">Something not covered here? Email <a class="link" href="mailto:hello@halpcraft.com">hello@halpcraft.com</a> and a real person will reply within 24 hours.</p>
+        <div class="faq-head">
+          <h2 id="faqTitle">Questions</h2>
+          <p>Not covered here? <a href="mailto:hello@halpcraft.com">hello@halpcraft.com</a>. A real person replies within 24 hours.</p>
         </div>
         <div class="faq">
           <details>
@@ -478,24 +688,9 @@
       </div>
     </section>
 
-    <!-- 10. Final purchase CTA -->
-    <section class="sec close" aria-labelledby="closeTitle">
-      <div class="wrap">
-        <p class="label dot-label">Ready when they are</p>
-        <h2 id="closeTitle" style="margin-top:18px">Your next new hire deserves a good start.</h2>
-        <div class="actions">
-          <a class="btn btn--azure btn--buy" href="https://buy.stripe.com/cNi9AM9Mcgh60yYcBO0Ba0c">Buy now, $49 NZD</a>
-          <a class="link" href="#pricing">Buying for a team? &rarr;</a>
-        </div>
-        <p class="fine">One-time, per new hire. Curious how your onboarding stacks up first? <a href="/quiz">Take the Onboarding Score</a>.</p>
-        <p class="family"><span class="label">Part of HalpCraft</span><a class="link" href="/between-two-minds">Between Two Minds</a><a class="link" href="/agency">For agencies</a><a class="link" href="/about">Who&rsquo;s behind it</a></p>
-      </div>
-    </section>
-
     <section class="signoff" aria-label="HalpCraft">
       <div class="wrap">
         <p>Better Leaders<span class="bar" aria-hidden="true"></span><br />Better Workplaces</p>
-        <small>Helping good leaders do the job a little better.</small>
       </div>
     </section>
   </main>
@@ -505,7 +700,6 @@
       <div class="foot-grid">
         <div>
           <a href="/" class="foot-logo"><img loading="lazy" src="/logos/halpcraft-logo-on-dark.png" alt="HalpCraft" width="1875" height="480" /></a>
-          <p class="foot-tag">Better Leaders | Better Workplaces</p>
         </div>
         <div class="foot-cols">
           <div><h4>Products</h4><ul><li><a href="/onboarding-nudges">Onboarding Nudges</a></li><li><a href="/between-two-minds">Between Two Minds</a></li><li><a href="/agency">For agencies</a></li><li><a href="/quiz">Onboarding Score</a></li></ul></div>
@@ -513,21 +707,28 @@
           <div><h4>Already bought?</h4><ul><li><a href="/redeem">Redeem a code</a></li><li><a href="/privacy">Privacy</a></li></ul></div>
         </div>
       </div>
-      <div class="foot-base"><span>&copy; 2026 HalpCraft. Made in New Zealand.</span><span>Helping good leaders do the job a little better.</span></div>
+      <div class="foot-base"><span>&copy; 2026 HalpCraft. Made in New Zealand.</span><span>Better Leaders | Better Workplaces</span></div>
     </div>
   </footer>
 
+  <script src="/concept/walkthrough.js" defer></script>
   <script>
     document.documentElement.classList.add('js');
     (function () {
-      var els = document.querySelectorAll('[data-motion]');
+      var els = document.querySelectorAll('[data-motion], .shot');
       if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-in'); }); return; }
-      var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('is-in'); io.unobserve(x.target); } }); }, { threshold: 0.3 });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+      }, { threshold: 0.3, rootMargin: '0px 0px -8% 0px' });
       els.forEach(function (e) { io.observe(e); });
     })();
     (function () {
       var nav = document.getElementById('nav'), btn = document.getElementById('navToggle');
-      btn.addEventListener('click', function () { var o = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); btn.textContent = o ? 'Close' : 'Menu'; });
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.textContent = open ? 'Close' : 'Menu';
+      });
       document.querySelectorAll('#navLinks a').forEach(function (a) {
         a.addEventListener('click', function () { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.textContent = 'Menu'; });
       });

@@ -186,8 +186,12 @@
     .world-head .label { color: var(--azure); padding-left: 28px; position: relative; }
     .world-head .label::before { content: ""; position: absolute; left: -4px; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--azure); transform: translateY(-50%); }
 
-    /* the product index: HalpCraft, then its two products, named plainly */
-    .lineup { list-style: none; margin-top: clamp(40px, 5vw, 64px); border-top: 2px solid var(--ink); }
+    /* the product index: the HalpCraft tools available now, named plainly */
+    .now { margin-top: clamp(48px, 6vw, 80px); display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 32px; }
+    .now .now-label { color: var(--ink); padding-left: 0; }
+    .now .now-label::before { display: none; }
+    .now-line { font: italic 400 clamp(1.1rem, 1.6vw, 1.35rem)/1.3 var(--serif); color: var(--ink-soft); }
+    .lineup { list-style: none; margin-top: 16px; border-top: 2px solid var(--ink); }
     .lineup li { border-bottom: 1px solid var(--rule); }
     .lineup a { display: grid; grid-template-columns: 72px minmax(0, 5fr) minmax(0, 6fr) auto; gap: 8px 40px; align-items: baseline; padding: 22px 0; text-decoration: none; }
     .lineup .n { font: 400 1.4rem/1 var(--serif); color: var(--azure); font-variant-numeric: oldstyle-nums; }
@@ -540,7 +544,7 @@
             <p class="lead">HalpCraft makes practical tools for the real work of leading people. Small, well-timed, and built by someone who has done the job.</p>
             <div class="hero-actions">
               <a class="btn" href="#believe">What we believe</a>
-              <a class="link" href="#tools">See the two tools &rarr;</a>
+              <a class="link" href="#tools">See the tools &rarr;</a>
             </div>
           </div>
 
@@ -631,7 +635,7 @@
     <!-- bridge: philosophy -> tools -->
     <div class="bridge" aria-hidden="false">
       <div class="wrap">
-        <p>Principles are easy to agree with on a Monday. <span class="quiet">They&rsquo;re harder to remember by Thursday afternoon.</span> So we built them into two tools.</p>
+        <p>Principles are easy to agree with on a Monday. <span class="quiet">They&rsquo;re harder to remember by Thursday afternoon.</span> So we&rsquo;re building them into tools.</p>
       </div>
     </div>
 
@@ -641,14 +645,18 @@
         <div class="split">
           <div>
             <p class="label">What HalpCraft makes</p>
-            <h2 id="toolsTitle">Two tools for the real work of leading people.</h2>
+            <h2 id="toolsTitle">Practical tools for the real work of leading people.</h2>
           </div>
           <div>
-            <p class="lead">Same idea, different jobs. One helps you bring a new person into your team. The other helps you think clearly about how you showed up. Use one. Use both.</p>
+            <p class="lead">We build one tool at a time, each for a real moment in a leader&rsquo;s week. Small enough to use today, useful enough to keep using.</p>
             <p class="maker"><img loading="lazy" src="/logos/halpcraft-mark-on-light.png" alt="" width="469" height="512" /> Made by HalpCraft in New Zealand.</p>
           </div>
         </div>
-        <ol class="lineup" aria-label="HalpCraft products">
+        <div class="now">
+          <p class="label now-label">Available now</p>
+          <p class="now-line">Two HalpCraft tools are live today. More are on the way.</p>
+        </div>
+        <ol class="lineup" aria-label="HalpCraft tools available now">
           <li><a href="/onboarding-nudges"><span class="n">01</span><span class="nm">Onboarding Nudges</span><span class="what">Ten well-timed nudges for your new hire&rsquo;s first 150 days. $49 NZD, one-time.</span><span class="go">Explore &rarr;</span></a></li>
           <li><a href="/between-two-minds"><span class="n">02</span><span class="nm">Between Two Minds</span><span class="what">A comic-book reflection for the argument in your own head.</span><span class="go">Explore &rarr;</span></a></li>
         </ol>

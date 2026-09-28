@@ -66,9 +66,9 @@
     #sample h2 { font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.04; margin-top: 18px; max-width: 14ch; }
     #sample .split { align-items: start; }
     .free form { display: flex; margin-top: 8px; max-width: 520px; }
-    .free input { flex: 1; min-width: 0; font: 400 16px var(--sans); padding: 15px 16px; border: 1.5px solid var(--ink); border-right: 0; background: var(--paper); color: var(--ink); border-radius: 0; }
+    .free input { flex: 1; min-width: 0; font: 400 16px var(--sans); padding: 15px 16px; border: 1.5px solid var(--ink); border-right: 0; background: var(--paper); color: var(--ink); border-radius: 10px 0 0 10px; }
     .free input:focus { outline: 2px solid var(--azure); outline-offset: 2px; }
-    .free button { font: 600 15px var(--sans); padding: 15px 20px; background: var(--ink); color: var(--paper); border: 1.5px solid var(--ink); cursor: pointer; white-space: nowrap; }
+    .free button { border-radius: 0 10px 10px 0; font: 600 15px var(--sans); padding: 15px 20px; background: var(--ink); color: var(--paper); border: 1.5px solid var(--ink); cursor: pointer; white-space: nowrap; }
     .free button:hover { background: var(--azure); border-color: var(--azure); }
     .free button:disabled { opacity: .6; cursor: default; }
     .free .fine { margin-top: 10px; font-size: 13px; color: var(--ink-mute); }
@@ -156,7 +156,8 @@
     }
     @media (max-width: 620px) {
       .free form { flex-direction: column; }
-      .free input { border-right: 1.5px solid var(--ink); border-bottom: 0; }
+      .free input { border-right: 1.5px solid var(--ink); border-bottom: 0; border-radius: 10px 10px 0 0; }
+      .free button { border-radius: 0 0 10px 10px; }
       .gets li { grid-template-columns: 1fr; gap: 4px; }
       .guide-parts { grid-template-columns: 1fr; }
       .tiers .btn, .close .actions .btn { width: 100%; text-align: center; }

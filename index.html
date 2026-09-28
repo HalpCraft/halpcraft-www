@@ -78,7 +78,7 @@
     .btn--azure:hover { background: var(--azure-dk); border-color: var(--azure-dk); color: var(--paper); }
     .btn--line { background: transparent; color: var(--ink); }
     .btn--line:hover { background: var(--ink); color: var(--paper); }
-    .btn--buy { border-radius: 10px; }
+    .btn, .btn--buy { border-radius: 10px; }
 
     /* module: split */
     .split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 104px); }
@@ -92,7 +92,7 @@
     .slip h3 { font-size: clamp(1.6rem, 2.3vw, 2rem); line-height: 1.1; margin-top: 12px; }
     .slip p { margin-top: 10px; font-size: 15.5px; color: var(--ink-soft); line-height: 1.5; }
     .slip-foot { margin-top: 18px; padding-top: 12px; border-top: 1px dashed var(--rule); display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; color: var(--ink-mute); }
-    .slip-done { font: 600 13px var(--sans); color: var(--ink); background: none; border: 1.5px solid var(--ink); padding: 7px 12px; cursor: pointer; }
+    .slip-done { font: 600 13px var(--sans); color: var(--ink); background: none; border: 1.5px solid var(--ink); border-radius: 8px; padding: 7px 12px; cursor: pointer; }
     .slip-done:hover { background: var(--ink); color: var(--paper); }
     .slip.is-done h3 { text-decoration: line-through; text-decoration-color: var(--azure); text-decoration-thickness: 2px; color: var(--ink-mute); }
     .slip.is-done .slip-done { background: var(--azure); border-color: var(--azure); color: var(--paper); }
@@ -124,7 +124,7 @@
     .nav ul .btn { padding: 11px 18px; font-size: 14px; color: var(--paper); }
     .nav ul .btn:hover { color: var(--ink); }
     .nav-cta { display: none; }
-    .nav-toggle { display: none; background: none; border: 1.5px solid var(--ink); font: 600 14px var(--sans); padding: 8px 14px; color: var(--ink); cursor: pointer; }
+    .nav-toggle { display: none; background: none; border: 1.5px solid var(--ink); border-radius: 8px; font: 600 14px var(--sans); padding: 8px 14px; color: var(--ink); cursor: pointer; }
     .nav ul .group { font: 600 11px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); display: none; }
     .nav .sep { width: 1px; height: 18px; background: var(--rule); }
 

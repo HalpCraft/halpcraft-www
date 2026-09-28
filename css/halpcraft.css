@@ -50,6 +50,7 @@ h1, h2, h3, .display { font-family: var(--serif); font-weight: 400; letter-spaci
 .btn--azure:hover { background: var(--azure-dk); border-color: var(--azure-dk); color: var(--paper); }
 .btn--line { background: transparent; color: var(--ink); }
 .btn--line:hover { background: var(--ink); color: var(--paper); }
+.btn--buy { border-radius: 10px; }
 .actions { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
 
 /* split */

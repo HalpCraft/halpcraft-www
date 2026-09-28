@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Between Two Minds | HalpCraft</title>
+  <meta name="description" content="Between Two Minds by HalpCraft: a comic-book reflection for the argument in your own head. Pick your hero, name your villain, and answer a few honest questions." />
+  <link rel="canonical" href="https://www.halpcraft.com/between-two-minds" />
+  <meta name="theme-color" content="#171714" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="HalpCraft" />
+  <meta property="og:title" content="Between Two Minds | HalpCraft" />
+  <meta property="og:description" content="Same mind. A different outcome. A comic-book reflection for the argument in your own head." />
+  <meta property="og:url" content="https://www.halpcraft.com/between-two-minds" />
+  <meta property="og:image" content="https://www.halpcraft.com/logos/halpcraft-og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/logos/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/css/halpcraft.css" />
+  <style>
+    /* Between Two Minds product page: louder, ink, comic. Same brand system. */
+    .crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+    .crumb span[aria-hidden] { color: #6FB1B9; }
+    .crumb a { color: var(--on-ink); }
+    .sec { padding: var(--space) 0; }
+    .sec-head h2 { font-size: clamp(2.2rem, 4.8vw, 4.4rem); line-height: 1.02; margin-top: 18px; max-width: 15ch; }
+    .sec-head .lead { margin-top: 22px; }
+    .sec-head.split { align-items: end; }
+    .ink-btn { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+    .ink-btn:hover { background: transparent; color: var(--paper); }
+    .band--ink .link, .b-hero .link, .close .link { color: var(--paper); border-bottom-color: rgba(243,239,231,0.45); }
+    .b-hero :focus-visible, .close :focus-visible { outline-color: var(--paper); }
+
+    /* hero */
+    .b-hero { background: var(--ink); color: var(--paper); padding: clamp(40px, 5vw, 72px) 0 var(--space); overflow: hidden; }
+    .b-hero .label { color: var(--on-ink-mute); }
+    .b-hero .split { margin-top: clamp(28px, 4vw, 48px); align-items: center; }
+    .b-name { font: italic 600 clamp(3.4rem, 9vw, 8.4rem)/0.9 var(--serif); letter-spacing: -0.035em; font-variation-settings: "opsz" 72; }
+    .b-name span { display: block; }
+    .b-tag { font: italic 400 clamp(1.4rem, 2.2vw, 1.9rem)/1.2 var(--serif); margin-top: 22px; color: var(--on-ink); }
+    .b-hero .lead { margin-top: 20px; color: var(--on-ink); }
+    .b-hero .actions { margin-top: 32px; }
+    .by { margin-top: 28px; font-size: 14px; color: var(--on-ink-mute); }
+    .by a { color: var(--paper); }
+    .comic { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; transform: rotate(-1.5deg); }
+    .comic figure { border: 6px solid var(--paper); background: var(--paper); position: relative; }
+    .comic figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+    .comic figcaption { position: absolute; left: -6px; bottom: -6px; background: var(--paper); color: var(--ink); padding: 8px 12px 6px; font: 700 13px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
+    .comic figcaption small { display: block; font-weight: 600; font-size: 10px; letter-spacing: 0.16em; color: var(--ink-mute); }
+    .vs { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%) rotate(-6deg); background: var(--clay); color: var(--ink); font: italic 700 clamp(1.6rem, 2.6vw, 2.4rem)/1 var(--serif); padding: 12px 16px 14px; border: 4px solid var(--ink); z-index: 2; }
+    .bubble { position: relative; margin-top: 40px; background: var(--paper); color: var(--ink); padding: 18px 22px; max-width: 420px; border: 3px solid var(--ink); transform: rotate(1deg); font: italic 400 1.3rem/1.3 var(--serif); }
+    .bubble::after { content: ""; position: absolute; left: 44px; bottom: -22px; border-width: 22px 22px 0 0; border-style: solid; border-color: var(--paper) transparent transparent transparent; }
+    .bubble small { display: block; font: 600 11px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 6px; font-style: normal; }
+
+    /* what it is */
+    .what .display { font-size: clamp(2.2rem, 5vw, 4.6rem); max-width: 16ch; margin-top: 22px; }
+    .what .split { margin-top: clamp(40px, 5vw, 64px); padding-top: 32px; border-top: 1px solid var(--rule); }
+    .what .claim { font: 400 clamp(1.5rem, 2.4vw, 2.1rem)/1.2 var(--serif); max-width: 16em; }
+
+    /* how a battle works */
+    .how { padding-top: 0; }
+    .how .head { padding-top: clamp(56px, 7vw, 96px); border-top: 1px solid var(--rule); }
+    .how .rows { margin-top: clamp(40px, 5vw, 64px); }
+    .depth { list-style: none; margin-top: 12px; }
+    .depth li { font-size: 15px; color: var(--ink-soft); padding: 6px 0; border-top: 1px dashed var(--rule); }
+    .depth li b { color: var(--ink); font-weight: 600; }
+    .wheel { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .wheel span { font: 700 12px var(--sans); letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 10px; border: 2px solid var(--ink); }
+    .wheel span:last-child { background: var(--ink); color: var(--paper); }
+
+    /* the cast */
+    .cast h2 { color: var(--paper); }
+    .cast-group { margin-top: clamp(48px, 6vw, 80px); }
+    .cast-group > .label { display: flex; align-items: center; gap: 14px; }
+    .cast-group > .label::after { content: ""; flex: 1; height: 1px; background: var(--rule-on-ink); }
+    .panels { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); margin-top: 24px; }
+    .panel { background: var(--paper); color: var(--ink); border: 4px solid var(--paper); display: flex; flex-direction: column; }
+    .panel img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: #e8e3d8; }
+    .panel .body { padding: 14px 12px 16px; flex: 1; display: flex; flex-direction: column; }
+    .panel h3 { font: italic 600 1.25rem/1.1 var(--serif); letter-spacing: -0.01em; }
+    .panel p { margin-top: 8px; font-size: 14px; line-height: 1.45; color: var(--ink-soft); }
+    .panel .cost { margin-top: auto; padding-top: 10px; font-size: 13px; color: var(--ink-mute); border-top: 1px dashed var(--rule); }
+    .panel .cost b { display: block; font: 700 10px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); margin-bottom: 2px; }
+    .panels--villains .panel { border-color: var(--clay); }
+    .panels--villains .says { margin-top: auto; padding-top: 10px; font: italic 400 15px/1.35 var(--serif); color: var(--ink); border-top: 1px dashed var(--rule); }
+    .panels--villains .panel:nth-child(odd) { transform: rotate(-0.8deg); }
+    .panels--heroes .panel:nth-child(even) { transform: rotate(0.8deg); }
+    .cast-foot { margin-top: clamp(40px, 5vw, 64px); font: italic 400 clamp(1.3rem, 2vw, 1.7rem)/1.3 var(--serif); color: var(--on-ink); max-width: 30em; }
+
+    /* when to use it */
+    .moments { list-style: none; margin-top: clamp(40px, 5vw, 64px); border-top: 2px solid var(--ink); }
+    .moments li { font: 400 clamp(1.5rem, 3vw, 2.5rem)/1.15 var(--serif); letter-spacing: -0.015em; font-variation-settings: "opsz" 72; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+    .moments li:nth-child(2) { padding-left: 6%; }
+    .moments li:nth-child(3) { padding-left: 12%; }
+    .moments li:nth-child(4) { padding-left: 18%; color: var(--azure); font-style: italic; }
+    .note-account { margin-top: 32px; font-size: 15px; color: var(--ink-mute); max-width: 40em; }
+
+    /* close */
+    .close { background: var(--ink); color: var(--paper); }
+    .close h2 { font: italic 600 clamp(2.8rem, 7vw, 6.4rem)/0.95 var(--serif); letter-spacing: -0.03em; }
+    .close .lead { margin-top: 22px; color: var(--on-ink); }
+    .close .actions { margin-top: 32px; }
+    .family { margin-top: clamp(56px, 7vw, 88px); padding-top: 24px; border-top: 1px solid var(--rule-on-ink); display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: baseline; font-size: 15px; color: var(--on-ink); }
+    .family .label { color: var(--on-ink-mute); }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .js .comic figure { transition: transform .7s cubic-bezier(.2,.7,.2,1), opacity .5s ease; opacity: 0; }
+      .js .comic figure:first-child { transform: translateX(-40px) rotate(-4deg); }
+      .js .comic figure:nth-child(2) { transform: translateX(40px) rotate(4deg); }
+      .js .comic.is-in figure { opacity: 1; transform: none; }
+      .js .comic .vs { opacity: 0; transform: translate(-50%, -50%) rotate(-6deg) scale(1.8); transition: transform .35s cubic-bezier(.3,1.6,.5,1) .6s, opacity .2s ease .6s; }
+      .js .comic.is-in .vs { opacity: 1; transform: translate(-50%, -50%) rotate(-6deg) scale(1); }
+    }
+    @media (max-width: 1100px) {
+      .panels { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 960px) {
+      .comic { max-width: 560px; margin-top: 16px; order: -1; }
+    }
+    @media (max-width: 620px) {
+      .panels { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .panel .body { padding: 10px 8px 12px; }
+      .panel h3 { font-size: 1.05rem; }
+      .panel p { font-size: 13px; }
+      .comic { gap: 8px; }
+      .comic figure { border-width: 4px; }
+      .comic figcaption { font-size: 11px; padding: 6px 8px 4px; }
+      .moments li:nth-child(n) { padding-left: 0; }
+      .b-hero .actions .btn, .close .actions .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <nav class="nav" id="nav" aria-label="Main">
+    <div class="wrap">
+      <a href="/" class="nav-logo" aria-label="HalpCraft home"><img src="/logos/halpcraft-logo-on-light.png" alt="HalpCraft" width="1935" height="480" fetchpriority="high" /></a>
+      <a class="btn nav-cta" href="https://btm.halpcraft.com/">Pick your hero</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <ul id="navLinks">
+        <li class="group">Products</li>
+        <li><a href="/onboarding-nudges">Onboarding Nudges</a></li>
+        <li><a href="/between-two-minds" aria-current="page">Between Two Minds</a></li>
+        <li class="sep" aria-hidden="true"></li>
+        <li class="group">Company</li>
+        <li><a href="/#believe">What we believe</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="https://btm.halpcraft.com/" class="btn">Pick your hero</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- 1. Hero -->
+    <header class="b-hero">
+      <div class="wrap">
+        <p class="label crumb"><a href="/">HalpCraft</a><span aria-hidden="true">/</span><span>Between Two Minds</span></p>
+        <div class="split">
+          <div>
+            <h1 class="b-name"><span>Between</span><span>Two Minds</span></h1>
+            <p class="b-tag">Same mind. A different outcome.</p>
+            <p class="lead">A comic-book reflection for the argument in your own head. Pick the version of you that showed up, name the voice that pushed back, and answer a few honest questions written for that exact match-up.</p>
+            <div class="actions">
+              <a class="btn ink-btn" href="https://btm.halpcraft.com/">Pick your hero &rarr;</a>
+              <a class="link" href="#how">How a battle works</a>
+            </div>
+            <p class="by">A HalpCraft product. <a href="/">Back to HalpCraft</a></p>
+          </div>
+          <div>
+            <div class="comic" aria-label="Example match-up: The Forge versus The Fog">
+              <figure>
+                <img decoding="async" src="/images/btm/forge.webp" alt="Comic illustration of The Forge, one of the heroes" width="480" height="480" />
+                <figcaption><small>Hero</small>The Forge</figcaption>
+              </figure>
+              <figure>
+                <img decoding="async" src="/images/btm/fog.webp" alt="Comic illustration of The Fog, one of the villains" width="480" height="480" />
+                <figcaption><small>Villain</small>The Fog</figcaption>
+              </figure>
+              <span class="vs" aria-hidden="true">vs</span>
+            </div>
+            <p class="bubble"><small>The Fog says</small>&ldquo;You do not know enough yet.&rdquo;</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. What it is -->
+    <section class="sec what" aria-labelledby="whatTitle">
+      <div class="wrap">
+        <p class="label dot-label">What it is</p>
+        <h2 class="display" id="whatTitle">Some days the hardest conversation is the one in your own head.</h2>
+        <div class="split">
+          <p class="claim">You already know the voice. It tells you to wait, to double-check, to carry it all yourself.</p>
+          <div class="prose">
+            <p>Between Two Minds gives that voice a name and a face, and puts it up against the best version of you. Then it asks you a few honest questions about what actually happened.</p>
+            <p>It isn&rsquo;t a personality test and it isn&rsquo;t homework. It&rsquo;s a few minutes of clear thinking, dressed as a comic, so it&rsquo;s easier to be honest with yourself.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. How one battle works -->
+    <section class="sec how" id="how" aria-labelledby="howTitle">
+      <div class="wrap">
+        <div class="head split sec-head">
+          <div>
+            <p class="label">How a battle works</p>
+            <h2 id="howTitle">Five panels. A few honest minutes.</h2>
+          </div>
+          <p class="lead">Every combination of hero, villain and outcome changes the questions, so no two battles read the same.</p>
+        </div>
+        <ol class="rows">
+          <li><span class="n">01</span><h3>Choose your cast</h3><p>Pick the hero, the version of you that showed up. Then pick the villain, the voice that pushed back. Any hero can face any villain.</p></li>
+          <li><span class="n">02</span><h3>Who has the wheel?</h3><div><p>Right now, as you see it. There&rsquo;s no wrong answer. This is where the reflection starts.</p><p class="wheel" aria-label="The three outcomes"><span>Hero</span><span>Contested</span><span>Villain</span></p></div></li>
+          <li><span class="n">03</span><h3>Choose your depth</h3><div><p>Pick the space you have today. Deeper rounds add more prompts, not more pressure.</p><ul class="depth"><li><b>Quick</b>, 3 prompts, about 2 to 3 minutes</li><li><b>Standard</b>, 5 prompts, about 4 to 6 minutes</li><li><b>Deep</b>, 7 prompts, about 7 to 10 minutes</li></ul></div></li>
+          <li><span class="n">04</span><h3>Tell it straight</h3><p>Set the scene in your own words, then work the questions this battle threw up. Finish with one good thing, and what you&rsquo;ll carry forward.</p></li>
+          <li><span class="n">05</span><h3>Log the battle</h3><p>Save it to your story. Over time you&rsquo;ll see which heroes turn up for you, and which villains keep winning.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. The cast -->
+    <section class="band band--ink cast" id="cast" aria-labelledby="castTitle">
+      <div class="wrap">
+        <div class="split sec-head">
+          <div>
+            <p class="label">The cast</p>
+            <h2 id="castTitle">Five heroes. Five villains. All of them you.</h2>
+          </div>
+          <p class="lead">Every hero has a strength and a cost. Every villain has a line it likes to use. You&rsquo;ll recognise a few.</p>
+        </div>
+
+        <div class="cast-group">
+          <p class="label">The heroes</p>
+          <ol class="panels panels--heroes">
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/horizon.webp" alt="Horizon" width="480" height="480" /><div class="body"><h3>Horizon</h3><p>Sees what could be and gets others to see it too.</p><p class="cost"><b>The cost</b>Struggles to stay present long enough to finish.</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/lens.webp" alt="The Lens" width="480" height="480" /><div class="body"><h3>The Lens</h3><p>Cuts through noise and finds the actual problem.</p><p class="cost"><b>The cost</b>Can want certainty more than progress.</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/mender.webp" alt="The Mender" width="480" height="480" /><div class="body"><h3>The Mender</h3><p>Drawn to what is broken. Closes the gap.</p><p class="cost"><b>The cost</b>Finds it hard to leave anything alone.</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/forge.webp" alt="The Forge" width="480" height="480" /><div class="body"><h3>The Forge</h3><p>Works under pressure. Holds a standard nobody else holds.</p><p class="cost"><b>The cost</b>Struggles to let anyone else hold it.</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/signal.webp" alt="The Signal" width="480" height="480" /><div class="body"><h3>The Signal</h3><p>Reads the room and says the true thing.</p><p class="cost"><b>The cost</b>Feels the cost of friction more than most.</p></div></li>
+          </ol>
+        </div>
+
+        <div class="cast-group">
+          <p class="label">The villains</p>
+          <ol class="panels panels--villains">
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/mirage.webp" alt="The Mirage" width="480" height="480" /><div class="body"><h3>The Mirage</h3><p>Promises the real thing is somewhere else.</p><p class="says">&ldquo;The real thing is still ahead of this.&rdquo;</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/fog.webp" alt="The Fog" width="480" height="480" /><div class="body"><h3>The Fog</h3><p>Makes certainty the price of moving.</p><p class="says">&ldquo;You do not know enough yet.&rdquo;</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/unpicker.webp" alt="The Unpicker" width="480" height="480" /><div class="body"><h3>The Unpicker</h3><p>Will not let settled things stay settled.</p><p class="says">&ldquo;You missed something. Go back.&rdquo;</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/furnace.webp" alt="The Furnace" width="480" height="480" /><div class="body"><h3>The Furnace</h3><p>Turns everything into load, then burns it.</p><p class="says">&ldquo;If you do not carry it, nobody will.&rdquo;</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/echo.webp" alt="The Echo" width="480" height="480" /><div class="body"><h3>The Echo</h3><p>Gives the room what it wants.</p><p class="says">&ldquo;Do not make this harder than it needs to be.&rdquo;</p></div></li>
+          </ol>
+        </div>
+        <p class="cast-foot">The villains aren&rsquo;t other people. They&rsquo;re the habits every capable leader carries. Naming one is half the fight.</p>
+      </div>
+    </section>
+
+    <!-- 5. When to use it -->
+    <section class="sec" id="when" aria-labelledby="whenTitle">
+      <div class="wrap">
+        <div class="split sec-head">
+          <div>
+            <p class="label">When to use it</p>
+            <h2 id="whenTitle">Whenever something keeps replaying.</h2>
+          </div>
+          <p class="lead">Between Two Minds works best close to the moment, while it still has a hold on you.</p>
+        </div>
+        <ul class="moments">
+          <li>After a conversation that didn&rsquo;t go the way you wanted.</li>
+          <li>Before a decision you keep circling.</li>
+          <li>When something small is taking up a lot of room.</li>
+          <li>At the end of a long week, to put it down.</li>
+        </ul>
+        <p class="note-account">You can pick your cast straight away. Saving a battle needs a Between Two Minds account (your email and a password), so your story is there the next time you sign in.</p>
+      </div>
+    </section>
+
+    <!-- 6. Close -->
+    <section class="sec close" aria-labelledby="closeTitle">
+      <div class="wrap">
+        <p class="label" style="color:var(--on-ink-mute)">Issue #1 &middot; Choose your fight</p>
+        <h2 id="closeTitle" style="margin-top:18px">Pick your hero.</h2>
+        <p class="lead">Then name the voice pushing back. Two to three minutes is enough for one clear pass.</p>
+        <div class="actions">
+          <a class="btn ink-btn" href="https://btm.halpcraft.com/">Open Between Two Minds &rarr;</a>
+        </div>
+        <p class="family"><span class="label">Part of HalpCraft</span><a class="link" href="/onboarding-nudges">Onboarding Nudges</a><a class="link" href="/#believe">What we believe</a><a class="link" href="/about">Who&rsquo;s behind it</a></p>
+      </div>
+    </section>
+
+    <section class="signoff" aria-label="HalpCraft">
+      <div class="wrap">
+        <p>Better Leaders<span class="bar" aria-hidden="true"></span><br />Better Workplaces</p>
+        <small>Helping good leaders do the job a little better.</small>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a href="/" class="foot-logo"><img loading="lazy" src="/logos/halpcraft-logo-on-dark.png" alt="HalpCraft" width="1875" height="480" /></a>
+          <p class="foot-tag">Better Leaders | Better Workplaces</p>
+        </div>
+        <div class="foot-cols">
+          <div><h4>Products</h4><ul><li><a href="/onboarding-nudges">Onboarding Nudges</a></li><li><a href="/between-two-minds">Between Two Minds</a></li><li><a href="/agency">For agencies</a></li><li><a href="/quiz">Onboarding Score</a></li></ul></div>
+          <div><h4>Company</h4><ul><li><a href="/#believe">What we believe</a></li><li><a href="/about">About</a></li><li><a href="mailto:hello@halpcraft.com">Contact</a></li></ul></div>
+          <div><h4>Already bought?</h4><ul><li><a href="/redeem">Redeem a code</a></li><li><a href="/privacy">Privacy</a></li></ul></div>
+        </div>
+      </div>
+      <div class="foot-base"><span>&copy; 2026 HalpCraft. Made in New Zealand.</span><span>Helping good leaders do the job a little better.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    document.documentElement.classList.add('js');
+    (function () {
+      var els = document.querySelectorAll('[data-motion], .comic');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-in'); }); return; }
+      var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('is-in'); io.unobserve(x.target); } }); }, { threshold: 0.3 });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+    (function () {
+      var nav = document.getElementById('nav'), btn = document.getElementById('navToggle');
+      btn.addEventListener('click', function () { var o = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); btn.textContent = o ? 'Close' : 'Menu'; });
+      document.querySelectorAll('#navLinks a').forEach(function (a) {
+        a.addEventListener('click', function () { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.textContent = 'Menu'; });
+      });
+    })();
+  </script>
+</body>
+</html>

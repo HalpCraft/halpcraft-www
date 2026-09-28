@@ -78,6 +78,7 @@
     .btn--azure:hover { background: var(--azure-dk); border-color: var(--azure-dk); color: var(--paper); }
     .btn--line { background: transparent; color: var(--ink); }
     .btn--line:hover { background: var(--ink); color: var(--paper); }
+    .btn--buy { border-radius: 10px; }
 
     /* module: split */
     .split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 104px); }
@@ -124,6 +125,8 @@
     .nav ul .btn:hover { color: var(--ink); }
     .nav-cta { display: none; }
     .nav-toggle { display: none; background: none; border: 1.5px solid var(--ink); font: 600 14px var(--sans); padding: 8px 14px; color: var(--ink); cursor: pointer; }
+    .nav ul .group { font: 600 11px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); display: none; }
+    .nav .sep { width: 1px; height: 18px; background: var(--rule); }
 
     /* ── 01 RECOGNITION ────────────────────────────── */
     .hero { padding: clamp(40px, 5vw, 72px) 0 var(--space); position: relative; }
@@ -180,6 +183,19 @@
     .world-head .lead { margin-top: 28px; }
     .maker { display: flex; align-items: center; gap: 16px; margin-top: 36px; font-size: 14px; color: var(--ink-mute); }
     .maker img { height: 30px; width: auto; }
+    .world-head .label { color: var(--azure); padding-left: 28px; position: relative; }
+    .world-head .label::before { content: ""; position: absolute; left: -4px; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--azure); transform: translateY(-50%); }
+
+    /* the product index: HalpCraft, then its two products, named plainly */
+    .lineup { list-style: none; margin-top: clamp(40px, 5vw, 64px); border-top: 2px solid var(--ink); }
+    .lineup li { border-bottom: 1px solid var(--rule); }
+    .lineup a { display: grid; grid-template-columns: 72px minmax(0, 5fr) minmax(0, 6fr) auto; gap: 8px 40px; align-items: baseline; padding: 22px 0; text-decoration: none; }
+    .lineup .n { font: 400 1.4rem/1 var(--serif); color: var(--azure); font-variant-numeric: oldstyle-nums; }
+    .lineup .nm { font: 400 clamp(1.6rem, 2.6vw, 2.3rem)/1.05 var(--serif); letter-spacing: -0.02em; font-variation-settings: "opsz" 72; }
+    .lineup li:nth-child(2) .nm { font-weight: 600; font-style: italic; }
+    .lineup .what { color: var(--ink-soft); font-size: 16px; }
+    .lineup .go { font: 600 14px var(--sans); color: var(--azure); white-space: nowrap; }
+    .lineup a:hover .nm { color: var(--azure); }
 
     .spread { position: relative; }
     .spread-name { font: 400 clamp(3.4rem, 9vw, 8.4rem)/0.9 var(--serif); letter-spacing: -0.035em; font-variation-settings: "opsz" 72; }
@@ -191,6 +207,13 @@
     .facts li:last-child { border-bottom: 1px solid var(--rule); }
     .facts b { font-weight: 600; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); padding-top: 3px; }
     .spread-links { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; }
+    .price { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+    .price strong { font: 400 clamp(2.4rem, 4vw, 3.2rem)/1 var(--serif); letter-spacing: -0.02em; font-variation-settings: "opsz" 72; }
+    .price span { font-size: 15px; color: var(--ink-mute); }
+    .spread-more { margin-top: 16px; font-size: 14px; color: var(--ink-mute); }
+    .spread-more a { color: var(--ink); font-weight: 600; }
+    .spread--btm .spread-more { color: var(--on-ink-mute); }
+    .spread--btm .spread-more a { color: var(--paper); }
 
     /* Nudges: calm, paper, practical */
     .spread--nudges { padding: clamp(40px, 5vw, 72px) 0 clamp(80px, 10vw, 140px); }
@@ -265,16 +288,8 @@
     .action h2 { font-size: clamp(2.6rem, 6vw, 5.4rem); line-height: 0.98; letter-spacing: -0.025em; margin-top: 18px; }
     .action .lead { margin-top: 20px; }
     .action .rows { margin-top: clamp(40px, 5vw, 72px); }
-    .free form { display: flex; margin-top: 4px; max-width: 520px; }
-    .free input { flex: 1; min-width: 0; font: 400 16px var(--sans); padding: 15px 16px; border: 1.5px solid var(--ink); border-right: 0; background: var(--sheet); color: var(--ink); border-radius: 0; }
-    .free input:focus { outline: 2px solid var(--azure); outline-offset: 2px; }
-    .free button { font: 600 15px var(--sans); padding: 15px 20px; background: var(--ink); color: var(--paper); border: 1.5px solid var(--ink); cursor: pointer; white-space: nowrap; }
-    .free button:hover { background: var(--azure); border-color: var(--azure); }
-    .free button:disabled { opacity: .6; cursor: default; }
-    .free .fine { margin-top: 10px; font-size: 13px; color: var(--ink-mute); }
-    .free .ok { font: 400 1.2rem var(--serif); color: var(--azure); }
-    .free .err { margin-top: 10px; font-size: 14px; color: var(--ink); }
     .packs { margin-top: 14px; font-size: 14px; color: var(--ink-mute); }
+    .action .rows h3 .prod { display: block; margin-top: 12px; font: 600 12px/1.4 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--azure); }
     .packs a { color: var(--ink); font-weight: 600; }
     .contact { margin-top: 40px; font-size: 15px; color: var(--ink-mute); }
     .contact a { color: var(--ink); }
@@ -422,6 +437,8 @@
       .nav-logo { margin-right: auto; }
       .nav-cta { display: inline-block; padding: 10px 14px; font-size: 14px; }
       .nav.open ul { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; position: absolute; top: 76px; left: 0; right: 0; background: var(--paper); padding: 24px var(--gutter) 28px; border-bottom: 1px solid var(--rule); }
+      .nav.open ul .group { display: block; margin-top: 8px; }
+      .nav .sep { display: none; }
       .split, .split--rev, .founder-grid, .foot-grid { grid-template-columns: 1fr; }
       .hero-below { margin-top: clamp(28px, 6vw, 48px); }
       .hero-moment { justify-self: start; margin-top: 0; order: -1; max-width: 460px; }
@@ -437,6 +454,8 @@
       .stairs li:nth-child(n) { margin-top: 0; }
       .rows > li, .workshop .slot { grid-template-columns: 48px minmax(0, 1fr); }
       .rows > li > :last-child, .workshop .slot p { grid-column: 2; }
+      .lineup a { grid-template-columns: 48px minmax(0, 1fr); }
+      .lineup .what, .lineup .go { grid-column: 2; }
       .comic { max-width: 560px; margin-top: 8px; }
       .founder .photo { max-width: 320px; }
       .founder .headline { margin-left: 0; margin-top: -48px; }
@@ -465,6 +484,9 @@
       .rows > li, .workshop .slot { grid-template-columns: 1fr; gap: 10px; }
       .rows > li > :last-child, .workshop .slot p { grid-column: auto; }
       .spread-links .btn, .explore .btn { width: 100%; text-align: center; }
+      .lineup a { grid-template-columns: 1fr; gap: 6px; }
+      .lineup .what, .lineup .go { grid-column: auto; }
+      .lineup .n { font-size: 1.1rem; }
       .ask { grid-template-columns: 1fr; gap: 14px; }
       .ask > form, .ask > .ok { grid-column: auto; }
       .ask form { grid-template-columns: 1fr; }
@@ -472,8 +494,6 @@
       .founder .photo { max-width: 74%; }
       .founder .headline { margin-top: 20px; padding-left: 0; }
       .spread--nudges .spread-name { font-size: clamp(2.8rem, 13vw, 3.6rem); }
-      .free form { flex-direction: column; }
-      .free input { border-right: 1.5px solid var(--ink); border-bottom: 0; }
       .foot-cols { grid-template-columns: 1fr 1fr; }
       .statement .display .bar { display: block; width: 44px; height: 4px; margin: 0.2em 0 0.24em; }
       .statement .display br { display: none; }
@@ -493,10 +513,13 @@
       <a class="btn nav-cta" href="#start">Start small</a>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
       <ul id="navLinks">
+        <li class="group">Products</li>
+        <li><a href="/onboarding-nudges">Onboarding Nudges</a></li>
+        <li><a href="/between-two-minds">Between Two Minds</a></li>
+        <li class="sep" aria-hidden="true"></li>
+        <li class="group">Company</li>
         <li><a href="#believe">What we believe</a></li>
-        <li><a href="#tools">Our tools</a></li>
-        <li><a href="#founder">Who&rsquo;s behind it</a></li>
-        <li><a href="/quiz">Onboarding Score</a></li>
+        <li><a href="/about">About</a></li>
         <li><a href="#start" class="btn">Start small</a></li>
       </ul>
     </div>
@@ -516,7 +539,7 @@
             <p class="lead">HalpCraft makes practical tools for the real work of leading people. Small, well-timed, and built by someone who has done the job.</p>
             <div class="hero-actions">
               <a class="btn" href="#believe">What we believe</a>
-              <a class="link" href="#tools">See the tools &rarr;</a>
+              <a class="link" href="#tools">See the two tools &rarr;</a>
             </div>
           </div>
 
@@ -607,7 +630,7 @@
     <!-- bridge: philosophy -> tools -->
     <div class="bridge" aria-hidden="false">
       <div class="wrap">
-        <p>Principles are easy to agree with on a Monday. <span class="quiet">They&rsquo;re harder to remember by Thursday afternoon.</span> So we built them into tools.</p>
+        <p>Principles are easy to agree with on a Monday. <span class="quiet">They&rsquo;re harder to remember by Thursday afternoon.</span> So we built them into two tools.</p>
       </div>
     </div>
 
@@ -617,13 +640,17 @@
         <div class="split">
           <div>
             <p class="label">What HalpCraft makes</p>
-            <h2 id="toolsTitle">Tools for the real work of leading people.</h2>
+            <h2 id="toolsTitle">Two tools for the real work of leading people.</h2>
           </div>
           <div>
-            <p class="lead">Each one comes from the same idea, and each one does a different job. Use one. Use both. Start wherever your week needs it most.</p>
+            <p class="lead">Same idea, different jobs. One helps you bring a new person into your team. The other helps you think clearly about how you showed up. Use one. Use both.</p>
             <p class="maker"><img loading="lazy" src="/logos/halpcraft-mark-on-light.png" alt="" width="469" height="512" /> Made by HalpCraft in New Zealand.</p>
           </div>
         </div>
+        <ol class="lineup" aria-label="HalpCraft products">
+          <li><a href="/onboarding-nudges"><span class="n">01</span><span class="nm">Onboarding Nudges</span><span class="what">Ten well-timed nudges for your new hire&rsquo;s first 150 days. $49 NZD, one-time.</span><span class="go">Explore &rarr;</span></a></li>
+          <li><a href="/between-two-minds"><span class="n">02</span><span class="nm">Between Two Minds</span><span class="what">A comic-book reflection for the argument in your own head.</span><span class="go">Explore &rarr;</span></a></li>
+        </ol>
       </div></div>
 
       <!-- Nudges -->
@@ -634,17 +661,18 @@
             <span class="spread-by">01 &middot; HalpCraft Onboarding Nudges</span>
             <h3 class="spread-name"><span>Onboarding</span><span>Nudges</span></h3>
             <p class="spread-tag">A little help, right when you need it.</p>
-            <p class="spread-copy">Ten research-backed onboarding nudges delivered to your calendar across a new hire&rsquo;s first 150 days. Each one arrives at the moment it matters, with what to do and the words to use. No app to check. No dashboard to forget.</p>
+            <p class="spread-copy">Ten short, research-backed nudges land in your calendar across a new hire&rsquo;s first 150 days, each one telling you what to do and the words to use. No app to check. No dashboard to forget.</p>
             <ul class="facts">
               <li><b>For</b><span>Anyone bringing a new person into their team</span></li>
               <li><b>Lives in</b><span>Google, Outlook or Apple Calendar</span></li>
               <li><b>Covers</b><span>The week before, through to Day 150. Shift workers included.</span></li>
-              <li><b>Costs</b><span>$49 NZD per new hire, one-time</span></li>
             </ul>
+            <p class="price"><strong>$49 NZD</strong><span>per new hire, one-time. No subscription.</span></p>
             <div class="spread-links">
-              <a class="btn btn--azure" href="https://buy.stripe.com/cNi9AM9Mcgh60yYcBO0Ba0c">Buy now</a>
-              <a class="link" href="https://app.halpcraft.com/sample">Read a sample &rarr;</a>
+              <a class="btn btn--azure btn--buy" href="https://buy.stripe.com/cNi9AM9Mcgh60yYcBO0Ba0c">Buy now</a>
+              <a class="link" href="/onboarding-nudges">Explore Onboarding Nudges &rarr;</a>
             </div>
+            <p class="spread-more">Hiring a few? <a href="/onboarding-nudges#pricing">Team packs from $39 per hire</a>.</p>
           </div>
           <div class="fan" aria-label="Three of the ten onboarding nudges">
             <article class="slip">
@@ -687,15 +715,16 @@
             <span class="spread-by">02 &middot; Between Two Minds &middot; by HalpCraft</span>
             <h3 class="spread-name"><span>Between</span><span>Two Minds</span></h3>
             <p class="spread-tag">A different way to think about how you showed up.</p>
-            <p class="spread-copy">Some days the hardest conversation is the one in your own head. Pick the version of you that showed up, name the voice that pushed back, and answer a few honest questions. Same mind. A different outcome.</p>
+            <p class="spread-copy">A comic-book reflection for the argument in your own head: pick the version of you that showed up, name the voice that pushed back, and answer a few honest questions. Same mind. A different outcome.</p>
             <p class="bubble"><small>The Fog says</small>&ldquo;You do not know enough yet.&rdquo;</p>
             <ul class="facts" style="margin-top:48px">
               <li><b>For</b><span>The argument you&rsquo;re having with yourself</span></li>
               <li><b>Takes</b><span>About two to three minutes for one clear pass</span></li>
             </ul>
             <div class="spread-links">
-              <a class="btn" href="https://btm.halpcraft.com/">Pick your hero &rarr;</a>
+              <a class="btn" href="/between-two-minds">Explore Between Two Minds &rarr;</a>
             </div>
+            <p class="spread-more">Ready now? <a href="https://btm.halpcraft.com/">Pick your hero</a>.</p>
           </div>
         </div>
       </article>
@@ -750,7 +779,7 @@
       <div class="wrap">
         <p class="label">What HalpCraft stands for</p>
         <h2 class="display">Good leaders want to show up for their people.</h2>
-        <p>HalpCraft helps them know how, and when. That&rsquo;s the job, and we think it&rsquo;s worth doing well.</p>
+        <p>HalpCraft helps them know how, and when. That&rsquo;s the job, and we think it&rsquo;s worth doing well. Here&rsquo;s where to start.</p>
       </div>
     </section>
 
@@ -765,38 +794,36 @@
           <p class="lead">Start small. You don&rsquo;t need a rollout plan or a budget meeting. Pick whichever of these fits your week.</p>
         </div>
         <ol class="rows">
-          <li>
-            <span class="n">01</span>
-            <h3>Try one nudge, free.</h3>
-            <div class="free" id="free-nudge">
-              <form id="freeNudgeForm" novalidate>
-                <label for="freeEmail" class="sr">Email address</label>
-                <input type="email" id="freeEmail" name="email" placeholder="you@company.com" required />
-                <button type="submit" id="freeNudgeBtn">Send my free nudge</button>
-              </form>
-              <p class="fine" id="freeNudgeNote">One real nudge in your calendar tomorrow at 9am. One email. No follow-up spam.</p>
-              <p class="ok" id="freeNudgeSuccess" style="display:none;">Done. Check your inbox, your nudge is waiting.</p>
-              <p class="err" id="freeNudgeError" style="display:none;">Something broke. Email hello@halpcraft.com and we&rsquo;ll send it manually.</p>
-            </div>
-          </li>
           <li id="pricing">
-            <span class="n">02</span>
-            <h3>Set up Onboarding Nudges for your next new hire.</h3>
+            <span class="n">01</span>
+            <h3>Someone new starting soon? <span class="prod">Onboarding Nudges</span></h3>
             <div>
-              <p>All ten onboarding nudges, in your calendar in about two minutes. $49 NZD per new hire, one-time. No subscription.</p>
+              <p>All ten nudges in your calendar in about two minutes. $49 NZD per new hire, one-time. No subscription.</p>
               <div class="spread-links" style="margin-top:18px">
-                <a class="btn btn--azure" href="https://buy.stripe.com/cNi9AM9Mcgh60yYcBO0Ba0c">Buy for one new hire</a>
+                <a class="btn btn--azure btn--buy" href="https://buy.stripe.com/cNi9AM9Mcgh60yYcBO0Ba0c">Buy now</a>
+                <a class="link" href="/onboarding-nudges">How it works &rarr;</a>
               </div>
               <p class="packs">Hiring a few? <a href="https://buy.stripe.com/8x2fZa2jK1mcgxWatG0Ba0d">Team 5, $220 NZD</a> or <a href="https://buy.stripe.com/aFacMYgaA7KA3La45i0Ba0e">Team 10, $390 NZD</a>. Placing candidates? <a href="/agency">Agency programme</a>.</p>
             </div>
           </li>
           <li>
-            <span class="n">03</span>
-            <h3>Have a think with Between Two Minds.</h3>
+            <span class="n">02</span>
+            <h3>Something you can&rsquo;t stop turning over? <span class="prod">Between Two Minds</span></h3>
             <div>
               <p>Two to three minutes with the argument in your own head. Pick your hero, name the villain, tell it straight.</p>
               <div class="spread-links" style="margin-top:18px">
-                <a class="btn btn--line" href="https://btm.halpcraft.com/">Open Between Two Minds</a>
+                <a class="btn btn--line" href="/between-two-minds">Explore Between Two Minds</a>
+                <a class="link" href="https://btm.halpcraft.com/">Pick your hero &rarr;</a>
+              </div>
+            </div>
+          </li>
+          <li id="free-nudge">
+            <span class="n">03</span>
+            <h3>Not ready to buy? <span class="prod">Try one nudge, free</span></h3>
+            <div>
+              <p>Pop your email in on the Onboarding Nudges page and one real nudge lands in your calendar tomorrow at 9am. One email. No follow-up spam.</p>
+              <div class="spread-links" style="margin-top:18px">
+                <a class="link" href="/onboarding-nudges#sample">Try a sample &rarr;</a>
               </div>
             </div>
           </li>
@@ -840,8 +867,8 @@
           <p class="foot-tag">Better Leaders | Better Workplaces</p>
         </div>
         <div class="foot-cols">
-          <div><h4>Tools</h4><ul><li><a href="#onboarding-nudges">Onboarding Nudges</a></li><li><a href="https://btm.halpcraft.com/">Between Two Minds</a></li><li><a href="/quiz">Onboarding Score</a></li></ul></div>
-          <div><h4>HalpCraft</h4><ul><li><a href="#believe">What we believe</a></li><li><a href="/about">About</a></li><li><a href="/agency">For agencies</a></li><li><a href="mailto:hello@halpcraft.com">Contact</a></li></ul></div>
+          <div><h4>Products</h4><ul><li><a href="/onboarding-nudges">Onboarding Nudges</a></li><li><a href="/between-two-minds">Between Two Minds</a></li><li><a href="/agency">For agencies</a></li><li><a href="/quiz">Onboarding Score</a></li></ul></div>
+          <div><h4>Company</h4><ul><li><a href="#believe">What we believe</a></li><li><a href="/about">About</a></li><li><a href="mailto:hello@halpcraft.com">Contact</a></li></ul></div>
           <div><h4>Already bought?</h4><ul><li><a href="/redeem">Redeem a code</a></li><li><a href="/privacy">Privacy</a></li></ul></div>
         </div>
       </div>
@@ -902,34 +929,6 @@
       });
     })();
 
-    // Free nudge form: identical request to the live homepage (POST to the sample API)
-    (function () {
-      var form = document.getElementById('freeNudgeForm'); if (!form) return;
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var email = form.email.value.trim();
-        if (!email) return;
-        var btn = document.getElementById('freeNudgeBtn');
-        var err = document.getElementById('freeNudgeError');
-        btn.disabled = true;
-        err.style.display = 'none';
-        fetch('https://app.halpcraft.com/api/sample', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email })
-        })
-        .then(function (res) {
-          if (!res.ok) throw new Error('Request failed');
-          form.style.display = 'none';
-          document.getElementById('freeNudgeNote').style.display = 'none';
-          document.getElementById('freeNudgeSuccess').style.display = 'block';
-        })
-        .catch(function () {
-          err.style.display = 'block';
-          btn.disabled = false;
-        });
-      });
-    })();
   </script>
 </body>
 </html>

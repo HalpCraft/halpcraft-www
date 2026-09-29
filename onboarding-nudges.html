@@ -222,17 +222,7 @@
     .ruler-key i { width: 12px; height: 12px; border-radius: 50%; background: #6FB1B9; display: inline-block; }
     .ruler-key i.m { background: var(--ink); border: 2px solid rgba(243,239,231,.7); width: 11px; height: 11px; }
 
-    .phases { list-style: none; margin-top: clamp(56px, 7vw, 96px); border-top: 2px solid var(--paper); }
-    .phase { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 12px clamp(24px, 4vw, 64px); padding: clamp(22px, 2.6vw, 32px) 0; border-bottom: 1px solid var(--rule-on-ink); }
     .phase-name { font: italic 400 clamp(1.3rem, 2vw, 1.7rem)/1.15 var(--serif); color: var(--paper); font-variation-settings: "opsz" 36; }
-    .phase-name small { display: block; margin-top: 6px; font: 600 11px var(--sans); letter-spacing: .14em; text-transform: uppercase; font-style: normal; color: var(--on-ink-mute); }
-    .nudge { display: grid; grid-template-columns: 150px minmax(0, 4fr) minmax(0, 6fr) 64px; gap: 4px 28px; align-items: baseline; }
-    .nudge + .nudge { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--rule-on-ink); }
-    .nudge .when { font: 600 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: #6FB1B9; }
-    .nudge h3 { font-size: clamp(1.2rem, 1.7vw, 1.45rem); line-height: 1.15; color: var(--paper); }
-    .nudge h3 .no { font: 400 .8em var(--serif); color: var(--on-ink-mute); margin-right: .45em; }
-    .nudge p { color: var(--on-ink); font-size: 15.5px; }
-    .nudge .mins { font-size: 13px; color: var(--on-ink-mute); text-align: right; white-space: nowrap; }
     .seq-foot { margin-top: 32px; color: var(--on-ink); max-width: 42em; font-size: 15.5px; }
 
     /* ── 04 WHAT ARRIVES ── */
@@ -250,23 +240,45 @@
     .part .n { font: 400 1.3rem/1.2 var(--serif); color: var(--azure); }
     .part h4 { font: 600 12px/1.5 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
     .part p { margin-top: 6px; color: var(--ink-soft); font-size: 15.5px; max-width: 36em; }
-    .part .acts { list-style: none; margin-top: 10px; }
-    .part .acts li { padding: 8px 0 8px 18px; position: relative; color: var(--ink-soft); font-size: 15.5px; }
-    .part .acts li::before { content: ""; position: absolute; left: 0; top: 17px; width: 8px; height: 2px; background: var(--azure); }
-    .part .acts b { color: var(--ink); font-weight: 600; }
-    .part .say { margin-top: 12px; padding-left: 16px; border-left: 3px solid var(--azure); font: 400 clamp(1.15rem, 1.6vw, 1.35rem)/1.4 var(--serif); color: var(--ink); max-width: 30em; }
     .around { list-style: none; margin-top: clamp(56px, 7vw, 88px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 44px); }
     .around li { border-top: 1px solid var(--ink); padding-top: 14px; }
     .around b { display: block; font: 600 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--azure); }
     .around span { display: block; margin-top: 8px; color: var(--ink-soft); font-size: 15.5px; }
-    .words { list-style: none; margin-top: clamp(64px, 8vw, 112px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--ink); }
-    .words li { padding: 24px clamp(18px, 2.4vw, 32px) 8px; border-left: 1px solid var(--rule); }
-    .words li:first-child { padding-left: 0; border-left: 0; }
-    .words .w { font: 600 11px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); }
-    .words q { display: block; quotes: none; margin-top: 12px; font: 400 clamp(1.2rem, 1.7vw, 1.45rem)/1.35 var(--serif); letter-spacing: -.005em; color: var(--ink); }
-    .words-cap { margin-top: 12px; font-size: 14px; color: var(--ink-mute); }
 
-    /* ── 05 WHY THESE MOMENTS ── */
+    .journey { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 80px); margin-top: clamp(56px, 7vw, 96px); }
+    .stage { border-top: 2px solid var(--paper); padding-top: 18px; }
+    .phase-name small { display: block; margin-top: 6px; font: 600 11px var(--sans); letter-spacing: .14em; text-transform: uppercase; font-style: normal; color: var(--on-ink-mute); }
+    .named { list-style: none; margin-top: 18px; }
+    .named li { display: grid; grid-template-columns: 130px 30px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; padding: 13px 0; border-bottom: 1px solid var(--rule-on-ink); }
+    .named .when { font: 600 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: #6FB1B9; }
+    .named .no { font: 400 1rem var(--serif); color: var(--on-ink-mute); }
+    .named .nm { font: 400 clamp(1.15rem, 1.6vw, 1.35rem)/1.2 var(--serif); color: var(--paper); }
+    .named li.open .nm { font-style: italic; }
+    .named .go { font: 600 13px var(--sans); color: var(--paper); text-decoration: none; border-bottom: 1px solid rgba(243,239,231,.45); white-space: nowrap; }
+    .named--locked .when { color: var(--on-ink-mute); }
+    .named .bar { display: block; height: 10px; border-radius: 5px; background: rgba(243,239,231,.12); align-self: center; }
+    .named li:nth-child(2) .bar { width: 72%; } .named li:nth-child(3) .bar { width: 88%; } .named li:nth-child(4) .bar { width: 64%; } .named li:nth-child(5) .bar { width: 80%; }
+    .named .in { font: 600 11px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--on-ink-mute); white-space: nowrap; }
+    .ruler .dot.here { background: var(--paper); box-shadow: 0 0 0 4px var(--ink), 0 0 0 6px #6FB1B9; }
+    .ruler .dot.lock { width: 16px; height: 16px; margin: -8px 0 0 -8px; background: var(--ink); border: 2px solid #6FB1B9; box-shadow: 0 0 0 3px var(--ink); }
+    .lockt { font: 600 11px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); white-space: nowrap; border: 1px solid var(--rule); border-radius: 999px; padding: 4px 10px; }
+    .part { position: relative; }
+    .part--locked { grid-template-columns: 56px minmax(0, 1fr) auto; }
+    .part--locked .lockt { align-self: start; }
+    .part--locked h4, .part--locked p { color: var(--ink-mute); }
+    .part .acts { list-style: none; margin-top: 10px; }
+    .part .acts li { padding: 8px 0 8px 18px; position: relative; color: var(--ink-soft); font-size: 15.5px; }
+    .part .acts li::before { content: ""; position: absolute; left: 0; top: 17px; width: 8px; height: 2px; background: var(--azure); }
+    .part .acts b { color: var(--ink); font-weight: 600; }
+    .part .acts--locked { margin-top: 14px; border-top: 1px dashed var(--rule); padding-top: 6px; }
+    .part .acts--locked li { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .part .acts--locked b { color: var(--ink-mute); }
+    .part .say { margin-top: 12px; padding-left: 16px; border-left: 3px solid var(--azure); font: 400 clamp(1.15rem, 1.6vw, 1.35rem)/1.4 var(--serif); color: var(--ink); max-width: 30em; }
+    .gbook-foot { margin-top: 22px; }
+    .inside-cap { font: 600 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 12px; }
+    .moments .around { margin-top: clamp(36px, 4vw, 52px); grid-template-columns: 1fr; gap: 16px; }
+
+    /* ── 05 WHAT'S INSIDE ── */
     .moments { background: var(--sheet); }
     .moments-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(40px, 6vw, 104px); align-items: start; }
     .moments .display { font-size: clamp(2.6rem, 5.6vw, 5rem); line-height: 1; margin-top: clamp(26px, 3.6vw, 44px); max-width: 13ch; }
@@ -276,11 +288,6 @@
     .principles .n { font: 400 1.15rem/1.3 var(--serif); color: var(--azure); }
     .principles h3 { font-size: clamp(1.25rem, 1.8vw, 1.5rem); line-height: 1.15; }
     .principles p { grid-column: 2; color: var(--ink-soft); font-size: 15.5px; }
-    .figs { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; margin-top: 12px; }
-    .figs p, .principles .stat { margin-top: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.45; }
-    .figs b, .principles .stat b { display: block; font: 400 clamp(2rem, 3vw, 2.6rem)/1 var(--serif); letter-spacing: -.02em; color: var(--azure); margin-bottom: 8px; font-variation-settings: "opsz" 72; }
-    .principles .stat b { font-size: clamp(1.7rem, 2.4vw, 2.1rem); margin: 8px 0 6px; }
-    .cite { margin-top: 10px !important; font-size: 13px !important; color: var(--ink-mute) !important; font-style: italic; }
     .principles .cite { grid-column: 2; margin-top: 4px !important; }
     .src { margin-top: 22px; font-size: 14px; color: var(--ink-mute); max-width: 40em; }
     .moments .signline { margin-top: clamp(40px, 5vw, 64px); font: italic 400 clamp(1.3rem, 2vw, 1.7rem)/1.3 var(--serif); color: var(--azure); }
@@ -352,8 +359,6 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
-      .nudge { grid-template-columns: 130px minmax(0, 1fr) 56px; }
-      .nudge p { grid-column: 2 / 4; }
       .ruler .quiet { display: none; }
     }
     @media (max-width: 960px) {
@@ -369,12 +374,9 @@
       .shot::before { right: -10px; left: 10px; top: 10px; bottom: 50px; }
       .problem .shot { max-width: 460px; }
       .steps { grid-template-columns: 1fr 1fr; row-gap: 40px; }
-      .phase { grid-template-columns: 1fr; }
       .cal { position: static; }
+      .journey { grid-template-columns: 1fr; }
       .around { grid-template-columns: 1fr; gap: 18px; }
-      .figs { grid-template-columns: 1fr; }
-      .words { grid-template-columns: 1fr; }
-      .words li { padding: 22px 0 18px; border-left: 0; border-bottom: 1px solid var(--rule); }
       .faq { columns: 1; }
       .mark .aside { margin-left: 0; flex-basis: 100%; }
     }
@@ -385,11 +387,16 @@
       .ruler .tick { top: 50px; font-size: 10px; letter-spacing: .06em; }
       .ruler .tick.mid { display: none; }
       .ruler .axis, .ruler .fill { top: 40px; }
-      .nudge { grid-template-columns: minmax(0, 1fr) auto; }
-      .nudge .when { grid-column: 1 / -1; }
-      .nudge h3 { grid-column: 1; }
-      .nudge .mins { grid-column: 2; grid-row: 2; }
-      .nudge p { grid-column: 1 / -1; }
+      .ruler .dot.here { box-shadow: 0 0 0 2px var(--ink), 0 0 0 4px #6FB1B9; }
+      .ruler .dot.lock { width: 10px; height: 10px; margin: -5px 0 0 -5px; box-shadow: none; }
+      .named li { grid-template-columns: 26px minmax(0, 1fr); gap: 2px 10px; }
+      .named .when { grid-column: 2; }
+      .named .no { grid-column: 1; grid-row: 1 / span 2; }
+      .named .nm, .named .bar, .named .go, .named .in { grid-column: 2; }
+      .named .go, .named .in { justify-self: start; margin-top: 6px; }
+      .part--locked { grid-template-columns: 44px minmax(0, 1fr); }
+      .part--locked .lockt { grid-column: 2; justify-self: start; margin-top: 8px; }
+      .part .acts--locked li { flex-wrap: wrap; }
     }
     @media (max-width: 620px) {
       body { font-size: 16px; }
@@ -504,31 +511,44 @@
       </div>
     </section>
 
-    <!-- 03 THE SEQUENCE -->
+    <!-- 03 THE JOURNEY -->
     <section class="band band--ink sequence" id="sequence" aria-labelledby="seqTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">03</span><span class="name">The 150-day sequence</span></p>
-        <h2 class="sec-title" id="seqTitle">Ten moments, where they fall.</h2>
+        <p class="mark"><span class="no">03</span><span class="name">The 150-day journey</span></p>
+        <h2 class="sec-title" id="seqTitle">Ten moments, weighted to the start.</h2>
         <p class="sec-lead">Most of the weight sits early, when a new start is decided. Then the nudges spread out, the way the relationship does.</p>
-        <div class="ruler" data-motion aria-hidden="true"><span class="axis"></span><span class="fill"></span><span class="quiet" style="left:13.38%">six in the first 40 days</span><span class="quiet" style="left:74.52%">then one every few weeks</span><span class="dot" style="left:0.0%;--d:0.00">1</span><span class="dot" style="left:4.46%;--d:0.04">2</span><span class="dot" style="left:7.64%;--d:0.08">3</span><span class="dot" style="left:12.1%;--d:0.12">4</span><span class="dot" style="left:20.38%;--d:0.20">5</span><span class="dot" style="left:29.94%;--d:0.30">6</span><span class="dot" style="left:55.41%;--d:0.55">7</span><span class="dot" style="left:68.15%;--d:0.68">8</span><span class="dot" style="left:84.08%;--d:0.84">9</span><span class="dot" style="left:100.0%;--d:1.00">10</span><span class="dot mail" style="left:42.68%;--d:0.43"></span><span class="tick first" style="left:0">Week before</span><span class="tick mid" style="left:23.57%">Month 1</span><span class="tick mid" style="left:42.68%">Month 2</span><span class="tick mid" style="left:61.78%">Month 3</span><span class="tick mid" style="left:80.89%">Month 4</span><span class="tick last" style="left:100%">Day 150</span></div>
+        <div class="ruler" data-motion aria-hidden="true"><span class="axis"></span><span class="fill"></span><span class="quiet" style="left:10.19%">five in the first 25 days</span><span class="quiet" style="left:64.97%">five more to Day 150</span><span class="dot" style="left:0.0%;--d:0.00">1</span><span class="dot" style="left:4.46%;--d:0.04">2</span><span class="dot" style="left:7.64%;--d:0.08">3</span><span class="dot here" style="left:12.1%;--d:0.12">4</span><span class="dot" style="left:20.38%;--d:0.20">5</span><span class="dot lock" style="left:29.94%;--d:0.30"></span><span class="dot lock" style="left:55.41%;--d:0.55"></span><span class="dot lock" style="left:68.15%;--d:0.68"></span><span class="dot lock" style="left:84.08%;--d:0.84"></span><span class="dot lock" style="left:100.0%;--d:1.00"></span><span class="dot mail" style="left:42.68%;--d:0.43"></span><span class="tick first" style="left:0">Week before</span><span class="tick mid" style="left:23.57%">Month 1</span><span class="tick mid" style="left:42.68%">Month 2</span><span class="tick mid" style="left:61.78%">Month 3</span><span class="tick mid" style="left:80.89%">Month 4</span><span class="tick last" style="left:100%">Day 150</span></div>
         <p class="ruler-key" aria-hidden="true"><span><i></i>A nudge in your calendar</span><span><i class="m"></i>Day 60 check-in email</span></p>
-        <ol class="phases" aria-label="The ten nudges, by stage">
-          <li class="phase"><p class="phase-name">Before they start<small>Week before</small></p><div><div class="nudge"><span class="when">One week before</span><h3><span class="no">01</span>The Team Signal</h3><p>Is the team ready? Brief them, brief the buddy, decide your first words.</p><span class="mins">15 min</span></div></div></li>
-          <li class="phase"><p class="phase-name">The first week<small>Days 1 to 5</small></p><div><div class="nudge"><span class="when">Day 1</span><h3><span class="no">02</span>The Belonging Ritual</h3><p>Set the tone: a human tour and a coffee without the laptop.</p><span class="mins">60 min</span></div><div class="nudge"><span class="when">End of week 1</span><h3><span class="no">03</span>Clarity &amp; Connection Check</h3><p>The high point, the roadblock, and the one priority for week two.</p><span class="mins">20 min</span></div></div></li>
-          <li class="phase"><p class="phase-name">An early relationship<small>Days 12 to 25</small></p><div><div class="nudge"><span class="when">Day 12</span><h3><span class="no">04</span>The Pace Setter</h3><p>Normalise the learning curve before the doubt sets in.</p><span class="mins">10 min</span></div><div class="nudge"><span class="when">Day 25</span><h3><span class="no">05</span>The Ethos Guard</h3><p>Is the interview promise holding up? Ask before they wonder.</p><span class="mins">20 min</span></div></div></li>
-          <li class="phase"><p class="phase-name">Settling in<small>Day 40</small></p><div><div class="nudge"><span class="when">Day 40</span><h3><span class="no">06</span>Vulnerability &amp; Mastery Check</h3><p>Permission to be unfinished. Clear the silent gaps early.</p><span class="mins">15 min</span></div></div></li>
-          <li class="phase"><p class="phase-name">Feedback, both ways<small>Days 80 to 100</small></p><div><div class="nudge"><span class="when">Day 80</span><h3><span class="no">07</span>The Transparency Bridge</h3><p>No surprises. Clear the air before the 90-day mark.</p><span class="mins">20 min</span></div><div class="nudge"><span class="when">Day 100</span><h3><span class="no">08</span>Q1 Efficiency Bridge</h3><p>Invite critique. Fresh eyes see the friction you&rsquo;ve stopped noticing.</p><span class="mins">20 min</span></div></div></li>
-          <li class="phase"><p class="phase-name">Growth<small>Day 125</small></p><div><div class="nudge"><span class="when">Day 125</span><h3><span class="no">09</span>The Values-Impact Bridge</h3><p>Show them why their work matters, and where it could lead.</p><span class="mins">15 min</span></div></div></li>
-          <li class="phase"><p class="phase-name">Looking further ahead<small>Day 150</small></p><div><div class="nudge"><span class="when">Day 150</span><h3><span class="no">10</span>Taking the Lead</h3><p>From new hire to trusted partner. Hand over ownership, and say thank you.</p><span class="mins">15 min</span></div></div></li>
-        </ol>
-        <p class="seq-foot">Most take 10 to 20 minutes. Day 1 is the longest, and most of that is time with your new hire you&rsquo;d be spending anyway.</p>
+        <div class="journey">
+          <div class="stage">
+            <p class="phase-name">The first 25 days<small>Nudges 1 to 5</small></p>
+            <ol class="named" aria-label="The first five nudges">
+              <li><span class="when">One week before</span><span class="no">01</span><span class="nm">The Team Signal</span></li>
+              <li><span class="when">Day 1</span><span class="no">02</span><span class="nm">The Belonging Ritual</span></li>
+              <li><span class="when">End of week 1</span><span class="no">03</span><span class="nm">Clarity &amp; Connection Check</span></li>
+              <li class="open"><span class="when">Day 12</span><span class="no">04</span><span class="nm">The Pace Setter</span><a class="go" href="#receive">Opened below &darr;</a></li>
+              <li><span class="when">Day 25</span><span class="no">05</span><span class="nm">The Ethos Guard</span></li>
+            </ol>
+          </div>
+          <div class="stage">
+            <p class="phase-name">Months 2 to 5<small>Nudges 6 to 10</small></p>
+            <ol class="named named--locked" aria-label="Nudges six to ten, included in the programme">
+              <li><span class="when">Month 2</span><span class="no">06</span><span class="bar" aria-hidden="true"></span><span class="in">In the programme</span></li>
+              <li><span class="when">Month 3</span><span class="no">07</span><span class="bar" aria-hidden="true"></span><span class="in">In the programme</span></li>
+              <li><span class="when">Month 4</span><span class="no">08</span><span class="bar" aria-hidden="true"></span><span class="in">In the programme</span></li>
+              <li><span class="when">Month 5</span><span class="no">09</span><span class="bar" aria-hidden="true"></span><span class="in">In the programme</span></li>
+              <li><span class="when">Month 5</span><span class="no">10</span><span class="bar" aria-hidden="true"></span><span class="in">In the programme</span></li>
+            </ol>
+          </div>
+        </div>
+        <p class="seq-foot">The full sequence, with every date and every guide, arrives with your calendar. Most nudges take 10 to 20 minutes.</p>
       </div>
     </section>
 
-    <!-- 04 WHAT ARRIVES -->
+    <!-- 04 ONE NUDGE, OPENED -->
     <section class="sec receive" id="receive" aria-labelledby="receiveTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">04</span><span class="name">What a manager actually receives</span></p>
+        <p class="mark"><span class="no">04</span><span class="name">One nudge, opened</span><span class="aside">Nudge 4 of 10, the Day 12 moment.</span></p>
         <h2 class="sec-title" id="receiveTitle">One calendar block. One short guide. Ten minutes.</h2>
         <div class="receive-grid">
           <div class="cal">
@@ -543,57 +563,48 @@
           </div>
           <div class="gbook">
             <div class="guide-head"><h3>Inside the guide</h3><p>Day 12 &middot; The Pace Setter</p></div>
-            <div class="part"><span class="n">01</span><div><h4>Why this moment matters</h4><p>By Day 12 the hand-holding has stopped but real competence hasn&rsquo;t arrived. Most new hires won&rsquo;t say anything, because they&rsquo;re still proving they were the right hire.</p></div></div>
+            <div class="part part--locked"><span class="n">01</span><div><h4>Why this moment matters</h4><p>Why Day 12 is the moment, in plain words.</p></div><span class="lockt">In the full guide</span></div>
             <div class="part"><span class="n">02</span><div><h4>What to do &middot; 3 actions, 10 minutes</h4>
               <ul class="acts">
-                <li><b>The Timeline Talk.</b> Tell them it&rsquo;s normal to feel behind at this point.</li>
-                <li><b>The Hidden Question.</b> Ask, then just listen:</li>
+                <li><b>The Hidden Question.</b> Ask one person, word for word:</li>
               </ul>
-              <p class="say">&ldquo;What is one thing you have come across in the last two weeks that you are not 100% sure about but have not asked yet?&rdquo;</p>
-              <ul class="acts"><li><b>The Progress Anchor.</b> Name one thing they can do now that they couldn&rsquo;t on Day 1.</li></ul>
+              <p class="say">&ldquo;What&rsquo;s one thing you&rsquo;ve come across that you&rsquo;re not sure about, but haven&rsquo;t asked about yet?&rdquo;</p>
+              <p>Then stop talking. The real answer usually comes after the pause.</p>
+              <ul class="acts acts--locked">
+                <li><b>The Timeline Talk</b><span class="lockt">In the full guide</span></li>
+                <li><b>The Progress Anchor</b><span class="lockt">In the full guide</span></li>
+              </ul>
             </div></div>
-            <div class="part"><span class="n">03</span><div><h4>What the research says</h4>
-              <div class="figs">
-                <p><b>40%</b>of new hires report feeling &ldquo;not competent enough&rdquo; within the first two weeks, peaking between days 10 and 14.</p>
-                <p><b>3&times;</b>more likely to stay past 12 months when a manager explicitly normalises the learning timeline in the first two weeks.</p>
-              </div>
-              <p class="cite">Source as cited: LinkedIn Workforce Learning Report &amp; Journal of Organisational Behaviour.</p>
-            </div></div>
-            <div class="part"><span class="n">04</span><div><h4>Why you&rsquo;re doing this</h4><p>&ldquo;Imposter syndrome does not announce itself. It shows up as silence, as &lsquo;I am fine.&rsquo;&rdquo; You&rsquo;re giving them permission to still be learning.</p></div></div>
+            <div class="part part--locked"><span class="n">03</span><div><h4>What the research says</h4><p>The research anchor for the moment, with its sources named.</p></div><span class="lockt">In the full guide</span></div>
+            <div class="part part--locked"><span class="n">04</span><div><h4>Why you&rsquo;re doing this</h4><p>The leadership reason behind the moment.</p></div><span class="lockt">In the full guide</span></div>
+            <p class="gbook-foot"><a class="link" href="https://app.halpcraft.com/sample">Read the free sample of this nudge &rarr;</a></p>
           </div>
         </div>
-        <ul class="around" aria-label="Around the nudges">
-          <li><b>Straight away</b><span>One email with one calendar file. Nothing else to set up.</span></li>
-          <li><b>Around Day 60</b><span>A short check-in email with one thing to tell your new hire.</span></li>
-          <li><b>Never</b><span>An app, a login, a dashboard, or anything sent to your new hire.</span></li>
-        </ul>
-        <ul class="words" aria-label="Real words from the nudges">
-          <li><p class="w">One week before &middot; to your team</p><q>&ldquo;Heads up, [Name] starts next week. Please stop by on their first morning to introduce yourself.&rdquo;</q></li>
-          <li><p class="w">Day 25 &middot; ask, then listen</p><q>&ldquo;What is one thing about our daily culture that has surprised you, for better or worse?&rdquo;</q></li>
-          <li><p class="w">Day 150 &middot; say it</p><q>&ldquo;The way you&rsquo;ve approached these first 150 days has made a real difference to this team.&rdquo;</q></li>
-        </ul>
-        <p class="words-cap">Real words, taken straight from the nudges.</p>
       </div>
     </section>
 
-    <!-- 05 WHY THESE MOMENTS -->
+    <!-- 05 WHAT'S INSIDE -->
     <section class="sec moments" id="why" aria-labelledby="whyTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">05</span><span class="name">Why these moments matter</span></p>
+        <p class="mark"><span class="no">05</span><span class="name">What&rsquo;s inside the programme</span></p>
         <div class="moments-grid">
           <div>
             <h2 class="display" id="whyTitle">Good onboarding isn&rsquo;t one big event.<span class="l2">It&rsquo;s a handful of small moments.</span></h2>
             <p class="signline">Helping good leaders do the job a little better.</p>
           </div>
           <div>
+            <p class="inside-cap">Every one of the ten nudges includes</p>
             <ol class="principles">
-              <li><span class="n">01</span><h3>Belonging comes first</h3><p class="stat"><b>91%</b>of new hires who received an effective introduction to company culture on Day 1 feel connected to their workplace. For those who didn&rsquo;t, it drops to 29%.</p><p class="cite">Glassdoor, Journal of Applied Psychology</p></li>
-              <li><span class="n">02</span><h3>Clarity beats volume</h3><p class="stat"><b>#1</b>Role clarity is the single highest driver of employee productivity.</p><p class="cite">Gallup 2025 Workforce Report</p></li>
-              <li><span class="n">03</span><h3>Doubt is normal, silence is costly</h3><p class="stat"><b>31%</b>of employees fail to complete important projects because they fear their work will expose a gap in their competence.</p><p class="cite">Training Industry, Combatting Imposter Syndrome in the Workplace</p></li>
-              <li><span class="n">04</span><h3>Promises get checked</h3><p class="stat"><b>43%</b>of new hires say their day-to-day role wasn&rsquo;t what they were led to believe during hiring. Most make that call by Day 33.</p><p class="cite">Glassdoor &amp; Journal of Vocational Behavior</p></li>
-              <li><span class="n">05</span><h3>A visible future keeps people</h3><p class="stat"><b>33%</b>of employees who leave within their first year do so between months 4 and 6.</p><p class="cite">LinkedIn Workplace Learning Report &amp; Attrition Risk Research</p></li>
+              <li><span class="n">01</span><h3>Why this moment matters</h3><p>What&rsquo;s going on for your new hire at this point, in plain words.</p></li>
+              <li><span class="n">02</span><h3>What to do, and the words to use</h3><p>Three or four small actions, with the exact words where they help.</p></li>
+              <li><span class="n">03</span><h3>A research anchor</h3><p>The evidence behind the moment, with its sources named.</p></li>
+              <li><span class="n">04</span><h3>Why you&rsquo;re doing this</h3><p>The leadership reason, so it never feels like a box to tick.</p></li>
             </ol>
-            <p class="src">Figures as cited in the nudges&rsquo; action guides. Every guide includes its own research anchor, with its sources named.</p>
+            <ul class="around" aria-label="Around the nudges">
+              <li><b>Straight away</b><span>One email with one calendar file. Nothing else to set up.</span></li>
+              <li><b>Around Day 60</b><span>A short check-in email with one thing to tell your new hire.</span></li>
+              <li><b>Never</b><span>An app to check, a login, or anything sent to your new hire.</span></li>
+            </ul>
           </div>
         </div>
       </div>

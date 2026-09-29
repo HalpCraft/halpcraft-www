@@ -262,8 +262,6 @@
     .founder-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 104px); align-items: start; }
     .founder .photo { position: relative; max-width: 400px; }
     .founder .photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; }
-    .founder .photo figcaption { margin-top: 14px; font-size: 14px; color: var(--ink-mute); }
-    .founder .photo figcaption b { color: var(--ink); font-weight: 600; }
     .founder .display { font-size: clamp(3.2rem, 8vw, 7.4rem); }
     .founder .story { margin-top: clamp(32px, 4vw, 48px); max-width: 34em; }
     .founder .story p { color: var(--ink-soft); font-size: 1.1rem; }
@@ -414,9 +412,7 @@
       .js .comic.is-in figure { opacity: 1; transform: none; }
       .js .comic .vs { opacity: 0; transform: translate(-50%, -50%) rotate(-6deg) scale(1.8); transition: transform .35s cubic-bezier(.3,1.6,.5,1) .6s, opacity .2s ease .6s; }
       .js .comic.is-in .vs { opacity: 1; transform: translate(-50%, -50%) rotate(-6deg) scale(1); }
-      .js .founder-grid .photo img { clip-path: inset(100% 0 0 0); transition: clip-path 1s cubic-bezier(.3,.6,.2,1); }
       .js .founder-grid .headline { opacity: 0; transform: translateX(24px); transition: opacity .7s ease .45s, transform .9s cubic-bezier(.2,.7,.2,1) .45s; }
-      .js .founder-grid.is-in .photo img { clip-path: inset(0 0 0 0); }
       .js .founder-grid.is-in .headline { opacity: 1; transform: none; }
     }
     @keyframes slipIn { from { opacity: 0; transform: translateY(-28px) rotate(5deg); } to { opacity: 1; transform: rotate(0); } }
@@ -771,9 +767,9 @@
       <div class="wrap">
         <p class="mark"><span class="no">04</span><span class="name">Who&rsquo;s behind it</span></p>
         <div class="founder-grid" data-motion>
-          <figure class="photo">
-            <img loading="lazy" decoding="async" src="/damian.jpg" alt="Damian Sicely, founder of HalpCraft" width="400" height="533" />
-            <figcaption><b>Damian Sicely</b> &middot; Founder, HalpCraft &middot; New Zealand</figcaption>
+          <figure class="shot photo">
+            <div class="frame"><img loading="lazy" decoding="async" src="/damian.jpg" alt="Damian Sicely, founder of HalpCraft" width="400" height="533" /></div>
+            <figcaption>Damian Sicely &middot; Founder, HalpCraft</figcaption>
           </figure>
           <div class="headline">
             <h2 class="sec-title" id="founderTitle">I&rsquo;ve been there.</h2>

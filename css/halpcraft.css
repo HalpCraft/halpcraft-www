@@ -178,3 +178,48 @@ footer { background: var(--ink); color: var(--on-ink-mute); padding: 56px 0 40px
   .signoff p .bar { display: block; width: 44px; height: 4px; margin: 0.18em 0 0.22em; }
   .signoff p br { display: none; }
 }
+
+/* =====================================================================
+   Section title plates + framed photography (matches the homepage)
+   .plate-row  sits between two sections; its plate straddles the seam.
+   .shot       photo with an offset ink frame, warm grade and caption.
+   ===================================================================== */
+.plate-row { position: relative; z-index: 4; height: 0; }
+.plate-row .wrap { position: relative; height: 0; }
+.plate { position: absolute; left: var(--gutter); top: 0; transform: translateY(-50%); display: inline-flex; font-size: clamp(2.3rem, 5.4vw, 5rem); line-height: 1; margin: 0; max-width: calc(100% - 2 * var(--gutter)); }
+.plate::after { content: ""; position: absolute; inset: 12px -12px -12px 12px; border: 1px solid var(--ink); border-radius: 4px; z-index: -1; pointer-events: none; }
+.plate .t { position: relative; display: inline-flex; align-items: center; gap: .34em; background: var(--paper); border: 1px solid var(--ink); border-radius: 4px; padding: .14em .46em .2em .36em; font: 400 1em/1 var(--serif); letter-spacing: -.025em; font-variation-settings: "opsz" 144; color: var(--ink); white-space: nowrap; }
+.plate .t::before { content: ""; width: .42em; height: 3px; background: var(--azure); flex: none; }
+.shot { margin: 0; position: relative; }
+.shot .frame { position: relative; z-index: 1; overflow: hidden; border-radius: 4px; background: var(--ink); }
+.shot .frame img { display: block; width: 100%; height: auto; filter: saturate(.86) contrast(1.02) sepia(.06); }
+.shot::before { content: ""; position: absolute; z-index: 0; top: 18px; left: 18px; right: -18px; bottom: 42px; border: 1px solid var(--ink); border-radius: 4px; pointer-events: none; }
+.shot figcaption { display: flex; align-items: center; gap: 12px; margin-top: 32px; min-height: 28px; font: 600 11px/1.3 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); }
+.shot figcaption::before { content: ""; width: 28px; height: 2px; background: var(--azure); flex: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .plate .t { clip-path: inset(0 100% 0 0); transition: clip-path 1s cubic-bezier(.7,0,.2,1); }
+  .js .plate::after { opacity: 0; transform: translate(-12px, -12px); transition: opacity .5s ease .6s, transform .8s cubic-bezier(.2,.7,.2,1) .6s; }
+  .js .plate-row.is-in .plate .t { clip-path: inset(0 0 0 0); }
+  .js .plate-row.is-in .plate::after { opacity: 1; transform: none; }
+  .js .shot .frame { clip-path: inset(100% 0 0 0); transition: clip-path 1.1s cubic-bezier(.7,0,.2,1); }
+  .js .shot .frame img { transform: scale(1.12); transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
+  .js .shot::before { opacity: 0; transform: translate(-18px, -18px); transition: opacity .6s ease .7s, transform .9s cubic-bezier(.2,.7,.2,1) .7s; }
+  .js .shot figcaption { opacity: 0; transition: opacity .6s ease 1.1s; }
+  .js .shot.is-in .frame { clip-path: inset(0 0 0 0); }
+  .js .shot.is-in .frame img { transform: none; }
+  .js .shot.is-in::before { opacity: 1; transform: none; }
+  .js .shot.is-in figcaption { opacity: 1; }
+}
+@media (max-width: 960px) {
+  .shot::before { right: -10px; left: 10px; top: 10px; bottom: 50px; }
+}
+@media (max-width: 620px) {
+  .plate::after { inset: 8px -8px -8px 8px; }
+  .plate .t { white-space: normal; }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 620px) {
+  .js .plate::after { transform: translate(-8px, -8px); }
+  .js .plate-row.is-in .plate::after { transform: none; }
+}
+/* the section under a plate starts with the same breathing room everywhere */
+.plate-row + section { padding-top: clamp(96px, 11vw, 150px); }

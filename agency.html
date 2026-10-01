@@ -92,6 +92,10 @@
     @media (max-width: 620px) {
       .facts li { grid-template-columns: 1fr; gap: 2px; }
     }
+    /* plates replace the section labels; the connecting thread lines are retired */
+    .thread-line { display: none; }
+    .g-hero-exit { padding-bottom: clamp(88px, 10vw, 128px); }
+    .how .head { padding-top: 0; border-top: 0; }
   </style>
 </head>
 <body>
@@ -151,9 +155,9 @@
     </header>
 
     <!-- 2. The gap -->
+    <div class="plate-row" data-motion><div class="wrap"><p class="plate"><span class="t">The gap</span></p></div></div>
     <section class="band band--ink gap" aria-labelledby="gapTitle">
       <div class="wrap">
-        <p class="label dot-label">The gap</p>
         <h2 class="display" id="gapTitle">The relationship doesn&rsquo;t end when they start.</h2>
         <div class="split">
           <p class="claim">When a placement fails early, you wear the cost: in fees, reputation, and relationships.</p>
@@ -166,10 +170,10 @@
     </section>
 
     <!-- 3. What the hiring manager gets -->
+    <div class="plate-row" data-motion><div class="wrap"><p class="plate"><span class="t">What the hiring manager gets</span></p></div></div>
     <section class="gets" aria-labelledby="getsTitle">
       <div class="wrap split">
         <div>
-          <p class="label">What the hiring manager gets</p>
           <h2 id="getsTitle">150 days of structured support. Delivered invisibly.</h2>
           <p class="lead">Ten research-backed nudges land directly in the hiring manager&rsquo;s calendar across the first 150 days. No app. No login. No IT approval. Just the right action at the right time.</p>
           <ul class="facts">
@@ -200,10 +204,10 @@
     </section>
 
     <!-- 4. How it works for an agency -->
+    <div class="plate-row" data-motion><div class="wrap"><p class="plate"><span class="t">Simple by design</span></p></div></div>
     <section class="how" aria-labelledby="howTitle">
       <div class="wrap">
         <div class="head">
-          <p class="label">Simple by design</p>
           <h2 id="howTitle">Set up in under two minutes per placement.</h2>
         </div>
         <ol class="rows">
@@ -216,9 +220,9 @@
     </section>
 
     <!-- 5. Why agencies use it -->
+    <div class="plate-row" data-motion><div class="wrap"><p class="plate"><span class="t">Why agencies use it</span></p></div></div>
     <section class="band band--ink why" aria-labelledby="whyTitle">
       <div class="wrap">
-        <p class="label">Why agencies use it</p>
         <h2 id="whyTitle">It keeps you in the story after the placement.</h2>
         <ol class="rows">
           <li><span class="n">01</span><h3>Protect your placement fee</h3><p>A structured 150-day onboarding programme is there to reduce the risk of an early departure. Your placement has a better chance of sticking.</p></li>
@@ -229,9 +233,9 @@
     </section>
 
     <!-- 6. Packages -->
+    <div class="plate-row" data-motion><div class="wrap"><p class="plate"><span class="t">Agency packages</span></p></div></div>
     <section class="band band--azure packs" aria-labelledby="packsTitle">
       <div class="wrap">
-        <p class="label dot-label">Agency packages</p>
         <h2 id="packsTitle">Every agency is different. Your package should be too.</h2>
         <div class="split" style="margin-top:28px">
           <p class="lead">Whether you place 10 people a year or 200, we&rsquo;ll put together a package that fits your volume and your budget. Bulk pricing starts well below our solo rate, and every placement gets the full 150-day programme.</p>

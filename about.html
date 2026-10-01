@@ -29,8 +29,6 @@
     .a-hero .lead { margin-top: 28px; }
     .portrait { position: relative; justify-self: end; width: 100%; max-width: 400px; }
     .portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; }
-    .portrait figcaption { margin-top: 14px; font-size: 14px; color: var(--ink-mute); }
-    .portrait figcaption b { color: var(--ink); font-weight: 600; }
     .a-hero-exit { margin-top: clamp(64px, 8vw, 112px); padding-bottom: clamp(40px, 5vw, 64px); }
     .a-hero-exit .thread-line { --thread-h: calc(100% - 0.55em + clamp(150px, 16vw, 220px) + 3px); }
     .a-hero-exit .thread-line::after { display: none; }
@@ -76,6 +74,10 @@
       .portrait { max-width: 78%; }
       .seen-exit p { padding-left: 22px; }
     }
+    /* plates replace the section labels; the connecting thread lines are retired */
+    .thread-line { display: none; }
+    .a-hero-exit { padding-bottom: clamp(88px, 10vw, 128px); }
+    .seen-exit { padding-bottom: clamp(56px, 7vw, 88px); }
   </style>
 </head>
 <body>
@@ -110,9 +112,9 @@
             <h1 class="display">There&rsquo;s a real person behind HalpCraft.<span class="l2">He&rsquo;s been where you are.</span></h1>
             <p class="lead">HalpCraft makes practical tools for the real work of leading people. This is where it came from, and who&rsquo;s behind it.</p>
           </div>
-          <figure class="portrait reveal-photo" data-motion>
-            <img src="/damian.jpg" alt="Damian Sicely, founder of HalpCraft" width="400" height="533" />
-            <figcaption><b>Damian Sicely</b> &middot; Founder, HalpCraft &middot; New Zealand</figcaption>
+          <figure class="portrait shot" data-motion>
+            <div class="frame"><img src="/damian.jpg" alt="Damian Sicely, founder of HalpCraft" width="400" height="533" /></div>
+            <figcaption>Damian Sicely &middot; Founder, HalpCraft</figcaption>
           </figure>
         </div>
         <div class="thread a-hero-exit" data-motion>
@@ -123,9 +125,9 @@
     </header>
 
     <!-- 2. What Damian has seen -->
+    <div class="plate-row" data-motion><div class="wrap"><p class="plate"><span class="t">What he&rsquo;s seen</span></p></div></div>
     <section class="band band--ink seen" aria-labelledby="seenTitle">
       <div class="wrap">
-        <p class="label dot-label" style="--c:1">What he&rsquo;s seen</p>
         <h2 class="display" id="seenTitle">&ldquo;I&rsquo;ve spent nearly twenty years watching good leaders fail the people around them.<span class="l2">Not because they didn&rsquo;t care, but because nobody gave them the right support at the right moment.&rdquo;</span></h2>
         <div class="split">
           <p class="claim">That pattern shows up everywhere.</p>
@@ -141,10 +143,10 @@
     </section>
 
     <!-- 3. Why that led to HalpCraft -->
+    <div class="plate-row" data-motion><div class="wrap"><p class="plate"><span class="t">Why I built it the way I did</span></p></div></div>
     <section class="built" aria-labelledby="builtTitle">
       <div class="wrap split">
         <div>
-          <p class="label dot-label">Why I built it the way I did</p>
           <h2 id="builtTitle">I&rsquo;m an executive leader, not a developer.</h2>
           <p class="pull">The best solutions are almost always the simplest ones.</p>
         </div>
@@ -157,20 +159,20 @@
     </section>
 
     <!-- 4. What HalpCraft believes -->
+    <div class="plate-row" data-motion><div class="wrap"><p class="plate"><span class="t">What HalpCraft believes</span></p></div></div>
     <section class="band band--azure belief" aria-labelledby="beliefTitle">
       <div class="wrap">
-        <p class="label dot-label">What HalpCraft believes</p>
         <h2 class="display" id="beliefTitle">Give a leader the right insight at the right moment, without adding complexity to an already relentless working week, and they will almost always do the right thing by their people.</h2>
         <p class="by"><a class="link" href="/#believe">Read what we believe &rarr;</a></p>
       </div>
     </section>
 
     <!-- 5. How that belief shapes the products -->
+    <div class="plate-row" data-motion><div class="wrap"><p class="plate"><span class="t">What that belief has become</span></p></div></div>
     <section class="made" aria-labelledby="madeTitle">
       <div class="wrap">
         <div class="split">
           <div>
-            <p class="label">What that belief has become</p>
             <h2 id="madeTitle">A growing suite of tools, built around one belief.</h2>
           </div>
           <p class="lead" style="align-self:end">Simple, well-timed, affordable, and designed for the leaders who give a damn.</p>

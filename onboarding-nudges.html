@@ -421,6 +421,36 @@
       .signoff p br { display: none; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+    /* ── Section titles: framed plates that straddle the section above ── */
+    .sec { --pt: clamp(88px, 11vw, 150px); }
+    .band { --pt: var(--space); }
+    .sec > .wrap > .mark, .band > .wrap > .mark { position: relative; z-index: 4; border-top: 0; padding-top: 0; align-items: center; gap: 16px 32px;
+      font-size: clamp(2.3rem, 5.4vw, 5rem); line-height: 1; margin-top: calc(-1 * var(--pt) - .68em); }
+    .mark .name { position: relative; display: inline-flex; line-height: 1; font: inherit; letter-spacing: 0; text-transform: none; }
+    .mark .name::after { content: ""; position: absolute; inset: 12px -12px -12px 12px; border: 1px solid var(--ink); border-radius: 4px; z-index: -1; pointer-events: none; }
+    .mark .t { position: relative; display: inline-flex; align-items: center; gap: .34em; background: var(--paper); border: 1px solid var(--ink); border-radius: 4px;
+      padding: .14em .46em .2em .36em; font: 400 1em/1 var(--serif); letter-spacing: -.025em; font-variation-settings: "opsz" 144; color: var(--ink); white-space: nowrap; }
+    .mark .t::before { content: ""; width: .42em; height: 3px; background: var(--azure); flex: none; }
+    .sec--sheet > .wrap > .mark .t, .moments > .wrap > .mark .t { background: var(--sheet); }
+    .mark .aside { align-self: flex-end; margin-bottom: .2em; }
+    .sec-title { margin-top: clamp(30px, 4vw, 52px); }
+    @media (prefers-reduced-motion: no-preference) {
+      .js .mark .t { clip-path: inset(0 100% 0 0); transition: clip-path 1s cubic-bezier(.7,0,.2,1); }
+      .js .mark .name::after { opacity: 0; transform: translate(-12px, -12px); transition: opacity .5s ease .6s, transform .8s cubic-bezier(.2,.7,.2,1) .6s; }
+      .js .mark .aside { opacity: 0; transition: opacity .6s ease .9s; }
+      .js .mark.is-in .t { clip-path: inset(0 0 0 0); }
+      .js .mark.is-in .name::after { opacity: 1; transform: none; }
+      .js .mark.is-in .aside { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: no-preference) and (max-width: 620px) {
+      .js .mark .name::after { transform: translate(-8px, -8px); }
+      .js .mark.is-in .name::after { transform: none; }
+    }
+    @media (max-width: 620px) {
+      .mark .name::after { inset: 8px -8px -8px 8px; }
+      .mark .t { white-space: normal; }
+    }
+
   </style>
   <link rel="stylesheet" href="/concept/walkthrough.css" />
 </head>
@@ -473,7 +503,7 @@
     <!-- 01 THE PROBLEM -->
     <section class="sec sec--sheet problem" id="problem" aria-labelledby="problemTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">01</span><span class="name">The problem</span></p>
+        <p class="mark"><span class="name"><span class="t">The problem</span></span></p>
         <div class="problem-grid">
           <div>
             <h2 class="sec-title" id="problemTitle">Most managers know what a good start looks like.</h2>
@@ -496,7 +526,7 @@
     <!-- 02 HOW IT WORKS -->
     <section class="sec how" id="how" aria-labelledby="howTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">02</span><span class="name">How the nudges work</span></p>
+        <p class="mark"><span class="name"><span class="t">How the nudges work</span></span></p>
         <div class="how-head">
           <h2 class="sec-title" id="howTitle">Set up once. Then it turns up on its own.</h2>
           <p class="sec-lead">About two minutes of setup. After that there&rsquo;s nothing to log in to, and nothing to remember.</p>
@@ -514,7 +544,7 @@
     <!-- 03 THE JOURNEY -->
     <section class="band band--ink sequence" id="sequence" aria-labelledby="seqTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">03</span><span class="name">The 150-day journey</span></p>
+        <p class="mark"><span class="name"><span class="t">The 150-day journey</span></span></p>
         <h2 class="sec-title" id="seqTitle">Ten moments, weighted to the start.</h2>
         <p class="sec-lead">Most of the weight sits early, when a new start is decided. Then the nudges spread out, the way the relationship does.</p>
         <div class="ruler" data-motion aria-hidden="true"><span class="axis"></span><span class="fill"></span><span class="quiet" style="left:10.19%">five in the first 25 days</span><span class="quiet" style="left:64.97%">five more to Day 150</span><span class="dot" style="left:0.0%;--d:0.00">1</span><span class="dot" style="left:4.46%;--d:0.04">2</span><span class="dot" style="left:7.64%;--d:0.08">3</span><span class="dot here" style="left:12.1%;--d:0.12">4</span><span class="dot" style="left:20.38%;--d:0.20">5</span><span class="dot lock" style="left:29.94%;--d:0.30"></span><span class="dot lock" style="left:55.41%;--d:0.55"></span><span class="dot lock" style="left:68.15%;--d:0.68"></span><span class="dot lock" style="left:84.08%;--d:0.84"></span><span class="dot lock" style="left:100.0%;--d:1.00"></span><span class="dot mail" style="left:42.68%;--d:0.43"></span><span class="tick first" style="left:0">Week before</span><span class="tick mid" style="left:23.57%">Month 1</span><span class="tick mid" style="left:42.68%">Month 2</span><span class="tick mid" style="left:61.78%">Month 3</span><span class="tick mid" style="left:80.89%">Month 4</span><span class="tick last" style="left:100%">Day 150</span></div>
@@ -548,7 +578,7 @@
     <!-- 04 ONE NUDGE, OPENED -->
     <section class="sec receive" id="receive" aria-labelledby="receiveTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">04</span><span class="name">One nudge, opened</span><span class="aside">Nudge 4 of 10, the Day 12 moment.</span></p>
+        <p class="mark"><span class="name"><span class="t">One nudge, opened</span></span><span class="aside">Nudge 4 of 10, the Day 12 moment.</span></p>
         <h2 class="sec-title" id="receiveTitle">One calendar block. One short guide. Ten minutes.</h2>
         <div class="receive-grid">
           <div class="cal">
@@ -586,7 +616,7 @@
     <!-- 05 WHAT'S INSIDE -->
     <section class="sec moments" id="why" aria-labelledby="whyTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">05</span><span class="name">What&rsquo;s inside the programme</span></p>
+        <p class="mark"><span class="name"><span class="t">What&rsquo;s inside the programme</span></span></p>
         <div class="moments-grid">
           <div>
             <h2 class="display" id="whyTitle">Good onboarding isn&rsquo;t one big event.<span class="l2">It&rsquo;s a handful of small moments.</span></h2>
@@ -613,7 +643,7 @@
     <!-- 06 START SMALL -->
     <section class="sec start" id="pricing" aria-labelledby="startTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">06</span><span class="name">Start small</span><span class="aside">One price per new hire. Paid once.</span></p>
+        <p class="mark"><span class="name"><span class="t">Start small</span></span><span class="aside">One price per new hire. Paid once.</span></p>
         <h2 class="sec-title" id="startTitle">Start with one new hire.</h2>
         <div class="start-grid">
           <div class="one">
@@ -726,7 +756,7 @@
   <script>
     document.documentElement.classList.add('js');
     (function () {
-      var els = document.querySelectorAll('[data-motion], .shot');
+      var els = document.querySelectorAll('[data-motion], .shot, .mark');
       if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-in'); }); return; }
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });

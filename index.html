@@ -606,6 +606,54 @@
       .mark .aside { margin-left: 0; flex-basis: 100%; }
       .stairs li:nth-child(n) { margin-top: 0; }
     }
+
+    /* ── Section titles: framed plates that straddle the section above ── */
+    .sec { --pt: clamp(88px, 11vw, 150px); }
+    .sec > .wrap > .mark { position: relative; z-index: 4; border-top: 0; padding-top: 0; align-items: center; gap: 16px 32px;
+      font-size: clamp(2.3rem, 5.4vw, 5rem); line-height: 1; margin-top: calc(-1 * var(--pt) - .68em); }
+    .mark .name { position: relative; display: inline-flex; line-height: 1; font: inherit; letter-spacing: 0; text-transform: none; }
+    .mark .name::after { content: ""; position: absolute; inset: 12px -12px -12px 12px; border: 1px solid var(--ink); border-radius: 4px; z-index: -1; pointer-events: none; }
+    .mark .t { position: relative; display: inline-flex; align-items: center; gap: .34em; background: var(--paper); border: 1px solid var(--ink); border-radius: 4px;
+      padding: .14em .46em .2em .36em; font: 400 1em/1 var(--serif); letter-spacing: -.025em; font-variation-settings: "opsz" 144; color: var(--ink); white-space: nowrap; }
+    .mark .t::before { content: ""; width: .42em; height: 3px; background: var(--azure); flex: none; }
+    .sec--sheet > .wrap > .mark .t { background: var(--sheet); }
+    .mark .aside { align-self: flex-end; margin-bottom: .2em; }
+    .sec-title { margin-top: clamp(30px, 4vw, 52px); }
+    @media (prefers-reduced-motion: no-preference) {
+      .js .mark .t { clip-path: inset(0 100% 0 0); transition: clip-path 1s cubic-bezier(.7,0,.2,1); }
+      .js .mark .name::after { opacity: 0; transform: translate(-12px, -12px); transition: opacity .5s ease .6s, transform .8s cubic-bezier(.2,.7,.2,1) .6s; }
+      .js .mark .aside { opacity: 0; transition: opacity .6s ease .9s; }
+      .js .mark.is-in .t { clip-path: inset(0 0 0 0); }
+      .js .mark.is-in .name::after { opacity: 1; transform: none; }
+      .js .mark.is-in .aside { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: no-preference) and (max-width: 620px) {
+      .js .mark .name::after { transform: translate(-8px, -8px); }
+      .js .mark.is-in .name::after { transform: none; }
+    }
+    @media (max-width: 620px) {
+      .mark .name::after { inset: 8px -8px -8px 8px; }
+      .mark .t { white-space: normal; }
+    }
+
+    /* ── Tools section: product titles up top; Between Two Minds "In development" stamp ── */
+    .mark .aside--stack { align-self: flex-end; margin: 0 0 .15em auto; max-width: 25em; text-align: right; }
+    .mark .aside--stack h2 { font: italic 400 clamp(1.25rem, 1.9vw, 1.6rem)/1.25 var(--serif); letter-spacing: -.01em; color: var(--ink); font-variation-settings: "opsz" 36; }
+    .mark .aside--stack p { margin-top: 6px; font: 400 15px/1.4 var(--sans); color: var(--ink-mute); }
+    #tools .tool { margin-top: clamp(40px, 5vw, 72px); align-items: start; }
+    #tools .tool-name { font-size: clamp(2.6rem, 5vw, 4.2rem); line-height: .98; letter-spacing: -.03em; margin-top: 14px; }
+    .comic .stamp { position: absolute; z-index: 3; right: -14px; top: -26px; transform: rotate(9deg); margin: 0; }
+    .comic .stamp span { display: block; padding: 9px 14px 8px; background: var(--paper); color: var(--clay); border: 3px solid var(--clay); outline: 1.5px solid var(--clay); outline-offset: 3px; border-radius: 4px;
+      font: 700 19px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 0 0 4px var(--ink); }
+    @media (prefers-reduced-motion: no-preference) {
+      .js .comic .stamp { opacity: 0; transform: rotate(9deg) scale(1.7); transition: transform .35s cubic-bezier(.3,1.6,.5,1) 1.1s, opacity .15s ease 1.1s; }
+      .js .comic.is-in .stamp { opacity: 1; transform: rotate(9deg) scale(1); }
+    }
+    @media (max-width: 960px) {
+      .mark .aside--stack { margin-left: 0; text-align: left; flex-basis: 100%; }
+      .comic .stamp { right: 6px; top: -20px; }
+    }
+
   </style>
   <link rel="stylesheet" href="/concept/walkthrough.css" />
 </head>
@@ -668,7 +716,7 @@
     <!-- 01 WHY -->
     <section class="sec sec--sheet why" id="believe" aria-labelledby="whyTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">01</span><span class="name">Why HalpCraft</span></p>
+        <p class="mark"><span class="name"><span class="t">Why HalpCraft</span></span></p>
         <div class="why-grid">
           <div>
             <h2 class="sec-title" id="whyTitle">It&rsquo;s rarely a care problem.</h2>
@@ -691,8 +739,7 @@
     <!-- 02 THE TOOLS -->
     <section class="sec" id="tools" aria-labelledby="toolsTitle" style="padding-bottom:0">
       <div class="wrap">
-        <p class="mark"><span class="no">02</span><span class="name">The tools</span><span class="aside">Two HalpCraft tools are live today. More are on the way.</span></p>
-        <h2 class="sec-title" id="toolsTitle">Practical tools for the real work of leading people.</h2>
+        <div class="mark"><span class="name"><span class="t">The tools</span></span><div class="aside aside--stack"><h2 id="toolsTitle">Practical tools for the real work of leading people.</h2><p>Two HalpCraft tools are live today. More are on the way.</p></div></div>
 
         <span id="how"></span><span id="nudges"></span><span id="sequence"></span>
         <article class="tool" id="onboarding-nudges" aria-label="Onboarding Nudges">
@@ -715,6 +762,7 @@
       <article class="spread spread--btm" id="between-two-minds" aria-label="Between Two Minds">
         <div class="wrap split split--rev">
           <div class="comic" aria-label="Example match-up: The Forge versus The Fog">
+            <p class="stamp"><span>In development</span></p>
             <figure>
               <img loading="lazy" decoding="async" src="/concept/btm-forge.webp" alt="Comic illustration of The Forge, one of the heroes" width="640" height="640" />
               <figcaption><small>Hero</small>The Forge</figcaption>
@@ -743,7 +791,7 @@
     <!-- 03 HOW WE BUILD -->
     <section class="sec" id="approach" aria-labelledby="howTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">03</span><span class="name">How we build</span></p>
+        <p class="mark"><span class="name"><span class="t">How we build</span></span></p>
         <div class="how-grid">
           <div>
             <h2 class="sec-title" id="howTitle">Three small things, done at the right time.</h2>
@@ -765,7 +813,7 @@
     <!-- 04 WHO'S BEHIND IT -->
     <section class="sec sec--sheet founder" id="founder" aria-labelledby="founderTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">04</span><span class="name">Who&rsquo;s behind it</span></p>
+        <p class="mark"><span class="name"><span class="t">Who&rsquo;s behind it</span></span></p>
         <div class="founder-grid" data-motion>
           <figure class="shot photo">
             <div class="frame"><img loading="lazy" decoding="async" src="/damian.jpg" alt="Damian Sicely, founder of HalpCraft" width="400" height="533" /></div>
@@ -789,7 +837,7 @@
     <!-- 05 START HERE -->
     <section class="sec start" id="start" aria-labelledby="startTitle">
       <div class="wrap">
-        <p class="mark"><span class="no">05</span><span class="name">Start here</span></p>
+        <p class="mark"><span class="name"><span class="t">Start here</span></span></p>
         <h2 class="sec-title" id="startTitle">Start small.</h2>
         <ol class="rows">
           <li id="pricing">
@@ -866,7 +914,7 @@
   <script>
     document.documentElement.classList.add('js');
     (function () {
-      var els = document.querySelectorAll('[data-motion], .stairs, .comic, .shot, .coast');
+      var els = document.querySelectorAll('[data-motion], .stairs, .comic, .shot, .coast, .mark');
       if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-in'); }); return; }
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });

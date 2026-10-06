@@ -85,6 +85,11 @@
     .panel p { margin-top: 8px; font-size: 14px; line-height: 1.45; color: var(--ink-soft); }
     .panel .cost { margin-top: auto; padding-top: 10px; font-size: 13px; color: var(--ink-mute); border-top: 1px dashed var(--rule); }
     .panel .cost b { display: block; font: 700 10px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); margin-bottom: 2px; }
+    .panel .powers { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--rule); }
+    .panel .powers b { display: block; font: 700 10px var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); margin-bottom: 6px; }
+    .panel .powers p { margin-top: 7px; font-size: 13px; line-height: 1.4; color: var(--ink-mute); }
+    .panel .powers p:first-of-type { margin-top: 0; }
+    .panel .powers span { display: block; font: 700 11px var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
     .panels--villains .panel { border-color: var(--clay); }
     .panels--villains .says { margin-top: auto; padding-top: 10px; font: italic 400 15px/1.35 var(--serif); color: var(--ink); border-top: 1px dashed var(--rule); }
     .panels--villains .panel:nth-child(odd) { transform: rotate(-0.8deg); }
@@ -245,31 +250,31 @@
           <div>
             <h2 id="castTitle">Five heroes. Five villains. All of them you.</h2>
           </div>
-          <p class="lead">Every hero has a strength and a cost. Every villain has a line it likes to use. You&rsquo;ll recognise a few.</p>
+          <p class="lead">Every hero brings two powers. So does every villain, along with a line it likes to use. You&rsquo;ll recognise a few.</p>
         </div>
 
         <div class="cast-group">
           <p class="label">The heroes</p>
           <ol class="panels panels--heroes">
-            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/horizon.webp" alt="Horizon" width="480" height="480" /><div class="body"><h3>Horizon</h3><p>Sees what could be and gets others to see it too.</p><p class="cost"><b>The cost</b>Struggles to stay present long enough to finish.</p></div></li>
-            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/lens.webp" alt="The Lens" width="480" height="480" /><div class="body"><h3>The Lens</h3><p>Cuts through noise and finds the actual problem.</p><p class="cost"><b>The cost</b>Can want certainty more than progress.</p></div></li>
-            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/mender.webp" alt="The Mender" width="480" height="480" /><div class="body"><h3>The Mender</h3><p>Drawn to what is broken. Closes the gap.</p><p class="cost"><b>The cost</b>Finds it hard to leave anything alone.</p></div></li>
-            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/forge.webp" alt="The Forge" width="480" height="480" /><div class="body"><h3>The Forge</h3><p>Works under pressure. Holds a standard nobody else holds.</p><p class="cost"><b>The cost</b>Struggles to let anyone else hold it.</p></div></li>
-            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/signal.webp" alt="The Signal" width="480" height="480" /><div class="body"><h3>The Signal</h3><p>Reads the room and says the true thing.</p><p class="cost"><b>The cost</b>Feels the cost of friction more than most.</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/horizon.webp" alt="Horizon" width="480" height="480" /><div class="body"><h3>Horizon</h3><p>Sees what things could be, and gets other people to see it too.</p><div class="powers"><b>Powers</b><p><span>Far sight</span>Sees the version of this that does not exist yet.</p><p><span>Pull</span>Makes other people want to go there too.</p></div></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/lens.webp" alt="The Lens" width="480" height="480" /><div class="body"><h3>The Lens</h3><p>Cuts through the noise and names what is actually going on.</p><div class="powers"><b>Powers</b><p><span>X-ray</span>Finds the real problem under everything being said about it.</p><p><span>Plain speech</span>Names it in one sentence anyone can follow.</p></div></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/mender.webp" alt="The Mender" width="480" height="480" /><div class="body"><h3>The Mender</h3><p>Drawn to what is broken, in things or between people. Closes the gap.</p><div class="powers"><b>Powers</b><p><span>Gap sense</span>Spots what is broken before anyone says so.</p><p><span>Quiet repair</span>Closes it without being asked and without fuss.</p></div></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/forge.webp" alt="The Forge" width="480" height="480" /><div class="body"><h3>The Forge</h3><p>Steps up when it is heavy. Holds a line nobody else is holding.</p><div class="powers"><b>Powers</b><p><span>Load bearing</span>Holds weight that would stop most people.</p><p><span>Finisher</span>Gets it done after everyone else has drifted off.</p></div></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/signal.webp" alt="The Signal" width="480" height="480" /><div class="body"><h3>The Signal</h3><p>Reads people, and says the true thing out loud.</p><div class="powers"><b>Powers</b><p><span>Deep read</span>Hears what people are not saying.</p><p><span>Straight talk</span>Says the true thing while it still matters.</p></div></div></li>
           </ol>
         </div>
 
         <div class="cast-group">
           <p class="label">The villains</p>
           <ol class="panels panels--villains">
-            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/mirage.webp" alt="The Mirage" width="480" height="480" /><div class="body"><h3>The Mirage</h3><p>Promises the real thing is somewhere else.</p><p class="says">&ldquo;The real thing is still ahead of this.&rdquo;</p></div></li>
-            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/fog.webp" alt="The Fog" width="480" height="480" /><div class="body"><h3>The Fog</h3><p>Makes certainty the price of moving.</p><p class="says">&ldquo;You do not know enough yet.&rdquo;</p></div></li>
-            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/unpicker.webp" alt="The Unpicker" width="480" height="480" /><div class="body"><h3>The Unpicker</h3><p>Will not let settled things stay settled.</p><p class="says">&ldquo;You missed something. Go back.&rdquo;</p></div></li>
-            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/furnace.webp" alt="The Furnace" width="480" height="480" /><div class="body"><h3>The Furnace</h3><p>Turns everything into load, then burns it.</p><p class="says">&ldquo;If you do not carry it, nobody will.&rdquo;</p></div></li>
-            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/echo.webp" alt="The Echo" width="480" height="480" /><div class="body"><h3>The Echo</h3><p>Gives the room what it wants.</p><p class="says">&ldquo;Do not make this harder than it needs to be.&rdquo;</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/mirage.webp" alt="The Mirage" width="480" height="480" /><div class="body"><h3>The Mirage</h3><p>Keeps the real version of you somewhere up ahead, so this one never counts.</p><div class="powers"><b>Powers</b><p><span>Moving line</span>Shifts the finish line every time you get near it.</p><p><span>Shine</span>Makes the next thing look brighter than the one in your hands.</p></div><p class="says">&ldquo;You will be the real thing once the next one is done.&rdquo;</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/fog.webp" alt="The Fog" width="480" height="480" /><div class="body"><h3>The Fog</h3><p>Makes being certain the price of being allowed to speak.</p><div class="powers"><b>Powers</b><p><span>The unknowns</span>For every answer, three more things you should have checked.</p><p><span>Stall</span>Turns waiting into something that sounds like research.</p></div><p class="says">&ldquo;You do not know enough yet. Someone else knows more.&rdquo;</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/unpicker.webp" alt="The Unpicker" width="480" height="480" /><div class="body"><h3>The Unpicker</h3><p>Treats one flaw as the proof. Reopens what was already settled.</p><div class="powers"><b>Powers</b><p><span>Flaw finder</span>Finds the one wrong thing in anything you have done.</p><p><span>Rewind</span>Reopens decisions that were already made.</p></div><p class="says">&ldquo;They will find the part you got wrong.&rdquo;</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/furnace.webp" alt="The Furnace" width="480" height="480" /><div class="body"><h3>The Furnace</h3><p>Turns proving you deserve it into the job. Stopping feels like being caught.</p><div class="powers"><b>Powers</b><p><span>Noble weight</span>Makes carrying everything feel like the right thing to do.</p><p><span>Alarm</span>Makes stopping feel like you are about to be found out.</p></div><p class="says">&ldquo;If you put it down, they will see.&rdquo;</p></div></li>
+            <li class="panel"><img loading="lazy" decoding="async" src="/images/btm/echo.webp" alt="The Echo" width="480" height="480" /><div class="body"><h3>The Echo</h3><p>Keeps you agreeable so nobody looks too closely.</p><div class="powers"><b>Powers</b><p><span>False kindness</span>Makes going along with it feel like being nice.</p><p><span>Volume down</span>Turns your voice down until the point is gone.</p></div><p class="says">&ldquo;Do not make this harder than it needs to be.&rdquo;</p></div></li>
           </ol>
         </div>
-        <p class="cast-foot">The villains aren&rsquo;t other people. They&rsquo;re the habits every capable leader carries. Naming one is half the fight.</p>
+        <p class="cast-foot">The villains aren&rsquo;t other people. They&rsquo;re the habits capable people carry, at work and at home. Naming one is half the fight.</p>
       </div>
     </section>
 
